@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "gulp test"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "liferay-sdk": "git://github.com/liferay-apps/tasks.git",
+    "require-dir": "^0.1.0"
+  }
+}

@@ -1,3 +1,8 @@
+.page-logo {
+  display: block;
+  margin: 32px auto;
+}
+
 .card {
   background: #fff;
   border-radius: 2px;
@@ -34,4 +39,9 @@
   font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
   margin: 0;
   padding: 16px;
+}
+
+.page-copyright {
+  text-align: center;
+  margin: 32px 0;
 }

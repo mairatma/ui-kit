@@ -1,0 +1,30 @@
+{namespace main}
+
+/**
+ * @param content
+ */
+{template .page}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Styleguide</title>
+
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
+  <link rel="stylesheet" href="styles/normalize.css">
+  <link rel="stylesheet" href="styles/skeleton.css">
+  <link rel="stylesheet" href="styles/site.css">
+  <link rel="stylesheet" href="styles/main.css">
+
+  <link rel="stylesheet" href="components/navbar/navbar.css">
+  <link rel="stylesheet" href="components/avatar/avatar.css">
+</head>
+<body>
+  <div class="container">
+    <img class="page-logo" src="images/logo.png" alt="Logo">
+    {$content}
+    <p class="page-copyright">© 2015 Liferay, Inc.</p>
+  </div>
+</body>
+</html>
+{/template}

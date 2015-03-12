@@ -1,0 +1,40 @@
+{namespace components}
+
+/**
+ *
+ */
+{template .navbar}
+  {let $title: 'Navbar' /}
+  {let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, optio.' /}
+  {let $html kind="html"}
+{literal}<nav class="navbar shadow">
+  <ul class="navbar-list">
+    <li class="navbar-item">
+      <a class="navbar-link" href="#">
+        <img class="navbar-logo" src="components/navbar/logo.svg" width="20" height="20" alt="Logo">
+      </a>
+    <li class="navbar-item">
+      <a class="navbar-link navbar-link-selected" href="#">My Apps</a>
+    </li>
+    <li class="navbar-item">
+      <a class="navbar-link" href="#">Tutorials</a>
+    </li>
+    <li class="navbar-item">
+      <a class="navbar-link" href="#">Documentation</a>
+    </li>
+    <li class="navbar-item u-pull-right">
+      <a class="navbar-link" href="#">
+        <img class="avatar" src="components/avatar/user.jpg" width="36" height="36" alt="Zeno Rocha">
+      </a>
+    </li>
+  </ul>
+</nav>{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.card}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

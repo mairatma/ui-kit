@@ -3,36 +3,36 @@
   margin: 32px auto;
 }
 
-.card {
+.page-card {
   background: #fff;
   border-radius: 2px;
   margin-top: 32px;
 }
 
-.card-title {
-  border-bottom: 1px solid #eeeff0;
+.page-card-title {
+  font-size: 2.4rem;
   margin: 0;
-  padding: 16px;
+  padding: 16px 16px 8px;
+  text-transform: uppercase;
 }
 
-.card-description {
+.page-card-description {
   border-bottom: 1px solid #eeeff0;
   margin: 0;
-  padding: 16px;
+  padding: 0 16px 16px;
 }
 
-.card-demo {
-  background: #E8F3FF;
+.page-card-demo {
   border-bottom: 1px solid #eeeff0;
   padding: 16px;
   text-align: center;
 }
 
-.card-pre {
+.page-card-pre {
   margin: 0;
 }
 
-.card-code {
+.page-card-code {
   background: #fff;
   border-radius: 0;
   border: 0;

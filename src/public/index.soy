@@ -9,6 +9,7 @@
 {call main.page}
   {param content kind="html"}
     {call components.avatar}{/call}
+    {call components.button}{/call}
     {call components.navbar}{/call}
   {/param}
 {/call}
@@ -21,12 +22,12 @@
  * @param snippet
  */
 {template .card}
-  <div class="card shadow">
-    <h3 class="card-title">{$title}</h3>
-    <p class="card-description">{$description}</p>
-    <div class="card-demo">
+  <div class="page-card shadow">
+    <h3 class="page-card-title">{$title}</h3>
+    <p class="page-card-description">{$description}</p>
+    <div class="page-card-demo">
       {$html}
     </div>
-    <pre class="card-pre"><code class="card-code">{$snippet}</code></pre>
+    <pre class="page-card-pre"><code class="page-card-code">{$snippet}</code></pre>
   </div>
 {/template}

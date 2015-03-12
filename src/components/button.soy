@@ -1,0 +1,19 @@
+{namespace components}
+
+/**
+ * Button component
+ */
+{template .button}
+  {let $title: 'Button' /}
+  {let $description: 'Primary buttons are used when there is a clear call-to-action.' /}
+  {let $html kind="html"}
+    <a class="btn" href="#">Create new app</a>
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.card}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

@@ -1,0 +1,40 @@
+.navbar {
+  background: #1c6de2;
+  height: 64px;
+  text-align: left;
+}
+
+.navbar-list {
+  list-style: none;
+  padding: 20px 0;
+}
+
+.navbar-item {
+  display: inline-block;
+  margin: 0 12px;
+}
+
+.navbar-item:first-child {
+  margin-left: 24px;
+}
+
+.navbar-item:last-child {
+  margin-right: 24px;
+}
+
+.navbar-logo {
+  vertical-align: sub;
+}
+
+.navbar-link {
+  color: rgba(255, 255, 255, .5);
+  text-decoration: none;
+}
+
+.navbar-link-selected {
+  color: #fff;
+}
+
+.navbar-link .avatar {
+  margin-top: -6px;
+}

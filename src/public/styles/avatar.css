@@ -43,3 +43,24 @@
   font-size: 4rem;
   line-height: 9.2rem;
 }
+
+/* Icon
+   ========================================================================== */
+
+.avatar-icon.avatar-small img {
+  width: 18px;
+  height: 18px;
+  padding: 9px 0;
+}
+
+.avatar-icon.avatar-medium img {
+  width: 28px;
+  height: 28px;
+  padding: 14px 0;
+}
+
+.avatar-icon.avatar-large img {
+  width: 46px;
+  height: 46px;
+  padding: 23px 0;
+}

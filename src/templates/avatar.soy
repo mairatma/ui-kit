@@ -39,3 +39,31 @@
     {param html: $html /}
   {/call}
 {/template}
+
+/**
+ * Avatar Icon component
+ */
+{template .avatarIcon}
+  {let $title: 'Avatar · Icon' /}
+  {let $description: 'Represents the first letter from the first two names of a person.' /}
+  {let $html kind="html"}
+{literal}<div class="avatar avatar-small avatar-icon" style="background-color: #00d95e;">
+  <img src="docs/images/avatar-plane.svg" alt="Airplane icon">
+</div>
+
+<div class="avatar avatar-medium avatar-icon" style="background-color: #fbd22a;">
+  <img src="docs/images/avatar-balloon.svg" alt="Balloon icon">
+</div>
+
+<div class="avatar avatar-large avatar-icon" style="background-color: #ff5653;">
+  <img src="docs/images/avatar-rocket.svg" alt="Rocket icon">
+</div>{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.card}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

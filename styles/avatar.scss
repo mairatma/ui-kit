@@ -1,0 +1,70 @@
+.avatar {
+  border-radius: 50%;
+}
+
+/* Sizes
+   ========================================================================== */
+
+$small : 3.6rem;
+$medium: 5.6rem;
+$large : 9.2rem;
+
+.avatar-small {
+  width: $small;
+  height: $small;
+}
+
+.avatar-medium {
+  width: $medium;
+  height: $medium;
+}
+
+.avatar-large {
+  width: $large;
+  height: $large;
+}
+
+/* Initials
+   ========================================================================== */
+
+.avatar-initials {
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.avatar-initials.avatar-small {
+  font-size: $small/3;
+  line-height: $small;
+}
+
+.avatar-initials.avatar-medium {
+  font-size: $medium/3;
+  line-height: $medium;
+}
+
+.avatar-initials.avatar-large {
+  font-size: $large/3;
+  line-height: $large;
+}
+
+/* Icon
+   ========================================================================== */
+
+.avatar-icon.avatar-small img {
+  width: $small/2;
+  height: $small/2;
+  padding: $small/4 0;
+}
+
+.avatar-icon.avatar-medium img {
+  width: $medium/2;
+  height: $medium/2;
+  padding: $medium/4 0;
+}
+
+.avatar-icon.avatar-large img {
+  width: $large/2;
+  height: $large/2;
+  padding: $large/4 0;
+}

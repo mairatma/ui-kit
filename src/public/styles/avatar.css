@@ -1,0 +1,14 @@
+.avatar {
+  border-radius: 50%;
+}
+
+.avatar-initials {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  background: #33abfd;
+  color: #fff;
+  font-size: 1.2rem;
+  text-align: center;
+  text-transform: uppercase;
+}

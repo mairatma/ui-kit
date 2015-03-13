@@ -1,0 +1,28 @@
+{namespace components}
+
+/**
+ * Tooltip Menu component
+ */
+{template .tooltipMenu}
+  {let $title: 'Tooltip Menu' /}
+  {let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, optio.' /}
+  {let $html kind="html"}
+{literal}<nav class="tooltip-menu shadow">
+  <ul>
+    <li><a href="#">Rename</a></li>
+    <li><a href="#">Change URL</a></li>
+    <li><a href="#">Change Plan</a></li>
+    <li><a href="#">Add Collaborator</a></li>
+    <li><a href="#">Delete App</a></li>
+  </ul>
+</nav>
+{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.card}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

@@ -5,14 +5,16 @@
  */
 {template .navbar}
   {let $title: 'Navbar' /}
-  {let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, optio.' /}
+  {let $description: 'This is how users navigate through the application.' /}
   {let $html kind="html"}
-{literal}<nav class="navbar shadow">
+{literal}
+<nav class="navbar shadow">
   <ul class="navbar-list">
     <li class="navbar-item">
       <a class="navbar-link" href="#">
-        <img class="navbar-logo" src="images/navbar/logo.svg" width="20" height="20" alt="Logo">
+        <img class="navbar-logo" src="docs/images/navbar-logo.svg" width="20" height="20" alt="Logo">
       </a>
+    </li>
     <li class="navbar-item">
       <a class="navbar-link navbar-link-selected" href="#">My Apps</a>
     </li>
@@ -24,11 +26,12 @@
     </li>
     <li class="navbar-item u-pull-right">
       <a class="navbar-link" href="#">
-        <img class="avatar" src="images/avatar/user.jpg" width="36" height="36" alt="Zeno Rocha">
+        <img class="avatar" src="docs/images/avatar-photo.jpg" width="36" height="36" alt="Zeno Rocha">
       </a>
     </li>
   </ul>
-</nav>{/literal}
+</nav>
+{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.card}

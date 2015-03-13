@@ -1,13 +1,16 @@
 {namespace components}
 
 /**
- * Avatar component
+ * Avatar components
  */
 {template .avatar}
   {let $title: 'Avatar' /}
   {let $description: 'Make sure you load an image twice the size in order to guarantee high quality on retina displays.' /}
   {let $html kind="html"}
-    <img class="avatar" src="images/avatar/user.jpg" width="48" height="48" alt="Zeno Rocha">
+{literal}
+<img class="avatar" src="docs/images/avatar-photo.jpg" width="36" height="36" alt="Zeno Rocha">
+<span class="avatar avatar-initials">BM</span>
+{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.card}

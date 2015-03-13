@@ -1,0 +1,13 @@
+var gulp = require('gulp');
+var plugins = require('gulp-load-plugins')();
+var runSequence = require('run-sequence');
+
+gulp.task('build-highlight', function () {
+  return gulp.src('dist/**/*.html')
+    .pipe(plugins.highlight())
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build-all', function(cb) {
+  runSequence('build', 'build-highlight', cb);
+});

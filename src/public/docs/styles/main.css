@@ -30,6 +30,7 @@
 
 .page-card-demo .avatar {
   display: inline-block;
+  vertical-align: bottom;
 }
 
 .page-card-pre {

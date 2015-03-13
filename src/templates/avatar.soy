@@ -1,16 +1,35 @@
 {namespace components}
 
 /**
- * Avatar components
+ * Avatar Photo component
  */
-{template .avatar}
-  {let $title: 'Avatar' /}
+{template .avatarPhoto}
+  {let $title: 'Avatar · Photo' /}
   {let $description: 'Make sure you load an image twice the size in order to guarantee high quality on retina displays.' /}
   {let $html kind="html"}
-{literal}
-<img class="avatar" src="docs/images/avatar-photo.jpg" width="36" height="36" alt="Zeno Rocha">
-<span class="avatar avatar-initials">BM</span>
-{/literal}
+{literal}<img class="avatar avatar-small"  src="docs/images/avatar-small.jpg"  alt="Zeno Rocha">
+<img class="avatar avatar-medium" src="docs/images/avatar-medium.jpg" alt="Eduardo Lundgren">
+<img class="avatar avatar-large"  src="docs/images/avatar-large.jpg"  alt="Bruno Farache">{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.card}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}
+
+/**
+ * Avatar Initials component
+ */
+{template .avatarInitials}
+  {let $title: 'Avatar · Initials' /}
+  {let $description: 'Represents the first letter from the first two names of a person.' /}
+  {let $html kind="html"}
+{literal}<div class="avatar avatar-initials avatar-small"  style="background: #33abfd;">zr</div>
+<div class="avatar avatar-initials avatar-medium" style="background: #ff5653;">el</div>
+<div class="avatar avatar-initials avatar-large"  style="background: #00d95e;">bf</div>{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.card}

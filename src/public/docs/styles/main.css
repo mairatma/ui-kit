@@ -28,6 +28,10 @@
   text-align: center;
 }
 
+.page-card-demo .avatar {
+  display: inline-block;
+}
+
 .page-card-pre {
   margin: 0;
 }

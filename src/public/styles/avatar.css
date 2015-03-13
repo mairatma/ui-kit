@@ -2,13 +2,44 @@
   border-radius: 50%;
 }
 
-.avatar-initials {
+/* Sizes
+   ========================================================================== */
+
+.avatar-small {
   width: 36px;
   height: 36px;
-  padding: 8px;
-  background: #33abfd;
+}
+
+.avatar-medium {
+  width: 56px;
+  height: 56px;
+}
+
+.avatar-large {
+  width: 92px;
+  height: 92px;
+}
+
+/* Initials
+   ========================================================================== */
+
+.avatar-initials {
   color: #fff;
-  font-size: 1.2rem;
   text-align: center;
   text-transform: uppercase;
+}
+
+.avatar-initials.avatar-small {
+  font-size: 1.2rem;
+  line-height: 3.6rem;
+}
+
+.avatar-initials.avatar-medium {
+  font-size: 2rem;
+  line-height: 5.6rem;
+}
+
+.avatar-initials.avatar-large {
+  font-size: 4rem;
+  line-height: 9.2rem;
 }

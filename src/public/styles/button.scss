@@ -1,0 +1,32 @@
+.btn,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  background-color: #1c6de2;
+  border-radius: 0.2rem;
+  border: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 300;
+  height: 3.2rem;
+  line-height: 3.2rem;
+  margin: 0;
+  padding: 0 2.4rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: background .2s ease-in-out;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover {
+  background-color: #498ae8;
+  color: #fff;
+}

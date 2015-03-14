@@ -1,10 +1,26 @@
 {namespace components}
 
 /**
- * Button component
+ * Button (Tags) component
  */
-{template .button}
-  {let $title: 'Button' /}
+{template .buttonTags}
+  {let $title: 'Button · Tags' /}
+  {let $description: 'Default buttons are used when there is a clear call-to-action.' /}
+  {let $html kind="html"}
+{literal}<a class="btn" href="#" role="button">Link</a>
+<button class="btn" type="submit">Button</button>
+<input class="btn" type="button" value="Input">
+<input class="btn" type="submit" value="Submit">
+<input class="btn" type="reset" value="Reset">{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.card}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}
   {let $description: 'Primary buttons are used when there is a clear call-to-action.' /}
   {let $html kind="html"}
 {literal}<a class="btn" href="#">Create New App</a>{/literal}

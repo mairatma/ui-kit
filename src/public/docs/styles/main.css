@@ -33,6 +33,12 @@
   vertical-align: bottom;
 }
 
+.page-card-demo form {
+  display: block;
+  margin: 0 auto;
+  width: 170px;
+}
+
 .page-card-pre {
   margin: 0;
 }

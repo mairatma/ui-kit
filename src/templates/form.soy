@@ -1,0 +1,24 @@
+{namespace components}
+
+/**
+ * Form · Input
+ */
+{template .form}
+  {let $title: 'Form · Input' /}
+  {let $description: '' /}
+  {let $html kind="html"}
+{literal}<form>
+  <label for="example">Input</label>
+  <input id="example" type="text">
+  <span class="input-aux">A block of auxiliar text</span>
+</form>
+{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.card}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

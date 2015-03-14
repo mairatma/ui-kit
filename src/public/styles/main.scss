@@ -1,0 +1,24 @@
+/* Dependencies
+   ========================================================================== */
+
+@import 'normalize';
+@import 'skeleton';
+
+/* Base
+   ========================================================================== */
+
+body {
+  background: #f3f8fe;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.shadow {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .16);
+}
+
+/* Components
+   ========================================================================== */
+
+@import 'avatar';
+@import 'button';
+@import 'form';

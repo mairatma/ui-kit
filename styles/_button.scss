@@ -1,33 +1,28 @@
 /* Primary
    ========================================================================== */
 
-$bgColor   : #1c6de2;
-$textColor : #fff;
-$height    : 3.2rem;
-
 .btn,
 button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  background-color: $bgColor;
-  border-radius: 0.2rem;
+  @include anim(opacity);
+  @extend .round;
+  background: $blue;
   border: none;
-  box-sizing: border-box;
-  color: $textColor;
+  color: $white;
   cursor: pointer;
   display: inline-block;
   font-size: 1.2rem;
-  font-weight: 300;
-  height: $height;
+  font-weight: 400;
+  height: 3.2rem;
   letter-spacing: normal;
-  line-height: $height;
+  line-height: 3.2rem;
   margin: 0;
   padding: 0 2.4rem;
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  transition: opacity .2s ease-in-out;
 }
 
 .btn:hover,
@@ -35,8 +30,16 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
-  color: $textColor;
+  color: $white;
   opacity: .8;
+}
+
+/* Secondary
+   ========================================================================== */
+
+.btn.btn-secondary {
+  color: $white;
+  background: $grey;
 }
 
 /* Disabled
@@ -47,4 +50,22 @@ button[disabled] {
   opacity: .4;
   cursor: not-allowed;
   transition: none;
+}
+
+.btn.btn-disabled:hover {
+  opacity: .4;
+}
+
+/* Link
+   ========================================================================== */
+
+.btn.btn-link {
+  color: $blue;
+  background: $white;
+}
+
+.btn.btn-link:hover {
+  color: $blue;
+  opacity: 1;
+  text-decoration: underline;
 }

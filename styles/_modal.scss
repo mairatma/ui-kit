@@ -1,0 +1,58 @@
+.overlay {
+  background: rgba(0, 0, 0, .7);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.modal {
+  @extend .cell;
+  @extend .shadow-z2;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.modal-header {
+  padding: 2rem;
+  border: 1px solid rgba(35, 50, 64, .1);
+}
+
+.modal-header h1,
+.modal-header h2,
+.modal-header h3,
+.modal-header h4,
+.modal-header h5,
+.modal-header h6 {
+  font-size: 1.6rem;
+  color: rgb(28, 109, 226);
+  text-align: left;
+  margin: 0;
+}
+
+.modal-header .close {
+  color: rgba(35, 50, 64, .4);
+  cursor: pointer;
+  float: right;
+  font-size: 2rem;
+  margin-top: -.6rem;
+}
+
+.modal-body {
+  padding: 2rem;
+  text-align: left;
+}
+
+.modal-body p {
+  margin: 0;
+  font-weight: 300;
+}
+
+.modal-footer {
+  padding: 2rem;
+  text-align: right;
+}
+

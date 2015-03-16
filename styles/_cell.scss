@@ -1,4 +1,4 @@
 .cell {
-  background: #fff;
-  border-radius: .2rem;
+  @extend .round;
+  background: $white;
 }

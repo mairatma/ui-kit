@@ -7,11 +7,11 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
+  @include anim(border);
+  @extend .round;
   margin: 0;
-  border-radius: 0.2rem;
   border: 1px solid rgba(0, 0, 0, .2);
   font-weight: 300;
-  transition: border .2s ease-in-out;
 }
 
 input[type="email"]:focus,

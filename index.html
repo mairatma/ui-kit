@@ -26,19 +26,23 @@
 
 &lt;div <span class="hljs-variable">class=</span><span class="hljs-string">&quot;avatar avatar-icon avatar-large&quot;</span> <span class="hljs-variable">style=</span><span class="hljs-string">&quot;background-color: #ff5653;&quot;</span>&gt;
   &lt;img <span class="hljs-variable">src=</span><span class="hljs-string">&quot;docs/images/avatar-rocket.svg&quot;</span> <span class="hljs-variable">alt=</span><span class="hljs-string">&quot;Rocket icon&quot;</span>&gt;
-&lt;/div&gt;</code></pre></div><div class="page-cell shadow-z1"><h3 class="page-cell-title">Button &#xB7; Primary</h3><p class="page-cell-description">Primary buttons are used when there is a clear call-to-action.</p><div class="page-cell-demo"><a class="btn" href="#" role="button">Link</a>
+&lt;/div&gt;</code></pre></div><div class="page-cell shadow-z1"><h3 class="page-cell-title">Button &#xB7; Types</h3><p class="page-cell-description">Make sure to include the base class in order to use any of the four different button styles.</p><div class="page-cell-demo"><a class="btn" href="#">Primary</a>
+<a class="btn btn-secondary" href="#">Secondary</a>
+<a class="btn btn-disabled" href="#">Disabled</a>
+<a class="btn btn-link" href="#">Link</a>
+</div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;btn&quot;</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;#&quot;</span>&gt;</span>Primary<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;btn btn-secondary&quot;</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;#&quot;</span>&gt;</span>Secondary<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;btn btn-disabled&quot;</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;#&quot;</span>&gt;</span>Disabled<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;btn btn-link&quot;</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;#&quot;</span>&gt;</span>Link<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</code></pre></div><div class="page-cell shadow-z1"><h3 class="page-cell-title">Button &#xB7; Tags</h3><p class="page-cell-description">Button styles can be applied to different HTML tags such as links, buttons, and inputs.</p><div class="page-cell-demo"><a class="btn" href="#">Link</a>
 <button type="submit">Button</button>
 <input type="button" value="Input">
 <input type="submit" value="Submit">
-<input type="reset" value="Reset"></div><pre class="page-cell-pre"><code class="page-cell-code">&lt;a <span class="hljs-variable">class=</span><span class="hljs-string">&quot;btn&quot;</span> <span class="hljs-variable">href=</span><span class="hljs-string">&quot;#&quot;</span> <span class="hljs-variable">role=</span><span class="hljs-string">&quot;button&quot;</span>&gt;Link&lt;/a&gt;
-&lt;button <span class="hljs-variable">type=</span><span class="hljs-string">&quot;submit&quot;</span>&gt;Button&lt;/button&gt;
-&lt;input <span class="hljs-variable">type=</span><span class="hljs-string">&quot;button&quot;</span> <span class="hljs-variable">value=</span><span class="hljs-string">&quot;Input&quot;</span>&gt;
-&lt;input <span class="hljs-variable">type=</span><span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-variable">value=</span><span class="hljs-string">&quot;Submit&quot;</span>&gt;
-&lt;input <span class="hljs-variable">type=</span><span class="hljs-string">&quot;reset&quot;</span> <span class="hljs-variable">value=</span><span class="hljs-string">&quot;Reset&quot;</span>&gt;</code></pre></div><div class="page-cell shadow-z1"><h3 class="page-cell-title">Button &#xB7; Disabled</h3><p class="page-cell-description">Make buttons look unclickable.</p><div class="page-cell-demo"><a class="btn btn-disabled">Anchor Disabled</a>
-<button type="submit" disabled>Button Disabled</button>
-</div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;btn btn-disabled&quot;</span>&gt;</span>Anchor Disabled<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">&quot;submit&quot;</span> <span class="hljs-attribute">disabled</span>&gt;</span>Button Disabled<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-</code></pre></div><div class="page-cell shadow-z1"><h3 class="page-cell-title">Form &#xB7; Input</h3><p class="page-cell-description"></p><div class="page-cell-demo"><form>
+<input type="reset" value="Reset"></div><pre class="page-cell-pre"><code class="page-cell-code">&lt;a <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">&quot;btn&quot;</span> href=<span class="hljs-string">&quot;#&quot;</span>&gt;<span class="hljs-type">Link</span>&lt;/a&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">&quot;submit&quot;</span>&gt;<span class="hljs-type">Button</span>&lt;/button&gt;
+&lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">&quot;button&quot;</span> value=<span class="hljs-string">&quot;Input&quot;</span>&gt;
+&lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;Submit&quot;</span>&gt;
+&lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">&quot;reset&quot;</span> value=<span class="hljs-string">&quot;Reset&quot;</span>&gt;</code></pre></div><div class="page-cell shadow-z1"><h3 class="page-cell-title">Form &#xB7; Input</h3><p class="page-cell-description"></p><div class="page-cell-demo"><form>
   <label for="example-input">Label</label>
   <input id="example-input" type="text">
   <span class="form-field-aux">A block of auxiliar text</span>
@@ -76,6 +80,34 @@
   <span class="hljs-tag">&lt;<span class="hljs-title">textarea</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;example-textarea&quot;</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">&quot;Type your message&#x2026;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">textarea</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;form-field-aux&quot;</span>&gt;</span>A block of auxiliar text<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+</code></pre></div><div class="page-cell shadow-z1"><h3 class="page-cell-title">Modal</h3><p class="page-cell-description"></p><div class="page-cell-demo"><div class="overlay"></div>
+<div class="modal">
+  <header class="modal-header">
+    <a class="close">&#xD7;</a>
+    <h1>Modal header</h1>
+  </header>
+  <div class="modal-body">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
+  </div>
+  <footer class="modal-footer">
+    <button class="btn btn-secondary">Cancel</button>
+    <button>Confirm</button>
+  </footer>
+</div>
+</div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;overlay&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;modal&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">header</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;modal-header&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;close&quot;</span>&gt;</span>&#xD7;<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Modal header<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">header</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;modal-body&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">footer</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;modal-footer&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;btn btn-secondary&quot;</span>&gt;</span>Cancel<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">button</span>&gt;</span>Confirm<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">footer</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 </code></pre></div><div class="page-cell shadow-z1"><h3 class="page-cell-title">Shadow</h3><p class="page-cell-description"></p><div class="page-cell-demo"><section class="shadow-z1" style="width: 100px; height: 100px;"></section>
 <section class="shadow-z2" style="width: 100px; height: 100px;"></section></div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;shadow-z1&quot;</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">&quot;width: 100px; height: 100px;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;shadow-z2&quot;</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">&quot;width: 100px; height: 100px;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span></code></pre></div><div class="page-cell shadow-z1"><h3 class="page-cell-title">Tooltip</h3><p class="page-cell-description"></p><div class="page-cell-demo"><div class="tooltip">Brittany Hall</div>

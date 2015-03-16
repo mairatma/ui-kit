@@ -4,7 +4,6 @@
   color: rgba(35, 50, 64, .7);
   display: inline-block;
   font-size: 1.2rem;
-  font-weight: 400;
   padding: .8rem 1.2rem;
   text-align: left;
 }
@@ -29,13 +28,12 @@
 }
 
 .tooltip-menu-link {
+  @include anim(background);
   color: rgba(35, 50, 64, .7);
   display: block;
   font-size: 1.2rem;
-  font-weight: 400;
   padding: .6rem 3.6rem;
   text-decoration: none;
-  transition: background .2s ease-in-out;
 }
 
 .tooltip-menu-link:hover {

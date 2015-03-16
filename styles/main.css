@@ -2,7 +2,40 @@
    ========================================================================== */
 body {
   background: #f3f8fe;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+a {
+  color: #1c6de2;
+}
+
+a:hover {
+  color: #1c6de2;
+}
+
+/* Utils
+   ========================================================================== */
+.round, .btn,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"], .cell, .modal, .tooltip, .tooltip-menu, input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  border-radius: 0.2rem;
 }
 
 /* Components
@@ -31,7 +64,7 @@ body {
 /* Initials
    ========================================================================== */
 .avatar-initials {
-  color: #fff;
+  color: white;
   text-align: center;
   text-transform: uppercase;
 }
@@ -78,15 +111,14 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  background-color: #1c6de2;
-  border-radius: 0.2rem;
+  transition: opacity 0.2s ease-in-out;
+  background: #1c6de2;
   border: none;
-  box-sizing: border-box;
-  color: #fff;
+  color: white;
   cursor: pointer;
   display: inline-block;
   font-size: 1.2rem;
-  font-weight: 300;
+  font-weight: 400;
   height: 3.2rem;
   letter-spacing: normal;
   line-height: 3.2rem;
@@ -95,7 +127,6 @@ input[type="button"] {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  transition: opacity .2s ease-in-out;
 }
 
 .btn:hover,
@@ -103,8 +134,15 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
-  color: #fff;
+  color: white;
   opacity: .8;
+}
+
+/* Secondary
+   ========================================================================== */
+.btn.btn-secondary {
+  color: white;
+  background: #bdc1c5;
 }
 
 /* Disabled
@@ -116,9 +154,25 @@ button[disabled] {
   transition: none;
 }
 
-.cell, .tooltip, .tooltip-menu {
-  background: #fff;
-  border-radius: .2rem;
+.btn.btn-disabled:hover {
+  opacity: .4;
+}
+
+/* Link
+   ========================================================================== */
+.btn.btn-link {
+  color: #1c6de2;
+  background: white;
+}
+
+.btn.btn-link:hover {
+  color: #1c6de2;
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.cell, .modal, .tooltip, .tooltip-menu {
+  background: white;
 }
 
 input[type="email"],
@@ -130,11 +184,10 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
+  transition: border 0.2s ease-in-out;
   margin: 0;
-  border-radius: 0.2rem;
   border: 1px solid rgba(0, 0, 0, 0.2);
   font-weight: 300;
-  transition: border .2s ease-in-out;
 }
 
 input[type="email"]:focus,
@@ -171,11 +224,67 @@ label,
   margin-top: .5rem;
 }
 
+.overlay {
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.modal {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.modal-header {
+  padding: 2rem;
+  border: 1px solid rgba(35, 50, 64, 0.1);
+}
+
+.modal-header h1,
+.modal-header h2,
+.modal-header h3,
+.modal-header h4,
+.modal-header h5,
+.modal-header h6 {
+  font-size: 1.6rem;
+  color: #1c6de2;
+  text-align: left;
+  margin: 0;
+}
+
+.modal-header .close {
+  color: rgba(35, 50, 64, 0.4);
+  cursor: pointer;
+  float: right;
+  font-size: 2rem;
+  margin-top: -.6rem;
+}
+
+.modal-body {
+  padding: 2rem;
+  text-align: left;
+}
+
+.modal-body p {
+  margin: 0;
+  font-weight: 300;
+}
+
+.modal-footer {
+  padding: 2rem;
+  text-align: right;
+}
+
 .shadow-z1 {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
-.shadow-z2, .tooltip, .tooltip-menu {
+.shadow-z2, .modal, .tooltip, .tooltip-menu {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -183,7 +292,6 @@ label,
   color: rgba(35, 50, 64, 0.7);
   display: inline-block;
   font-size: 1.2rem;
-  font-weight: 400;
   padding: .8rem 1.2rem;
   text-align: left;
 }
@@ -205,13 +313,12 @@ label,
 }
 
 .tooltip-menu-link {
+  transition: background 0.2s ease-in-out;
   color: rgba(35, 50, 64, 0.7);
   display: block;
   font-size: 1.2rem;
-  font-weight: 400;
   padding: .6rem 3.6rem;
   text-decoration: none;
-  transition: background .2s ease-in-out;
 }
 
 .tooltip-menu-link:hover {

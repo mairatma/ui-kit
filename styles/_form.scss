@@ -11,7 +11,7 @@ select {
   @extend .round;
   margin: 0;
   border: 1px solid rgba(0, 0, 0, .2);
-  font-weight: 300;
+  font-weight: $fontWeight;
 }
 
 input[type="email"]:focus,
@@ -39,7 +39,7 @@ label,
   color: #233240;
   text-align: left;
   opacity: .7;
-  font-weight: 300;
+  font-weight: $fontWeight;
   font-size: 1.2rem;
   display: block;
 }

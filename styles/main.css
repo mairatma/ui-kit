@@ -187,7 +187,7 @@ select {
   transition: border 0.2s ease-in-out;
   margin: 0;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 input[type="email"]:focus,
@@ -215,7 +215,7 @@ label,
   color: #233240;
   text-align: left;
   opacity: .7;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1.2rem;
   display: block;
 }

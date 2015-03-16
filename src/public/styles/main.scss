@@ -3,15 +3,22 @@
 
 body {
   background: #f3f8fe;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* Components
    ========================================================================== */
 
-@import 'avatar';
-@import 'button';
-@import 'cell';
-@import 'form';
-@import 'shadow';
-@import 'tooltip';
+@import "avatar";
+@import "button";
+@import "cell";
+@import "form";
+@import "shadow";
+@import "tooltip";

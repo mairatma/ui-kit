@@ -26,6 +26,7 @@
   border-bottom: 1px solid #eeeff0;
   padding: 1.6rem;
   text-align: center;
+  position: relative;
 }
 
 .page-cell-demo .avatar {

@@ -1,0 +1,33 @@
+{namespace components}
+
+/**
+ * Modal
+ */
+{template .modal}
+  {let $title: 'Modal' /}
+  {let $description: '' /}
+  {let $html kind="html"}
+{literal}<div class="overlay"></div>
+<div class="modal">
+  <header class="modal-header">
+    <a class="close">×</a>
+    <h1>Modal header</h1>
+  </header>
+  <div class="modal-body">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
+  </div>
+  <footer class="modal-footer">
+    <button disabled>Cancel</button>
+    <button>Confirm</button>
+  </footer>
+</div>
+{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

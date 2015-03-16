@@ -39,3 +39,39 @@
     {param html: $html /}
   {/call}
 {/template}
+
+/**
+ * Nav · Secondary
+ */
+{template .navSecondary}
+  {let $title: 'Nav · Secondary' /}
+  {let $description: 'This is how users navigate through a page anchors.' /}
+  {let $html kind="html"}
+{literal}<nav class="nav-secondary">
+  <ul class="nav-secondary-list">
+    <li class="nav-secondary-item">
+      <a class="nav-secondary-link" href="#">
+        <img class="nav-secondary-icon" src="docs/images/nav-icon-app.png" alt="">App Info
+      </a>
+    </li>
+    <li class="nav-secondary-item">
+      <a class="nav-secondary-link" href="#">
+        <img class="nav-secondary-icon" src="docs/images/nav-icon-collab.png" alt="">Collaborators
+      </a>
+    </li>
+    <li class="nav-secondary-item">
+      <a class="nav-secondary-link" href="#">
+        <img class="nav-secondary-icon" src="docs/images/nav-icon-plan.png" alt="">Plans
+      </a>
+    </li>
+  </ul>
+</nav>{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

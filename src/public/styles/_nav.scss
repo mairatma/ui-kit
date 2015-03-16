@@ -48,3 +48,45 @@
 .nav-primary-link-selected:hover {
   color: rgb(255, 255, 255);
 }
+
+/* Secondary
+   ========================================================================== */
+
+.nav-secondary {
+  @extend .shadow-z2;
+  width: 20rem;
+  margin: 0 auto;
+}
+
+.nav-secondary-list {
+  list-style: none;
+  margin: 0;
+  text-align: left;
+}
+
+.nav-secondary-item {
+  display: block;
+}
+
+.nav-secondary-item:first-child {
+  padding-top: 1.4rem;
+}
+
+.nav-secondary-item:last-child {
+  padding-bottom: 1.4rem;
+}
+
+.nav-secondary-link {
+  display: block;
+  color: $blue;
+  text-decoration: none;
+  padding: .8rem 2rem;
+}
+
+.nav-secondary-link:hover {
+  background: rgba(28, 109, 226, .1);
+}
+
+.nav-secondary-icon {
+  margin-right: 1.6rem;
+}

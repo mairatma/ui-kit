@@ -3,7 +3,12 @@
   "scripts": {
     "test": "gulp test"
   },
+  "author": {
+    "name": "Liferay, Inc.",
+    "email": "engineering@liferay.com"
+  },
   "devDependencies": {
+    "alloyui-tasks": "git://github.com/alloyui/tasks",
     "gulp": "^3.8.8",
     "gulp-gh-pages": "^0.4.0",
     "gulp-highlight": "0.0.3",
@@ -11,5 +16,13 @@
     "liferay-sdk": "git://github.com/liferay-apps/tasks.git",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.2"
+  },
+  "jspm": {
+    "directories": {
+      "lib": "src"
+    },
+    "dependencies": {
+      "aui": "github:alloyui/core@master"
+    }
   }
 }

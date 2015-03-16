@@ -36,7 +36,13 @@
 .page-card-demo form {
   display: block;
   margin: 0 auto;
-  width: 170px;
+  width: 200px;
+}
+
+.page-card-demo form input,
+.page-card-demo form select,
+.page-card-demo form textarea {
+  width: 100%;
 }
 
 .page-card-pre {

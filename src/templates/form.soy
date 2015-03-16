@@ -3,14 +3,64 @@
 /**
  * Form · Input
  */
-{template .form}
+{template .formInput}
   {let $title: 'Form · Input' /}
   {let $description: '' /}
   {let $html kind="html"}
 {literal}<form>
-  <label for="example">Input</label>
-  <input id="example" type="text">
-  <span class="input-aux">A block of auxiliar text</span>
+  <label for="example-input">Label</label>
+  <input id="example-input" type="text">
+  <span class="form-field-aux">A block of auxiliar text</span>
+</form>
+{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.card}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}
+
+/**
+ * Form · Select
+ */
+{template .formSelect}
+  {let $title: 'Form · Select' /}
+  {let $description: '' /}
+  {let $html kind="html"}
+{literal}<form>
+  <label for="example-select">Label</label>
+  <select id="example-select">
+    <option value="Option 1">Option 1</option>
+    <option value="Option 2">Option 2</option>
+    <option value="Option 3">Option 3</option>
+  </select>
+  <span class="form-field-aux">A block of auxiliar text</span>
+</form>
+{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.card}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}
+
+/**
+ * Form · Textarea
+ */
+{template .formTextarea}
+  {let $title: 'Form · Textarea' /}
+  {let $description: '' /}
+  {let $html kind="html"}
+{literal}<form>
+  <label for="example-textarea">Label</label>
+  <textarea id="example-textarea" placeholder="Type your message…"></textarea>
+  <span class="form-field-aux">A block of auxiliar text</span>
 </form>
 {/literal}
   {/let}

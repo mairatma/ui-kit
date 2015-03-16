@@ -34,7 +34,8 @@ input::selection {
   background: #d1e2f9;
 }
 
-label, .input-aux {
+label,
+.form-field-aux {
   color: #233240;
   text-align: left;
   opacity: .7;
@@ -43,6 +44,6 @@ label, .input-aux {
   display: block;
 }
 
-.input-aux {
+.form-field-aux {
   margin-top: .5rem;
 }

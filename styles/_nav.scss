@@ -1,0 +1,50 @@
+/* Primary
+   ========================================================================== */
+
+.nav-primary {
+  @extend .shadow-z1;
+  background: #1c6de2;
+  height: 6.4rem;
+  text-align: left;
+}
+
+.nav-primary-list {
+  list-style: none;
+  padding: 2rem 0;
+}
+
+.nav-primary-item {
+  display: inline-block;
+  margin: 0 1.2rem;
+}
+
+.nav-primary-item:first-child {
+  margin-left: 2.4rem;
+}
+
+.nav-primary-item:last-child {
+  margin-right: 2.4rem;
+}
+
+.nav-primary-item .avatar {
+  margin-top: -2.8rem;
+}
+
+.nav-primary-logo {
+  vertical-align: sub;
+}
+
+.nav-primary-link {
+  @include anim(color);
+  color: rgba(255, 255, 255, .5);
+  text-decoration: none;
+}
+
+.nav-primary-link:hover {
+  color: rgba(255, 255, 255, .8);
+}
+
+.nav-primary-link-selected,
+.nav-primary-link-selected:hover {
+  color: rgb(255, 255, 255);
+}

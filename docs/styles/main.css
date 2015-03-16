@@ -34,6 +34,10 @@
   vertical-align: bottom;
 }
 
+.page-cell-demo .nav-primary-item .avatar {
+  display: block;
+}
+
 .page-cell-demo form {
   display: block;
   margin: 0 auto;

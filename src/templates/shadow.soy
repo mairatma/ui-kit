@@ -1,0 +1,20 @@
+{namespace components}
+
+/**
+ * Shadow
+ */
+{template .shadow}
+  {let $title: 'Shadow' /}
+  {let $description: '' /}
+  {let $html kind="html"}
+{literal}<section class="shadow-z1" style="width: 100px; height: 100px;"></section>
+<section class="shadow-z2" style="width: 100px; height: 100px;"></section>{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

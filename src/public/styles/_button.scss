@@ -1,20 +1,18 @@
-/* Primary
-   ========================================================================== */
+$height: 3.2rem;
 
-$bgColor   : #1c6de2;
-$textColor : #fff;
-$height    : 3.2rem;
+/* Default
+   ========================================================================== */
 
 .btn,
 button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  background-color: $bgColor;
-  border-radius: 0.2rem;
+  @include anim(opacity);
+  @extend .round;
   border: none;
   box-sizing: border-box;
-  color: $textColor;
+  color: $white;
   cursor: pointer;
   display: inline-block;
   font-size: 1.2rem;
@@ -27,7 +25,6 @@ input[type="button"] {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  transition: opacity .2s ease-in-out;
 }
 
 .btn:hover,
@@ -35,8 +32,24 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
-  color: $textColor;
+  color: $white;
   opacity: .8;
+}
+
+/* Primary
+   ========================================================================== */
+
+.btn-primary {
+  color: $white;
+  background: $blue;
+}
+
+/* Secondary
+   ========================================================================== */
+
+.btn-secondary {
+  color: $white;
+  background: $grey;
 }
 
 /* Disabled

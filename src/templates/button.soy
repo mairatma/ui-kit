@@ -1,17 +1,17 @@
 {namespace components}
 
 /**
- * Button · Primary
+ * Button · Types
  */
-{template .buttonPrimary}
-  {let $title: 'Button · Primary' /}
-  {let $description: 'Primary buttons are used when there is a clear call-to-action.' /}
+{template .buttonTypes}
+  {let $title: 'Button · Types' /}
+  {let $description: '' /}
   {let $html kind="html"}
-{literal}<a class="btn" href="#" role="button">Link</a>
-<button type="submit">Button</button>
-<input type="button" value="Input">
-<input type="submit" value="Submit">
-<input type="reset" value="Reset">{/literal}
+{literal}<a class="btn btn-primary"   href="#">Primary</a>
+<a class="btn btn-secondary" href="#">Secondary</a>
+<a class="btn btn-disabled"  href="#">Disabled</a>
+<a class="btn btn-link"      href="#">Link</a>
+{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
@@ -23,15 +23,17 @@
 {/template}
 
 /**
- * Button · Disabled
+ * Button · Tags
  */
-{template .buttonDisabled}
-  {let $title: 'Button · Disabled' /}
-  {let $description: 'Make buttons look unclickable.' /}
+{template .buttonTags}
+  {let $title: 'Button · Tags' /}
+  {let $description: '' /}
   {let $html kind="html"}
-{literal}<a class="btn btn-disabled">Anchor Disabled</a>
-<button type="submit" disabled>Button Disabled</button>
-{/literal}
+{literal}<a class="btn" href="#">Link</a>
+<button type="submit">Button</button>
+<input type="button" value="Input">
+<input type="submit" value="Submit">
+<input type="reset" value="Reset">{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}

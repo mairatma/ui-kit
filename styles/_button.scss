@@ -1,0 +1,50 @@
+/* Primary
+   ========================================================================== */
+
+$bgColor   : #1c6de2;
+$textColor : #fff;
+$height    : 3.2rem;
+
+.btn,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  background-color: $bgColor;
+  border-radius: 0.2rem;
+  border: none;
+  box-sizing: border-box;
+  color: $textColor;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 300;
+  height: $height;
+  letter-spacing: normal;
+  line-height: $height;
+  margin: 0;
+  padding: 0 2.4rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: opacity .2s ease-in-out;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover {
+  color: $textColor;
+  opacity: .8;
+}
+
+/* Disabled
+   ========================================================================== */
+
+.btn.btn-disabled,
+button[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+  transition: none;
+}

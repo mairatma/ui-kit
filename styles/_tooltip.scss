@@ -1,0 +1,44 @@
+.tooltip {
+  @extend .cell;
+  @extend .shadow-z2;
+  color: rgba(35, 50, 64, .7);
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: .8rem 1.2rem;
+  text-align: left;
+}
+
+/* Menu
+   ========================================================================== */
+
+.tooltip-menu {
+  @extend .cell;
+  @extend .shadow-z2;
+  display: inline-block;
+  text-align: center;
+}
+
+.tooltip-menu-list {
+  list-style: none;
+  margin: 0;
+}
+
+.tooltip-menu-item {
+  margin: 0;
+}
+
+.tooltip-menu-link {
+  color: rgba(35, 50, 64, .7);
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: .6rem 3.6rem;
+  text-decoration: none;
+  transition: background .2s ease-in-out;
+}
+
+.tooltip-menu-link:hover {
+  background: rgba(28, 109, 226, .1);
+  color: rgba(35, 50, 64, .7);
+}

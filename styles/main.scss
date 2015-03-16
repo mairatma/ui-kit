@@ -1,0 +1,17 @@
+/* Base
+   ========================================================================== */
+
+body {
+  background: #f3f8fe;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Components
+   ========================================================================== */
+
+@import 'avatar';
+@import 'button';
+@import 'cell';
+@import 'form';
+@import 'shadow';
+@import 'tooltip';

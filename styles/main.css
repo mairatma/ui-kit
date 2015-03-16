@@ -1,8 +1,220 @@
+/* Base
+   ========================================================================== */
 body {
   background: #f3f8fe;
   font-family: 'Open Sans', sans-serif;
 }
 
-.shadow {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .16);
+/* Components
+   ========================================================================== */
+.avatar {
+  border-radius: 50%;
+}
+
+/* Sizes
+   ========================================================================== */
+.avatar-small {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.avatar-medium {
+  width: 5.6rem;
+  height: 5.6rem;
+}
+
+.avatar-large {
+  width: 9.2rem;
+  height: 9.2rem;
+}
+
+/* Initials
+   ========================================================================== */
+.avatar-initials {
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.avatar-initials.avatar-small {
+  font-size: 1.2rem;
+  line-height: 3.6rem;
+}
+
+.avatar-initials.avatar-medium {
+  font-size: 1.86667rem;
+  line-height: 5.6rem;
+}
+
+.avatar-initials.avatar-large {
+  font-size: 3.06667rem;
+  line-height: 9.2rem;
+}
+
+/* Icon
+   ========================================================================== */
+.avatar-icon.avatar-small img {
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0.9rem 0;
+}
+
+.avatar-icon.avatar-medium img {
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 1.4rem 0;
+}
+
+.avatar-icon.avatar-large img {
+  width: 4.6rem;
+  height: 4.6rem;
+  padding: 2.3rem 0;
+}
+
+/* Primary
+   ========================================================================== */
+.btn,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  background-color: #1c6de2;
+  border-radius: 0.2rem;
+  border: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 300;
+  height: 3.2rem;
+  letter-spacing: normal;
+  line-height: 3.2rem;
+  margin: 0;
+  padding: 0 2.4rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: opacity .2s ease-in-out;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover {
+  color: #fff;
+  opacity: .8;
+}
+
+/* Disabled
+   ========================================================================== */
+.btn.btn-disabled,
+button[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+  transition: none;
+}
+
+.cell, .tooltip, .tooltip-menu {
+  background: #fff;
+  border-radius: .2rem;
+}
+
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  margin: 0;
+  border-radius: 0.2rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-weight: 300;
+  transition: border .2s ease-in-out;
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #1c6de2;
+}
+
+input::-moz-selection {
+  background: #d1e2f9;
+}
+
+input::selection {
+  background: #d1e2f9;
+}
+
+label,
+.form-field-aux {
+  color: #233240;
+  text-align: left;
+  opacity: .7;
+  font-weight: 300;
+  font-size: 1.2rem;
+  display: block;
+}
+
+.form-field-aux {
+  margin-top: .5rem;
+}
+
+.shadow-z1 {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.shadow-z2, .tooltip, .tooltip-menu {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip {
+  color: rgba(35, 50, 64, 0.7);
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: .8rem 1.2rem;
+  text-align: left;
+}
+
+/* Menu
+   ========================================================================== */
+.tooltip-menu {
+  display: inline-block;
+  text-align: center;
+}
+
+.tooltip-menu-list {
+  list-style: none;
+  margin: 0;
+}
+
+.tooltip-menu-item {
+  margin: 0;
+}
+
+.tooltip-menu-link {
+  color: rgba(35, 50, 64, 0.7);
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: .6rem 3.6rem;
+  text-decoration: none;
+  transition: background .2s ease-in-out;
+}
+
+.tooltip-menu-link:hover {
+  background: rgba(28, 109, 226, 0.1);
+  color: rgba(35, 50, 64, 0.7);
 }

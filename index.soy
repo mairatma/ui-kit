@@ -11,6 +11,14 @@
     {call components.avatarPhoto}{/call}
     {call components.avatarInitials}{/call}
     {call components.avatarIcon}{/call}
+    {call components.buttonPrimary}{/call}
+    {call components.buttonDisabled}{/call}
+    {call components.formInput}{/call}
+    {call components.formSelect}{/call}
+    {call components.formTextarea}{/call}
+    {call components.shadow}{/call}
+    {call components.tooltip}{/call}
+    {call components.tooltipMenu}{/call}
   {/param}
 {/call}
 {/template}
@@ -21,13 +29,13 @@
  * @param html
  * @param snippet
  */
-{template .card}
-  <div class="page-card shadow">
-    <h3 class="page-card-title">{$title}</h3>
-    <p class="page-card-description">{$description}</p>
-    <div class="page-card-demo">
+{template .cell}
+  <div class="page-cell shadow-z1">
+    <h3 class="page-cell-title">{$title}</h3>
+    <p class="page-cell-description">{$description}</p>
+    <div class="page-cell-demo">
       {$html}
     </div>
-    <pre class="page-card-pre"><code class="page-card-code">{$snippet}</code></pre>
+    <pre class="page-cell-pre"><code class="page-cell-code">{$snippet}</code></pre>
   </div>
 {/template}

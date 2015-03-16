@@ -45,6 +45,7 @@
   width: 100%;
 }
 
+.page-cell-demo .tooltip,
 .page-cell-demo .shadow-z1,
 .page-cell-demo .shadow-z2 {
   margin: 0 1rem;

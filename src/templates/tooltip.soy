@@ -1,0 +1,57 @@
+{namespace components}
+
+/**
+ * Tooltip
+ */
+{template .tooltip}
+  {let $title: 'Tooltip' /}
+  {let $description: '' /}
+  {let $html kind="html"}
+{literal}<div class="tooltip">Brittany Hall</div>
+<div class="tooltip">Alyssa Spencer<br>Shelly Bryant<br>Victor Moreno</div>{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}
+
+/**
+ * Tooltip · Menu
+ */
+{template .tooltipMenu}
+  {let $title: 'Tooltip · Menu' /}
+  {let $description: '' /}
+  {let $html kind="html"}
+{literal}<nav class="tooltip-menu">
+  <ul class="tooltip-menu-list">
+    <li class="tooltip-menu-item">
+      <a class="tooltip-menu-link" href="#">Rename</a>
+    </li>
+    <li class="tooltip-menu-item">
+      <a class="tooltip-menu-link" href="#">Change URL</a>
+    </li>
+    <li class="tooltip-menu-item">
+      <a class="tooltip-menu-link" href="#">Change Plan</a>
+    </li>
+    <li class="tooltip-menu-item">
+      <a class="tooltip-menu-link" href="#">Add Collaborator</a>
+    </li>
+    <li class="tooltip-menu-item">
+      <a class="tooltip-menu-link" href="#">Delete App</a>
+    </li>
+  </ul>
+</nav>
+{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

@@ -1,0 +1,41 @@
+{namespace components}
+
+/**
+ * Nav · Primary
+ */
+{template .navPrimary}
+  {let $title: 'Nav · Primary' /}
+  {let $description: 'This is how users navigate through the application.' /}
+  {let $html kind="html"}
+{literal}<nav class="nav-primary">
+  <ul class="nav-primary-list">
+    <li class="nav-primary-item">
+      <a class="nav-primary-link" href="#">
+        <img class="nav-primary-logo" src="docs/images/nav-logo.svg" width="20" height="20" alt="Logo">
+      </a>
+    </li>
+    <li class="nav-primary-item">
+      <a class="nav-primary-link nav-primary-link-selected" href="#">My Apps</a>
+    </li>
+    <li class="nav-primary-item">
+      <a class="nav-primary-link" href="#">Tutorials</a>
+    </li>
+    <li class="nav-primary-item">
+      <a class="nav-primary-link" href="#">Documentation</a>
+    </li>
+    <li class="nav-primary-item u-pull-right">
+      <a class="nav-primary-link" href="#">
+        <img class="avatar" src="docs/images/avatar-medium.jpg" width="36" height="36" alt="Zeno Rocha">
+      </a>
+    </li>
+  </ul>
+</nav>{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

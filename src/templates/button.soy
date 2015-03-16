@@ -5,12 +5,12 @@
  */
 {template .buttonTypes}
   {let $title: 'Button · Types' /}
-  {let $description: '' /}
+  {let $description: 'Make sure to include the base class in order to use any of the four different button styles.' /}
   {let $html kind="html"}
-{literal}<a class="btn btn-primary"   href="#">Primary</a>
+{literal}<a class="btn" href="#">Primary</a>
 <a class="btn btn-secondary" href="#">Secondary</a>
-<a class="btn btn-disabled"  href="#">Disabled</a>
-<a class="btn btn-link"      href="#">Link</a>
+<a class="btn btn-disabled" href="#">Disabled</a>
+<a class="btn btn-link" href="#">Link</a>
 {/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
@@ -27,7 +27,7 @@
  */
 {template .buttonTags}
   {let $title: 'Button · Tags' /}
-  {let $description: '' /}
+  {let $description: 'Button styles can be applied to different HTML tags such as links, buttons, and inputs.' /}
   {let $html kind="html"}
 {literal}<a class="btn" href="#">Link</a>
 <button type="submit">Button</button>

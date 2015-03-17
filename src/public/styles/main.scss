@@ -19,6 +19,7 @@ body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  letter-spacing: -0.02rem;
 }
 
 a {
@@ -33,7 +34,7 @@ a:hover {
    ========================================================================== */
 
 @mixin anim($property) {
-  transition: $property .2s ease-in-out;
+  transition: $property .3s ease-in-out;
 }
 
 .round {

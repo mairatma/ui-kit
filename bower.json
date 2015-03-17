@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "styleguide",
+  "name": "ui-kit",
   "version": "0.0.0",
   "dependencies": {
     "skeleton": "~2.0.4"

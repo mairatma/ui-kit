@@ -67,6 +67,7 @@
 
 .nav-secondary-item {
   display: block;
+  margin: 0;
 }
 
 .nav-secondary-item:first-child {
@@ -78,14 +79,15 @@
 }
 
 .nav-secondary-link {
-  @include anim(background);
+  @include anim(all);
+  color: rgba(35, 50, 64, .9);
   display: block;
-  color: $blue;
-  text-decoration: none;
   padding: .8rem 2rem;
+  text-decoration: none;
 }
 
 .nav-secondary-link:hover {
+  color: $blue;
   background: rgba(28, 109, 226, .1);
 }
 

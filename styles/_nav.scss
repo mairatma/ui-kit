@@ -87,8 +87,12 @@
 }
 
 .nav-secondary-link:hover {
-  color: $blue;
   background: rgba(28, 109, 226, .1);
+}
+
+.nav-secondary-link-selected {
+  color: $blue;
+  background: rgba(28, 109, 226, .05);
 }
 
 .nav-secondary-icon {

@@ -247,7 +247,7 @@ label,
 [class^="icon-12-"], [class*=" icon-12-"] {
   font-family: 'ui-kit-12';
   speak: none;
-  font-size: 1.2rem;
+  font-size: 12px;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -414,7 +414,7 @@ label,
 [class^="icon-16-"], [class*=" icon-16-"] {
   font-family: 'ui-kit-16';
   speak: none;
-  font-size: 1.6rem;
+  font-size: 16px;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -679,8 +679,12 @@ label,
 }
 
 .nav-secondary-link:hover {
-  color: #1c6de2;
   background: rgba(28, 109, 226, 0.1);
+}
+
+.nav-secondary-link-selected {
+  color: #1c6de2;
+  background: rgba(28, 109, 226, 0.05);
 }
 
 .nav-secondary-icon {

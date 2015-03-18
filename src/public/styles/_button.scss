@@ -34,6 +34,14 @@ input[type="button"]:hover {
   opacity: .8;
 }
 
+.btn:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  color: $white;
+}
+
 /* Button · Secondary
    ========================================================================== */
 

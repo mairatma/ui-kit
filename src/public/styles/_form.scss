@@ -14,7 +14,7 @@ select {
   @extend .round;
   margin: 0;
   border: 1px solid rgba(0, 0, 0, .2);
-  font-weight: $fontWeight;
+  font-weight: $regular;
 }
 
 input[type="email"]:focus,

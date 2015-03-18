@@ -37,6 +37,7 @@
 .nav-primary-link {
   @include anim(color);
   color: rgba(255, 255, 255, .5);
+  font-weight: $semiBold;
   text-decoration: none;
 }
 

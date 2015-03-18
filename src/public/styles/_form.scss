@@ -1,6 +1,10 @@
 /* Form
    ========================================================================== */
 
+form {
+  max-width: 40rem;
+}
+
 input[type="email"],
 input[type="number"],
 input[type="search"],

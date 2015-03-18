@@ -16,6 +16,30 @@
   <div class="modal-body">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
   </div>
+</div>
+{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}
+
+/**
+ * Modal · Dialog
+ */
+{template .modalDialog}
+  {let $title: 'Modal · Dialog' /}
+  {let $description: '' /}
+  {let $html kind="html"}
+{literal}<div class="overlay"></div>
+<div class="modal">
+  <div class="modal-body">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
+  </div>
   <footer class="modal-footer">
     <button class="btn btn-secondary">Cancel</button>
     <button>Confirm</button>

@@ -34,6 +34,16 @@
   margin: 0 1.2rem;
 }
 
+/* Button
+   ========================================================================== */
+
+#buttonTypes .btn,
+#buttonTags .btn,
+#buttonTags button,
+#buttonTags input {
+  margin: 0 .6rem;
+}
+
 /* Tooltip
    ========================================================================== */
 

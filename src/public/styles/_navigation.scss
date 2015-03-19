@@ -3,7 +3,7 @@
 
 .topbar {
   @extend .shadow-z1;
-  background: #1c6de2;
+  background: $blue;
   height: 6.4rem;
 }
 
@@ -59,7 +59,7 @@
 .sidebar {
   @extend .round;
   @extend .shadow-z2;
-  background: #fff;
+  background: $white;
   margin: 0 auto;
   width: 20.8rem;
 }
@@ -91,8 +91,14 @@
 }
 
 .sidebar-link:hover {
-  color: $blue;
+  background: rgba(28, 109, 226, .05);
+  color: rgba(35, 50, 64, .9);
+}
+
+.sidebar-link-selected,
+.sidebar-link-selected:hover {
   background: rgba(28, 109, 226, .1);
+  color: $blue;
 }
 
 .sidebar-icon {

@@ -1,7 +1,80 @@
+/* Demo
+   ========================================================================== */
+
+.page-cell-demo {
+  border-bottom: 1px solid #eeeff0;
+  padding: 1.6rem;
+  position: relative;
+}
+
+#avatarPhoto .page-cell-demo,
+#avatarInitials .page-cell-demo,
+#avatarIcon .page-cell-demo,
+#buttonTypes .page-cell-demo,
+#buttonTags .page-cell-demo,
+#modal .modal,
+#modalDialog .modal,
+#shadow .page-cell-demo,
+#tooltip .page-cell-demo,
+#tooltipMenu .page-cell-demo,
+#icon12x12 .page-cell-demo,
+#icon16x16 .page-cell-demo {
+  display: table;
+  margin: 0 auto;
+}
+
+/* Avatar
+   ========================================================================== */
+
+#avatarPhoto .avatar,
+#avatarInitials .avatar,
+#avatarIcon .avatar {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 1.2rem;
+}
+
+/* Tooltip
+   ========================================================================== */
+
+#tooltip .tooltip,
+#tooltipMenu .tooltip {
+  margin: 0 1rem;
+}
+
+/* Shadow
+   ========================================================================== */
+
+#shadow .shadow-z1,
+#shadow .shadow-z2 {
+  margin: 0 1rem;
+  display: inline-block;
+}
+
+/* Form
+   ========================================================================== */
+
+#formInput form {
+  display: block;
+  margin: 0 auto;
+}
+
+#formInput input,
+#formInput select,
+#formInput textarea {
+  width: 100%;
+}
+
+/* Logo
+   ========================================================================== */
+
 .page-logo {
   display: block;
   margin: 32px auto;
 }
+
+/* Cell
+   ========================================================================== */
 
 .page-cell {
   background: #fff;
@@ -22,39 +95,8 @@
   padding: 0 1.6rem 1.6rem;
 }
 
-.page-cell-demo {
-  border-bottom: 1px solid #eeeff0;
-  padding: 1.6rem;
-  text-align: center;
-  position: relative;
-}
-
-.page-cell-demo .avatar {
-  display: inline-block;
-  vertical-align: bottom;
-}
-
-.page-cell-demo .nav-primary-item .avatar {
-  display: block;
-}
-
-.page-cell-demo form {
-  display: block;
-  margin: 0 auto;
-}
-
-.page-cell-demo form input,
-.page-cell-demo form select,
-.page-cell-demo form textarea {
-  width: 100%;
-}
-
-.page-cell-demo .tooltip,
-.page-cell-demo .shadow-z1,
-.page-cell-demo .shadow-z2 {
-  margin: 0 1rem;
-  display: inline-block;
-}
+/* Code
+   ========================================================================== */
 
 .page-cell-pre {
   margin: 0;
@@ -68,6 +110,9 @@
   margin: 0;
   padding: 1.6rem;
 }
+
+/* Copyright
+   ========================================================================== */
 
 .page-copyright {
   text-align: center;

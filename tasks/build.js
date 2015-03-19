@@ -9,5 +9,5 @@ gulp.task('build-highlight', function () {
 });
 
 gulp.task('build-all', function(cb) {
-  runSequence('aui:soy', 'build', 'build-highlight', cb);
+  runSequence('aui:build:globals', 'build', 'build-highlight', cb);
 });

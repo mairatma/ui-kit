@@ -3,7 +3,7 @@ require('alloyui-tasks')({
   globalName: 'ui',
   jspmConfigFile: 'jspm.js',
   taskPrefix: 'aui:',
-  buildDest: 'build/scripts/',
+  buildDest: 'dist/public/scripts/',
   buildSrc: 'lib/scripts/*.js',
   cssSrc: 'lib/scripts/*.css',
   lintSrc: ['lib/scripts/*.js', 'lib/tests/*.js'],

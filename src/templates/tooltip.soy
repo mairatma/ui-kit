@@ -4,6 +4,7 @@
  * Tooltip
  */
 {template .tooltip}
+  {let $id: 'tooltip' /}
   {let $title: 'Tooltip' /}
   {let $description: '' /}
   {let $html kind="html"}
@@ -12,6 +13,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}
@@ -23,6 +25,7 @@
  * Tooltip · Menu
  */
 {template .tooltipMenu}
+  {let $id: 'tooltipMenu' /}
   {let $title: 'Tooltip · Menu' /}
   {let $description: '' /}
   {let $html kind="html"}
@@ -49,6 +52,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}

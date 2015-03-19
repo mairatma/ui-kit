@@ -4,6 +4,7 @@
  * Navigation · Top
  */
 {template .navTop}
+  {let $id: 'navTop' /}
   {let $title: 'Navigation · Top' /}
   {let $description: 'This is how users navigate through the application.' /}
   {let $html kind="html"}
@@ -33,6 +34,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}
@@ -44,6 +46,7 @@
  * Navigation · Side
  */
 {template .navSide}
+  {let $id: 'navSide' /}
   {let $title: 'Navigation · Side' /}
   {let $description: 'This is how users navigate through a page anchors.' /}
   {let $html kind="html"}
@@ -69,6 +72,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}

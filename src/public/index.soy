@@ -28,13 +28,14 @@
 {/template}
 
 /**
+ * @param id
  * @param title
  * @param description
  * @param html
  * @param snippet
  */
 {template .cell}
-  <div class="page-cell shadow-z1">
+  <div id="{$id}" class="page-cell shadow-z1">
     <h3 class="page-cell-title">{$title}</h3>
     <p class="page-cell-description">{$description}</p>
     <div class="page-cell-demo">

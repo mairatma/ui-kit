@@ -4,6 +4,7 @@
  * Icon · 12x12
  */
 {template .icon12x12}
+  {let $id: 'icon12x12' /}
   {let $title: 'Icon · 12x12' /}
   {let $description: 'These are icons built in a 12x12 canvas. When scaling them, always follow the right proportion, for example: 24x24, 36x36, 48x48, etc.' /}
   {let $html kind="html"}
@@ -44,6 +45,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}
@@ -55,6 +57,7 @@
  * Icon · 16x16
  */
 {template .icon16x16}
+  {let $id: 'icon16x16' /}
   {let $title: 'Icon · 16x16' /}
   {let $description: 'These are icons built in a 16x16 canvas. When scaling them, always follow the right proportion, for example: 32x32, 48x48, 64x64, etc.' /}
   {let $html kind="html"}
@@ -88,6 +91,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}

@@ -4,6 +4,7 @@
  * Form · Input
  */
 {template .formInput}
+  {let $id: 'formInput' /}
   {let $title: 'Form · Input' /}
   {let $description: '' /}
   {let $html kind="html"}
@@ -16,6 +17,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}
@@ -27,6 +29,7 @@
  * Form · Select
  */
 {template .formSelect}
+  {let $id: 'formSelect' /}
   {let $title: 'Form · Select' /}
   {let $description: '' /}
   {let $html kind="html"}
@@ -43,6 +46,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}
@@ -54,6 +58,7 @@
  * Form · Textarea
  */
 {template .formTextarea}
+  {let $id: 'formTextarea' /}
   {let $title: 'Form · Textarea' /}
   {let $description: '' /}
   {let $html kind="html"}
@@ -66,6 +71,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}

@@ -4,6 +4,7 @@
  * Button · Types
  */
 {template .buttonTypes}
+  {let $id: 'buttonTypes' /}
   {let $title: 'Button · Types' /}
   {let $description: 'Make sure to include the base class in order to use any of the four different button styles.' /}
   {let $html kind="html"}
@@ -15,6 +16,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}
@@ -26,6 +28,7 @@
  * Button · Tags
  */
 {template .buttonTags}
+  {let $id: 'buttonTags' /}
   {let $title: 'Button · Tags' /}
   {let $description: 'Button styles can be applied to different HTML tags such as links, buttons, and inputs.' /}
   {let $html kind="html"}
@@ -37,6 +40,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}

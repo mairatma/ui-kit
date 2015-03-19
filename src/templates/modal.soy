@@ -4,6 +4,7 @@
  * Modal
  */
 {template .modal}
+  {let $id: 'modal' /}
   {let $title: 'Modal' /}
   {let $description: '' /}
   {let $html kind="html"}
@@ -21,6 +22,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}
@@ -32,6 +34,7 @@
  * Modal · Dialog
  */
 {template .modalDialog}
+  {let $id: 'modalDialog' /}
   {let $title: 'Modal · Dialog' /}
   {let $description: '' /}
   {let $html kind="html"}
@@ -49,6 +52,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}

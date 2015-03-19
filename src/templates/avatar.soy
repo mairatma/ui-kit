@@ -4,6 +4,7 @@
  * Avatar · Photo
  */
 {template .avatarPhoto}
+  {let $id: 'avatarPhoto' /}
   {let $title: 'Avatar · Photo' /}
   {let $description: 'Make sure you load an image twice the size in order to guarantee high quality on retina displays.' /}
   {let $html kind="html"}
@@ -13,6 +14,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}
@@ -24,6 +26,7 @@
  * Avatar · Initials
  */
 {template .avatarInitials}
+  {let $id: 'avatarInitials' /}
   {let $title: 'Avatar · Initials' /}
   {let $description: 'Represents the first letters from the first two names of a person.' /}
   {let $html kind="html"}
@@ -41,6 +44,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}
@@ -52,6 +56,7 @@
  * Avatar · Icon
  */
 {template .avatarIcon}
+  {let $id: 'avatarIcon' /}
   {let $title: 'Avatar · Icon' /}
   {let $description: 'Contains a SVG file that represents an app.' /}
   {let $html kind="html"}
@@ -69,6 +74,7 @@
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
+    {param id: $id /}
     {param title: $title /}
     {param description: $description /}
     {param snippet: $snippet /}

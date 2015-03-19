@@ -22,11 +22,14 @@
 }
 
 .topbar-item:last-child {
-  margin-right: 2.4rem;
+  margin-right: 3.2rem;
 }
 
 .topbar-item .avatar {
-  margin-top: -2.8rem;
+  display: block;
+  height: 36px;
+  margin-top: -.6rem;
+  width: 36px;
 }
 
 .topbar-logo {

@@ -26,6 +26,15 @@ a:hover {
 /* ==========================================================================
    Utils
    ========================================================================== */
+.centered {
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+}
+
 .round, .btn,
 button,
 input[type="submit"],
@@ -85,7 +94,7 @@ select, .sidebar {
 /* Avatar · Initials
    ========================================================================== */
 .avatar-initials {
-  color: white;
+  color: #fff;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
@@ -136,7 +145,7 @@ input[type="button"] {
   transition: opacity 0.3s ease-in-out;
   background: #1c6de2;
   border: none;
-  color: white;
+  color: #fff;
   cursor: pointer;
   display: inline-block;
   font-size: 1.2rem;
@@ -156,7 +165,7 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
-  color: white;
+  color: #fff;
   opacity: .8;
 }
 
@@ -165,13 +174,13 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-  color: white;
+  color: #fff;
 }
 
 /* Button · Secondary
    ========================================================================== */
 .btn.btn-secondary {
-  color: white;
+  color: #fff;
   background: #bdc1c5;
 }
 
@@ -192,7 +201,7 @@ button[disabled] {
    ========================================================================== */
 .btn.btn-link {
   color: #1c6de2;
-  background: white;
+  background: #fff;
   font-weight: 400;
 }
 
@@ -206,7 +215,7 @@ button[disabled] {
    ========================================================================== */
 .cell, .modal, .tooltip, .tooltip-menu {
   transition: box-shadow 0.3s ease-in-out;
-  background: white;
+  background: #fff;
 }
 
 /* Form
@@ -225,7 +234,7 @@ input[type="password"],
 textarea,
 select {
   transition: border 0.3s ease-in-out;
-  background: white;
+  background: #fff;
   border: 1px solid rgba(35, 50, 64, 0.2);
   font-size: 1.2rem;
   font-weight: 400;
@@ -270,14 +279,21 @@ label {
 
 /* Overlay
    ========================================================================== */
-.overlay {
+.backdrop, .overlay {
   background: rgba(0, 0, 0, 0.7);
   height: 100%;
   left: 0;
-  position: absolute;
   top: 0;
   width: 100%;
   z-index: 0;
+}
+
+.backdrop {
+  position: absolute;
+}
+
+.overlay {
+  position: fixed;
 }
 
 /* Modal
@@ -414,13 +430,13 @@ label {
 
 .topbar-link-selected,
 .topbar-link-selected:hover {
-  color: white;
+  color: #fff;
 }
 
 /* Navigation · Sidebar
    ========================================================================== */
 .sidebar {
-  background: white;
+  background: #fff;
   margin: 0 auto;
   width: 20.8rem;
 }
@@ -501,6 +517,14 @@ label {
 
 .tooltip-menu-item {
   margin: 0;
+}
+
+.tooltip-menu-item:first-child {
+  margin-top: .6rem;
+}
+
+.tooltip-menu-item:last-child {
+  margin-bottom: .6rem;
 }
 
 .tooltip-menu-link {

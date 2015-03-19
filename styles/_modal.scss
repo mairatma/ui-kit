@@ -1,14 +1,21 @@
 /* Overlay
    ========================================================================== */
 
-.overlay {
-  background: rgba(0, 0, 0, .7);
+.backdrop, .overlay {
+  background: rgba($black, .7);
   height: 100%;
   left: 0;
-  position: absolute;
   top: 0;
   width: 100%;
   z-index: 0;
+}
+
+.backdrop {
+  position: absolute;
+}
+
+.overlay {
+  position: fixed;
 }
 
 /* Modal
@@ -27,7 +34,7 @@
    ========================================================================== */
 
 .modal header {
-  border-bottom: 1px solid rgba(35, 50, 64, .1);
+  border-bottom: 1px solid rgba($secondary, .1);
   padding: 2.4rem;
 }
 
@@ -42,7 +49,7 @@
 .modal header h4,
 .modal header h5,
 .modal header h6 {
-  color: rgb(28, 109, 226);
+  color: $primary;
   font-size: 1.4rem;
   font-weight: $regular;
   letter-spacing: -0.02rem;
@@ -51,14 +58,14 @@
 }
 
 .modal .modal-close {
-  color: rgba(35, 50, 64, .4);
+  color: rgba($secondary, .4);
   cursor: pointer;
   float: right;
   font-size: 1.2rem;
 }
 
 .modal .modal-close:hover {
-  color: rgba(35, 50, 64, .4);
+  color: rgba($secondary, .4);
 }
 
 /* Modal · Body
@@ -73,7 +80,7 @@
 }
 
 .modal section p {
-  color: rgba(35, 50, 64, .8);
+  color: rgba($secondary, .8);
   font-size: 1.2rem;
 }
 

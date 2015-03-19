@@ -8,7 +8,7 @@ input[type="reset"],
 input[type="button"] {
   @include anim(opacity);
   @extend .round;
-  background: $blue;
+  background: $primary;
   border: none;
   color: $white;
   cursor: pointer;
@@ -68,13 +68,13 @@ button[disabled] {
    ========================================================================== */
 
 .btn.btn-link {
-  color: $blue;
+  color: $primary;
   background: $white;
   font-weight: $regular;
 }
 
 .btn.btn-link:hover {
-  color: $blue;
+  color: $primary;
   opacity: 1;
   text-decoration: underline;
 }

@@ -27,9 +27,17 @@
   {let $title: 'Avatar · Initials' /}
   {let $description: 'Represents the first letters from the first two names of a person.' /}
   {let $html kind="html"}
-{literal}<div class="avatar avatar-initials avatar-small"  style="background: #33abfd;">zr</div>
-<div class="avatar avatar-initials avatar-medium" style="background: #ff5653;">el</div>
-<div class="avatar avatar-initials avatar-large"  style="background: #00d95e;">bf</div>{/literal}
+{literal}<div class="avatar avatar-large" style="background: #e4c143;">
+  <span class="avatar-initials">ch</span>
+</div>
+
+<div class="avatar avatar-medium" style="background: #ff536b;">
+  <span class="avatar-initials">bf</span>
+</div>
+
+<div class="avatar avatar-small" style="background: #9552ef;">
+  <span class="avatar-initials">mc</span>
+</div>{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
@@ -47,16 +55,16 @@
   {let $title: 'Avatar · Icon' /}
   {let $description: 'Contains a SVG file that represents an app.' /}
   {let $html kind="html"}
-{literal}<div class="avatar avatar-icon avatar-small" style="background-color: #00d95e;">
-  <img src="docs/images/avatar-plane.svg" alt="Airplane icon">
+{literal}<div class="avatar avatar-large" style="background: #9552ef;">
+  <img class="avatar-icon" src="fonts/16/heart-outline.svg" alt="Heart icon">
 </div>
 
-<div class="avatar avatar-icon avatar-medium" style="background-color: #fbd22a;">
-  <img src="docs/images/avatar-balloon.svg" alt="Balloon icon">
+<div class="avatar avatar-medium" style="background: #c25daa;">
+  <img class="avatar-icon" src="fonts/16/bell.svg" alt="Bell icon">
 </div>
 
-<div class="avatar avatar-icon avatar-large" style="background-color: #ff5653;">
-  <img src="docs/images/avatar-rocket.svg" alt="Rocket icon">
+<div class="avatar avatar-small" style="background: #ff7175;">
+  <img class="avatar-icon" src="fonts/16/star.svg" alt="Star icon">
 </div>{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}

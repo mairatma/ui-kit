@@ -37,17 +37,17 @@
   {let $title: 'Modal · Dialog' /}
   {let $description: '' /}
   {let $html kind="html"}
-{literal}<div class="backdrop"></div>
-<div class="modal">
-  <header></header>
-  <section>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
-  </section>
-  <footer>
-    <button class="btn btn-secondary">Cancel</button><button class="btn">Confirm</button>
-  </footer>
-</div>
-{/literal}
+  <div class="backdrop"></div>
+  {delcall Modal}
+    {param id: 'modalDialog' /}
+    {param body kind="html"}
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
+    {/param}
+    {param footer kind="html"}
+      <button class="btn btn-secondary">Cancel</button>
+      <button class="btn">Confirm</button>
+    {/param}
+  {/delcall}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}

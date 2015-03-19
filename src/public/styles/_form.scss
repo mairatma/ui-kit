@@ -17,7 +17,7 @@ select {
   @include anim(border);
   @extend .round;
   background: $white;
-  border: 1px solid rgba(35, 50, 64, .2);
+  border: 1px solid rgba($secondary, .2);
   font-size: 1.2rem;
   font-weight: $regular;
   margin: 0;
@@ -32,20 +32,20 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid $blue;
+  border: 1px solid $primary;
 }
 
 input::-moz-selection {
-  background: rgba(28, 109, 226, 0.1);
+  background: rgba($primary, 0.1);
 }
 
 input::selection {
-  background: rgba(28, 109, 226, 0.1);
+  background: rgba($primary, 0.1);
 }
 
 label,
 .form-field-aux {
-  color: rgba(35, 50, 64, .7);
+  color: rgba($secondary, .7);
   font-weight: $regular;
   font-size: 1.2rem;
   display: block;

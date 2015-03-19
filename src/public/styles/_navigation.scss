@@ -3,7 +3,7 @@
 
 .topbar {
   @extend .shadow-z1;
-  background: $blue;
+  background: $primary;
   height: 6.4rem;
 }
 
@@ -38,19 +38,19 @@
 
 .topbar-link {
   @include anim(color);
-  color: rgba(255, 255, 255, .5);
+  color: rgba($white, .5);
   font-size: 1.6rem;
   font-weight: $semiBold;
   text-decoration: none;
 }
 
 .topbar-link:hover {
-  color: rgba(255, 255, 255, .8);
+  color: rgba($white, .8);
 }
 
 .topbar-link-selected,
 .topbar-link-selected:hover {
-  color: rgb(255, 255, 255);
+  color: $white;
 }
 
 /* Navigation · Sidebar
@@ -84,21 +84,21 @@
 
 .sidebar-link {
   @include anim(all);
-  color: rgba(35, 50, 64, .9);
+  color: rgba($secondary, .9);
   display: block;
   padding: .8rem 2rem;
   text-decoration: none;
 }
 
 .sidebar-link:hover {
-  background: rgba(28, 109, 226, .05);
-  color: rgba(35, 50, 64, .9);
+  background: rgba($primary, .05);
+  color: rgba($secondary, .9);
 }
 
 .sidebar-link-selected,
 .sidebar-link-selected:hover {
-  background: rgba(28, 109, 226, .1);
-  color: $blue;
+  background: rgba($primary, .1);
+  color: $primary;
 }
 
 .sidebar-icon {

@@ -1,6 +1,9 @@
-$blue: rgb(28, 109, 226);
-$white: rgb(255, 255, 255);
-$grey: rgb(189, 193, 197);
+$primary: #1c6de2;
+$secondary: #233240;
+
+$black: #000;
+$grey: #bdc1c5;
+$white: #fff;
 
 $regular: 400;
 $semiBold: 600;
@@ -10,7 +13,7 @@ $semiBold: 600;
    ========================================================================== */
 
 body {
-  background: rgb(244, 248, 255);
+  background: #f4f8ff;
   font-family: "Open Sans", sans-serif;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
@@ -23,11 +26,11 @@ body {
 }
 
 a {
-  color: $blue;
+  color: $primary;
 }
 
 a:hover {
-  color: $blue;
+  color: $primary;
 }
 
 /* ==========================================================================

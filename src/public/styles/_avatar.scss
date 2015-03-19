@@ -60,22 +60,23 @@ $large : 9.2rem;
 
 .avatar-initials {
   color: $white;
+  font-weight: $semiBold;
   text-align: center;
   text-transform: uppercase;
 }
 
 .avatar-small .avatar-initials {
-  font-size: $small/3;
+  font-size: $small/4;
   line-height: $small;
 }
 
 .avatar-medium .avatar-initials {
-  font-size: $medium/3;
+  font-size: $medium/4;
   line-height: $medium;
 }
 
 .avatar-large .avatar-initials {
-  font-size: $large/3;
+  font-size: $large/4;
   line-height: $large;
 }
 

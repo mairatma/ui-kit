@@ -18,13 +18,14 @@
   @extend .cell;
   @extend .shadow-z2;
   display: inline-block;
+  max-width: 46.4rem;
   position: relative;
   z-index: 1;
 }
 
 .modal-header {
-  padding: 2rem;
-  border: 1px solid rgba(35, 50, 64, .1);
+  padding: 2.4rem;
+  border-bottom: 1px solid rgba(35, 50, 64, .1);
 }
 
 .modal-header h1,
@@ -33,20 +34,24 @@
 .modal-header h4,
 .modal-header h5,
 .modal-header h6 {
-  font-size: 1.6rem;
-  font-weight: $regular;
   color: rgb(28, 109, 226);
+  font-size: 1.4rem;
+  font-weight: $regular;
+  letter-spacing: -0.02rem;
+  margin: 0;
   text-align: left;
   text-transform: capitalize;
-  margin: 0;
 }
 
-.modal-header .close {
+.modal-header-close {
   color: rgba(35, 50, 64, .4);
   cursor: pointer;
   float: right;
-  font-size: 2rem;
-  margin-top: -.6rem;
+  font-size: 1.2rem;
+}
+
+.modal-header-close:hover {
+  color: rgba(35, 50, 64, .4);
 }
 
 .modal-body {

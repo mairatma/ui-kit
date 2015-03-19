@@ -1,0 +1,77 @@
+{namespace components}
+
+/**
+ * Navigation · Top
+ */
+{template .navTop}
+  {let $title: 'Navigation · Top' /}
+  {let $description: 'This is how users navigate through the application.' /}
+  {let $html kind="html"}
+{literal}<nav class="nav-top">
+  <ul class="nav-top-list">
+    <li class="nav-top-item">
+      <a class="nav-top-link" href="#">
+        <img class="nav-top-logo" src="docs/images/nav-logo.svg" width="20" height="20" alt="Logo">
+      </a>
+    </li>
+    <li class="nav-top-item">
+      <a class="nav-top-link nav-top-link-selected" href="#">My Apps</a>
+    </li>
+    <li class="nav-top-item">
+      <a class="nav-top-link" href="#">Tutorials</a>
+    </li>
+    <li class="nav-top-item">
+      <a class="nav-top-link" href="#">Documentation</a>
+    </li>
+    <li class="nav-top-item u-pull-right">
+      <a class="nav-top-link" href="#">
+        <img class="avatar" src="docs/images/avatar-person-1.png" width="36" height="36" alt="Zeno Rocha">
+      </a>
+    </li>
+  </ul>
+</nav>{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}
+
+/**
+ * Navigation · Side
+ */
+{template .navSide}
+  {let $title: 'Navigation · Side' /}
+  {let $description: 'This is how users navigate through a page anchors.' /}
+  {let $html kind="html"}
+{literal}<nav class="nav-side">
+  <ul class="nav-side-list">
+    <li class="nav-side-item">
+      <a class="nav-side-link" href="#">
+        <img class="nav-side-icon" src="docs/images/nav-icon-app.png" alt="">App Info
+      </a>
+    </li>
+    <li class="nav-side-item">
+      <a class="nav-side-link" href="#">
+        <img class="nav-side-icon" src="docs/images/nav-icon-collab.png" alt="">Collaborators
+      </a>
+    </li>
+    <li class="nav-side-item">
+      <a class="nav-side-link" href="#">
+        <img class="nav-side-icon" src="docs/images/nav-icon-plan.png" alt="">Plans
+      </a>
+    </li>
+  </ul>
+</nav>{/literal}
+  {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

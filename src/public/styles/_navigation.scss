@@ -1,85 +1,85 @@
-/* Nav · Primary
+/* Navigation · Top
    ========================================================================== */
 
-.nav-primary {
+.nav-top {
   @extend .shadow-z1;
   background: #1c6de2;
   height: 6.4rem;
   text-align: left;
 }
 
-.nav-primary-list {
+.nav-top-list {
   list-style: none;
   padding: 2rem 0;
 }
 
-.nav-primary-item {
+.nav-top-item {
   display: inline-block;
   margin: 0 1.2rem;
 }
 
-.nav-primary-item:first-child {
+.nav-top-item:first-child {
   margin-left: 2.4rem;
 }
 
-.nav-primary-item:last-child {
+.nav-top-item:last-child {
   margin-right: 2.4rem;
 }
 
-.nav-primary-item .avatar {
+.nav-top-item .avatar {
   margin-top: -2.8rem;
 }
 
-.nav-primary-logo {
+.nav-top-logo {
   vertical-align: sub;
 }
 
-.nav-primary-link {
+.nav-top-link {
   @include anim(color);
   color: rgba(255, 255, 255, .5);
   font-weight: $semiBold;
   text-decoration: none;
 }
 
-.nav-primary-link:hover {
+.nav-top-link:hover {
   color: rgba(255, 255, 255, .8);
 }
 
-.nav-primary-link-selected,
-.nav-primary-link-selected:hover {
+.nav-top-link-selected,
+.nav-top-link-selected:hover {
   color: rgb(255, 255, 255);
 }
 
-/* Nav · Secondary
+/* Navigation · Side
    ========================================================================== */
 
-.nav-secondary {
+.nav-side {
   @extend .shadow-z2;
   background: #fff;
   margin: 0 auto;
   width: 20.8rem;
 }
 
-.nav-secondary-list {
+.nav-side-list {
   list-style: none;
   margin: 0;
   text-align: left;
 }
 
-.nav-secondary-item {
+.nav-side-item {
   display: block;
   margin: 0;
 }
 
-.nav-secondary-item:first-child {
+.nav-side-item:first-child {
   padding-top: 1.4rem;
 }
 
-.nav-secondary-item:last-child {
+.nav-side-item:last-child {
   padding-bottom: 1.4rem;
 }
 
-.nav-secondary-link {
+.nav-side-link {
   @include anim(all);
   color: rgba(35, 50, 64, .9);
   display: block;
@@ -87,11 +87,11 @@
   text-decoration: none;
 }
 
-.nav-secondary-link:hover {
+.nav-side-link:hover {
   color: $blue;
   background: rgba(28, 109, 226, .1);
 }
 
-.nav-secondary-icon {
+.nav-side-icon {
   margin-right: 1.6rem;
 }

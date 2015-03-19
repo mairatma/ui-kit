@@ -14,7 +14,7 @@ input[type="button"] {
   cursor: pointer;
   display: inline-block;
   font-size: 1.2rem;
-  font-weight: $fontWeight;
+  font-weight: $semiBold;
   height: 3.2rem;
   letter-spacing: normal;
   line-height: 3.2rem;
@@ -32,6 +32,14 @@ input[type="reset"]:hover,
 input[type="button"]:hover {
   color: $white;
   opacity: .8;
+}
+
+.btn:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  color: $white;
 }
 
 /* Button · Secondary
@@ -62,6 +70,7 @@ button[disabled] {
 .btn.btn-link {
   color: $blue;
   background: $white;
+  font-weight: $regular;
 }
 
 .btn.btn-link:hover {

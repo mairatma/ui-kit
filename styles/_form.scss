@@ -1,6 +1,10 @@
 /* Form
    ========================================================================== */
 
+form {
+  max-width: 40rem;
+}
+
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -14,7 +18,7 @@ select {
   @extend .round;
   margin: 0;
   border: 1px solid rgba(0, 0, 0, .2);
-  font-weight: $fontWeight;
+  font-weight: $regular;
 }
 
 input[type="email"]:focus,
@@ -40,9 +44,8 @@ input::selection {
 label,
 .form-field-aux {
   color: #233240;
-  text-align: left;
   opacity: .7;
-  font-weight: $fontWeight;
+  font-weight: $regular;
   font-size: 1.2rem;
   display: block;
 }

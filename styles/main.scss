@@ -1,7 +1,9 @@
 $blue: rgb(28, 109, 226);
 $white: rgb(255, 255, 255);
 $grey: rgb(189, 193, 197);
-$fontWeight: 400;
+
+$regular: 400;
+$semiBold: 600;
 
 /* ==========================================================================
    Base
@@ -49,6 +51,6 @@ a:hover {
 @import "cell";
 @import "form";
 @import "modal";
-@import "nav";
+@import "navigation";
 @import "shadow";
 @import "tooltip";

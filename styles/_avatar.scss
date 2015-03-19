@@ -3,6 +3,7 @@
 
 .avatar {
   border-radius: 50%;
+  text-align: center;
 }
 
 /* Avatar · Sizes
@@ -36,17 +37,17 @@ $large : 9.2rem;
   text-transform: uppercase;
 }
 
-.avatar-initials.avatar-small {
+.avatar-small .avatar-initials {
   font-size: $small/3;
   line-height: $small;
 }
 
-.avatar-initials.avatar-medium {
+.avatar-medium .avatar-initials {
   font-size: $medium/3;
   line-height: $medium;
 }
 
-.avatar-initials.avatar-large {
+.avatar-large .avatar-initials {
   font-size: $large/3;
   line-height: $large;
 }
@@ -54,19 +55,19 @@ $large : 9.2rem;
 /* Avatar · Icon
    ========================================================================== */
 
-.avatar-icon.avatar-small img {
+.avatar-small .avatar-icon {
   width: $small/2;
   height: $small/2;
   padding: $small/4 0;
 }
 
-.avatar-icon.avatar-medium img {
+.avatar-medium .avatar-icon {
   width: $medium/2;
   height: $medium/2;
   padding: $medium/4 0;
 }
 
-.avatar-icon.avatar-large img {
+.avatar-large .avatar-icon {
   width: $large/2;
   height: $large/2;
   padding: $large/4 0;

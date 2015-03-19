@@ -10,13 +10,14 @@
   {let $html kind="html"}
 {literal}<div class="overlay"></div>
 <div class="modal">
-  <header class="modal-header">
-    <a class="modal-header-close icon-12-close-long"></a>
+  <header>
+    <a class="modal-close icon-12-close-long"></a>
     <h1>Modal title</h1>
   </header>
-  <div class="modal-body">
+  <section>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
-  </div>
+  </section>
+  <footer></footer>
 </div>
 {/literal}
   {/let}
@@ -40,10 +41,11 @@
   {let $html kind="html"}
 {literal}<div class="overlay"></div>
 <div class="modal">
-  <div class="modal-body">
+  <header></header>
+  <section>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
-  </div>
-  <footer class="modal-footer">
+  </section>
+  <footer>
     <button class="btn btn-secondary">Cancel</button>
     <button>Confirm</button>
   </footer>

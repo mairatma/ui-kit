@@ -23,17 +23,25 @@
   z-index: 1;
 }
 
-.modal-header {
+/* Modal · Header
+   ========================================================================== */
+
+.modal header {
   border-bottom: 1px solid rgba(35, 50, 64, .1);
   padding: 2.4rem;
 }
 
-.modal-header h1,
-.modal-header h2,
-.modal-header h3,
-.modal-header h4,
-.modal-header h5,
-.modal-header h6 {
+.modal header:empty {
+  border: none;
+  padding: 0;
+}
+
+.modal header h1,
+.modal header h2,
+.modal header h3,
+.modal header h4,
+.modal header h5,
+.modal header h6 {
   color: rgb(28, 109, 226);
   font-size: 1.4rem;
   font-weight: $regular;
@@ -43,32 +51,46 @@
   text-transform: capitalize;
 }
 
-.modal-header-close {
+.modal .modal-close {
   color: rgba(35, 50, 64, .4);
   cursor: pointer;
   float: right;
   font-size: 1.2rem;
 }
 
-.modal-header-close:hover {
+.modal .modal-close:hover {
   color: rgba(35, 50, 64, .4);
 }
 
-.modal-body {
+/* Modal · Body
+   ========================================================================== */
+
+.modal section {
   padding: 2.4rem 4.8rem 2.4rem 2.4rem;
   text-align: left;
 }
 
-.modal-body p {
+.modal section:empty {
+  padding: 0;
+}
+
+.modal section p {
   color: rgba(35, 50, 64, .8);
   font-size: 1.2rem;
 }
 
-.modal-body p:last-child {
+.modal section p:last-child {
   margin-bottom: 0;
 }
 
-.modal-footer {
+/* Modal · Footer
+   ========================================================================== */
+
+.modal footer {
   padding: 2rem;
   text-align: right;
+}
+
+.modal footer:empty {
+  padding: 0;
 }

@@ -2,8 +2,15 @@
    ========================================================================== */
 
 .avatar {
+  @include anim(opacity);
   border-radius: 50%;
+  display: block;
   text-align: center;
+  text-decoration: none;
+}
+
+.avatar:hover {
+  opacity: .8;
 }
 
 /* Avatar · Sizes
@@ -28,27 +35,48 @@ $large : 9.2rem;
   height: $large;
 }
 
+
+/* Avatar · Photo
+   ========================================================================== */
+
+.avatar-photo {
+  border-radius: 50%;
+}
+
+.avatar-small .avatar-photo {
+  @extend .avatar-small;
+}
+
+.avatar-medium .avatar-photo {
+  @extend .avatar-medium;
+}
+
+.avatar-large .avatar-photo {
+  @extend .avatar-large;
+}
+
 /* Avatar · Initials
    ========================================================================== */
 
 .avatar-initials {
   color: $white;
+  font-weight: $semiBold;
   text-align: center;
   text-transform: uppercase;
 }
 
 .avatar-small .avatar-initials {
-  font-size: $small/3;
+  font-size: $small/4;
   line-height: $small;
 }
 
 .avatar-medium .avatar-initials {
-  font-size: $medium/3;
+  font-size: $medium/4;
   line-height: $medium;
 }
 
 .avatar-large .avatar-initials {
-  font-size: $large/3;
+  font-size: $large/4;
   line-height: $large;
 }
 

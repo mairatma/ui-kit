@@ -3,7 +3,7 @@
    Base
    ========================================================================== */
 body {
-  background: #f3f8fe;
+  background: #f4f8ff;
   font-family: "Open Sans", sans-serif;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
@@ -38,7 +38,7 @@ input[type="tel"],
 input[type="url"],
 input[type="password"],
 textarea,
-select {
+select, .sidebar {
   border-radius: 0.2rem;
 }
 
@@ -48,47 +48,61 @@ select {
 /* Avatar
    ========================================================================== */
 .avatar {
+  transition: opacity 0.3s ease-in-out;
   border-radius: 50%;
+  display: block;
   text-align: center;
+  text-decoration: none;
+}
+
+.avatar:hover {
+  opacity: .8;
 }
 
 /* Avatar · Sizes
    ========================================================================== */
-.avatar-small {
+.avatar-small, .avatar-small .avatar-photo {
   width: 3.6rem;
   height: 3.6rem;
 }
 
-.avatar-medium {
+.avatar-medium, .avatar-medium .avatar-photo {
   width: 5.6rem;
   height: 5.6rem;
 }
 
-.avatar-large {
+.avatar-large, .avatar-large .avatar-photo {
   width: 9.2rem;
   height: 9.2rem;
+}
+
+/* Avatar · Photo
+   ========================================================================== */
+.avatar-photo {
+  border-radius: 50%;
 }
 
 /* Avatar · Initials
    ========================================================================== */
 .avatar-initials {
   color: white;
+  font-weight: 600;
   text-align: center;
   text-transform: uppercase;
 }
 
 .avatar-small .avatar-initials {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   line-height: 3.6rem;
 }
 
 .avatar-medium .avatar-initials {
-  font-size: 1.86667rem;
+  font-size: 1.4rem;
   line-height: 5.6rem;
 }
 
 .avatar-large .avatar-initials {
-  font-size: 3.06667rem;
+  font-size: 2.3rem;
   line-height: 9.2rem;
 }
 
@@ -131,7 +145,7 @@ input[type="button"] {
   letter-spacing: normal;
   line-height: 3.2rem;
   margin: 0;
-  padding: 0 2.4rem;
+  padding: 0 3.2rem;
   text-align: center;
   text-decoration: none;
   text-transform: none;
@@ -191,6 +205,7 @@ button[disabled] {
 /* Cell
    ========================================================================== */
 .cell, .modal, .tooltip, .tooltip-menu {
+  transition: box-shadow 0.3s ease-in-out;
   background: white;
 }
 
@@ -210,9 +225,11 @@ input[type="password"],
 textarea,
 select {
   transition: border 0.3s ease-in-out;
-  margin: 0;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: white;
+  border: 1px solid rgba(35, 50, 64, 0.2);
+  font-size: 1.2rem;
   font-weight: 400;
+  margin: 0;
 }
 
 input[type="email"]:focus,
@@ -228,24 +245,27 @@ select:focus {
 }
 
 input::-moz-selection {
-  background: #d1e2f9;
+  background: rgba(28, 109, 226, 0.1);
 }
 
 input::selection {
-  background: #d1e2f9;
+  background: rgba(28, 109, 226, 0.1);
 }
 
 label,
 .form-field-aux {
-  color: #233240;
-  opacity: .7;
+  color: rgba(35, 50, 64, 0.7);
   font-weight: 400;
   font-size: 1.2rem;
   display: block;
 }
 
+label {
+  margin-bottom: .4rem;
+}
+
 .form-field-aux {
-  margin-top: .5rem;
+  margin-top: .4rem;
 }
 
 /* Overlay
@@ -309,7 +329,7 @@ label,
 /* Modal · Body
    ========================================================================== */
 .modal section {
-  padding: 2.4rem 4.8rem 2.4rem 2.4rem;
+  padding: 2.4rem 4.8rem 5.2rem 2.4rem;
 }
 
 .modal section:empty {
@@ -328,12 +348,20 @@ label,
 /* Modal · Footer
    ========================================================================== */
 .modal footer {
-  padding: 2rem;
+  padding: 1.2rem;
   text-align: right;
 }
 
 .modal footer:empty {
   padding: 0;
+}
+
+.modal footer .btn {
+  margin: 0 .6rem;
+}
+
+.modal footer .btn:last-child {
+  margin-right: 0;
 }
 
 /* Navigation · Topbar
@@ -358,11 +386,14 @@ label,
 }
 
 .topbar-item:last-child {
-  margin-right: 2.4rem;
+  margin-right: 3.2rem;
 }
 
 .topbar-item .avatar {
-  margin-top: -2.8rem;
+  display: block;
+  height: 36px;
+  margin-top: -.6rem;
+  width: 36px;
 }
 
 .topbar-logo {
@@ -389,7 +420,7 @@ label,
 /* Navigation · Sidebar
    ========================================================================== */
 .sidebar {
-  background: #fff;
+  background: white;
   margin: 0 auto;
   width: 20.8rem;
 }
@@ -401,15 +432,15 @@ label,
 
 .sidebar-item {
   display: block;
-  margin: 0;
+  margin: .2rem 0;
 }
 
 .sidebar-item:first-child {
-  padding-top: 1.4rem;
+  padding-top: 1.6rem;
 }
 
 .sidebar-item:last-child {
-  padding-bottom: 1.4rem;
+  padding-bottom: 1.6rem;
 }
 
 .sidebar-link {
@@ -421,21 +452,28 @@ label,
 }
 
 .sidebar-link:hover {
-  color: #1c6de2;
+  background: rgba(28, 109, 226, 0.05);
+  color: rgba(35, 50, 64, 0.9);
+}
+
+.sidebar-link-selected,
+.sidebar-link-selected:hover {
   background: rgba(28, 109, 226, 0.1);
+  color: #1c6de2;
 }
 
 .sidebar-icon {
   margin-right: 1.6rem;
+  vertical-align: middle;
 }
 
 /* Shadow
    ========================================================================== */
-.shadow-z1, .topbar {
+.shadow-z1, .cell, .modal, .tooltip, .tooltip-menu, .topbar {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
 }
 
-.shadow-z2, .modal, .sidebar, .tooltip, .tooltip-menu {
+.shadow-z2, .cell:hover, .modal:hover, .tooltip:hover, .tooltip-menu:hover, .modal, .sidebar, .tooltip, .tooltip-menu {
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.24);
 }
 
@@ -475,6 +513,6 @@ label,
 }
 
 .tooltip-menu-link:hover {
-  background: rgba(28, 109, 226, 0.1);
+  background: rgba(28, 109, 226, 0.05);
   color: rgba(35, 50, 64, 0.7);
 }

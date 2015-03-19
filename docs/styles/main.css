@@ -14,7 +14,7 @@
 #buttonTags .page-cell-demo,
 #modal .modal,
 #modalDialog .modal,
-#shadow .page-cell-demo,
+#cell .page-cell-demo,
 #tooltip .page-cell-demo,
 #tooltipMenu .page-cell-demo,
 #icon12x12 .page-cell-demo,
@@ -32,6 +32,16 @@
   display: inline-block;
   vertical-align: middle;
   margin: 0 1.2rem;
+}
+
+/* Button
+   ========================================================================== */
+
+#buttonTypes .btn,
+#buttonTags .btn,
+#buttonTags button,
+#buttonTags input {
+  margin: 0 .6rem;
 }
 
 /* Tooltip

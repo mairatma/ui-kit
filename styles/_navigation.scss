@@ -3,7 +3,7 @@
 
 .topbar {
   @extend .shadow-z1;
-  background: #1c6de2;
+  background: $blue;
   height: 6.4rem;
 }
 
@@ -22,11 +22,14 @@
 }
 
 .topbar-item:last-child {
-  margin-right: 2.4rem;
+  margin-right: 3.2rem;
 }
 
 .topbar-item .avatar {
-  margin-top: -2.8rem;
+  display: block;
+  height: 36px;
+  margin-top: -.6rem;
+  width: 36px;
 }
 
 .topbar-logo {
@@ -54,8 +57,9 @@
    ========================================================================== */
 
 .sidebar {
+  @extend .round;
   @extend .shadow-z2;
-  background: #fff;
+  background: $white;
   margin: 0 auto;
   width: 20.8rem;
 }
@@ -67,15 +71,15 @@
 
 .sidebar-item {
   display: block;
-  margin: 0;
+  margin: .2rem 0;
 }
 
 .sidebar-item:first-child {
-  padding-top: 1.4rem;
+  padding-top: 1.6rem;
 }
 
 .sidebar-item:last-child {
-  padding-bottom: 1.4rem;
+  padding-bottom: 1.6rem;
 }
 
 .sidebar-link {
@@ -87,10 +91,17 @@
 }
 
 .sidebar-link:hover {
-  color: $blue;
+  background: rgba(28, 109, 226, .05);
+  color: rgba(35, 50, 64, .9);
+}
+
+.sidebar-link-selected,
+.sidebar-link-selected:hover {
   background: rgba(28, 109, 226, .1);
+  color: $blue;
 }
 
 .sidebar-icon {
   margin-right: 1.6rem;
+  vertical-align: middle;
 }

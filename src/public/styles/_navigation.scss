@@ -57,6 +57,7 @@
    ========================================================================== */
 
 .sidebar {
+  @extend .round;
   @extend .shadow-z2;
   background: #fff;
   margin: 0 auto;

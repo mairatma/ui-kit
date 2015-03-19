@@ -2,6 +2,12 @@
    ========================================================================== */
 
 .cell {
+  @include anim(box-shadow);
   @extend .round;
+  @extend .shadow-z1;
   background: $white;
+}
+
+.cell:hover {
+  @extend .shadow-z2;
 }

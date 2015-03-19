@@ -8,18 +8,20 @@
   {let $title: 'Modal' /}
   {let $description: '' /}
   {let $html kind="html"}
-{literal}<div class="overlay"></div>
-<div class="modal">
-  <header>
-    <a class="modal-close icon-12-close-long"></a>
-    <h1>Modal title</h1>
-  </header>
-  <section>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
-  </section>
-  <footer></footer>
-</div>
-{/literal}
+  <div class="backdrop"></div>
+  {delcall Modal}
+    {param id: 'modal' /}
+    {param header kind="html"}
+      <h1>Modal header</h1>
+    {/param}
+    {param body kind="html"}
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
+    {/param}
+    {param footer kind="html"}
+      <button class="btn btn-secondary">Cancel</button>
+      <button>Confirm</button>
+    {/param}
+  {/delcall}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}

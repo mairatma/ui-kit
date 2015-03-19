@@ -30,6 +30,14 @@
   margin: 0;
 }
 
+.tooltip-menu-item:first-child {
+  margin-top: .6rem;
+}
+
+.tooltip-menu-item:last-child {
+  margin-bottom: .6rem;
+}
+
 .tooltip-menu-link {
   @include anim(background);
   color: rgba($secondary, .7);

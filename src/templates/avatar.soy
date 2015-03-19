@@ -8,9 +8,18 @@
   {let $title: 'Avatar · Photo' /}
   {let $description: 'Make sure you load an image twice the size in order to guarantee high quality on retina displays.' /}
   {let $html kind="html"}
-{literal}<img class="avatar avatar-large"  src="docs/images/avatar-person-1.png" alt="Chloe Hart">
-<img class="avatar avatar-medium" src="docs/images/avatar-person-2.png" alt="Bobbie Flores">
-<img class="avatar avatar-small"  src="docs/images/avatar-person-3.png" alt="Maureen Cruz">{/literal}
+{literal}
+<a class="avatar avatar-large" href="#">
+  <img class="avatar-photo" src="docs/images/avatar-person-1.png" alt="Chloe Hart">
+</a>
+
+<a class="avatar avatar-medium" href="#">
+  <img class="avatar-photo" src="docs/images/avatar-person-2.png" alt="Bobbie Flores">
+</a>
+
+<a class="avatar avatar-small" href="#">
+  <img class="avatar-photo" src="docs/images/avatar-person-3.png" alt="Maureen Cruz">
+</a>{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
@@ -30,17 +39,17 @@
   {let $title: 'Avatar · Initials' /}
   {let $description: 'Represents the first letters from the first two names of a person.' /}
   {let $html kind="html"}
-{literal}<div class="avatar avatar-large" style="background: #e4c143;">
+{literal}<a class="avatar avatar-large" href="#" style="background: #e4c143;">
   <span class="avatar-initials">ch</span>
-</div>
+</a>
 
-<div class="avatar avatar-medium" style="background: #ff536b;">
+<a class="avatar avatar-medium" href="#" style="background: #ff536b;">
   <span class="avatar-initials">bf</span>
-</div>
+</a>
 
-<div class="avatar avatar-small" style="background: #9552ef;">
+<a class="avatar avatar-small" href="#" style="background: #9552ef;">
   <span class="avatar-initials">mc</span>
-</div>{/literal}
+</a>{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}
@@ -60,17 +69,17 @@
   {let $title: 'Avatar · Icon' /}
   {let $description: 'Contains a SVG file that represents an app.' /}
   {let $html kind="html"}
-{literal}<div class="avatar avatar-large" style="background: #9552ef;">
+{literal}<a class="avatar avatar-large" href="#" style="background: #9552ef;">
   <img class="avatar-icon" src="fonts/16/heart-outline.svg" alt="Heart icon">
-</div>
+</a>
 
-<div class="avatar avatar-medium" style="background: #c25daa;">
+<a class="avatar avatar-medium" href="#" style="background: #c25daa;">
   <img class="avatar-icon" src="fonts/16/bell.svg" alt="Bell icon">
-</div>
+</a>
 
-<div class="avatar avatar-small" style="background: #ff7175;">
+<a class="avatar avatar-small" href="#" style="background: #ff7175;">
   <img class="avatar-icon" src="fonts/16/star.svg" alt="Star icon">
-</div>{/literal}
+</a>{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}

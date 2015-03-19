@@ -2,8 +2,15 @@
    ========================================================================== */
 
 .avatar {
+  @include anim(opacity);
   border-radius: 50%;
+  display: block;
   text-align: center;
+  text-decoration: none;
+}
+
+.avatar:hover {
+  opacity: .8;
 }
 
 /* Avatar · Sizes
@@ -26,6 +33,26 @@ $large : 9.2rem;
 .avatar-large {
   width: $large;
   height: $large;
+}
+
+
+/* Avatar · Photo
+   ========================================================================== */
+
+.avatar-photo {
+  border-radius: 50%;
+}
+
+.avatar-small .avatar-photo {
+  @extend .avatar-small;
+}
+
+.avatar-medium .avatar-photo {
+  @extend .avatar-medium;
+}
+
+.avatar-large .avatar-photo {
+  @extend .avatar-large;
 }
 
 /* Avatar · Initials

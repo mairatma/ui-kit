@@ -6,7 +6,8 @@
     "before": true,
     "beforeEach": true,
     "describe": true,
-    "it": true
+    "it": true,
+    "soy": true
   },
   "extends": "../scripts/.jshintrc"
 }

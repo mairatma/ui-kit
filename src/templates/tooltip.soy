@@ -8,8 +8,18 @@
   {let $title: 'Tooltip' /}
   {let $description: '' /}
   {let $html kind="html"}
-{literal}<div class="tooltip">Brittany Hall</div>
-<div class="tooltip">Alyssa Spencer<br>Shelly Bryant<br>Victor Moreno</div>{/literal}
+  {delcall Tooltip}
+    {param id: 'myTooltip1' /}
+    {param content: 'Brittany Hall' /}
+  {/delcall}
+  {delcall Tooltip}
+    {param id: 'myTooltip2' /}
+    {param content kind="html"}
+    Alyssa Spencer<br/>
+    Shelly Bryant<br/>
+    Victor Moreno
+    {/param}
+  {/delcall}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}

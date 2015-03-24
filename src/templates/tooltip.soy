@@ -39,26 +39,16 @@
   {let $title: 'Tooltip · Menu' /}
   {let $description: '' /}
   {let $html kind="html"}
-{literal}<nav class="tooltip-menu">
-  <ul class="tooltip-menu-list">
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Rename</a>
-    </li>
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Change URL</a>
-    </li>
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Change Plan</a>
-    </li>
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Add Collaborator</a>
-    </li>
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Delete App</a>
-    </li>
-  </ul>
-</nav>
-{/literal}
+  {delcall TooltipMenu}
+    {param id: 'myTooltipMenu' /}
+    {param items: [
+      ['content': 'Rename'],
+      ['content': 'Change URL'],
+      ['content': 'Change Plan'],
+      ['content': 'Add Collaborator'],
+      ['content': 'Delete App']
+    ] /}
+  {/delcall}
   {/let}
   {let $snippet kind="text"}{$html}{/let}
   {call static.cell}

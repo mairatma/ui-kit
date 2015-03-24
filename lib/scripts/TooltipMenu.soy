@@ -1,0 +1,38 @@
+{namespace Templates.TooltipMenu}
+
+/**
+ * This renders the main element.
+ */
+{template .content}
+  {delcall TooltipMenu.items data="all" /}
+{/template}
+
+/**
+ * @param items
+ */
+{template .items}
+  {foreach $item in $items}
+  <li class="tooltip-menu-item">
+    <a class="tooltip-menu-link" href="{$item.href ? $item.href : '#'}">{$item.content}</a>
+  </li>
+  {/foreach}
+{/template}
+
+/**
+ * @param? elementContent
+ * @param? elementClasses
+ * @param id
+ */
+{deltemplate TooltipMenu variant="'element'"}
+<nav id="{$id}" class="tooltip-menu {$elementClasses ? $elementClasses : ''}" data-component>
+{$elementContent}
+</nav>
+{/deltemplate}
+
+/**
+ * @param? elementContent
+ * @param id
+ */
+{deltemplate TooltipMenu.items variant="'element'"}
+    <ul id="{$id}-items" class="tooltip-menu-list">{$elementContent}</ul>
+{/deltemplate}

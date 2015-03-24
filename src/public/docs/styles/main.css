@@ -44,12 +44,21 @@
   margin: 0 .6rem;
 }
 
+/* Modal
+   ========================================================================== */
+
+#modal .modal,
+#modalDialog .modal {
+  position: relative;
+}
+
 /* Tooltip
    ========================================================================== */
 
 #tooltip .tooltip,
-#tooltipMenu .tooltip {
+#tooltipMenu .tooltip-menu {
   margin: 0 1rem;
+  position: relative;
 }
 
 /* Shadow

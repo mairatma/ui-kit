@@ -9,6 +9,7 @@
   font-size: 1.2rem;
   padding: .8rem 1.2rem;
   text-align: left;
+  position: absolute;
 }
 
 /* Tooltip · Menu
@@ -19,6 +20,7 @@
   @extend .shadow-z2;
   display: inline-block;
   text-align: center;
+  position: absolute;
 }
 
 .tooltip-menu-list {

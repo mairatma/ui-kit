@@ -26,11 +26,87 @@
   <link rel="icon" href="docs/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <div class="container">
-    <img class="page-logo" src="docs/images/logo.png" alt="Logo">
-    {$content}
-    <p class="page-copyright">© 2015 Liferay, Inc.</p>
-  </div>
+  <nav class="topbar">
+    <ul class="topbar-list">
+      <li class="topbar-item">
+        <a class="topbar-link" href="#">
+          <img class="topbar-logo" src="docs/images/nav-logo.svg" width="19" height="19" alt="Logo">
+        </a>
+      </li>
+      <li class="topbar-item">
+        <a class="topbar-link topbar-link-selected" href="/">UI Kit</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="wrap">
+    <div class="container">
+      <div class="row">
+        <div class="four columns">
+          <nav class="sidebar">
+            <ul class="sidebar-list">
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#avatarIcon">Avatar · Icon</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#avatarInitials">Avatar · Initials</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#avatarPhoto">Avatar · Photo</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#avatarPhoto">Avatar · Photo</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#buttonTags">Button · Tags</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#buttonTypes">Button · Types</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#cell">Cell</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#formInput">Form · Input</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#icon12x12">Icon · 12x12</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#icon16x16">Icon · 16x16</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#modal">Modal</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#modalDialog">Modal · Dialog</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#navSidebar">Navigation · Sidebar</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#navTopbar">Navigation · Topbar</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#tooltip">Tooltip</a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="#tooltipMenu">Tooltip · Menu</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="eight columns">
+          {$content}
+        </div>
+      </div>
+
+      <div class="row">
+        <p class="page-copyright">© 2015 Liferay, Inc.</p>
+      </div>
+    </div>
+  </main>
+
   <script src="docs/scripts/main.js"></script>
 </body>
 </html>

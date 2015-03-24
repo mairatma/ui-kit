@@ -84,12 +84,11 @@
   width: 100%;
 }
 
-/* Logo
+/* Wrap
    ========================================================================== */
 
-.page-logo {
-  display: block;
-  margin: 32px auto;
+.wrap {
+  margin-top: 3.2rem;
 }
 
 /* Cell
@@ -99,6 +98,10 @@
   background: #fff;
   border-radius: .2rem;
   margin-top: 3.2rem;
+}
+
+.page-cell:first-child {
+  margin-top: 0;
 }
 
 .page-cell-title {

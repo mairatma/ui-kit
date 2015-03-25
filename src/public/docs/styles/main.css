@@ -1,10 +1,20 @@
 /* Demo
    ========================================================================== */
 
-.page-cell-demo {
-  border-bottom: 1px solid #eeeff0;
-  padding: 1.6rem;
+.page-cell-demo-container {
+  background: #f4f8ff;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  height: 34.4rem;
+  padding: 0 1.6rem;
   position: relative;
+}
+
+.page-cell-demo {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #avatarPhoto .page-cell-demo,
@@ -21,6 +31,13 @@
 #icon16x16 .page-cell-demo {
   display: table;
   margin: 0 auto;
+}
+
+#modal .page-cell-demo,
+#modalDialog .page-cell-demo {
+  position: static;
+  top: initial;
+  transform: none;
 }
 
 /* Avatar
@@ -98,6 +115,7 @@
   background: #fff;
   border-radius: .2rem;
   margin-top: 3.2rem;
+  padding: .8rem;
 }
 
 .page-cell:first-child {
@@ -105,38 +123,30 @@
 }
 
 .page-cell-title {
-  font-size: 2.4rem;
+  font-size: 1.6rem;
   margin: 0;
-  padding: 1.6rem 1.6rem .8rem;
-  text-transform: uppercase;
+  padding: 2.4rem 4rem 1.4rem;
 }
 
 .page-cell-description {
-  border-bottom: .1rem solid #eeeff0;
+  font-size: 1.2rem;
   margin: 0;
-  padding: 0 1.6rem 1.6rem;
+  padding: 0 4rem 4rem;
 }
 
 /* Code
    ========================================================================== */
 
 .page-cell-pre {
-  margin: 0;
+  background: #f4f8ff;
+  margin: 0 4rem 3rem;
+  overflow: scroll;
 }
 
 .page-cell-code {
-  background: #f8f8f8;
+  background: #f4f8ff;
   border-radius: 0;
   border: 0;
   font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
-  margin: 0;
-  padding: 1.6rem;
-}
-
-/* Copyright
-   ========================================================================== */
-
-.page-copyright {
-  text-align: center;
-  margin: 3.2rem 0;
+  font-size: 1.1rem;
 }

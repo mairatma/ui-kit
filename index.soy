@@ -36,11 +36,13 @@
  */
 {template .cell}
   <div id="{$id}" class="page-cell shadow-z1">
+    <div class="page-cell-demo-container">
+      <div class="page-cell-demo">
+        {$html}
+      </div>
+    </div>
     <h3 class="page-cell-title">{$title}</h3>
     <p class="page-cell-description">{$description}</p>
-    <div class="page-cell-demo">
-      {$html}
-    </div>
     <pre class="page-cell-pre"><code class="page-cell-code">{$snippet}</code></pre>
   </div>
 {/template}

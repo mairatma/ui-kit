@@ -1,14 +1,92 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>UI Kit</title><link rel="stylesheet" href="vendor/skeleton/css/normalize.css"><link rel="stylesheet" href="vendor/skeleton/css/skeleton.css"><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600"><link rel="stylesheet" href="fonts/icon-12.css"><link rel="stylesheet" href="fonts/icon-16.css"><link rel="stylesheet" href="styles/main.css"><link rel="stylesheet" href="docs/styles/main.css"><link rel="stylesheet" href="docs/styles/syntax-highlight.css"><link rel="icon" href="docs/images/favicon.ico" type="image/x-icon"></head><body><div class="container"><img class="page-logo" src="docs/images/logo.png" alt="Logo"><div id="avatarIcon" class="page-cell shadow-z1"><h3 class="page-cell-title">Avatar · Icon</h3><p class="page-cell-description">Contains a SVG file that represents an app.</p><div class="page-cell-demo"><a class="avatar avatar-large" href="#" style="background: #9552ef;">
-  <img class="avatar-icon" src="fonts/16/heart-outline.svg" alt="Heart icon">
-</a>
+<!DOCTYPE html>
+<html lang="en">
 
-<a class="avatar avatar-medium" href="#" style="background: #c25daa;">
-  <img class="avatar-icon" src="fonts/16/bell.svg" alt="Bell icon">
-</a>
+<head>
+  <meta charset="UTF-8">
+  <title>UI Kit</title>
+  <link rel="stylesheet" href="vendor/skeleton/css/normalize.css">
+  <link rel="stylesheet" href="vendor/skeleton/css/skeleton.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600">
+  <link rel="stylesheet" href="fonts/icon-12.css">
+  <link rel="stylesheet" href="fonts/icon-16.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="docs/styles/main.css">
+  <link rel="stylesheet" href="docs/styles/syntax-highlight.css">
+  <link rel="icon" href="docs/images/favicon.ico" type="image/x-icon">
+</head>
 
-<a class="avatar avatar-small" href="#" style="background: #ff7175;">
-  <img class="avatar-icon" src="fonts/16/star.svg" alt="Star icon">
-</a></div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #9552ef;"</span>&gt;</span>
+<body>
+  <nav class="topbar">
+    <ul class="topbar-list">
+      <li class="topbar-item">
+        <a class="topbar-link" href="#">
+          <img class="topbar-logo" src="docs/images/nav-logo.svg" width="19" height="19" alt="Logo">
+        </a>
+      </li>
+      <li class="topbar-item"><a class="topbar-link topbar-link-selected" href="/">UI Kit</a>
+      </li>
+    </ul>
+  </nav>
+  <main class="wrap">
+    <div class="container">
+      <div class="row">
+        <div class="four columns">
+          <nav class="sidebar">
+            <ul class="sidebar-list">
+              <li class="sidebar-item"><a class="sidebar-link" href="#avatarIcon">Avatar · Icon</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#avatarInitials">Avatar · Initials</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#avatarPhoto">Avatar · Photo</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#avatarPhoto">Avatar · Photo</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#buttonTags">Button · Tags</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#buttonTypes">Button · Types</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#cell">Cell</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#formInput">Form · Input</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#icon12x12">Icon · 12x12</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#icon16x16">Icon · 16x16</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#modal">Modal</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#modalDialog">Modal · Dialog</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#navSidebar">Navigation · Sidebar</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#navTopbar">Navigation · Topbar</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#tooltip">Tooltip</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#tooltipMenu">Tooltip · Menu</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="eight columns">
+          <div id="avatarIcon" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <a class="avatar avatar-large" href="#" style="background: #9552ef;">
+                  <img class="avatar-icon" src="fonts/16/heart-outline.svg" alt="Heart icon">
+                </a>
+
+                <a class="avatar avatar-medium" href="#" style="background: #c25daa;">
+                  <img class="avatar-icon" src="fonts/16/bell.svg" alt="Bell icon">
+                </a>
+
+                <a class="avatar avatar-small" href="#" style="background: #ff7175;">
+                  <img class="avatar-icon" src="fonts/16/star.svg" alt="Star icon">
+                </a>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Avatar · Icon</h3>
+            <p class="page-cell-description">Contains a SVG file that represents an app.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #9552ef;"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"fonts/16/heart-outline.svg"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Heart icon"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
@@ -18,17 +96,26 @@
 
 <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-small"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #ff7175;"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"fonts/16/star.svg"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Star icon"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre></div><div id="avatarInitials" class="page-cell shadow-z1"><h3 class="page-cell-title">Avatar · Initials</h3><p class="page-cell-description">Represents the first letters from the first two names of a person.</p><div class="page-cell-demo"><a class="avatar avatar-large" href="#" style="background: #e4c143;">
-  <span class="avatar-initials">ch</span>
-</a>
+<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre>
+          </div>
+          <div id="avatarInitials" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <a class="avatar avatar-large" href="#" style="background: #e4c143;">
+                  <span class="avatar-initials">ch</span>
+                </a>
 
-<a class="avatar avatar-medium" href="#" style="background: #ff536b;">
-  <span class="avatar-initials">bf</span>
-</a>
+                <a class="avatar avatar-medium" href="#" style="background: #ff536b;">
+                  <span class="avatar-initials">bf</span>
+                </a>
 
-<a class="avatar avatar-small" href="#" style="background: #9552ef;">
-  <span class="avatar-initials">mc</span>
-</a></div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #e4c143;"</span>&gt;</span>
+                <a class="avatar avatar-small" href="#" style="background: #9552ef;">
+                  <span class="avatar-initials">mc</span>
+                </a>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Avatar · Initials</h3>
+            <p class="page-cell-description">Represents the first letters from the first two names of a person.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #e4c143;"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-initials"</span>&gt;</span>ch<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
@@ -38,19 +125,26 @@
 
 <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-small"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #9552ef;"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-initials"</span>&gt;</span>mc<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre></div><div id="avatarPhoto" class="page-cell shadow-z1"><h3 class="page-cell-title">Avatar · Photo</h3><p class="page-cell-description">Make sure you load an image twice the size in order to guarantee high quality on retina displays.</p><div class="page-cell-demo">
-<a class="avatar avatar-large" href="#">
-  <img class="avatar-photo" src="docs/images/avatar-person-1.png" alt="Chloe Hart">
-</a>
+<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre>
+          </div>
+          <div id="avatarPhoto" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <a class="avatar avatar-large" href="#">
+                  <img class="avatar-photo" src="docs/images/avatar-person-1.png" alt="Chloe Hart">
+                </a>
 
-<a class="avatar avatar-medium" href="#">
-  <img class="avatar-photo" src="docs/images/avatar-person-2.png" alt="Bobbie Flores">
-</a>
+                <a class="avatar avatar-medium" href="#">
+                  <img class="avatar-photo" src="docs/images/avatar-person-2.png" alt="Bobbie Flores">
+                </a>
 
-<a class="avatar avatar-small" href="#">
-  <img class="avatar-photo" src="docs/images/avatar-person-3.png" alt="Maureen Cruz">
-</a></div><pre class="page-cell-pre"><code class="page-cell-code">
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
+                <a class="avatar avatar-small" href="#">
+                  <img class="avatar-photo" src="docs/images/avatar-person-3.png" alt="Maureen Cruz">
+                </a>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Avatar · Photo</h3>
+            <p class="page-cell-description">Make sure you load an image twice the size in order to guarantee high quality on retina displays.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-photo"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"docs/images/avatar-person-1.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Chloe Hart"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
@@ -60,68 +154,108 @@
 
 <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-small"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-photo"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"docs/images/avatar-person-3.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Maureen Cruz"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre></div><div id="buttonTags" class="page-cell shadow-z1"><h3 class="page-cell-title">Button · Tags</h3><p class="page-cell-description">Button styles can be applied to different HTML tags such as links, buttons, and inputs.</p><div class="page-cell-demo"><a class="btn" href="#">Link</a>
-<button type="submit">Button</button>
-<input type="button" value="Input">
-<input type="submit" value="Submit">
-<input type="reset" value="Reset"></div><pre class="page-cell-pre"><code class="page-cell-code">&lt;a <span class="hljs-keyword">class</span>=<span class="hljs-string">"btn"</span> href=<span class="hljs-string">"#"</span>&gt;Link&lt;/a&gt;
+<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre>
+          </div>
+          <div id="buttonTags" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo"><a class="btn" href="#">Link</a>
+                <button type="submit">Button</button>
+                <input type="button" value="Input">
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+              </div>
+            </div>
+            <h3 class="page-cell-title">Button · Tags</h3>
+            <p class="page-cell-description">Button styles can be applied to different HTML tags such as links, buttons, and inputs.</p><pre class="page-cell-pre"><code class="page-cell-code">&lt;a <span class="hljs-keyword">class</span>=<span class="hljs-string">"btn"</span> href=<span class="hljs-string">"#"</span>&gt;Link&lt;/a&gt;
 &lt;button <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"submit"</span>&gt;Button&lt;/button&gt;
 &lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span> <span class="hljs-keyword">value</span>=<span class="hljs-string">"Input"</span>&gt;
 &lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"submit"</span> <span class="hljs-keyword">value</span>=<span class="hljs-string">"Submit"</span>&gt;
-&lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"reset"</span> <span class="hljs-keyword">value</span>=<span class="hljs-string">"Reset"</span>&gt;</code></pre></div><div id="buttonTypes" class="page-cell shadow-z1"><h3 class="page-cell-title">Button · Types</h3><p class="page-cell-description">Make sure to include the base class in order to use any of the four different button styles.</p><div class="page-cell-demo"><a class="btn" href="#">Primary</a>
-<a class="btn btn-secondary" href="#">Secondary</a>
-<a class="btn btn-disabled" href="#">Disabled</a>
-<a class="btn btn-link" href="#">Link</a>
-</div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Primary<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+&lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"reset"</span> <span class="hljs-keyword">value</span>=<span class="hljs-string">"Reset"</span>&gt;</code></pre>
+          </div>
+          <div id="buttonTypes" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo"><a class="btn" href="#">Primary</a>
+                <a class="btn btn-secondary" href="#">Secondary</a>
+                <a class="btn btn-disabled" href="#">Disabled</a>
+                <a class="btn btn-link" href="#">Link</a>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Button · Types</h3>
+            <p class="page-cell-description">Make sure to include the base class in order to use any of the four different button styles.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Primary<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-secondary"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Secondary<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-disabled"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Disabled<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Link<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-</code></pre></div><div id="cell" class="page-cell shadow-z1"><h3 class="page-cell-title">Cell</h3><p class="page-cell-description"></p><div class="page-cell-demo"><section class="cell" style="width: 100px; height: 100px;"></section></div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"cell"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"width: 100px; height: 100px;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span></code></pre></div><div id="formInput" class="page-cell shadow-z1"><h3 class="page-cell-title">Form · Input</h3><p class="page-cell-description"></p><div class="page-cell-demo"><form>
-  <label for="example-input">Label</label>
-  <input id="example-input" type="text" placeholder="Write something here...">
-  <span class="form-field-aux">A block of auxiliar text</span>
-</form>
-</div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
+</code></pre>
+          </div>
+          <div id="cell" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <section class="cell" style="width: 100px; height: 100px;"></section>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Cell</h3>
+            <p class="page-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"cell"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"width: 100px; height: 100px;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span></code></pre>
+          </div>
+          <div id="formInput" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <form>
+                  <label for="example-input">Label</label>
+                  <input id="example-input" type="text" placeholder="Write something here...">
+                  <span class="form-field-aux">A block of auxiliar text</span>
+                </form>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Form · Input</h3>
+            <p class="page-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">"example-input"</span>&gt;</span>Label<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"example-input"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Write something here..."</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-field-aux"</span>&gt;</span>A block of auxiliar text<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
-</code></pre></div><div id="icon12x12" class="page-cell shadow-z1"><h3 class="page-cell-title">Icon · 12x12</h3><p class="page-cell-description">These are icons built in a 12x12 canvas. When scaling them, always follow the right proportion, for example: 24x24, 36x36, 48x48, etc.</p><div class="page-cell-demo"><span class="icon-12-arrow-down-short"></span>
-<span class="icon-12-arrow-left-long"></span>
-<span class="icon-12-arrow-left-rod"></span>
-<span class="icon-12-arrow-right-long"></span>
-<span class="icon-12-arrow-right-rod"></span>
-<span class="icon-12-arrow-up-short"></span>
-<span class="icon-12-arrows"></span>
-<span class="icon-12-ballon-text"></span>
-<span class="icon-12-balloon-comments-inline"></span>
-<span class="icon-12-balloon-comments"></span>
-<span class="icon-12-balloon-topic"></span>
-<span class="icon-12-browser"></span>
-<span class="icon-12-building-big"></span>
-<span class="icon-12-building-small"></span>
-<span class="icon-12-camera"></span>
-<span class="icon-12-card"></span>
-<span class="icon-12-check"></span>
-<span class="icon-12-clock"></span>
-<span class="icon-12-close-long"></span>
-<span class="icon-12-close-short"></span>
-<span class="icon-12-groups"></span>
-<span class="icon-12-hash"></span>
-<span class="icon-12-heart-full"></span>
-<span class="icon-12-heart-inline"></span>
-<span class="icon-12-heart-outline"></span>
-<span class="icon-12-link"></span>
-<span class="icon-12-people"></span>
-<span class="icon-12-person-card-2"></span>
-<span class="icon-12-person-card-3"></span>
-<span class="icon-12-person"></span>
-<span class="icon-12-persons"></span>
-<span class="icon-12-pin"></span>
-<span class="icon-12-plus"></span>
-<span class="icon-12-post"></span>
-<span class="icon-12-star"></span>
-<span class="icon-12-trash"></span></div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-arrow-down-short"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+</code></pre>
+          </div>
+          <div id="icon12x12" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo"><span class="icon-12-arrow-down-short"></span>
+                <span class="icon-12-arrow-left-long"></span>
+                <span class="icon-12-arrow-left-rod"></span>
+                <span class="icon-12-arrow-right-long"></span>
+                <span class="icon-12-arrow-right-rod"></span>
+                <span class="icon-12-arrow-up-short"></span>
+                <span class="icon-12-arrows"></span>
+                <span class="icon-12-ballon-text"></span>
+                <span class="icon-12-balloon-comments-inline"></span>
+                <span class="icon-12-balloon-comments"></span>
+                <span class="icon-12-balloon-topic"></span>
+                <span class="icon-12-browser"></span>
+                <span class="icon-12-building-big"></span>
+                <span class="icon-12-building-small"></span>
+                <span class="icon-12-camera"></span>
+                <span class="icon-12-card"></span>
+                <span class="icon-12-check"></span>
+                <span class="icon-12-clock"></span>
+                <span class="icon-12-close-long"></span>
+                <span class="icon-12-close-short"></span>
+                <span class="icon-12-groups"></span>
+                <span class="icon-12-hash"></span>
+                <span class="icon-12-heart-full"></span>
+                <span class="icon-12-heart-inline"></span>
+                <span class="icon-12-heart-outline"></span>
+                <span class="icon-12-link"></span>
+                <span class="icon-12-people"></span>
+                <span class="icon-12-person-card-2"></span>
+                <span class="icon-12-person-card-3"></span>
+                <span class="icon-12-person"></span>
+                <span class="icon-12-persons"></span>
+                <span class="icon-12-pin"></span>
+                <span class="icon-12-plus"></span>
+                <span class="icon-12-post"></span>
+                <span class="icon-12-star"></span>
+                <span class="icon-12-trash"></span>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Icon · 12x12</h3>
+            <p class="page-cell-description">These are icons built in a 12x12 canvas. When scaling them, always follow the right proportion, for example: 24x24, 36x36, 48x48, etc.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-arrow-down-short"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-arrow-left-long"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-arrow-left-rod"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-arrow-right-long"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
@@ -156,33 +290,41 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-plus"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-post"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-star"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-trash"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span></code></pre></div><div id="icon16x16" class="page-cell shadow-z1"><h3 class="page-cell-title">Icon · 16x16</h3><p class="page-cell-description">These are icons built in a 16x16 canvas. When scaling them, always follow the right proportion, for example: 32x32, 48x48, 64x64, etc.</p><div class="page-cell-demo"><span class="icon-16-back"></span>
-<span class="icon-16-balloon-comment"></span>
-<span class="icon-16-balloon-topic"></span>
-<span class="icon-16-bell"></span>
-<span class="icon-16-bullhorn"></span>
-<span class="icon-16-camera"></span>
-<span class="icon-16-cancel"></span>
-<span class="icon-16-confirm"></span>
-<span class="icon-16-ellipsis"></span>
-<span class="icon-16-groups"></span>
-<span class="icon-16-heart-full"></span>
-<span class="icon-16-heart-inline"></span>
-<span class="icon-16-heart-outline"></span>
-<span class="icon-16-house"></span>
-<span class="icon-16-liferay-logo-inline"></span>
-<span class="icon-16-liferay-logo-outline"></span>
-<span class="icon-16-link"></span>
-<span class="icon-16-menu-content"></span>
-<span class="icon-16-menu"></span>
-<span class="icon-16-pen"></span>
-<span class="icon-16-persons"></span>
-<span class="icon-16-plus"></span>
-<span class="icon-16-post-subscribe"></span>
-<span class="icon-16-search"></span>
-<span class="icon-16-send"></span>
-<span class="icon-16-star"></span>
-<span class="icon-16-streams"></span></div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-back"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-trash"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span></code></pre>
+          </div>
+          <div id="icon16x16" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo"><span class="icon-16-back"></span>
+                <span class="icon-16-balloon-comment"></span>
+                <span class="icon-16-balloon-topic"></span>
+                <span class="icon-16-bell"></span>
+                <span class="icon-16-bullhorn"></span>
+                <span class="icon-16-camera"></span>
+                <span class="icon-16-cancel"></span>
+                <span class="icon-16-confirm"></span>
+                <span class="icon-16-ellipsis"></span>
+                <span class="icon-16-groups"></span>
+                <span class="icon-16-heart-full"></span>
+                <span class="icon-16-heart-inline"></span>
+                <span class="icon-16-heart-outline"></span>
+                <span class="icon-16-house"></span>
+                <span class="icon-16-liferay-logo-inline"></span>
+                <span class="icon-16-liferay-logo-outline"></span>
+                <span class="icon-16-link"></span>
+                <span class="icon-16-menu-content"></span>
+                <span class="icon-16-menu"></span>
+                <span class="icon-16-pen"></span>
+                <span class="icon-16-persons"></span>
+                <span class="icon-16-plus"></span>
+                <span class="icon-16-post-subscribe"></span>
+                <span class="icon-16-search"></span>
+                <span class="icon-16-send"></span>
+                <span class="icon-16-star"></span>
+                <span class="icon-16-streams"></span>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Icon · 16x16</h3>
+            <p class="page-cell-description">These are icons built in a 16x16 canvas. When scaling them, always follow the right proportion, for example: 32x32, 48x48, 64x64, etc.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-back"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-balloon-comment"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-balloon-topic"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-bell"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
@@ -208,25 +350,72 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-search"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-send"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-star"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-streams"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span></code></pre></div><div id="modal" class="page-cell shadow-z1"><h3 class="page-cell-title">Modal</h3><p class="page-cell-description"></p><div class="page-cell-demo"><div class="backdrop"></div></div><pre class="page-cell-pre"><code class="page-cell-code">&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"backdrop"</span>&gt;&lt;/<span class="hljs-keyword">div</span>&gt;</code></pre></div><div id="modalDialog" class="page-cell shadow-z1"><h3 class="page-cell-title">Modal · Dialog</h3><p class="page-cell-description"></p><div class="page-cell-demo"><div class="backdrop"></div></div><pre class="page-cell-pre"><code class="page-cell-code">&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"backdrop"</span>&gt;&lt;/<span class="hljs-keyword">div</span>&gt;</code></pre></div><div id="navSidebar" class="page-cell shadow-z1"><h3 class="page-cell-title">Navigation · Sidebar</h3><p class="page-cell-description">This is how users navigate through a page anchors.</p><div class="page-cell-demo"><nav class="sidebar">
-  <ul class="sidebar-list">
-    <li class="sidebar-item">
-      <a class="sidebar-link sidebar-link-selected" href="#">
-        <span class="sidebar-icon icon-12-browser"></span>App Info
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a class="sidebar-link" href="#">
-        <span class="sidebar-icon icon-12-persons"></span>Collaborators
-      </a>
-    </li>
-    <li class="sidebar-item">
-      <a class="sidebar-link" href="#">
-        <span class="sidebar-icon icon-12-card"></span>Plans
-      </a>
-    </li>
-  </ul>
-</nav></div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">nav</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-streams"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span></code></pre>
+          </div>
+          <div id="modal" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <div class="backdrop"></div>
+                <div id="myModal" class="modal " data-component="">
+                  <header id="myModal-header">
+                    <a class="modal-close icon-12-close-long" data-onclick="close"></a>
+                    <h1>Modal header</h1>
+                  </header>
+                  <section id="myModal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
+                  </section>
+                  <footer id="myModal-footer"></footer>
+                </div>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Modal</h3>
+            <p class="page-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"backdrop"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModal"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"modal "</span> <span class="hljs-attribute">data-component</span>=<span class="hljs-value">""</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">header</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModal-header"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"modal-close icon-12-close-long"</span> <span class="hljs-attribute">data-onclick</span>=<span class="hljs-value">"close"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Modal header<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">header</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModal-body"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">footer</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModal-footer"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">footer</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code></pre>
+          </div>
+          <div id="modalDialog" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <div class="backdrop"></div>
+                <div id="myModalDialog" class="modal " data-component="">
+                  <header id="myModalDialog-header"></header>
+                  <section id="myModalDialog-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
+                  </section>
+                  <footer id="myModalDialog-footer">
+                    <button class="btn btn-secondary">Cancel</button>
+                    <button class="btn">Confirm</button>
+                  </footer>
+                </div>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Modal · Dialog</h3>
+            <p class="page-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"backdrop"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModalDialog"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"modal "</span> <span class="hljs-attribute">data-component</span>=<span class="hljs-value">""</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">header</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModalDialog-header"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">header</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModalDialog-body"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">footer</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModalDialog-footer"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-secondary"</span>&gt;</span>Cancel<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>Confirm<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">footer</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code></pre>
+          </div>
+          <div id="navSidebar" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <nav class="sidebar">
+                  <ul class="sidebar-list">
+                    <li class="sidebar-item">
+                      <a class="sidebar-link sidebar-link-selected" href="#">
+                        <span class="sidebar-icon icon-12-browser"></span>App Info
+                      </a>
+                    </li>
+                    <li class="sidebar-item">
+                      <a class="sidebar-link" href="#">
+                        <span class="sidebar-icon icon-12-persons"></span>Collaborators
+                      </a>
+                    </li>
+                    <li class="sidebar-item">
+                      <a class="sidebar-link" href="#">
+                        <span class="sidebar-icon icon-12-card"></span>Plans
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Navigation · Sidebar</h3>
+            <p class="page-cell-description">This is how users navigate through a page anchors.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">nav</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-list"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-item"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-link sidebar-link-selected"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
@@ -244,29 +433,38 @@
       <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">nav</span>&gt;</span></code></pre></div><div id="navTopbar" class="page-cell shadow-z1"><h3 class="page-cell-title">Navigation · Topbar</h3><p class="page-cell-description">This is how users navigate through the application.</p><div class="page-cell-demo"><nav class="topbar">
-  <ul class="topbar-list">
-    <li class="topbar-item">
-      <a class="topbar-link" href="#">
-        <img class="topbar-logo" src="docs/images/nav-logo.svg" width="19" height="19" alt="Logo">
-      </a>
-    </li>
-    <li class="topbar-item">
-      <a class="topbar-link topbar-link-selected" href="#">My Apps</a>
-    </li>
-    <li class="topbar-item">
-      <a class="topbar-link" href="#">Tutorials</a>
-    </li>
-    <li class="topbar-item">
-      <a class="topbar-link" href="#">Documentation</a>
-    </li>
-    <li class="topbar-item u-pull-right">
-      <a class="topbar-link" href="#">
-        <img class="avatar" src="docs/images/avatar-person-1.png" alt="Zeno Rocha">
-      </a>
-    </li>
-  </ul>
-</nav></div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">nav</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"topbar"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">nav</span>&gt;</span></code></pre>
+          </div>
+          <div id="navTopbar" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <nav class="topbar">
+                  <ul class="topbar-list">
+                    <li class="topbar-item">
+                      <a class="topbar-link" href="#">
+                        <img class="topbar-logo" src="docs/images/nav-logo.svg" width="19" height="19" alt="Logo">
+                      </a>
+                    </li>
+                    <li class="topbar-item">
+                      <a class="topbar-link topbar-link-selected" href="#">My Apps</a>
+                    </li>
+                    <li class="topbar-item">
+                      <a class="topbar-link" href="#">Tutorials</a>
+                    </li>
+                    <li class="topbar-item">
+                      <a class="topbar-link" href="#">Documentation</a>
+                    </li>
+                    <li class="topbar-item u-pull-right">
+                      <a class="topbar-link" href="#">
+                        <img class="avatar" src="docs/images/avatar-person-1.png" alt="Zeno Rocha">
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Navigation · Topbar</h3>
+            <p class="page-cell-description">This is how users navigate through the application.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">nav</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"topbar"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"topbar-list"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"topbar-item"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"topbar-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
@@ -288,44 +486,48 @@
       <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">nav</span>&gt;</span></code></pre></div><div id="tooltip" class="page-cell shadow-z1"><h3 class="page-cell-title">Tooltip</h3><p class="page-cell-description"></p><div class="page-cell-demo"><div class="tooltip">Brittany Hall</div>
-<div class="tooltip">Alyssa Spencer<br>Shelly Bryant<br>Victor Moreno</div></div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip"</span>&gt;</span>Brittany Hall<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip"</span>&gt;</span>Alyssa Spencer<span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>Shelly Bryant<span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>Victor Moreno<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code></pre></div><div id="tooltipMenu" class="page-cell shadow-z1"><h3 class="page-cell-title">Tooltip · Menu</h3><p class="page-cell-description"></p><div class="page-cell-demo"><nav class="tooltip-menu">
-  <ul class="tooltip-menu-list">
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Rename</a>
-    </li>
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Change URL</a>
-    </li>
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Change Plan</a>
-    </li>
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Add Collaborator</a>
-    </li>
-    <li class="tooltip-menu-item">
-      <a class="tooltip-menu-link" href="#">Delete App</a>
-    </li>
-  </ul>
-</nav>
-</div><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">nav</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-list"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Rename<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Change URL<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Change Plan<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Add Collaborator<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Delete App<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">nav</span>&gt;</span>
-</code></pre></div><p class="page-copyright">© 2015 Liferay, Inc.</p></div><script src="docs/scripts/main.js"></script></body></html>
+<span class="hljs-tag">&lt;/<span class="hljs-title">nav</span>&gt;</span></code></pre>
+          </div>
+          <div id="tooltip" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <div id="myTooltip1" class="tooltip " data-component="">Brittany Hall</div>
+                <div id="myTooltip2" class="tooltip " data-component="">Alyssa Spencer
+                  <br>Shelly Bryant
+                  <br>Victor Moreno</div>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Tooltip</h3>
+            <p class="page-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="page-cell-pre"><code class="page-cell-code">&lt;<span class="hljs-keyword">div</span> <span class="hljs-property">id</span>=<span class="hljs-string">"myTooltip1"</span> <span class="hljs-type">class</span>=<span class="hljs-string">"tooltip "</span> data-component=<span class="hljs-string">""</span>&gt;Brittany Hall&lt;/<span class="hljs-keyword">div</span>&gt;&lt;<span class="hljs-keyword">div</span> <span class="hljs-property">id</span>=<span class="hljs-string">"myTooltip2"</span> <span class="hljs-type">class</span>=<span class="hljs-string">"tooltip "</span> data-component=<span class="hljs-string">""</span>&gt;Alyssa Spencer&lt;br/&gt;Shelly Bryant&lt;br/&gt;Victor Moreno&lt;/<span class="hljs-keyword">div</span>&gt;</code></pre>
+          </div>
+          <div id="tooltipMenu" class="page-cell shadow-z1">
+            <div class="page-cell-demo-container">
+              <div class="page-cell-demo">
+                <nav id="myTooltipMenu" class="tooltip-menu " data-component="">
+                  <ul id="myTooltipMenu-items" class="tooltip-menu-list">
+                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Rename</a>
+                    </li>
+                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Change URL</a>
+                    </li>
+                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Change Plan</a>
+                    </li>
+                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Add Collaborator</a>
+                    </li>
+                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Delete App</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <h3 class="page-cell-title">Tooltip · Menu</h3>
+            <p class="page-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="page-cell-pre"><code class="page-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">nav</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myTooltipMenu"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu "</span> <span class="hljs-attribute">data-component</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myTooltipMenu-items"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-list"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Rename<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Change URL<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Change Plan<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Add Collaborator<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Delete App<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">nav</span>&gt;</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="docs/scripts/main.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>

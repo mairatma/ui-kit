@@ -3,3 +3,8 @@
     e.preventDefault();
   });
 });
+
+new ui.Affix({
+  element: '#docs-sidebar',
+  offsetTop: 100
+});

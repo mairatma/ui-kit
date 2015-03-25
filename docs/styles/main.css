@@ -22,8 +22,6 @@
 #avatarIcon .page-cell-demo,
 #buttonTypes .page-cell-demo,
 #buttonTags .page-cell-demo,
-#modal .modal,
-#modalDialog .modal,
 #cell .page-cell-demo,
 #tooltip .page-cell-demo,
 #tooltipMenu .page-cell-demo,
@@ -59,14 +57,6 @@
 #buttonTags button,
 #buttonTags input {
   margin: 0 .6rem;
-}
-
-/* Modal
-   ========================================================================== */
-
-#modal .modal,
-#modalDialog .modal {
-  position: relative;
 }
 
 /* Tooltip

@@ -1,0 +1,95 @@
+#avatarPhoto .docs-cell-demo,
+#avatarInitials .docs-cell-demo,
+#avatarIcon .docs-cell-demo,
+#buttonTypes .docs-cell-demo,
+#buttonTags .docs-cell-demo,
+#cell .docs-cell-demo,
+#tooltip .docs-cell-demo,
+#tooltipMenu .docs-cell-demo,
+#icon12x12 .docs-cell-demo,
+#icon16x16 .docs-cell-demo,
+#navSidebar .docs-cell-demo {
+  display: table;
+  margin: 0 auto;
+}
+
+#modal .docs-cell-demo,
+#modalDialog .docs-cell-demo {
+  position: static;
+  top: initial;
+  transform: none;
+}
+
+/* Avatar
+   ========================================================================== */
+
+#avatarPhoto .avatar,
+#avatarInitials .avatar,
+#avatarIcon .avatar {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 1.2rem;
+}
+
+/* Button
+   ========================================================================== */
+
+#buttonTypes .btn,
+#buttonTags .btn,
+#buttonTags button,
+#buttonTags input {
+  margin: 0 .6rem;
+}
+
+/* Tooltip
+   ========================================================================== */
+
+#tooltip .tooltip,
+#tooltipMenu .tooltip-menu {
+  margin: 0 1rem;
+  position: relative;
+}
+
+/* Shadow
+   ========================================================================== */
+
+#shadow .shadow-z1,
+#shadow .shadow-z2 {
+  margin: 0 1rem;
+  display: inline-block;
+}
+
+/* Form
+   ========================================================================== */
+
+#formInput form {
+  display: block;
+  margin: 0 auto;
+}
+
+#formInput input,
+#formInput select,
+#formInput textarea {
+  width: 100%;
+}
+
+/* Icon
+   ========================================================================== */
+
+#icon12x12 [class^="icon-12-"],
+#icon12x12 [class*="icon-12-"],
+#icon16x16 [class^="icon-16-"],
+#icon16x16 [class*="icon-16-"] {
+  display: inline-block;
+  padding: .1rem;
+}
+
+#icon12x12 [class^="icon-12-"],
+#icon12x12 [class*="icon-12-"] {
+  font-size: 2.4rem;
+}
+
+#icon16x16 [class^="icon-16-"],
+#icon16x16 [class*="icon-16-"] {
+  font-size: 3.2rem;
+}

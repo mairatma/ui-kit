@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+
 $primary: #ff7175;
 $secondary: #233240;
 
@@ -34,12 +38,16 @@ a:hover {
 }
 
 /* ==========================================================================
-   Utils
+   Mixins
    ========================================================================== */
 
 @mixin anim($property) {
   transition: $property .3s ease-in-out;
 }
+
+/* ==========================================================================
+   Utils
+   ========================================================================== */
 
 .centered {
   left: 50%;
@@ -58,11 +66,11 @@ a:hover {
    Components
    ========================================================================== */
 
-@import "avatar";
-@import "button";
-@import "cell";
-@import "form";
-@import "modal";
-@import "navigation";
-@import "shadow";
-@import "tooltip";
+@import "components/avatar";
+@import "components/button";
+@import "components/cell";
+@import "components/form";
+@import "components/modal";
+@import "components/navigation";
+@import "components/shadow";
+@import "components/tooltip";

@@ -91,6 +91,27 @@
   width: 100%;
 }
 
+/* Icon
+   ========================================================================== */
+
+#icon12x12 [class^="icon-12-"],
+#icon12x12 [class*="icon-12-"],
+#icon16x16 [class^="icon-16-"],
+#icon16x16 [class*="icon-16-"] {
+  display: inline-block;
+  padding: .1rem;
+}
+
+#icon12x12 [class^="icon-12-"],
+#icon12x12 [class*="icon-12-"] {
+  font-size: 2.4rem;
+}
+
+#icon16x16 [class^="icon-16-"],
+#icon16x16 [class*="icon-16-"] {
+  font-size: 3.2rem;
+}
+
 /* Wrap
    ========================================================================== */
 

@@ -12,7 +12,7 @@ gulp.task('build-docs', function () {
 });
 
 gulp.task('build-scripts', ['aui:build:globals'], function() {
-  return gulp.src(['node_modules/closure-templates/soyutils.js', 'dist/public/scripts/!(*.soy).js'])
+  return gulp.src(['node_modules/closure-templates/soyutils.js', 'dist/public/scripts/main.js'])
     .pipe(concat('main.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dist/public/scripts'));

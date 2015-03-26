@@ -56,9 +56,7 @@
 {deltemplate ComponentTemplate variant="'TooltipMenu'"}
 {delcall ComponentElement data="all" variant="'TooltipMenu'"}
 {param elementContent kind="html"}
-{if $ij.renderChildComponents}
 {call .content data="all" /}
-{/if}
 {/param}
 {/delcall}
 {/deltemplate}
@@ -76,7 +74,7 @@
 {deltemplate TooltipMenu.items}
 {delcall TooltipMenu.items variant="'element'" data="all"}
 {param elementContent kind="html"}
-{if $ij.renderChildComponents}
+{if not $ij.skipSurfaceContents}
 {call .items data="all" /}
 {/if}
 {/param}

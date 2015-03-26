@@ -3,3 +3,13 @@
     e.preventDefault();
   });
 });
+
+new ui.Affix({
+  element: '#docs-sidebar',
+  offsetTop: 64
+});
+
+new ui.Scrollspy({
+  element: '#docs-sidebar',
+  activeClass: 'sidebar-link-selected'
+});

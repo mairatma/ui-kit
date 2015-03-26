@@ -91,11 +91,42 @@
   width: 100%;
 }
 
-/* Wrap
+/* Icon
    ========================================================================== */
 
-.wrap {
+#icon12x12 [class^="icon-12-"],
+#icon12x12 [class*="icon-12-"],
+#icon16x16 [class^="icon-16-"],
+#icon16x16 [class*="icon-16-"] {
+  display: inline-block;
+  padding: .1rem;
+}
+
+#icon12x12 [class^="icon-12-"],
+#icon12x12 [class*="icon-12-"] {
+  font-size: 2.4rem;
+}
+
+#icon16x16 [class^="icon-16-"],
+#icon16x16 [class*="icon-16-"] {
+  font-size: 3.2rem;
+}
+
+/* Columns
+   ========================================================================== */
+
+#page-left-column,
+#page-right-column {
   margin-top: 3.2rem;
+  position: relative;
+}
+
+/* Affix
+   ========================================================================== */
+
+.affix-default {
+  position: fixed;
+  top: 3.2rem;
 }
 
 /* Cell

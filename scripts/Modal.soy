@@ -80,9 +80,7 @@
 {deltemplate ComponentTemplate variant="'Modal'"}
 {delcall ComponentElement data="all" variant="'Modal'"}
 {param elementContent kind="html"}
-{if $ij.renderChildComponents}
 {call .content data="all" /}
-{/if}
 {/param}
 {/delcall}
 {/deltemplate}
@@ -93,7 +91,7 @@
  * @param id
  */
 {deltemplate Modal variant="'element'"}
-<div id="{$id}" class="modal {$elementClasses ? $elementClasses : ''}" data-component="">
+<div id="{$id}" class="modal component{$elementClasses ? ' ' + $elementClasses : ''}" data-component="">
 {$elementContent}
 </div>
 {/deltemplate}
@@ -111,7 +109,7 @@
 {deltemplate Modal.body}
 {delcall Modal.body variant="'element'" data="all"}
 {param elementContent kind="html"}
-{if $ij.renderChildComponents}
+{if not $ij.skipSurfaceContents}
 {call .body data="all" /}
 {/if}
 {/param}
@@ -125,7 +123,7 @@
 {deltemplate Modal.footer}
 {delcall Modal.footer variant="'element'" data="all"}
 {param elementContent kind="html"}
-{if $ij.renderChildComponents}
+{if not $ij.skipSurfaceContents}
 {call .footer data="all" /}
 {/if}
 {/param}
@@ -139,7 +137,7 @@
 {deltemplate Modal.header}
 {delcall Modal.header variant="'element'" data="all"}
 {param elementContent kind="html"}
-{if $ij.renderChildComponents}
+{if not $ij.skipSurfaceContents}
 {call .header data="all" /}
 {/if}
 {/param}

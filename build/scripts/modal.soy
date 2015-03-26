@@ -80,7 +80,9 @@
 {deltemplate ComponentTemplate variant="'Modal'"}
 {delcall ComponentElement data="all" variant="'Modal'"}
 {param elementContent kind="html"}
+{if $ij.renderChildComponents}
 {call .content data="all" /}
+{/if}
 {/param}
 {/delcall}
 {/deltemplate}
@@ -91,10 +93,8 @@
  * @param id
  */
 {deltemplate Modal variant="'element'"}
-<div id="{$id}" class="modal {$elementClasses ? $elementClasses : ''}" data-component>
-{if $elementContent}
+<div id="{$id}" class="modal {$elementClasses ? $elementClasses : ''}" data-component="">
 {$elementContent}
-{/if}
 </div>
 {/deltemplate}
 

@@ -27,7 +27,9 @@
 {deltemplate ComponentTemplate variant="'Tooltip'"}
 {delcall ComponentElement data="all" variant="'Tooltip'"}
 {param elementContent kind="html"}
+{if $ij.renderChildComponents}
 {call .content data="all" /}
+{/if}
 {/param}
 {/delcall}
 {/deltemplate}
@@ -38,10 +40,8 @@
  * @param id
  */
 {deltemplate Tooltip variant="'element'"}
-<div id="{$id}" class="tooltip {$elementClasses ? $elementClasses : ''}" data-component>
-{if $elementContent}
+<div id="{$id}" class="tooltip {$elementClasses ? $elementClasses : ''}" data-component="">
 {$elementContent}
-{/if}
 </div>
 {/deltemplate}
 

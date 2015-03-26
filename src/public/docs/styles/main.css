@@ -112,11 +112,21 @@
   font-size: 3.2rem;
 }
 
-/* Wrap
+/* Columns
    ========================================================================== */
 
-.wrap {
+#page-left-column,
+#page-right-column {
   margin-top: 3.2rem;
+  position: relative;
+}
+
+/* Affix
+   ========================================================================== */
+
+.affix-default {
+  position: fixed;
+  top: 3.2rem;
 }
 
 /* Cell

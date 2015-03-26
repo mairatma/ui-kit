@@ -6,5 +6,10 @@
 
 new ui.Affix({
   element: '#docs-sidebar',
-  offsetTop: 100
+  offsetTop: 64
+});
+
+new ui.Scrollspy({
+  element: '#docs-sidebar',
+  activeClass: 'sidebar-link-selected'
 });

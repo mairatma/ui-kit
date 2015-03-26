@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 1200 960" enable-background="new 0 0 1200 960" xml:space="preserve">
+	 viewBox="0 0 1440 1440" enable-background="new 0 0 1440 1440" xml:space="preserve">
+<g id="dribbble">
+</g>
+<g id="globe">
+</g>
+<g id="github">
+</g>
+<g id="facebook">
+</g>
+<g id="twitter">
+</g>
+<g id="skype">
+</g>
+<g id="phone">
+</g>
+<g id="mail">
+</g>
+<g id="liferay-logo-2">
+</g>
+<g id="menu-content">
+</g>
 <g id="streams">
 </g>
 <g id="balloon-topic">
@@ -14,19 +34,18 @@
 </g>
 <g id="liferay-logo">
 </g>
-<g id="heart-full">
+<g id="eye">
 </g>
 <g id="confirm">
 </g>
 <g id="send">
 </g>
+<g id="cancel">
+</g>
 <g id="back">
 </g>
-<g id="cancel_1_">
-</g>
 <g id="plus">
-	<rect x="540" width="120" height="960"/>
-	<rect x="120" y="420" width="960" height="120"/>
+	<path d="M1200,780H780v420H660V780H240V660h420V240h120v420h420V780z"/>
 </g>
 <g id="bullhorn">
 </g>
@@ -36,24 +55,22 @@
 </g>
 <g id="bell">
 </g>
-<g id="magnifier">
+<g id="search">
 </g>
-<g id="menu_x5F_hamburguer">
+<g id="menu">
 </g>
 <g id="ellipsis">
 </g>
-<g id="balloon_x5F_comment">
+<g id="balloon-comment">
 </g>
-<g id="heart_x5F_inline">
+<g id="heart-fill">
 </g>
-<g id="heart_x5F_outline">
+<g id="heart">
 </g>
 <g id="camera">
 </g>
 <g id="subscribe">
 </g>
 <g id="star">
-</g>
-<g id="guides">
 </g>
 </svg>

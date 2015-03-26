@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 800 960" enable-background="new 0 0 800 960" xml:space="preserve">
+	 viewBox="0 0 1280 1280" enable-background="new 0 0 1280 1280" xml:space="preserve">
+<g id="flag">
+</g>
+<g id="flag-small">
+</g>
+<g id="signpost">
+</g>
+<g id="info-card">
+</g>
+<g id="journal">
+</g>
+<g id="network">
+</g>
+<g id="trash">
+</g>
+<g id="card">
+</g>
+<g id="browser">
+</g>
+<g id="arrows">
+</g>
 <g id="arrow-left-rod">
 </g>
 <g id="arrow-right-rod">
@@ -10,66 +30,64 @@
 </g>
 <g id="arrow-down-short">
 </g>
-<g id="heart-full">
+<g id="briefcase">
 </g>
-<g id="balloon-comments-inline">
+<g id="balloon-comments-fill">
 </g>
 <g id="balloon-comments">
 </g>
 <g id="check">
 </g>
-<g id="balloon_x5F_topic">
+<g id="balloon-topic">
 </g>
 <g id="persons">
 </g>
 <g id="groups">
 </g>
-<g id="building_x5F_big">
+<g id="link">
 </g>
-<g id="person_x5F_card_x5F_2">
+<g id="camera">
 </g>
-<g id="person_x5F_card_x5F_3">
+<g id="balloon-text">
+</g>
+<g id="building-big">
+</g>
+<g id="person-card-2">
+</g>
+<g id="person-card-3">
+</g>
+<g id="close-long">
+</g>
+<g id="star">
+</g>
+<g id="heart-fill">
+</g>
+<g id="heart">
 </g>
 <g id="plus">
 </g>
-<g id="arrow_x5F_right_x5F_long">
+<g id="arrow-right-long">
 </g>
-<g id="arrow_x5F_left_x5F_long">
+<g id="arrow-left-long">
 </g>
-<g id="close_x5F_short">
-	<path d="M696.6,663.4c31.2,31.2,31.2,81.9,0,113.1C680.9,792.2,660.5,800,640,800s-40.9-7.8-56.6-23.4L400,593.1L216.6,776.6
-		C200.9,792.2,180.5,800,160,800s-40.9-7.8-56.6-23.4c-31.2-31.2-31.2-81.9,0-113.1L286.9,480L103.4,296.6
-		c-31.2-31.2-31.2-81.9,0-113.1s81.9-31.2,113.1,0L400,366.9l183.4-183.4c31.2-31.2,81.9-31.2,113.1,0s31.2,81.9,0,113.1L513.1,480
-		L696.6,663.4z"/>
+<g id="close-short">
+	<path d="M936.6,823.4c31.2,31.2,31.2,81.9,0,113.1C920.9,952.2,900.5,960,880,960s-40.9-7.8-56.6-23.4L640,753.1L456.6,936.6
+		C440.9,952.2,420.5,960,400,960s-40.9-7.8-56.6-23.4c-31.2-31.2-31.2-81.9,0-113.1L526.9,640L343.4,456.6
+		c-31.2-31.2-31.2-81.9,0-113.1s81.9-31.2,113.1,0L640,526.9l183.4-183.4c31.2-31.2,81.9-31.2,113.1,0s31.2,81.9,0,113.1L753.1,640
+		L936.6,823.4z"/>
 </g>
 <g id="hash">
 </g>
 <g id="people">
 </g>
-<g id="building_x5F_small">
+<g id="building-small">
 </g>
 <g id="person">
 </g>
-<g id="heart_x5F_inline">
-</g>
-<g id="close_x5F_long">
-</g>
 <g id="post">
-</g>
-<g id="star">
-</g>
-<g id="heart_x5F_outline">
-</g>
-<g id="link">
-</g>
-<g id="camera">
-</g>
-<g id="balloon_x5F_text">
 </g>
 <g id="pin">
 </g>
 <g id="clock">
-</g>
-<g id="guide">
 </g>
 </svg>

@@ -8,5 +8,5 @@ gulp.task('gh-pages', function () {
 });
 
 gulp.task('deploy', ['clean'], function(cb) {
-  runSequence('build-all', 'gh-pages', cb);
+  runSequence('build', 'build-docs', 'gh-pages', cb);
 });

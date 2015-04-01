@@ -3,7 +3,7 @@
 
 .tooltip {
   @extend .cell;
-  @extend .shadow-z2;
+  @extend .shadow-z1;
   color: rgba($secondary, .7);
   display: inline-block;
   font-size: 1.2rem;
@@ -17,7 +17,7 @@
 
 .tooltip-menu {
   @extend .cell;
-  @extend .shadow-z2;
+  @extend .shadow-z1;
   display: inline-block;
   text-align: center;
   position: absolute;

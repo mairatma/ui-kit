@@ -312,7 +312,7 @@ label {
    ========================================================================== */
 .modal {
   display: inline-block;
-  max-width: 46.4rem;
+  max-width: 39.8rem;
   position: absolute;
   z-index: 1;
 }
@@ -320,8 +320,8 @@ label {
 /* Modal · Header
    ========================================================================== */
 .modal header {
-  border-bottom: 1px solid rgba(35, 50, 64, 0.1);
-  padding: 2.4rem;
+  border-bottom: 1px solid rgba(35, 50, 64, 0.08);
+  padding: 2.1rem 2.4rem;
 }
 
 .modal header:empty {
@@ -347,7 +347,7 @@ label {
   color: rgba(35, 50, 64, 0.4);
   cursor: pointer;
   float: right;
-  font-size: 1.2rem;
+  line-height: 2rem;
 }
 
 .modal .modal-close:hover {
@@ -357,7 +357,7 @@ label {
 /* Modal · Body
    ========================================================================== */
 .modal section {
-  padding: 2.4rem 4.8rem 5.2rem 2.4rem;
+  padding: 2.1rem 4.4rem 6rem 2.2rem;
 }
 
 .modal section:empty {
@@ -502,7 +502,7 @@ label {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.16);
 }
 
-.shadow-z2, .cell:hover, .modal:hover, .tooltip:hover, .tooltip-menu:hover, .modal, .sidebar, .tooltip, .tooltip-menu {
+.shadow-z2, .cell:hover, .modal:hover, .tooltip:hover, .tooltip-menu:hover, .modal, .sidebar {
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.24);
 }
 

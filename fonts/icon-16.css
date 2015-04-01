@@ -10,9 +10,10 @@
 [class^="icon-16-"], [class*="icon-16-"] {
   speak: none;
   font-family: "icon-16";
+  font-size: 1.6rem;
   font-style: normal;
-  font-weight: normal;
   font-variant: normal;
+  font-weight: normal;
   line-height: 100%;
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;

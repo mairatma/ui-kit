@@ -168,6 +168,22 @@
   font-size: 3.2rem;
 }
 
+/* Grid
+   ========================================================================== */
+#grid .column,
+#grid .columns {
+  background: rgba(255, 113, 117, 0.1);
+  border-radius: 0.2rem;
+  color: #ff7175;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  line-height: 2.4rem;
+  margin-bottom: .75rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 /*
 
 github.com style (c) Vasily Polovnyov <vast@whiteants.net>

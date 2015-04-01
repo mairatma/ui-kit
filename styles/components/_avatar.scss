@@ -83,19 +83,27 @@ $large : 9.2rem;
 /* Avatar · Icon
    ========================================================================== */
 
+.avatar-icon {
+  display: block;
+  margin: 0 auto;
+}
+
 .avatar-small .avatar-icon {
+  font-size: $small/2;
   width: $small/2;
   height: $small/2;
   padding: $small/4 0;
 }
 
 .avatar-medium .avatar-icon {
+  font-size: $medium/2;
   width: $medium/2;
   height: $medium/2;
   padding: $medium/4 0;
 }
 
 .avatar-large .avatar-icon {
+  font-size: $large/2;
   width: $large/2;
   height: $large/2;
   padding: $large/4 0;

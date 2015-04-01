@@ -46,6 +46,8 @@
               </li>
               <li class="sidebar-item"><a class="sidebar-link" href="#formInput">Form · Input</a>
               </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#grid">Grid</a>
+              </li>
               <li class="sidebar-item"><a class="sidebar-link" href="#icon12x12">Icon · 12x12</a>
               </li>
               <li class="sidebar-item"><a class="sidebar-link" href="#icon16x16">Icon · 16x16</a>
@@ -70,29 +72,29 @@
             <div class="docs-cell-demo-container">
               <div class="docs-cell-demo">
                 <a class="avatar avatar-large" href="#" style="background: #9552ef;">
-                  <img class="avatar-icon" src="fonts/16/heart.svg" alt="Heart icon">
+                  <span class="avatar-icon icon-16-heart" style="color: white;"></span>
                 </a>
 
                 <a class="avatar avatar-medium" href="#" style="background: #c25daa;">
-                  <img class="avatar-icon" src="fonts/16/bell.svg" alt="Bell icon">
+                  <span class="avatar-icon icon-16-bell" style="color: white;"></span>
                 </a>
 
                 <a class="avatar avatar-small" href="#" style="background: #ff7175;">
-                  <img class="avatar-icon" src="fonts/16/star.svg" alt="Star icon">
+                  <span class="avatar-icon icon-16-star" style="color: white;"></span>
                 </a>
               </div>
             </div>
             <h3 class="docs-cell-title">Avatar · Icon</h3>
             <p class="docs-cell-description">Contains a SVG file that represents an app.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #9552ef;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"fonts/16/heart.svg"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Heart icon"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon icon-16-heart"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #c25daa;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"fonts/16/bell.svg"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Bell icon"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon icon-16-bell"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-small"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #ff7175;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"fonts/16/star.svg"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Star icon"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon icon-16-star"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre>
           </div>
           <div id="avatarInitials" class="docs-cell shadow-z1">
@@ -210,6 +212,97 @@
   <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-field-aux"</span>&gt;</span>A block of auxiliar text<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
 </code></pre>
+          </div>
+          <div id="grid" class="docs-cell shadow-z1">
+            <div class="docs-cell-demo-container">
+              <div class="docs-cell-demo">
+                <div class="container">
+                  <div class="row">
+                    <div class="one column">One</div>
+                    <div class="eleven columns">Eleven</div>
+                  </div>
+                  <div class="row">
+                    <div class="two columns">Two</div>
+                    <div class="ten columns">Ten</div>
+                  </div>
+                  <div class="row">
+                    <div class="three columns">Three</div>
+                    <div class="nine columns">Nine</div>
+                  </div>
+                  <div class="row">
+                    <div class="four columns">Four</div>
+                    <div class="eight columns">Eight</div>
+                  </div>
+                  <div class="row">
+                    <div class="five columns">Five</div>
+                    <div class="seven columns">Seven</div>
+                  </div>
+                  <div class="row">
+                    <div class="six columns">Six</div>
+                    <div class="six columns">Six</div>
+                  </div>
+                  <div class="row">
+                    <div class="seven columns">Seven</div>
+                    <div class="five columns">Five</div>
+                  </div>
+                  <div class="row">
+                    <div class="eight columns">Eight</div>
+                    <div class="four  columns">Four</div>
+                  </div>
+                  <div class="row">
+                    <div class="nine columns">Nine</div>
+                    <div class="three columns">Three</div>
+                  </div>
+                  <div class="row">
+                    <div class="ten columns">Ten</div>
+                    <div class="two columns">Two</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3 class="docs-cell-title">Grid</h3>
+            <p class="docs-cell-description">The grid is a 12-column fluid grid with a max width of 960px, that shrinks with the browser/device at smaller sizes.</p><pre class="docs-cell-pre"><code class="docs-cell-code">&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"container"</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"one column"</span>&gt;One&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"eleven columns"</span>&gt;Eleven&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"two columns"</span>&gt;Two&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"ten columns"</span>&gt;Ten&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"three columns"</span>&gt;Three&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"nine columns"</span>&gt;Nine&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"four columns"</span>&gt;Four&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"eight columns"</span>&gt;Eight&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"five columns"</span>&gt;Five&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"seven columns"</span>&gt;Seven&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"six columns"</span>&gt;Six&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"six columns"</span>&gt;Six&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"seven columns"</span>&gt;Seven&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"five columns"</span>&gt;Five&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"eight columns"</span>&gt;Eight&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"four  columns"</span>&gt;Four&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"nine columns"</span>&gt;Nine&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"three columns"</span>&gt;Three&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"ten columns"</span>&gt;Ten&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"two columns"</span>&gt;Two&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;</code></pre>
           </div>
           <div id="icon12x12" class="docs-cell shadow-z1">
             <div class="docs-cell-demo-container">

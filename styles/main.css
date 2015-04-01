@@ -245,12 +245,13 @@ input[type="password"],
 textarea,
 select {
   transition: border 0.3s ease-in-out;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(35, 50, 64, 0.2);
   color: rgba(0, 0, 0, 0.4);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 400;
   margin: 0;
+  padding: 5px 10px;
 }
 
 input[type="email"]:focus,
@@ -275,18 +276,20 @@ input::selection {
 
 label,
 .form-field-aux {
-  color: rgba(35, 50, 64, 0.7);
   font-weight: 400;
-  font-size: 1.2rem;
   display: block;
 }
 
 label {
-  margin-bottom: .4rem;
+  color: rgba(35, 50, 64, 0.7);
+  font-size: 1.2rem;
+  margin-bottom: .3rem;
 }
 
 .form-field-aux {
-  margin-top: .4rem;
+  color: rgba(35, 50, 64, 0.4);
+  font-size: 1.1rem;
+  margin-top: .2rem;
 }
 
 /* Overlay
@@ -312,7 +315,7 @@ label {
    ========================================================================== */
 .modal {
   display: inline-block;
-  max-width: 39.8rem;
+  max-width: 46.4rem;
   position: absolute;
   z-index: 1;
 }
@@ -320,8 +323,8 @@ label {
 /* Modal · Header
    ========================================================================== */
 .modal header {
-  border-bottom: 1px solid rgba(35, 50, 64, 0.08);
-  padding: 2.1rem 2.4rem;
+  border-bottom: 1px solid rgba(35, 50, 64, 0.1);
+  padding: 2.4rem;
 }
 
 .modal header:empty {
@@ -347,7 +350,7 @@ label {
   color: rgba(35, 50, 64, 0.4);
   cursor: pointer;
   float: right;
-  line-height: 2rem;
+  font-size: 1.2rem;
 }
 
 .modal .modal-close:hover {
@@ -357,7 +360,7 @@ label {
 /* Modal · Body
    ========================================================================== */
 .modal section {
-  padding: 2.1rem 4.4rem 6rem 2.2rem;
+  padding: 2.4rem 4.8rem 5.2rem 2.4rem;
 }
 
 .modal section:empty {
@@ -499,11 +502,11 @@ label {
 /* Shadow
    ========================================================================== */
 .shadow-z1, .cell, .modal, .tooltip, .tooltip-menu, .topbar {
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.08);
 }
 
 .shadow-z2, .cell:hover, .modal:hover, .tooltip:hover, .tooltip-menu:hover, .modal, .sidebar {
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.16);
 }
 
 /* Tooltip

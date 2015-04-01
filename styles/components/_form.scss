@@ -16,12 +16,13 @@ textarea,
 select {
   @include anim(border);
   @extend .round;
-  background: $white;
+  background: rgba($white, .2);
   border: 1px solid rgba($secondary, .2);
   color: rgba($black, .4);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: $regular;
   margin: 0;
+  padding: 5px 10px;
 }
 
 input[type="email"]:focus,
@@ -46,16 +47,18 @@ input::selection {
 
 label,
 .form-field-aux {
-  color: rgba($secondary, .7);
   font-weight: $regular;
-  font-size: 1.2rem;
   display: block;
 }
 
 label {
-  margin-bottom: .4rem;
+  color: rgba($secondary, .7);
+  font-size: 1.2rem;
+  margin-bottom: .3rem;
 }
 
 .form-field-aux {
-  margin-top: .4rem;
+  color: rgba($secondary, .4);
+  font-size: 1.1rem;
+  margin-top: .2rem;
 }

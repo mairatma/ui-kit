@@ -154,6 +154,7 @@
 #icon12x12 [class*="icon-12-"],
 #icon16x16 [class^="icon-16-"],
 #icon16x16 [class*="icon-16-"] {
+  display: inline-flex;
   padding: .1rem;
 }
 

@@ -54,7 +54,7 @@
 /* Demo
    ========================================================================== */
 .docs-cell-demo-container {
-  background: #f4f8ff;
+  background: #233240;
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
@@ -148,12 +148,21 @@
   width: 100%;
 }
 
+#formInput label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#formInput .form-field-aux {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 /* Icon
    ========================================================================== */
 #icon12x12 [class^="icon-12-"],
 #icon12x12 [class*="icon-12-"],
 #icon16x16 [class^="icon-16-"],
 #icon16x16 [class*="icon-16-"] {
+  color: #fff;
   display: inline-flex;
   padding: .1rem;
 }
@@ -162,12 +171,11 @@
    ========================================================================== */
 #grid .column,
 #grid .columns {
-  background: rgba(255, 113, 117, 0.1);
+  background: rgba(255, 113, 117, 0.5);
   border-radius: 0.2rem;
   color: #ff7175;
   font-size: 1rem;
   font-weight: 600;
-  letter-spacing: .1rem;
   line-height: 2.4rem;
   margin-bottom: .75rem;
   text-align: center;

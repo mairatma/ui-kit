@@ -35,7 +35,6 @@ $large : 9.2rem;
   height: $large;
 }
 
-
 /* Avatar · Photo
    ========================================================================== */
 
@@ -88,23 +87,35 @@ $large : 9.2rem;
   margin: 0 auto;
 }
 
-.avatar-small .avatar-icon {
-  font-size: $small/2;
+.avatar-small img.avatar-icon {
   width: $small/2;
   height: $small/2;
   padding: $small/4 0;
 }
 
-.avatar-medium .avatar-icon {
-  font-size: $medium/2;
+.avatar-small span.avatar-icon {
+  font-size: $small/3;
+  line-height: $small;
+}
+
+.avatar-medium img.avatar-icon {
   width: $medium/2;
   height: $medium/2;
   padding: $medium/4 0;
 }
 
-.avatar-large .avatar-icon {
-  font-size: $large/2;
+.avatar-medium span.avatar-icon {
+  font-size: $medium/3;
+  line-height: $medium;
+}
+
+.avatar-large img.avatar-icon {
   width: $large/2;
   height: $large/2;
   padding: $large/4 0;
+}
+
+.avatar-large span.avatar-icon {
+  font-size: $large/3;
+  line-height: $large;
 }

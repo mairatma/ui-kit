@@ -5,7 +5,7 @@ gulp.task('fonts-12', function() {
   return gulp.src('src/public/fonts/12/*.svg')
     .pipe(plugins.iconfontCss({
       fontName: 'icon-12',
-      path: 'src/public/fonts/.template',
+      path: 'src/public/fonts/.template-12',
       targetPath: '../fonts/icon-12.css'
     }))
     .pipe(plugins.iconfont({
@@ -20,7 +20,7 @@ gulp.task('fonts-16', function() {
   return gulp.src('src/public/fonts/16/*.svg')
     .pipe(plugins.iconfontCss({
       fontName: 'icon-16',
-      path: 'src/public/fonts/.template',
+      path: 'src/public/fonts/.template-16',
       targetPath: '../fonts/icon-16.css'
     }))
     .pipe(plugins.iconfont({

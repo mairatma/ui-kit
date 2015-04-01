@@ -93,3 +93,20 @@
 #icon16x16 [class*="icon-16-"] {
   font-size: 3.2rem;
 }
+
+/* Grid
+   ========================================================================== */
+
+#grid .column,
+#grid .columns {
+  background: rgba($primary, .1);
+  border-radius: 0.2rem;
+  color: $primary;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  line-height: 2.4rem;
+  margin-bottom: .75rem;
+  text-align: center;
+  text-transform: uppercase;
+}

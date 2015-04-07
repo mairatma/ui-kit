@@ -13,13 +13,6 @@
   margin: 0 auto;
 }
 
-#modal .docs-cell-demo,
-#modalDialog .docs-cell-demo {
-  position: static;
-  top: initial;
-  transform: none;
-}
-
 /* Avatar
    ========================================================================== */
 
@@ -91,6 +84,21 @@
   color: #fff;
   display: inline-flex;
   padding: .1rem;
+}
+
+/* Modal
+   ========================================================================== */
+
+#modal .docs-cell-demo-container,
+#modalDialog .docs-cell-demo-container {
+  background: rgba(#233240, .2);
+}
+
+#modal .docs-cell-demo,
+#modalDialog .docs-cell-demo {
+  position: static;
+  top: initial;
+  transform: none;
 }
 
 /* Grid

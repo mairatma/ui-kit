@@ -87,24 +87,20 @@ $large : 9.2rem;
   margin: 0 auto;
 }
 
-.avatar-small img.avatar-icon {
-  width: $small/2;
-  height: $small/2;
-  padding: $small/4 0;
-}
-
-.avatar-small span.avatar-icon {
-  font-size: 1.2rem;
-  line-height: $small;
-}
-
 .avatar-medium img.avatar-icon {
   width: $medium/2;
   height: $medium/2;
   padding: $medium/4 0;
 }
 
-.avatar-medium span.avatar-icon {
+.avatar-medium span[class^="icon-12-"].avatar-icon,
+.avatar-medium span[class*="icon-12-"].avatar-icon {
+  font-size: 1.2rem;
+  line-height: $medium;
+}
+
+.avatar-medium span[class^="icon-16-"].avatar-icon,
+.avatar-medium span[class*="icon-16-"].avatar-icon {
   font-size: 1.6rem;
   line-height: $medium;
 }
@@ -115,7 +111,14 @@ $large : 9.2rem;
   padding: $large/4 0;
 }
 
-.avatar-large span.avatar-icon {
+.avatar-large span[class^="icon-12-"].avatar-icon,
+.avatar-large span[class*="icon-12-"].avatar-icon {
+  font-size: 2.4rem;
+  line-height: $large;
+}
+
+.avatar-large span[class^="icon-16-"].avatar-icon,
+.avatar-large span[class*="icon-16-"].avatar-icon {
   font-size: 3.2rem;
   line-height: $large;
 }

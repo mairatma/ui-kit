@@ -68,16 +68,20 @@
   {let $title: 'Avatar · Icon' /}
   {let $description: 'Contains a SVG file that represents an app.' /}
   {let $html kind="html"}
-{literal}<a class="avatar avatar-large" href="#" style="background: #9552ef;">
+{literal}<a class="avatar avatar-medium" href="#" style="background: #c25daa;">
+  <span class="avatar-icon icon-12-pin" style="color: white;"></span>
+</a>
+
+<a class="avatar avatar-large" href="#" style="background: #9552ef;">
+  <span class="avatar-icon icon-12-check" style="color: white;"></span>
+</a>
+
+<a class="avatar avatar-large" href="#" style="background: #9552ef;">
   <span class="avatar-icon icon-16-heart" style="color: white;"></span>
 </a>
 
 <a class="avatar avatar-medium" href="#" style="background: #c25daa;">
   <span class="avatar-icon icon-16-bell" style="color: white;"></span>
-</a>
-
-<a class="avatar avatar-small" href="#" style="background: #ff7175;">
-  <span class="avatar-icon icon-12-star" style="color: white;"></span>
 </a>{/literal}
   {/let}
   {let $snippet kind="text"}{$html}{/let}

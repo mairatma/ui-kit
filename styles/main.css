@@ -125,24 +125,20 @@ select, .sidebar {
   margin: 0 auto;
 }
 
-.avatar-small img.avatar-icon {
-  width: 1.8rem;
-  height: 1.8rem;
-  padding: 0.9rem 0;
-}
-
-.avatar-small span.avatar-icon {
-  font-size: 1.2rem;
-  line-height: 3.6rem;
-}
-
 .avatar-medium img.avatar-icon {
   width: 2.8rem;
   height: 2.8rem;
   padding: 1.4rem 0;
 }
 
-.avatar-medium span.avatar-icon {
+.avatar-medium span[class^="icon-12-"].avatar-icon,
+.avatar-medium span[class*="icon-12-"].avatar-icon {
+  font-size: 1.2rem;
+  line-height: 5.6rem;
+}
+
+.avatar-medium span[class^="icon-16-"].avatar-icon,
+.avatar-medium span[class*="icon-16-"].avatar-icon {
   font-size: 1.6rem;
   line-height: 5.6rem;
 }
@@ -153,7 +149,14 @@ select, .sidebar {
   padding: 2.3rem 0;
 }
 
-.avatar-large span.avatar-icon {
+.avatar-large span[class^="icon-12-"].avatar-icon,
+.avatar-large span[class*="icon-12-"].avatar-icon {
+  font-size: 2.4rem;
+  line-height: 9.2rem;
+}
+
+.avatar-large span[class^="icon-16-"].avatar-icon,
+.avatar-large span[class*="icon-16-"].avatar-icon {
   font-size: 3.2rem;
   line-height: 9.2rem;
 }

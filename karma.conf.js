@@ -1,34 +1,40 @@
-module.exports = function(config) {
+var isparta = require('isparta');
+var istanbul = require('browserify-istanbul');
+var metaljs = require('metaljs');
+var renamer = require('browserify-imports-renamer');
+
+module.exports = function (config) {
   config.set({
-    browsers: ['Chrome'],
-    frameworks: ['jspm', 'mocha', 'chai'],
-    jspm: {
-      // ES6 files need to go through jspm for module loading.
-      loadFiles: ['lib/tests/unit/*.js'],
-      serveFiles: ['lib/scripts/*.js']
-    },
+    frameworks: ['mocha', 'chai', 'browserify'],
+
     files: [
       'node_modules/closure-templates/soyutils.js',
+      'lib/scripts/**/*.js',
+      'lib/tests/unit/*.js'
     ],
+
     preprocessors: {
-      // All src files should be included in the coverage report. These
-      // files don't need to go through the `babel` preprocessor, as the
-      // `coverage` preprocessor already does the necessary conversion.
-      'lib/scripts/!(*.soy).js': ['coverage'],
-      // Since tests, soy files and jspm packages are not going through
-      // the `coverage` preprocessor we need to explicitly make them go
-      // through `babel`.
-      'lib/scripts/*.soy.js': ['babel'],
-      'lib/tests/unit/*.js': ['babel'],
-      'jspm_packages/?*/**/*.js': ['babel']
+      'lib/scripts/**/*.js': ['browserify'],
+      'lib/tests/unit/*.js': ['browserify']
     },
+
+    browserify: {
+      transform: [renamer({renameFn: metaljs.renameAlias}), istanbul({
+        defaultIgnore: false,
+        instrumenter: isparta
+      })],
+      debug: true
+    },
+
+    browsers: ['Chrome'],
+
     reporters: ['coverage', 'progress'],
+
     coverageReporter: {
-      instrumenters: { isparta : require('isparta') },
-      instrumenter: { '**/*.js': 'isparta' },
+      ignore: ['**/src/public/vendor/**', '**/tests/**', '**/*.soy.js'],
       reporters: [
-        { type : 'text-summary' },
-        { type : 'html' },
+        {type: 'text-summary'},
+        {type: 'html'},
         { type: 'lcov', subdir: 'lcov' }
       ]
     }

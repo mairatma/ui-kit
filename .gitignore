@@ -3,4 +3,5 @@ dist/
 jspm_packages/
 node_modules/
 .sass-cache/
-jspm.js
+src/public/vendor/metaljs
+src/public/vendor/metal-position

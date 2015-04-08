@@ -1,8 +1,7 @@
-require('alloyui-tasks')({
+require('metaljs')({
   bundleFileName: 'main.js',
   globalName: 'ui',
-  jspmConfigFile: 'jspm.js',
-  taskPrefix: 'aui:',
+  taskPrefix: 'metal:',
   buildDest: 'dist/public/scripts/',
   buildSrc: 'lib/scripts/*.js',
   cssSrc: 'lib/scripts/*.css',

@@ -11,7 +11,7 @@ gulp.task('build-docs', function () {
     .pipe(gulp.dest('dist/public'));
 });
 
-gulp.task('build-scripts', ['aui:build:globals'], function() {
+gulp.task('build-scripts', ['metal:build:globals'], function() {
   return gulp.src(['node_modules/closure-templates/soyutils.js', 'dist/public/scripts/main.js'])
     .pipe(concat('main.js'))
     .pipe(uglify())

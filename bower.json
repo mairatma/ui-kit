@@ -3,7 +3,7 @@
   "name": "ui-kit",
   "version": "0.0.0",
   "dependencies": {
-    "metaljs": "liferay/metal",
+    "metaljs": "liferay/metal.js",
     "metal-position": "eduardolundgren/metal-position",
     "skeleton": "~2.0.4"
   }

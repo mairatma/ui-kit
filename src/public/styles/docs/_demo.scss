@@ -13,13 +13,6 @@
   margin: 0 auto;
 }
 
-#modal .docs-cell-demo,
-#modalDialog .docs-cell-demo {
-  position: static;
-  top: initial;
-  transform: none;
-}
-
 /* Avatar
    ========================================================================== */
 
@@ -73,14 +66,6 @@
   width: 100%;
 }
 
-#formInput label {
-  color: rgba($white, .7);
-}
-
-#formInput .form-field-aux {
-  color: rgba($white, .4);
-}
-
 /* Icon
    ========================================================================== */
 
@@ -91,6 +76,16 @@
   color: #fff;
   display: inline-flex;
   padding: .1rem;
+}
+
+/* Modal
+   ========================================================================== */
+
+#modal .docs-cell-demo,
+#modalDialog .docs-cell-demo {
+  position: static;
+  top: initial;
+  transform: none;
 }
 
 /* Grid

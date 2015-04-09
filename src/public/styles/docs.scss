@@ -17,7 +17,7 @@
    ========================================================================== */
 
 .docs-cell {
-  background: #fff;
+  background: $white;
   border-radius: .2rem;
   margin-top: 3.2rem;
   padding: .8rem;
@@ -39,6 +39,25 @@
   padding: 0 4rem 4rem;
 }
 
+/* Demo
+   ========================================================================== */
+
+.docs-cell-demo-container {
+  background: rgba($secondary, .2);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  height: 34.4rem;
+  padding: 0 1.6rem;
+  position: relative;
+}
+
+.docs-cell-demo {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 /* Code
    ========================================================================== */
 
@@ -54,25 +73,6 @@
   border: 0;
   font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
   font-size: 1.1rem;
-}
-
-/* Demo
-   ========================================================================== */
-
-.docs-cell-demo-container {
-  background: #233240;
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  height: 34.4rem;
-  padding: 0 1.6rem;
-  position: relative;
-}
-
-.docs-cell-demo {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 /* Affix

@@ -1,8 +1,6 @@
 var gulp = require('gulp');
-var concat = require('gulp-concat');
 var plugins = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
-var uglify = require('gulp-uglify');
 
 gulp.task('build-docs', function () {
   return gulp.src('dist/public/index.html')
@@ -12,9 +10,12 @@ gulp.task('build-docs', function () {
 });
 
 gulp.task('build-scripts', ['metal:build:globals'], function() {
-  return gulp.src(['node_modules/closure-templates/soyutils.js', 'dist/public/scripts/main.js'])
-    .pipe(concat('main.js'))
-    .pipe(uglify())
+  return gulp.src([
+      'node_modules/closure-templates/soyutils.js',
+      'dist/public/scripts/main.js'
+    ])
+    .pipe(plugins.concat('ui-kit.js'))
+    .pipe(plugins.uglify())
     .pipe(gulp.dest('dist/public/scripts'));
 });
 

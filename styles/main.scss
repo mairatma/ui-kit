@@ -6,15 +6,6 @@
 
 body {
   background: #f4f8ff;
-  font-family: "Open Sans", sans-serif;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  letter-spacing: -0.02rem;
 }
 
 a {
@@ -50,10 +41,6 @@ a:hover {
   border-radius: 0.2rem;
 }
 
-.semi-bold {
-  font-weight: $semiBold;
-}
-
 /* ==========================================================================
    Components
    ========================================================================== */
@@ -66,3 +53,4 @@ a:hover {
 @import "components/navigation";
 @import "components/shadow";
 @import "components/tooltip";
+@import "components/typography";

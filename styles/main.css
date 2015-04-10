@@ -4,15 +4,6 @@
    ========================================================================== */
 body {
   background: #f4f8ff;
-  font-family: "Open Sans", sans-serif;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  letter-spacing: -0.02rem;
 }
 
 a {
@@ -52,10 +43,6 @@ input[type="password"],
 textarea,
 select, .sidebar {
   border-radius: 0.2rem;
-}
-
-.semi-bold {
-  font-weight: 600;
 }
 
 /* ==========================================================================
@@ -646,4 +633,24 @@ label {
 .tooltip-menu-link:hover {
   background: rgba(255, 113, 117, 0.05);
   color: rgba(35, 50, 64, 0.7);
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  letter-spacing: -0.02rem;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.semi-bold {
+  font-weight: 600;
 }

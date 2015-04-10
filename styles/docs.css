@@ -187,6 +187,12 @@
   margin: 0 .7rem;
 }
 
+/* Typography · Font
+   ========================================================================== */
+#typographyFont h1 {
+  text-align: center;
+}
+
 /*
 
 github.com style (c) Vasily Polovnyov <vast@whiteants.net>

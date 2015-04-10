@@ -18,6 +18,19 @@ gulp.task('build-scripts', ['metal:build:globals'], function() {
     .pipe(gulp.dest('dist/public/scripts'));
 });
 
+gulp.task('build-styles', function() {
+  return gulp.src([
+      'dist/public/vendor/skeleton/css/normalize.css',
+      'dist/public/vendor/skeleton/css/skeleton.css',
+      'dist/public/styles/main.css',
+      'dist/public/fonts/icon-12.css',
+      'dist/public/fonts/icon-16.css'
+    ])
+    .pipe(plugins.concat('ui-kit.css'))
+    .pipe(plugins.minifyCss())
+    .pipe(gulp.dest('dist/public/styles/'));
+});
+
 gulp.task('build', function(cb) {
-  runSequence('build-scripts', 'copy', ['images', 'fonts', 'scripts', 'styles', 'templates'], cb);
+  runSequence('build-scripts', 'copy', ['images', 'fonts', 'scripts', 'styles', 'templates'], 'build-styles', cb);
 });

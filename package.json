@@ -9,6 +9,7 @@
   "devDependencies": {
     "babel": "^4.7.3",
     "browserify": "^9.0.3",
+    "browserify-imports-renamer": "^0.1.1",
     "browserify-istanbul": "^0.2.0",
     "chai": "^2.2.0",
     "closure-templates": "^20141017.0.0",

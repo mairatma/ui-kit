@@ -187,9 +187,19 @@
   margin: 0 .7rem;
 }
 
-/* Typography · Font
+/* Typography
    ========================================================================== */
-#typographyFont h1 {
+#typographyFont .docs-cell-demo h1 {
+  font-size: 3.6rem;
+  text-align: center;
+}
+
+#typographySizes .docs-cell-demo h1,
+#typographySizes .docs-cell-demo h2,
+#typographySizes .docs-cell-demo h3,
+#typographySizes .docs-cell-demo h4,
+#typographySizes .docs-cell-demo h5,
+#typographySizes .docs-cell-demo h6 {
   text-align: center;
 }
 

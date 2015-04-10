@@ -1,6 +1,6 @@
 module.exports = {
   defaultConfig: {
-    globTemplateCopy: ['src/**/*.soy', 'jspm_packages/github/alloyui/core@master/soy/SoyComponent.soy'],
+    globTemplateCopy: ['src/**/*.soy', 'src/public/vendor/metaljs/src/soy/SoyComponent.soy'],
     templateData: {
       renderChildComponents: true
     }

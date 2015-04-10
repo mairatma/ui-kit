@@ -4,14 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <title>UI Kit</title>
-  <link rel="stylesheet" href="vendor/skeleton/css/normalize.css">
-  <link rel="stylesheet" href="vendor/skeleton/css/skeleton.css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600">
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="fonts/icon-12.css">
-  <link rel="stylesheet" href="fonts/icon-16.css">
-  <link rel="stylesheet" href="styles/docs.css">
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600">
+  <link rel="stylesheet" href="styles/ui-kit.css">
+  <link rel="stylesheet" href="styles/docs.css">
 </head>
 
 <body>
@@ -32,7 +28,9 @@
         <div id="docs-left-column" class="three columns">
           <nav id="docs-sidebar" class="sidebar">
             <ul class="sidebar-list">
-              <li class="sidebar-item"><a class="sidebar-link" href="#avatarIcon">Avatar · Icon</a>
+              <li class="sidebar-item"><a class="sidebar-link" href="#avatarIconFont">Avatar · Icon (Font)</a>
+              </li>
+              <li class="sidebar-item"><a class="sidebar-link" href="#avatarIconSVG">Avatar · Icon (SVG)</a>
               </li>
               <li class="sidebar-item"><a class="sidebar-link" href="#avatarInitials">Avatar · Initials</a>
               </li>
@@ -68,99 +66,115 @@
           </nav>
         </div>
         <div id="docs-right-column" class="nine columns">
-          <div id="avatarIcon" class="docs-cell shadow-z1">
+          <div id="avatarIconFont" class="docs-cell shadow-z1">
             <div class="docs-cell-demo-container">
               <div class="docs-cell-demo">
-                <a class="avatar avatar-medium" href="#" style="background: #c25daa;">
-                  <span class="avatar-icon icon-12-pin" style="color: white;"></span>
+                <a class="avatar-icon-16 avatar-large" href="#" style="background: #9552ef;">
+                  <span class="icon-16-heart" style="color: white;"></span>
                 </a>
 
-                <a class="avatar avatar-large" href="#" style="background: #9552ef;">
-                  <span class="avatar-icon icon-12-check" style="color: white;"></span>
+                <a class="avatar-icon-12 avatar-large" href="#" style="background: #647efb;">
+                  <span class="icon-12-link" style="color: white;"></span>
                 </a>
 
-                <a class="avatar avatar-large" href="#" style="background: #9552ef;">
-                  <span class="avatar-icon icon-16-heart" style="color: white;"></span>
+                <a class="avatar-icon-16 avatar-medium" href="#" style="background: #c25daa;">
+                  <span class="icon-16-bell" style="color: white;"></span>
                 </a>
 
-                <a class="avatar avatar-medium" href="#" style="background: #c25daa;">
-                  <span class="avatar-icon icon-16-bell" style="color: white;"></span>
+                <a class="avatar-icon-12 avatar-medium" href="#" style="background: #ff7175">
+                  <span class="icon-12-star" style="color: white;"></span>
                 </a>
               </div>
             </div>
-            <h3 class="docs-cell-title">Avatar · Icon</h3>
-            <p class="docs-cell-description">Contains a SVG file that represents an app.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #c25daa;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon icon-12-pin"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+            <h3 class="docs-cell-title">Avatar · Icon (Font)</h3>
+            <p class="docs-cell-description">Contains a font icon 12x12 or 16x16.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon-16 avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #9552ef;"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-heart"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #9552ef;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon icon-12-check"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon-12 avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #647efb;"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-link"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #9552ef;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon icon-16-heart"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon-16 avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #c25daa;"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-bell"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #c25daa;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon icon-16-bell"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon-12 avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #ff7175"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-12-star"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: white;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre>
+          </div>
+          <div id="avatarIconSVG" class="docs-cell shadow-z1">
+            <div class="docs-cell-demo-container">
+              <div class="docs-cell-demo">
+                <a class="avatar-icon avatar-large" href="#" style="background: #647efb;">
+                  <img src="fonts/icon-16/back.svg" alt="Back Icon">
+                </a>
+
+                <a class="avatar-icon avatar-medium" href="#" style="background: #647efb;">
+                  <img src="fonts/icon-16/back.svg" alt="Back Icon">
+                </a>
+
+                <a class="avatar-icon avatar-small" href="#" style="background: #647efb;">
+                  <img src="fonts/icon-16/back.svg" alt="Back Icon">
+                </a>
+              </div>
+            </div>
+            <h3 class="docs-cell-title">Avatar · Icon (SVG)</h3>
+            <p class="docs-cell-description">Contains a SVG icon.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #647efb;"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"fonts/icon-16/back.svg"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Back Icon"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #647efb;"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"fonts/icon-16/back.svg"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Back Icon"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-icon avatar-small"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #647efb;"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"fonts/icon-16/back.svg"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Back Icon"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre>
           </div>
           <div id="avatarInitials" class="docs-cell shadow-z1">
             <div class="docs-cell-demo-container">
-              <div class="docs-cell-demo">
-                <a class="avatar avatar-large" href="#" style="background: #e4c143;">
-                  <span class="avatar-initials">ch</span>
-                </a>
+              <div class="docs-cell-demo"><a class="avatar-initials avatar-large" href="#" style="background: #e4c143;">ch</a>
 
-                <a class="avatar avatar-medium" href="#" style="background: #ff536b;">
-                  <span class="avatar-initials">bf</span>
-                </a>
+                <a class="avatar-initials avatar-medium" href="#" style="background: #ff536b;">bf</a>
 
-                <a class="avatar avatar-small" href="#" style="background: #9552ef;">
-                  <span class="avatar-initials">mc</span>
-                </a>
+                <a class="avatar-initials avatar-small" href="#" style="background: #9552ef;">mc</a>
               </div>
             </div>
             <h3 class="docs-cell-title">Avatar · Initials</h3>
-            <p class="docs-cell-description">Represents the first letters from the first two names of a person.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #e4c143;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-initials"</span>&gt;</span>ch<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+            <p class="docs-cell-description">Represents the first letters from the first two names of a person.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-initials avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #e4c143;"</span>&gt;</span>ch<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #ff536b;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-initials"</span>&gt;</span>bf<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-initials avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #ff536b;"</span>&gt;</span>bf<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-small"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #9552ef;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-initials"</span>&gt;</span>mc<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-initials avatar-small"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background: #9552ef;"</span>&gt;</span>mc<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre>
           </div>
           <div id="avatarPhoto" class="docs-cell shadow-z1">
             <div class="docs-cell-demo-container">
               <div class="docs-cell-demo">
-                <a class="avatar avatar-large" href="#">
-                  <img class="avatar-photo" src="images/avatar-person-1.png" alt="Chloe Hart">
+                <a class="avatar-photo avatar-large" href="#">
+                  <img src="images/avatar-person-1.png" alt="Chloe Hart">
                 </a>
 
-                <a class="avatar avatar-medium" href="#">
-                  <img class="avatar-photo" src="images/avatar-person-2.png" alt="Bobbie Flores">
+                <a class="avatar-photo avatar-medium" href="#">
+                  <img src="images/avatar-person-2.png" alt="Bobbie Flores">
                 </a>
 
-                <a class="avatar avatar-small" href="#">
-                  <img class="avatar-photo" src="images/avatar-person-3.png" alt="Maureen Cruz">
+                <a class="avatar-photo avatar-small" href="#">
+                  <img src="images/avatar-person-3.png" alt="Maureen Cruz">
                 </a>
               </div>
             </div>
             <h3 class="docs-cell-title">Avatar · Photo</h3>
-            <p class="docs-cell-description">Make sure you load an image twice the size in order to guarantee high quality on retina displays.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-photo"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"images/avatar-person-1.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Chloe Hart"</span>&gt;</span>
+            <p class="docs-cell-description">Make sure you load an image twice the size in order to guarantee high quality on retina displays.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-photo avatar-large"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"images/avatar-person-1.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Chloe Hart"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-photo"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"images/avatar-person-2.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Bobbie Flores"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-photo avatar-medium"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"images/avatar-person-2.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Bobbie Flores"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar avatar-small"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-photo"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"images/avatar-person-3.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Maureen Cruz"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar-photo avatar-small"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"images/avatar-person-3.png"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">"Maureen Cruz"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span></code></pre>
           </div>
           <div id="buttonTags" class="docs-cell shadow-z1">
@@ -416,6 +430,7 @@
                 <span class="icon-16-ellipsis"></span>
                 <span class="icon-16-eye"></span>
                 <span class="icon-16-facebook"></span>
+                <span class="icon-16-gear"></span>
                 <span class="icon-16-github"></span>
                 <span class="icon-16-globe"></span>
                 <span class="icon-16-groups"></span>
@@ -425,6 +440,7 @@
                 <span class="icon-16-liferay-logo-2"></span>
                 <span class="icon-16-liferay-logo"></span>
                 <span class="icon-16-link"></span>
+                <span class="icon-16-magnifier"></span>
                 <span class="icon-16-mail"></span>
                 <span class="icon-16-menu-content"></span>
                 <span class="icon-16-menu"></span>
@@ -432,12 +448,12 @@
                 <span class="icon-16-persons"></span>
                 <span class="icon-16-phone"></span>
                 <span class="icon-16-plus"></span>
-                <span class="icon-16-search"></span>
                 <span class="icon-16-send"></span>
                 <span class="icon-16-skype"></span>
                 <span class="icon-16-star"></span>
                 <span class="icon-16-streams"></span>
                 <span class="icon-16-subscribe"></span>
+                <span class="icon-16-tint"></span>
                 <span class="icon-16-twitter"></span>
               </div>
             </div>
@@ -454,6 +470,7 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-ellipsis"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-eye"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-facebook"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-gear"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-github"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-globe"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-groups"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
@@ -463,6 +480,7 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-liferay-logo-2"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-liferay-logo"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-link"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-magnifier"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-mail"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-menu-content"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-menu"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
@@ -470,51 +488,13 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-persons"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-phone"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-plus"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-search"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-send"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-skype"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-star"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-streams"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-subscribe"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-tint"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"icon-16-twitter"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span></code></pre>
-          </div>
-          <div id="modal" class="docs-cell shadow-z1">
-            <div class="docs-cell-demo-container">
-              <div class="docs-cell-demo">
-                <div class="backdrop"></div>
-                <div id="myModal" class="modal component centered" data-component="">
-                  <header id="myModal-header">
-                    <a class="modal-close icon-12-close-long" data-onclick="close"></a>
-                    <h1>Modal header</h1>
-                  </header>
-                  <section id="myModal-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
-                  </section>
-                  <footer id="myModal-footer"></footer>
-                </div>
-              </div>
-            </div>
-            <h3 class="docs-cell-title">Modal</h3>
-            <p class="docs-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"backdrop"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModal"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"modal component centered"</span> <span class="hljs-attribute">data-component</span>=<span class="hljs-value">""</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">header</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModal-header"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"modal-close icon-12-close-long"</span> <span class="hljs-attribute">data-onclick</span>=<span class="hljs-value">"close"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Modal header<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">header</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModal-body"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">footer</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModal-footer"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">footer</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code></pre>
-          </div>
-          <div id="modalDialog" class="docs-cell shadow-z1">
-            <div class="docs-cell-demo-container">
-              <div class="docs-cell-demo">
-                <div class="backdrop"></div>
-                <div id="myModalDialog" class="modal component centered" data-component="">
-                  <header id="myModalDialog-header"></header>
-                  <section id="myModalDialog-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
-                  </section>
-                  <footer id="myModalDialog-footer">
-                    <button class="btn btn-secondary">Cancel</button>
-                    <button class="btn">Confirm</button>
-                  </footer>
-                </div>
-              </div>
-            </div>
-            <h3 class="docs-cell-title">Modal · Dialog</h3>
-            <p class="docs-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"backdrop"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModalDialog"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"modal component centered"</span> <span class="hljs-attribute">data-component</span>=<span class="hljs-value">""</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">header</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModalDialog-header"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">header</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModalDialog-body"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">footer</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myModalDialog-footer"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-secondary"</span>&gt;</span>Cancel<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>Confirm<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">footer</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code></pre>
           </div>
           <div id="navSidebar" class="docs-cell shadow-z1">
             <div class="docs-cell-demo-container">
@@ -523,18 +503,41 @@
                   <ul class="sidebar-list">
                     <li class="sidebar-item">
                       <a class="sidebar-link sidebar-link-selected" href="#">
-                        <span class="sidebar-icon icon-12-browser"></span>App Info
+                        <span class="sidebar-icon icon-12-browser"></span>
+                        <span class="semi-bold">Label</span>
                       </a>
                     </li>
                     <li class="sidebar-item">
                       <a class="sidebar-link" href="#">
-                        <span class="sidebar-icon icon-12-persons"></span>Collaborators
+                        <span class="sidebar-icon icon-12-persons"></span>
+                        <span class="semi-bold">Label</span>
                       </a>
                     </li>
                     <li class="sidebar-item">
                       <a class="sidebar-link" href="#">
-                        <span class="sidebar-icon icon-12-card"></span>Plans
+                        <span class="sidebar-icon icon-12-card"></span>
+                        <span class="semi-bold">Label</span>
                       </a>
+                    </li>
+                  </ul>
+                </nav>
+
+                <nav class="sidebar">
+                  <ul class="sidebar-list">
+                    <li class="sidebar-item">
+                      <a class="sidebar-link sidebar-link-selected" href="#">
+        Label
+      </a>
+                    </li>
+                    <li class="sidebar-item">
+                      <a class="sidebar-link" href="#">
+        Label
+      </a>
+                    </li>
+                    <li class="sidebar-item">
+                      <a class="sidebar-link" href="#">
+        Label
+      </a>
                     </li>
                   </ul>
                 </nav>
@@ -545,17 +548,40 @@
   <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-list"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-item"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-link sidebar-link-selected"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-icon icon-12-browser"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>App Info
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-icon icon-12-browser"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"semi-bold"</span>&gt;</span>Label<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-item"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-icon icon-12-persons"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>Collaborators
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-icon icon-12-persons"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"semi-bold"</span>&gt;</span>Label<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-item"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-icon icon-12-card"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>Plans
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-icon icon-12-card"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"semi-bold"</span>&gt;</span>Label<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">nav</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">nav</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-list"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-item"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-link sidebar-link-selected"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
+        Label
+      <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-item"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
+        Label
+      <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-item"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>
+        Label
       <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
@@ -614,45 +640,11 @@
   <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">nav</span>&gt;</span></code></pre>
           </div>
-          <div id="tooltip" class="docs-cell shadow-z1">
-            <div class="docs-cell-demo-container">
-              <div class="docs-cell-demo">
-                <div id="myTooltip1" class="tooltip component" data-component="">Brittany Hall</div>
-                <div id="myTooltip2" class="tooltip component" data-component="">Alyssa Spencer
-                  <br>Shelly Bryant
-                  <br>Victor Moreno</div>
-              </div>
-            </div>
-            <h3 class="docs-cell-title">Tooltip</h3>
-            <p class="docs-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="docs-cell-pre"><code class="docs-cell-code">&lt;<span class="hljs-keyword">div</span> <span class="hljs-property">id</span>=<span class="hljs-string">"myTooltip1"</span> <span class="hljs-type">class</span>=<span class="hljs-string">"tooltip component"</span> data-component=<span class="hljs-string">""</span>&gt;Brittany Hall&lt;/<span class="hljs-keyword">div</span>&gt;&lt;<span class="hljs-keyword">div</span> <span class="hljs-property">id</span>=<span class="hljs-string">"myTooltip2"</span> <span class="hljs-type">class</span>=<span class="hljs-string">"tooltip component"</span> data-component=<span class="hljs-string">""</span>&gt;Alyssa Spencer&lt;br/&gt;Shelly Bryant&lt;br/&gt;Victor Moreno&lt;/<span class="hljs-keyword">div</span>&gt;</code></pre>
-          </div>
-          <div id="tooltipMenu" class="docs-cell shadow-z1">
-            <div class="docs-cell-demo-container">
-              <div class="docs-cell-demo">
-                <nav id="myTooltipMenu" class="tooltip-menu " data-component="">
-                  <ul id="myTooltipMenu-items" class="tooltip-menu-list">
-                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Rename</a>
-                    </li>
-                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Change URL</a>
-                    </li>
-                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Change Plan</a>
-                    </li>
-                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Add Collaborator</a>
-                    </li>
-                    <li class="tooltip-menu-item"><a class="tooltip-menu-link" href="#">Delete App</a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-            <h3 class="docs-cell-title">Tooltip · Menu</h3>
-            <p class="docs-cell-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.</p><pre class="docs-cell-pre"><code class="docs-cell-code"><span class="hljs-tag">&lt;<span class="hljs-title">nav</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myTooltipMenu"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu "</span> <span class="hljs-attribute">data-component</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myTooltipMenu-items"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-list"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Rename<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Change URL<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Change Plan<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Add Collaborator<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-item"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tooltip-menu-link"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span>&gt;</span>Delete App<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">nav</span>&gt;</span></code></pre>
-          </div>
         </div>
       </div>
     </div>
   </main>
-  <script src="scripts/main.js"></script>
+  <script src="scripts/ui-kit.js"></script>
   <script src="scripts/docs.js"></script>
 </body>
 

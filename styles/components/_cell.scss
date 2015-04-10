@@ -6,6 +6,7 @@
   @extend .round;
   @extend .shadow-z1;
   background: $white;
+  border: 1px solid rgba($secondary, 0.12);
 }
 
 .cell:hover {

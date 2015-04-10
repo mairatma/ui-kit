@@ -1,6 +1,7 @@
 #avatarPhoto .docs-cell-demo,
 #avatarInitials .docs-cell-demo,
-#avatarIcon .docs-cell-demo,
+#avatarIconFont .docs-cell-demo,
+#avatarIconSVG .docs-cell-demo,
 #buttonTypes .docs-cell-demo,
 #buttonTags .docs-cell-demo,
 #cell .docs-cell-demo,
@@ -16,9 +17,11 @@
 /* Avatar
    ========================================================================== */
 
-#avatarPhoto .avatar,
-#avatarInitials .avatar,
-#avatarIcon .avatar {
+#avatarPhoto .avatar-photo,
+#avatarInitials .avatar-initials,
+#avatarIconSVG .avatar-icon,
+#avatarIconFont .avatar-icon-12,
+#avatarIconFont .avatar-icon-16 {
   display: inline-block;
   vertical-align: middle;
   margin: 0 1.2rem;
@@ -66,14 +69,6 @@
   width: 100%;
 }
 
-#formInput label {
-  color: rgba($white, .7);
-}
-
-#formInput .form-field-aux {
-  color: rgba($white, .4);
-}
-
 /* Icon
    ========================================================================== */
 
@@ -88,11 +83,6 @@
 
 /* Modal
    ========================================================================== */
-
-#modal .docs-cell-demo-container,
-#modalDialog .docs-cell-demo-container {
-  background: rgba(#233240, .2);
-}
 
 #modal .docs-cell-demo,
 #modalDialog .docs-cell-demo {
@@ -115,4 +105,12 @@
   margin-bottom: .75rem;
   text-align: center;
   text-transform: uppercase;
+}
+
+/* Navigation · Sidebar
+   ========================================================================== */
+
+#navSidebar .sidebar {
+  display: inline-block;
+  margin: 0 .7rem;
 }

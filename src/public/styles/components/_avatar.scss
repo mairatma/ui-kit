@@ -82,9 +82,38 @@ $large : 9.2rem;
 /* Avatar · Icon
    ========================================================================== */
 
+$icon12Medium : 3.6rem;
+$icon16Medium : 5.6rem;
+$icon12Large  : 7.2rem;
+$icon16Large  : 9.2rem;
+
 .avatar-icon {
   display: block;
   margin: 0 auto;
+}
+
+.avatar-medium span[class^="icon-12-"].avatar-icon,
+.avatar-medium span[class*="icon-12-"].avatar-icon {
+  font-size: 1.2rem;
+  line-height: $icon12Medium;
+}
+
+.avatar-medium span[class^="icon-16-"].avatar-icon,
+.avatar-medium span[class*="icon-16-"].avatar-icon {
+  font-size: 1.6rem;
+  line-height: $icon16Medium;
+}
+
+.avatar-large span[class^="icon-12-"].avatar-icon,
+.avatar-large span[class*="icon-12-"].avatar-icon {
+  font-size: 2.4rem;
+  line-height: $icon12Large;
+}
+
+.avatar-large span[class^="icon-16-"].avatar-icon,
+.avatar-large span[class*="icon-16-"].avatar-icon {
+  font-size: 3.2rem;
+  line-height: $icon16Large;
 }
 
 .avatar-medium img.avatar-icon {
@@ -93,32 +122,8 @@ $large : 9.2rem;
   padding: $medium/4 0;
 }
 
-.avatar-medium span[class^="icon-12-"].avatar-icon,
-.avatar-medium span[class*="icon-12-"].avatar-icon {
-  font-size: 1.2rem;
-  line-height: $medium;
-}
-
-.avatar-medium span[class^="icon-16-"].avatar-icon,
-.avatar-medium span[class*="icon-16-"].avatar-icon {
-  font-size: 1.6rem;
-  line-height: $medium;
-}
-
 .avatar-large img.avatar-icon {
   width: $large/2;
   height: $large/2;
   padding: $large/4 0;
-}
-
-.avatar-large span[class^="icon-12-"].avatar-icon,
-.avatar-large span[class*="icon-12-"].avatar-icon {
-  font-size: 2.4rem;
-  line-height: $large;
-}
-
-.avatar-large span[class^="icon-16-"].avatar-icon,
-.avatar-large span[class*="icon-16-"].avatar-icon {
-  font-size: 3.2rem;
-  line-height: $large;
 }

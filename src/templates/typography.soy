@@ -1,0 +1,24 @@
+{namespace components}
+
+/**
+ * Typography · Font
+ */
+{template .typographyFont}
+  {let $id: 'typographyFont' /}
+  {let $title: 'Typography · Font' /}
+  {let $description: 'Open Sans was designed with an upright stress, open forms and a neutral, yet friendly
+appearance. It was optimized for print, web, and mobile interfaces, and has excellent legibility
+characteristics in its letterforms.' /}
+  {let $html kind="html"}
+{literal}<h1 class="regular">Aa</h1>
+<h1 class="semi-bold">Aa</h1>{/literal}
+   {/let}
+  {let $snippet kind="text"}{$html}{/let}
+  {call static.cell}
+    {param id: $id /}
+    {param title: $title /}
+    {param description: $description /}
+    {param snippet: $snippet /}
+    {param html: $html /}
+  {/call}
+{/template}

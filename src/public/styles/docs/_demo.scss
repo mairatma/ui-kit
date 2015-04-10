@@ -1,6 +1,7 @@
 #avatarPhoto .docs-cell-demo,
 #avatarInitials .docs-cell-demo,
-#avatarIcon .docs-cell-demo,
+#avatarIconFont .docs-cell-demo,
+#avatarIconSVG .docs-cell-demo,
 #buttonTypes .docs-cell-demo,
 #buttonTags .docs-cell-demo,
 #cell .docs-cell-demo,
@@ -16,9 +17,11 @@
 /* Avatar
    ========================================================================== */
 
-#avatarPhoto .avatar,
-#avatarInitials .avatar,
-#avatarIcon .avatar {
+#avatarPhoto .avatar-photo,
+#avatarInitials .avatar-initials,
+#avatarIconSVG .avatar-icon,
+#avatarIconFont .avatar-icon-12,
+#avatarIconFont .avatar-icon-16 {
   display: inline-block;
   vertical-align: middle;
   margin: 0 1.2rem;

@@ -87,6 +87,7 @@
   @include anim(all);
   color: rgba($secondary, .9);
   display: block;
+  font-size: 1.3rem;
   padding: .8rem 2rem;
   text-decoration: none;
 }
@@ -103,6 +104,9 @@
 }
 
 .sidebar-icon {
+  display: inline-block;
   margin-right: 1.6rem;
   vertical-align: middle;
+  color: $primary;
+  width: 1.6rem;
 }

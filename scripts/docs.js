@@ -7,12 +7,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   new ui.Affix({
     element: '#docs-sidebar',
-    offsetTop: 64
+    offsetTop: 72
   });
 
   new ui.Scrollspy({
     element: '#docs-sidebar',
-    offset: 90,
     activeClass: 'sidebar-link-selected'
   });
 });

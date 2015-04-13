@@ -4,37 +4,37 @@
  * This renders the main element.
  */
 {template .content}
-    {delcall Modal.header data="all" /}
-    {delcall Modal.body data="all" /}
-    {delcall Modal.footer data="all" /}
+		{delcall Modal.header data="all" /}
+		{delcall Modal.body data="all" /}
+		{delcall Modal.footer data="all" /}
 {/template}
 
 /**
  * @param body
  */
 {template .body}
-  {if $body}
-    {$body}
-  {/if}
+	{if $body}
+		{$body}
+	{/if}
 {/template}
 
 /**
  * @param footer
  */
 {template .footer}
-  {if $footer}
-    {$footer}
-  {/if}
+	{if $footer}
+		{$footer}
+	{/if}
 {/template}
 
 /**
  * @param header
  */
 {template .header}
-  {if $header}
-    <a class="modal-close icon-12-close-long" data-onclick="close"></a>
-    {$header}
-  {/if}
+	{if $header}
+		<a class="modal-close icon-12-close-long" data-onclick="close"></a>
+		{$header}
+	{/if}
 {/template}
 
 /**
@@ -42,7 +42,7 @@
  * @param id
  */
 {deltemplate Modal.body variant="'element'"}
-    <section id="{$id}-body">{$elementContent}</section>
+		<section id="{$id}-body">{$elementContent}</section>
 {/deltemplate}
 
 /**
@@ -50,7 +50,7 @@
  * @param id
  */
 {deltemplate Modal.footer variant="'element'"}
-    <footer id="{$id}-footer">{$elementContent}</footer>
+		<footer id="{$id}-footer">{$elementContent}</footer>
 {/deltemplate}
 
 /**
@@ -58,5 +58,5 @@
  * @param id
  */
 {deltemplate Modal.header variant="'element'"}
-    <header id="{$id}-header">{$elementContent}</header>
+		<header id="{$id}-header">{$elementContent}</header>
 {/deltemplate}

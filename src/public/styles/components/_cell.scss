@@ -1,14 +1,14 @@
 /* Cell
-   ========================================================================== */
+	 ========================================================================== */
 
 .cell {
-  @include anim(box-shadow);
-  @extend .round;
-  @extend .shadow-z1;
-  background: $white;
-  border: 1px solid rgba($secondary, 0.12);
+	@include anim(box-shadow);
+	@extend .round;
+	@extend .shadow-z1;
+	background: $white;
+	border: 1px solid rgba($secondary, 0.12);
 }
 
 .cell:hover {
-  @extend .shadow-z2;
+	@extend .shadow-z2;
 }

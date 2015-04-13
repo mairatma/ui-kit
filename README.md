@@ -12,16 +12,16 @@ bower install liferay-apps/ui-kit
 
 1. Load fonts and styles:
 
-  ```html
+	```html
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600">
 <link rel="stylesheet" href="bower_components/ui-kit/build/styles/ui-kit.css">
-  ```
+	```
 
 2. Load main script:
 
-  ```html
+	```html
 <script src="vendor/ui-kit/build/scripts/ui-kit.js"></script>
-  ```
+	```
 
 3. Copy & paste component's markup at [liferay-apps.github.io/ui-kit](http://liferay-apps.github.io/ui-kit/).
 

@@ -1,8 +1,8 @@
 /* Form
-   ========================================================================== */
+	 ========================================================================== */
 
 form {
-  max-width: 40rem;
+	max-width: 40rem;
 }
 
 input[type="email"],
@@ -14,15 +14,15 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
-  @include anim(border);
-  @extend .round;
-  background: rgba($white, .2);
-  border: 1px solid rgba($secondary, .2);
-  color: rgba($black, .4);
-  font-size: 1.2rem;
-  font-weight: $regular;
-  margin: 0;
-  padding: 5px 10px;
+	@include anim(border);
+	@extend .round;
+	background: rgba($white, .2);
+	border: 1px solid rgba($secondary, .2);
+	color: rgba($black, .4);
+	font-size: 1.2rem;
+	font-weight: $regular;
+	margin: 0;
+	padding: 5px 10px;
 }
 
 input[type="email"]:focus,
@@ -34,31 +34,31 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid $primary;
+	border: 1px solid $primary;
 }
 
 input::-moz-selection {
-  background: rgba($primary, 0.1);
+	background: rgba($primary, 0.1);
 }
 
 input::selection {
-  background: rgba($primary, 0.1);
+	background: rgba($primary, 0.1);
 }
 
 label,
 .form-field-aux {
-  font-weight: $regular;
-  display: block;
+	font-weight: $regular;
+	display: block;
 }
 
 label {
-  color: rgba($secondary, .7);
-  font-size: 1.2rem;
-  margin-bottom: .3rem;
+	color: rgba($secondary, .7);
+	font-size: 1.2rem;
+	margin-bottom: .3rem;
 }
 
 .form-field-aux {
-  color: rgba($secondary, .4);
-  font-size: 1.1rem;
-  margin-top: .2rem;
+	color: rgba($secondary, .4);
+	font-size: 1.1rem;
+	margin-top: .2rem;
 }

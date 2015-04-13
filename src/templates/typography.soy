@@ -4,47 +4,47 @@
  * Typography: Font
  */
 {template .typographyFont}
-  {let $id: 'typographyFont' /}
-  {let $title: 'Typography: Font' /}
-  {let $description: 'Open Sans was designed with an upright stress, open forms and a neutral, yet friendly
+	{let $id: 'typographyFont' /}
+	{let $title: 'Typography: Font' /}
+	{let $description: 'Open Sans was designed with an upright stress, open forms and a neutral, yet friendly
 appearance. It was optimized for print, web, and mobile interfaces, and has excellent legibility
 characteristics in its letterforms.' /}
-  {let $html kind="html"}
+	{let $html kind="html"}
 {literal}<h1 class="regular">Aa</h1>
 <h1 class="semi-bold">Aa</h1>{/literal}
-   {/let}
-  {let $snippet kind="text"}{$html}{/let}
-  {call static.cell}
-    {param id: $id /}
-    {param title: $title /}
-    {param description: $description /}
-    {param snippet: $snippet /}
-    {param html: $html /}
-  {/call}
+	 {/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
 {/template}
 
 /**
  * Typography: Sizes
  */
 {template .typographySizes}
-  {let $id: 'typographySizes' /}
-  {let $title: 'Typography: Sizes' /}
-  {let $description: 'These are the most common font-sizes we’ll make use of. They may be used as Regular as
+	{let $id: 'typographySizes' /}
+	{let $title: 'Typography: Sizes' /}
+	{let $description: 'These are the most common font-sizes we’ll make use of. They may be used as Regular as
 Semibold, according the context.' /}
-  {let $html kind="html"}
+	{let $html kind="html"}
 {literal}<h6>The quick brown fox jumps over the lazy dog.</h6>
 <h5>The quick brown fox jumps over the lazy dog.</h5>
 <h4>The quick brown fox jumps over the lazy dog.</h4>
 <h3>The quick brown fox jumps over the lazy dog.</h3>
 <h2>The quick brown fox jumps over the lazy dog.</h2>
 <h1>The quick brown fox jumps over the lazy dog.</h1>{/literal}
-   {/let}
-  {let $snippet kind="text"}{$html}{/let}
-  {call static.cell}
-    {param id: $id /}
-    {param title: $title /}
-    {param description: $description /}
-    {param snippet: $snippet /}
-    {param html: $html /}
-  {/call}
+	 {/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
 {/template}

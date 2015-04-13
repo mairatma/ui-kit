@@ -4,46 +4,46 @@
  * Button: Types
  */
 {template .buttonTypes}
-  {let $id: 'buttonTypes' /}
-  {let $title: 'Button: Types' /}
-  {let $description: 'Make sure to include the base class in order to use any of the four different button styles.' /}
-  {let $html kind="html"}
+	{let $id: 'buttonTypes' /}
+	{let $title: 'Button: Types' /}
+	{let $description: 'Make sure to include the base class in order to use any of the four different button styles.' /}
+	{let $html kind="html"}
 {literal}<a class="btn" href="#">Primary</a>
 <a class="btn btn-secondary" href="#">Secondary</a>
 <a class="btn btn-disabled" href="#">Disabled</a>
 <a class="btn btn-link" href="#">Link</a>
 {/literal}
-  {/let}
-  {let $snippet kind="text"}{$html}{/let}
-  {call static.cell}
-    {param id: $id /}
-    {param title: $title /}
-    {param description: $description /}
-    {param snippet: $snippet /}
-    {param html: $html /}
-  {/call}
+	{/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
 {/template}
 
 /**
  * Button: Tags
  */
 {template .buttonTags}
-  {let $id: 'buttonTags' /}
-  {let $title: 'Button: Tags' /}
-  {let $description: 'Button styles can be applied to different HTML tags such as links, buttons, and inputs.' /}
-  {let $html kind="html"}
+	{let $id: 'buttonTags' /}
+	{let $title: 'Button: Tags' /}
+	{let $description: 'Button styles can be applied to different HTML tags such as links, buttons, and inputs.' /}
+	{let $html kind="html"}
 {literal}<a class="btn" href="#">Link</a>
 <button type="submit">Button</button>
 <input type="button" value="Input">
 <input type="submit" value="Submit">
 <input type="reset" value="Reset">{/literal}
-  {/let}
-  {let $snippet kind="text"}{$html}{/let}
-  {call static.cell}
-    {param id: $id /}
-    {param title: $title /}
-    {param description: $description /}
-    {param snippet: $snippet /}
-    {param html: $html /}
-  {/call}
+	{/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
 {/template}

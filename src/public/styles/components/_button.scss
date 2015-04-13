@@ -1,28 +1,28 @@
 /* Button
-   ========================================================================== */
+	 ========================================================================== */
 
 .btn,
 button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  @include anim(opacity);
-  @extend .round;
-  background: $primary;
-  border: none;
-  color: $white;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1.2rem;
-  font-weight: $semiBold;
-  height: 3.2rem;
-  letter-spacing: normal;
-  line-height: 3.2rem;
-  margin: 0;
-  padding: 0 3.2rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: none;
+	@include anim(opacity);
+	@extend .round;
+	background: $primary;
+	border: none;
+	color: $white;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1.2rem;
+	font-weight: $semiBold;
+	height: 3.2rem;
+	letter-spacing: normal;
+	line-height: 3.2rem;
+	margin: 0;
+	padding: 0 3.2rem;
+	text-align: center;
+	text-decoration: none;
+	text-transform: none;
 }
 
 .btn:hover,
@@ -30,8 +30,8 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
-  color: $white;
-  opacity: .8;
+	color: $white;
+	opacity: .8;
 }
 
 .btn:focus,
@@ -39,42 +39,42 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-  color: $white;
+	color: $white;
 }
 
 /* Button · Secondary
-   ========================================================================== */
+	 ========================================================================== */
 
 .btn.btn-secondary {
-  color: $white;
-  background: #bdc1c5;
+	color: $white;
+	background: #bdc1c5;
 }
 
 /* Button · Disabled
-   ========================================================================== */
+	 ========================================================================== */
 
 .btn.btn-disabled,
 button[disabled] {
-  opacity: .4;
-  cursor: not-allowed;
-  transition: none;
+	opacity: .4;
+	cursor: not-allowed;
+	transition: none;
 }
 
 .btn.btn-disabled:hover {
-  opacity: .4;
+	opacity: .4;
 }
 
 /* Button · Link
-   ========================================================================== */
+	 ========================================================================== */
 
 .btn.btn-link {
-  color: $primary;
-  background: transparent;
-  font-weight: $regular;
+	color: $primary;
+	background: transparent;
+	font-weight: $regular;
 }
 
 .btn.btn-link:hover {
-  color: $primary;
-  opacity: 1;
-  text-decoration: underline;
+	color: $primary;
+	opacity: 1;
+	text-decoration: underline;
 }

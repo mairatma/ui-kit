@@ -4,18 +4,18 @@
  * This renders the main element.
  */
 {template .content}
-  {delcall TooltipMenu.items data="all" /}
+	{delcall TooltipMenu.items data="all" /}
 {/template}
 
 /**
  * @param items
  */
 {template .items}
-  {foreach $item in $items}
-  <li class="tooltip-menu-item">
-    <a class="tooltip-menu-link" href="{$item.href ? $item.href : '#'}">{$item.content}</a>
-  </li>
-  {/foreach}
+	{foreach $item in $items}
+	<li class="tooltip-menu-item">
+		<a class="tooltip-menu-link" href="{$item.href ? $item.href : '#'}">{$item.content}</a>
+	</li>
+	{/foreach}
 {/template}
 
 /**
@@ -34,5 +34,5 @@
  * @param id
  */
 {deltemplate TooltipMenu.items variant="'element'"}
-    <ul id="{$id}-items" class="tooltip-menu-list">{$elementContent}</ul>
+		<ul id="{$id}-items" class="tooltip-menu-list">{$elementContent}</ul>
 {/deltemplate}

@@ -1,49 +1,49 @@
 @import "variables";
 
 /* ==========================================================================
-   Base
-   ========================================================================== */
+	 Base
+	 ========================================================================== */
 
 body {
-  background: #f4f8ff;
+	background: #f4f8ff;
 }
 
 a {
-  color: $primary;
+	color: $primary;
 }
 
 a:hover {
-  color: $primary;
+	color: $primary;
 }
 
 /* ==========================================================================
-   Mixins
-   ========================================================================== */
+	 Mixins
+	 ========================================================================== */
 
 @mixin anim($property) {
-  transition: $property .3s ease-in-out;
+	transition: $property .3s ease-in-out;
 }
 
 /* ==========================================================================
-   Utils
-   ========================================================================== */
+	 Utils
+	 ========================================================================== */
 
 .centered {
-  left: 50%;
-  position: fixed;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  -ms-transform: translateX(-50%) translateY(-50%);
+	left: 50%;
+	position: fixed;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
 }
 
 .round {
-  border-radius: 0.2rem;
+	border-radius: 0.2rem;
 }
 
 /* ==========================================================================
-   Components
-   ========================================================================== */
+	 Components
+	 ========================================================================== */
 
 @import "components/avatar";
 @import "components/button";

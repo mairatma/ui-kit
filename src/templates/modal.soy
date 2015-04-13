@@ -4,59 +4,59 @@
  * Modal
  */
 {template .modal}
-  {let $id: 'modal' /}
-  {let $title: 'Modal' /}
-  {let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.' /}
-  {let $html kind="html"}
-  <div class="backdrop"></div>
-  {delcall Modal}
-    {param id: 'myModal' /}
-    {param elementClasses: 'centered' /}
-    {param header kind="html"}
-      <h1>Modal header</h1>
-    {/param}
-    {param body kind="html"}
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
-    {/param}
-  {/delcall}
-  {/let}
-  {let $snippet kind="text"}{$html}{/let}
-  {call static.cell}
-    {param id: $id /}
-    {param title: $title /}
-    {param description: $description /}
-    {param snippet: $snippet /}
-    {param html: $html /}
-  {/call}
+	{let $id: 'modal' /}
+	{let $title: 'Modal' /}
+	{let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.' /}
+	{let $html kind="html"}
+	<div class="backdrop"></div>
+	{delcall Modal}
+		{param id: 'myModal' /}
+		{param elementClasses: 'centered' /}
+		{param header kind="html"}
+			<h1>Modal header</h1>
+		{/param}
+		{param body kind="html"}
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
+		{/param}
+	{/delcall}
+	{/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
 {/template}
 
 /**
  * Modal: Dialog
  */
 {template .modalDialog}
-  {let $id: 'modalDialog' /}
-  {let $title: 'Modal: Dialog' /}
-  {let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.' /}
-  {let $html kind="html"}
-  <div class="backdrop"></div>
-  {delcall Modal}
-    {param id: 'myModalDialog' /}
-    {param elementClasses: 'dialog centered' /}
-    {param body kind="html"}
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
-    {/param}
-    {param footer kind="html"}
-      <button class="btn btn-secondary">Cancel</button>
-      <button class="btn">Confirm</button>
-    {/param}
-  {/delcall}
-  {/let}
-  {let $snippet kind="text"}{$html}{/let}
-  {call static.cell}
-    {param id: $id /}
-    {param title: $title /}
-    {param description: $description /}
-    {param snippet: $snippet /}
-    {param html: $html /}
-  {/call}
+	{let $id: 'modalDialog' /}
+	{let $title: 'Modal: Dialog' /}
+	{let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.' /}
+	{let $html kind="html"}
+	<div class="backdrop"></div>
+	{delcall Modal}
+		{param id: 'myModalDialog' /}
+		{param elementClasses: 'dialog centered' /}
+		{param body kind="html"}
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, dicta mollitia maxime sequi quia reprehenderit.</p>
+		{/param}
+		{param footer kind="html"}
+			<button class="btn btn-secondary">Cancel</button>
+			<button class="btn">Confirm</button>
+		{/param}
+	{/delcall}
+	{/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
 {/template}

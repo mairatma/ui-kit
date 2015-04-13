@@ -4,58 +4,58 @@
  * Tooltip
  */
 {template .tooltip}
-  {let $id: 'tooltip' /}
-  {let $title: 'Tooltip' /}
-  {let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.' /}
-  {let $html kind="html"}
-  {delcall Tooltip}
-    {param id: 'myTooltip1' /}
-    {param content: 'Brittany Hall' /}
-  {/delcall}
-  {delcall Tooltip}
-    {param id: 'myTooltip2' /}
-    {param content kind="html"}
-    Alyssa Spencer<br/>
-    Shelly Bryant<br/>
-    Victor Moreno
-    {/param}
-  {/delcall}
-  {/let}
-  {let $snippet kind="text"}{$html}{/let}
-  {call static.cell}
-    {param id: $id /}
-    {param title: $title /}
-    {param description: $description /}
-    {param snippet: $snippet /}
-    {param html: $html /}
-  {/call}
+	{let $id: 'tooltip' /}
+	{let $title: 'Tooltip' /}
+	{let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.' /}
+	{let $html kind="html"}
+	{delcall Tooltip}
+		{param id: 'myTooltip1' /}
+		{param content: 'Brittany Hall' /}
+	{/delcall}
+	{delcall Tooltip}
+		{param id: 'myTooltip2' /}
+		{param content kind="html"}
+		Alyssa Spencer<br/>
+		Shelly Bryant<br/>
+		Victor Moreno
+		{/param}
+	{/delcall}
+	{/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
 {/template}
 
 /**
  * Tooltip: Menu
  */
 {template .tooltipMenu}
-  {let $id: 'tooltipMenu' /}
-  {let $title: 'Tooltip: Menu' /}
-  {let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.' /}
-  {let $html kind="html"}
-  {delcall TooltipMenu}
-    {param id: 'myTooltipMenu' /}
-    {param items: [
-      ['content': 'Rename'],
-      ['content': 'Change URL'],
-      ['content': 'Change Plan'],
-      ['content': 'Add Collaborator'],
-      ['content': 'Delete App']
-    ] /}
-  {/delcall}
-  {/let}
-  {let $snippet kind="text"}{$html}{/let}
-  {call static.cell}
-    {param id: $id /}
-    {param title: $title /}
-    {param description: $description /}
-    {param snippet: $snippet /}
-    {param html: $html /}
-  {/call}
+	{let $id: 'tooltipMenu' /}
+	{let $title: 'Tooltip: Menu' /}
+	{let $description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, labore.' /}
+	{let $html kind="html"}
+	{delcall TooltipMenu}
+		{param id: 'myTooltipMenu' /}
+		{param items: [
+			['content': 'Rename'],
+			['content': 'Change URL'],
+			['content': 'Change Plan'],
+			['content': 'Add Collaborator'],
+			['content': 'Delete App']
+		] /}
+	{/delcall}
+	{/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
 {/template}

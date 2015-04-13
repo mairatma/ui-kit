@@ -107,8 +107,12 @@
   text-transform: uppercase;
 }
 
-/* Navigation · Sidebar
+/* Navigation
    ========================================================================== */
+
+#navTopbar .docs-cell-demo-container {
+  padding: 0 4rem;
+}
 
 #navSidebar .sidebar {
   display: inline-block;

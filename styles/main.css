@@ -463,36 +463,37 @@ label {
 /* Navigation · Topbar
    ========================================================================== */
 .topbar {
-  background: #ff7175;
-  height: 6.4rem;
+  background: #fff;
+  height: 7.2rem;
+  overflow: hidden;
 }
 
 .topbar-list {
-  font-size: 0;
   list-style: none;
-  padding: 2rem 0;
+  font-size: 0;
+  margin: 0;
 }
 
 .topbar-item {
   display: inline-block;
-  font-size: 1.4rem;
   margin: 0 2rem;
 }
 
 .topbar-item:first-child {
-  margin-left: 3.2rem;
+  margin: 0 2rem 0 0;
+  width: 7.2rem;
 }
 
 .topbar-item:last-child {
   margin-right: 3.2rem;
+  padding: 2.6rem 0;
 }
 
-.topbar-item .avatar, .topbar-item .avatar-initials, .topbar-item .avatar-icon, .topbar-item .avatar-icon-12,
-.topbar-item .avatar-icon-16 {
+.topbar-logo-link {
+  background: #ff7175;
   display: block;
-  height: 36px;
-  margin-top: -.6rem;
-  width: 36px;
+  font-size: 1.2rem;
+  padding: 2.6rem;
 }
 
 .topbar-logo {
@@ -501,19 +502,25 @@ label {
 
 .topbar-link {
   transition: color 0.3s ease-in-out;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 1.6rem;
+  color: rgba(35, 50, 64, 0.7);
+  font-size: 1.2rem;
   font-weight: 600;
   text-decoration: none;
 }
 
-.topbar-link:hover {
-  color: rgba(255, 255, 255, 0.8);
-}
-
 .topbar-link-selected,
 .topbar-link-selected:hover {
-  color: #fff;
+  color: #ff7175;
+  border-bottom: 2px solid #ff7175;
+  padding-bottom: 2.4rem;
+}
+
+.topbar-item .avatar, .topbar-item .avatar-initials, .topbar-item .avatar-icon, .topbar-item .avatar-icon-12,
+.topbar-item .avatar-icon-16 {
+  display: block;
+  height: 36px;
+  margin-top: -.6rem;
+  width: 36px;
 }
 
 /* Navigation · Sidebar

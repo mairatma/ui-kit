@@ -1,0 +1,50 @@
+body {
+	background: #f4f8ff;
+}
+
+a {
+	color: $primary;
+}
+
+a:hover {
+	color: $primary;
+}
+
+/* ==========================================================================
+	 Utils
+	 ========================================================================== */
+
+.centered {
+	left: 50%;
+	position: fixed;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+}
+
+.round {
+	border-radius: 0.2rem;
+}
+
+/* ==========================================================================
+	 Mixins
+	 ========================================================================== */
+
+@mixin anim($property) {
+	transition: $property .3s ease-in-out;
+}
+
+/* ==========================================================================
+	 Components
+	 ========================================================================== */
+
+@import "avatar";
+@import "button";
+@import "cell";
+@import "form";
+@import "modal";
+@import "navigation";
+@import "shadow";
+@import "tooltip";
+@import "typography";

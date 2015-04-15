@@ -1,11 +1,17 @@
-@import "variables";
+/* UI Kit
+	 ========================================================================== */
+
+$primary: #ff7175;
+
+@import "../../../lib/styles/theme";
+@import "../../../lib/styles/base";
+
+/* Layout
+	 ========================================================================== */
 
 .wrap {
 	margin-bottom: 2.4rem;
 }
-
-/* Columns
-	 ========================================================================== */
 
 #docs-left-column,
 #docs-right-column {
@@ -83,8 +89,8 @@
 	top: 3.2rem;
 }
 
-/* Import
+/* Imports
 	 ========================================================================== */
 
-@import "docs/demo";
-@import "docs/highlight";
+@import "demos";
+@import "highlight";

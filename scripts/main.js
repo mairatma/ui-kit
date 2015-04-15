@@ -5586,19 +5586,15 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
     /**
      * @fileoverview Templates in namespace Templates.Modal.
-     * @hassoydeltemplate {ComponentElement}
      * @hassoydeltemplate {ComponentTemplate}
      * @hassoydeltemplate {Modal}
      * @hassoydeltemplate {Modal.body}
      * @hassoydeltemplate {Modal.footer}
      * @hassoydeltemplate {Modal.header}
-     * @hassoydelcall {Component}
-     * @hassoydelcall {ComponentElement}
      * @hassoydelcall {Modal}
      * @hassoydelcall {Modal.body}
      * @hassoydelcall {Modal.footer}
      * @hassoydelcall {Modal.header}
-     * @hassoydelcall {Surface}
      */
 
     if (typeof lib$scripts$Modal$soy$$Templates.Modal == "undefined") {
@@ -5714,7 +5710,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @suppress {checkTypes}
      */
     lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s37_45b138fb = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Component"), "", true)(soy.$$augmentMap(opt_data, { componentName: "Modal" }), null, opt_ijData)));
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(lib$scripts$Modal$soy$$Templates.SoyComponent.component(soy.$$augmentMap(opt_data, { componentName: "Modal" }), null, opt_ijData)));
     };
     if (goog.DEBUG) {
         lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s37_45b138fb.soyTemplateName = "Templates.Modal.__deltemplate_s37_45b138fb";
@@ -5729,27 +5725,12 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @suppress {checkTypes}
      */
     lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s40_29e4e741 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("ComponentElement"), "Modal", true)(soy.$$augmentMap(opt_data, { elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.content(opt_data, null, opt_ijData)) }), null, opt_ijData));
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal"), "element", true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
         lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s40_29e4e741.soyTemplateName = "Templates.Modal.__deltemplate_s40_29e4e741";
     }
     soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentTemplate"), "Modal", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s40_29e4e741);
-
-    /**
-     * @param {Object.<string, *>=} opt_data
-     * @param {(null|undefined)=} opt_ignored
-     * @param {Object.<string, *>=} opt_ijData
-     * @return {!soydata.SanitizedHtml}
-     * @suppress {checkTypes}
-     */
-    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s44_31c78f9d = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal"), "element", true)(opt_data, null, opt_ijData));
-    };
-    if (goog.DEBUG) {
-        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s44_31c78f9d.soyTemplateName = "Templates.Modal.__deltemplate_s44_31c78f9d";
-    }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentElement"), "Modal", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s44_31c78f9d);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -5774,7 +5755,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @suppress {checkTypes}
      */
     lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s54_90747620 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.body"), "element", true)(soy.$$augmentMap(opt_data, { elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Surface"), "", true)({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.body(opt_data, null, opt_ijData)), id: opt_data.id + "-body" }, null, opt_ijData)) : "")) }), null, opt_ijData));
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.body"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(lib$scripts$Modal$soy$$Templates.SoyComponent.surface({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.body(opt_data, null, opt_ijData)), id: opt_data.id + "-body" }, null, opt_ijData)) : "")), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
         lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s54_90747620.soyTemplateName = "Templates.Modal.__deltemplate_s54_90747620";
@@ -5788,13 +5769,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s63_231e36e7 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "element", true)(soy.$$augmentMap(opt_data, { elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Surface"), "", true)({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.footer(opt_data, null, opt_ijData)), id: opt_data.id + "-footer" }, null, opt_ijData)) : "")) }), null, opt_ijData));
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s64_231e36e7 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(lib$scripts$Modal$soy$$Templates.SoyComponent.surface({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.footer(opt_data, null, opt_ijData)), id: opt_data.id + "-footer" }, null, opt_ijData)) : "")), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s63_231e36e7.soyTemplateName = "Templates.Modal.__deltemplate_s63_231e36e7";
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s64_231e36e7.soyTemplateName = "Templates.Modal.__deltemplate_s64_231e36e7";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s63_231e36e7);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s64_231e36e7);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -5803,13 +5784,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s72_b8354b7d = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.header"), "element", true)(soy.$$augmentMap(opt_data, { elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Surface"), "", true)({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.header(opt_data, null, opt_ijData)), id: opt_data.id + "-header" }, null, opt_ijData)) : "")) }), null, opt_ijData));
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s74_b8354b7d = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.header"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(lib$scripts$Modal$soy$$Templates.SoyComponent.surface({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.header(opt_data, null, opt_ijData)), id: opt_data.id + "-header" }, null, opt_ijData)) : "")), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s72_b8354b7d.soyTemplateName = "Templates.Modal.__deltemplate_s72_b8354b7d";
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s74_b8354b7d.soyTemplateName = "Templates.Modal.__deltemplate_s74_b8354b7d";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.header"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s72_b8354b7d);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.header"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s74_b8354b7d);
 
     lib$scripts$Modal$soy$$Templates.Modal.body.params = ["body"];
     lib$scripts$Modal$soy$$Templates.Modal.footer.params = ["footer"];
@@ -6434,11 +6415,8 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
     /**
      * @fileoverview Templates in namespace Templates.Tooltip.
-     * @hassoydeltemplate {ComponentElement}
      * @hassoydeltemplate {ComponentTemplate}
      * @hassoydeltemplate {Tooltip}
-     * @hassoydelcall {Component}
-     * @hassoydelcall {ComponentElement}
      * @hassoydelcall {Tooltip}
      */
 
@@ -6467,13 +6445,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s84_8d49094e = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Component"), "", true)(soy.$$augmentMap(opt_data, { componentName: "Tooltip" }), null, opt_ijData)));
+    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s87_8d49094e = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(lib$scripts$Tooltip$soy$$Templates.SoyComponent.component(soy.$$augmentMap(opt_data, { componentName: "Tooltip" }), null, opt_ijData)));
     };
     if (goog.DEBUG) {
-        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s84_8d49094e.soyTemplateName = "Templates.Tooltip.__deltemplate_s84_8d49094e";
+        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s87_8d49094e.soyTemplateName = "Templates.Tooltip.__deltemplate_s87_8d49094e";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"), "", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s84_8d49094e);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"), "", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s87_8d49094e);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6482,13 +6460,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s87_606fdd83 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("ComponentElement"), "Tooltip", true)(soy.$$augmentMap(opt_data, { elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Tooltip$soy$$Templates.Tooltip.content(opt_data, null, opt_ijData)) }), null, opt_ijData));
+    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s90_606fdd83 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Tooltip"), "element", true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Tooltip$soy$$Templates.Tooltip.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s87_606fdd83.soyTemplateName = "Templates.Tooltip.__deltemplate_s87_606fdd83";
+        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s90_606fdd83.soyTemplateName = "Templates.Tooltip.__deltemplate_s90_606fdd83";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentTemplate"), "Tooltip", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s87_606fdd83);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentTemplate"), "Tooltip", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s90_606fdd83);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6497,28 +6475,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s91_a8d4319d = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Tooltip"), "element", true)(opt_data, null, opt_ijData));
-    };
-    if (goog.DEBUG) {
-        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s91_a8d4319d.soyTemplateName = "Templates.Tooltip.__deltemplate_s91_a8d4319d";
-    }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentElement"), "Tooltip", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s91_a8d4319d);
-
-    /**
-     * @param {Object.<string, *>=} opt_data
-     * @param {(null|undefined)=} opt_ignored
-     * @param {Object.<string, *>=} opt_ijData
-     * @return {!soydata.SanitizedHtml}
-     * @suppress {checkTypes}
-     */
-    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s93_71828d2a = function (opt_data, opt_ignored, opt_ijData) {
+    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s96_71828d2a = function (opt_data, opt_ignored, opt_ijData) {
         return soydata.VERY_UNSAFE.ordainSanitizedHtml("<div id=\"" + soy.$$escapeHtmlAttribute(opt_data.id) + "\" class=\"tooltip component" + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? " " + opt_data.elementClasses : "") + "\" data-component=\"\">" + soy.$$escapeHtml(opt_data.elementContent) + "</div>");
     };
     if (goog.DEBUG) {
-        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s93_71828d2a.soyTemplateName = "Templates.Tooltip.__deltemplate_s93_71828d2a";
+        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s96_71828d2a.soyTemplateName = "Templates.Tooltip.__deltemplate_s96_71828d2a";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"), "element", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s93_71828d2a);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"), "element", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s96_71828d2a);
 
     lib$scripts$Tooltip$soy$$Templates.Tooltip.content.params = ["content"];
     "use strict";
@@ -6664,13 +6627,9 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
     /**
      * @fileoverview Templates in namespace Templates.TooltipMenu.
-     * @hassoydeltemplate {ComponentElement}
      * @hassoydeltemplate {ComponentTemplate}
      * @hassoydeltemplate {TooltipMenu}
      * @hassoydeltemplate {TooltipMenu.items}
-     * @hassoydelcall {Component}
-     * @hassoydelcall {ComponentElement}
-     * @hassoydelcall {Surface}
      * @hassoydelcall {TooltipMenu}
      * @hassoydelcall {TooltipMenu.items}
      */
@@ -6702,11 +6661,11 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      */
     lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.items = function (opt_data, opt_ignored, opt_ijData) {
         var output = "";
-        var itemList105 = opt_data.items;
-        var itemListLen105 = itemList105.length;
-        for (var itemIndex105 = 0; itemIndex105 < itemListLen105; itemIndex105++) {
-            var itemData105 = itemList105[itemIndex105];
-            output += "<li class=\"tooltip-menu-item\"><a class=\"tooltip-menu-link\" href=\"" + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData105.href ? itemData105.href : "#")) + "\">" + soy.$$escapeHtml(itemData105.content) + "</a></li>";
+        var itemList108 = opt_data.items;
+        var itemListLen108 = itemList108.length;
+        for (var itemIndex108 = 0; itemIndex108 < itemListLen108; itemIndex108++) {
+            var itemData108 = itemList108[itemIndex108];
+            output += "<li class=\"tooltip-menu-item\"><a class=\"tooltip-menu-link\" href=\"" + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData108.href ? itemData108.href : "#")) + "\">" + soy.$$escapeHtml(itemData108.content) + "</a></li>";
         }
         return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
     };
@@ -6721,13 +6680,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s112_cfc546d2 = function (opt_data, opt_ignored, opt_ijData) {
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s115_cfc546d2 = function (opt_data, opt_ignored, opt_ijData) {
         return soydata.VERY_UNSAFE.ordainSanitizedHtml("<nav id=\"" + soy.$$escapeHtmlAttribute(opt_data.id) + "\" class=\"tooltip-menu " + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? opt_data.elementClasses : "") + "\" data-component>" + soy.$$escapeHtml(opt_data.elementContent) + "</nav>");
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s112_cfc546d2.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s112_cfc546d2";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s115_cfc546d2.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s115_cfc546d2";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "element", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s112_cfc546d2);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "element", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s115_cfc546d2);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6736,13 +6695,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s120_c0ab3df3 = function (opt_data, opt_ignored, opt_ijData) {
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s123_c0ab3df3 = function (opt_data, opt_ignored, opt_ijData) {
         return soydata.VERY_UNSAFE.ordainSanitizedHtml("<ul id=\"" + soy.$$escapeHtmlAttribute(opt_data.id) + "-items\" class=\"tooltip-menu-list\">" + soy.$$escapeHtml(opt_data.elementContent) + "</ul>");
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s120_c0ab3df3.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s120_c0ab3df3";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s123_c0ab3df3.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s123_c0ab3df3";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "element", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s120_c0ab3df3);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "element", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s123_c0ab3df3);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6751,13 +6710,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s126_8f8c631d = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Component"), "", true)(soy.$$augmentMap(opt_data, { componentName: "TooltipMenu" }), null, opt_ijData)));
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s129_8f8c631d = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(lib$scripts$TooltipMenu$soy$$Templates.SoyComponent.component(soy.$$augmentMap(opt_data, { componentName: "TooltipMenu" }), null, opt_ijData)));
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s126_8f8c631d.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s126_8f8c631d";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s129_8f8c631d.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s129_8f8c631d";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s126_8f8c631d);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s129_8f8c631d);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6766,13 +6725,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s129_270e148b = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("ComponentElement"), "TooltipMenu", true)(soy.$$augmentMap(opt_data, { elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.content(opt_data, null, opt_ijData)) }), null, opt_ijData));
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s132_270e148b = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "element", true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s129_270e148b.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s129_270e148b";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s132_270e148b.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s132_270e148b";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentTemplate"), "TooltipMenu", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s129_270e148b);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentTemplate"), "TooltipMenu", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s132_270e148b);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6781,28 +6740,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s133_da5bead2 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "element", true)(opt_data, null, opt_ijData));
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s138_8278e063 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(lib$scripts$TooltipMenu$soy$$Templates.SoyComponent.surface({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.items(opt_data, null, opt_ijData)), id: opt_data.id + "-items" }, null, opt_ijData)) : "")), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s133_da5bead2.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s133_da5bead2";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s138_8278e063.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s138_8278e063";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentElement"), "TooltipMenu", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s133_da5bead2);
-
-    /**
-     * @param {Object.<string, *>=} opt_data
-     * @param {(null|undefined)=} opt_ignored
-     * @param {Object.<string, *>=} opt_ijData
-     * @return {!soydata.SanitizedHtml}
-     * @suppress {checkTypes}
-     */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s135_8278e063 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "element", true)(soy.$$augmentMap(opt_data, { elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Surface"), "", true)({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.items(opt_data, null, opt_ijData)), id: opt_data.id + "-items" }, null, opt_ijData)) : "")) }), null, opt_ijData));
-    };
-    if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s135_8278e063.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s135_8278e063";
-    }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s135_8278e063);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s138_8278e063);
 
     lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.items.params = ["items"];
     "use strict";

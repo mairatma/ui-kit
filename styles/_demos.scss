@@ -1,0 +1,137 @@
+#avatarPhoto .docs-cell-demo,
+#avatarInitials .docs-cell-demo,
+#avatarIconFont .docs-cell-demo,
+#avatarIconSVG .docs-cell-demo,
+#buttonTypes .docs-cell-demo,
+#buttonTags .docs-cell-demo,
+#cell .docs-cell-demo,
+#tooltip .docs-cell-demo,
+#tooltipMenu .docs-cell-demo,
+#icon12x12 .docs-cell-demo,
+#icon16x16 .docs-cell-demo,
+#navSidebar .docs-cell-demo {
+	display: table;
+	margin: 0 auto;
+}
+
+/* Avatar
+	 ========================================================================== */
+
+#avatarPhoto .avatar-photo,
+#avatarInitials .avatar-initials,
+#avatarIconSVG .avatar-icon,
+#avatarIconFont .avatar-icon-12,
+#avatarIconFont .avatar-icon-16 {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 1.2rem;
+}
+
+/* Button
+	 ========================================================================== */
+
+#buttonTypes .btn,
+#buttonTags .btn,
+#buttonTags button,
+#buttonTags input {
+	margin: 0 .6rem;
+}
+
+/* Tooltip
+	 ========================================================================== */
+
+#tooltip .tooltip,
+#tooltipMenu .tooltip-menu {
+	margin: 0 1rem;
+	position: relative;
+}
+
+/* Shadow
+	 ========================================================================== */
+
+#shadow .shadow-z1,
+#shadow .shadow-z2 {
+	margin: 0 1rem;
+	display: inline-block;
+}
+
+/* Form
+	 ========================================================================== */
+
+#formInput form {
+	display: block;
+	margin: 0 auto;
+}
+
+#formInput input,
+#formInput select,
+#formInput textarea {
+	width: 100%;
+}
+
+/* Icon
+	 ========================================================================== */
+
+#icon12x12 [class^="icon-12-"],
+#icon12x12 [class*="icon-12-"],
+#icon16x16 [class^="icon-16-"],
+#icon16x16 [class*="icon-16-"] {
+	color: #fff;
+	display: inline-flex;
+	padding: .1rem;
+}
+
+/* Modal
+	 ========================================================================== */
+
+#modal .docs-cell-demo,
+#modalDialog .docs-cell-demo {
+	position: static;
+	top: initial;
+	transform: none;
+}
+
+/* Grid
+	 ========================================================================== */
+
+#grid .column,
+#grid .columns {
+	background: rgba($primary, .5);
+	border-radius: 0.2rem;
+	color: $primary;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 2.4rem;
+	margin-bottom: .75rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+/* Navigation
+	 ========================================================================== */
+
+#navTopbar .docs-cell-demo-container {
+	padding: 0 4rem;
+}
+
+#navSidebar .sidebar {
+	display: inline-block;
+	margin: 0 .7rem;
+}
+
+/* Typography
+	 ========================================================================== */
+
+#typographyFont .docs-cell-demo h1 {
+	font-size: 3.6rem;
+	text-align: center;
+}
+
+#typographySizes .docs-cell-demo h1,
+#typographySizes .docs-cell-demo h2,
+#typographySizes .docs-cell-demo h3,
+#typographySizes .docs-cell-demo h4,
+#typographySizes .docs-cell-demo h5,
+#typographySizes .docs-cell-demo h6 {
+	text-align: center;
+}

@@ -1,90 +1,96 @@
-@import "variables";
+/* UI Kit
+	 ========================================================================== */
+
+$primary: #ff7175;
+
+@import "../../../lib/styles/theme";
+@import "../../../lib/styles/base";
+
+/* Layout
+	 ========================================================================== */
 
 .wrap {
-  margin-bottom: 3.2rem;
+	margin-bottom: 2.4rem;
 }
-
-/* Columns
-   ========================================================================== */
 
 #docs-left-column,
 #docs-right-column {
-  margin-top: 3.2rem;
-  position: relative;
+	margin-top: 2.4rem;
+	position: relative;
 }
 
 /* Cell
-   ========================================================================== */
+	 ========================================================================== */
 
 .docs-cell {
-  background: $white;
-  border-radius: .2rem;
-  margin-top: 3.2rem;
-  padding: .8rem;
+	background: $white;
+	border-radius: .2rem;
+	margin-top: 2.4rem;
+	padding: .8rem;
 }
 
 .docs-cell:first-child {
-  margin-top: 0;
+	margin-top: 0;
 }
 
 .docs-cell-title {
-  font-size: 1.6rem;
-  margin: 0;
-  padding: 2.4rem 4rem 1.4rem;
+	font-size: 1.6rem;
+	margin: 0;
+	padding: 2.4rem 4rem 1.4rem;
 }
 
 .docs-cell-description {
-  font-size: 1.2rem;
-  margin: 0;
-  padding: 0 4rem 4rem;
+	font-size: 1.2rem;
+	margin: 0;
+	padding: 0 4rem 4rem;
 }
 
 /* Demo
-   ========================================================================== */
+	 ========================================================================== */
 
 .docs-cell-demo-container {
-  background: rgba($secondary, .2);
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  height: 34.4rem;
-  padding: 0 1.6rem;
-  position: relative;
+	background: rgba($secondary, .2);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	height: 34.4rem;
+	padding: 0 1.6rem;
+	position: relative;
 }
 
 .docs-cell-demo {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 /* Code
-   ========================================================================== */
+	 ========================================================================== */
 
 .docs-cell-pre {
-  background: #f4f8ff;
-  margin: 0 4rem 3rem;
-  overflow: scroll;
+	background: #f4f8ff;
+	margin: 0 4rem 3rem;
+	overflow: scroll;
 }
 
 .docs-cell-code {
-  background: #f4f8ff;
-  border-radius: 0;
-  border: 0;
-  font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
-  font-size: 1.1rem;
+	background: #f4f8ff;
+	border-radius: 0;
+	border: 0;
+	font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+	font-size: 1.1rem;
 }
 
 /* Affix
-   ========================================================================== */
+	 ========================================================================== */
 
 .affix-default {
-  position: fixed;
-  top: 3.2rem;
+	position: fixed;
+	top: 3.2rem;
 }
 
-/* Import
-   ========================================================================== */
+/* Imports
+	 ========================================================================== */
 
-@import "docs/demo";
-@import "docs/highlight";
+@import "demos";
+@import "highlight";

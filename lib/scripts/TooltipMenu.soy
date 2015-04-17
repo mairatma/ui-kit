@@ -8,10 +8,10 @@
 {/template}
 
 /**
- * @param items
+ * @param content
  */
 {template .items}
-	{foreach $item in $items}
+	{foreach $item in $content}
 	<li class="tooltip-menu-item">
 		<a class="tooltip-menu-link" href="{$item.href ? $item.href : '#'}">{$item.content}</a>
 	</li>

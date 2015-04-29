@@ -236,13 +236,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                  * @param {function(*, *):*=} opt_mergeFn Function that receives an array filled
                  *   with the values of the property for the current class and all its super classes.
                  *   Should return the merged value to be stored on the current class.
-                 * @return {*} The value of the merged property.
+                 * @return {boolean} Returns true if merge happens, false otherwise.
                  */
 
                 value: function mergeSuperClassesProperty(constructor, propertyName, opt_mergeFn) {
                     var mergedName = propertyName + "_MERGED";
                     if (constructor.hasOwnProperty(mergedName)) {
-                        return constructor[mergedName];
+                        return false;
                     }
 
                     var merged = src$public$vendor$metaljs$src$core$$core.collectSuperClassesProperty(constructor, propertyName);
@@ -250,7 +250,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                         merged = opt_mergeFn(merged);
                     }
                     constructor[mergedName] = merged;
-                    return constructor[mergedName];
+                    return true;
                 }
             },
             nullFunction: {
@@ -396,6 +396,8 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
     var src$public$vendor$metaljs$src$events$EventHandle$$EventHandle = (function (_src$public$vendor$metaljs$src$disposable$Disposable$$default) {
         function src$public$vendor$metaljs$src$events$EventHandle$$EventHandle(emitter, event, listener) {
             _classCallCheck(this, src$public$vendor$metaljs$src$events$EventHandle$$EventHandle);
+
+            _get(Object.getPrototypeOf(src$public$vendor$metaljs$src$events$EventHandle$$EventHandle.prototype), "constructor", this).call(this);
 
             /**
              * The EventEmitter instance that the event was subscribed to.
@@ -609,6 +611,11 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                  */
 
                 value: function delegate(element, eventName, selector, callback) {
+                    var customConfig = src$public$vendor$metaljs$src$dom$dom$$dom.customEvents[eventName];
+                    if (customConfig && customConfig.delegate) {
+                        eventName = customConfig.originalEvent;
+                        callback = customConfig.handler.bind(customConfig, callback);
+                    }
                     return src$public$vendor$metaljs$src$dom$dom$$dom.on(element, eventName, src$public$vendor$metaljs$src$dom$dom$$dom.handleDelegateEvent_.bind(null, selector, callback));
                 }
             },
@@ -782,8 +789,26 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                  */
 
                 value: function on(element, eventName, callback) {
+                    var customConfig = src$public$vendor$metaljs$src$dom$dom$$dom.customEvents[eventName];
+                    if (customConfig && customConfig.event) {
+                        eventName = customConfig.originalEvent;
+                        callback = customConfig.handler.bind(customConfig, callback);
+                    }
                     element.addEventListener(eventName, callback);
                     return new src$public$vendor$metaljs$src$events$DomEventHandle$$default(element, eventName, callback);
+                }
+            },
+            registerCustomEvent: {
+
+                /**
+                 * Registers a custom event.
+                 * @param {string} eventName The name of the custom event.
+                 * @param {!Object} customConfig An object with information about how the event
+                 *   should be handled.
+                 */
+
+                value: function registerCustomEvent(eventName, customConfig) {
+                    src$public$vendor$metaljs$src$dom$dom$$dom.customEvents[eventName] = customConfig;
                 }
             },
             removeChildren: {
@@ -884,6 +909,10 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                  */
 
                 value: function supportsEvent(element, eventName) {
+                    if (src$public$vendor$metaljs$src$dom$dom$$dom.customEvents[eventName]) {
+                        return true;
+                    }
+
                     if (src$public$vendor$metaljs$src$core$$default.isString(element)) {
                         if (!src$public$vendor$metaljs$src$dom$dom$$elementsByTag[element]) {
                             src$public$vendor$metaljs$src$dom$dom$$elementsByTag[element] = document.createElement(element);
@@ -941,6 +970,28 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
     })();
 
     var src$public$vendor$metaljs$src$dom$dom$$elementsByTag = {};
+    src$public$vendor$metaljs$src$dom$dom$$dom.customEvents = {};
+
+    var src$public$vendor$metaljs$src$dom$dom$$eventMap = {
+        mouseenter: "mouseover",
+        mouseleave: "mouseout",
+        pointerenter: "pointerover",
+        pointerleave: "pointerout"
+    };
+    Object.keys(src$public$vendor$metaljs$src$dom$dom$$eventMap).forEach(function (eventName) {
+        src$public$vendor$metaljs$src$dom$dom$$dom.registerCustomEvent(eventName, {
+            delegate: true,
+            handler: function handler(callback, event) {
+                var related = event.relatedTarget;
+                var target = event.delegateTarget || event.target;
+                if (!related || related !== target && !target.contains(related)) {
+                    event.customType = eventName;
+                    return callback(event);
+                }
+            },
+            originalEvent: src$public$vendor$metaljs$src$dom$dom$$eventMap[eventName]
+        });
+    });
 
     var src$public$vendor$metaljs$src$dom$dom$$default = src$public$vendor$metaljs$src$dom$dom$$dom;
 
@@ -1381,6 +1432,8 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
     var src$public$vendor$metaljs$src$events$EventEmitter$$EventEmitter = (function (_src$public$vendor$metaljs$src$disposable$Disposable$$default2) {
         function src$public$vendor$metaljs$src$events$EventEmitter$$EventEmitter() {
             _classCallCheck(this, src$public$vendor$metaljs$src$events$EventEmitter$$EventEmitter);
+
+            _get(Object.getPrototypeOf(src$public$vendor$metaljs$src$events$EventEmitter$$EventEmitter.prototype), "constructor", this).call(this);
 
             /**
              * Holds event listeners scoped by event type.
@@ -2058,9 +2111,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                  * @param {!Object.<string, *>} initialValues An object that maps the names of
                  *   attributes to their initial values. These values have higher precedence than the
                  *   default values specified in the attribute configurations.
+                 * @param {boolean|Object=} opt_defineContext If value is false
+                 *     `Object.defineProperties` will not be called. If value is a valid
+                 *     context it will be used as definition context, otherwise `this`
+                 *     will be the context.
                  */
 
-                value: function addAttrs(configs, initialValues) {
+                value: function addAttrs(configs, initialValues, opt_defineContext) {
                     initialValues = initialValues || {};
                     var names = Object.keys(configs);
 
@@ -2071,7 +2128,9 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                         props[name] = this.buildAttrPropertyDef_(name);
                     }
 
-                    Object.defineProperties(this, props);
+                    if (opt_defineContext !== false) {
+                        Object.defineProperties(opt_defineContext || this, props);
+                    }
                 }
             },
             addAttrsFromStaticHint_: {
@@ -2084,8 +2143,12 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                  */
 
                 value: function addAttrsFromStaticHint_(config) {
-                    src$public$vendor$metaljs$src$core$$default.mergeSuperClassesProperty(this.constructor, "ATTRS", this.mergeAttrs_);
-                    this.addAttrs(this.constructor.ATTRS_MERGED, config);
+                    var ctor = this.constructor;
+                    var defineContext = false;
+                    if (src$public$vendor$metaljs$src$core$$default.mergeSuperClassesProperty(ctor, "ATTRS", this.mergeAttrs_)) {
+                        defineContext = ctor.prototype;
+                    }
+                    this.addAttrs(ctor.ATTRS_MERGED, config, defineContext);
                 }
             },
             assertValidAttrName_: {
@@ -2135,8 +2198,12 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                 value: function buildAttrPropertyDef_(name) {
                     return {
                         configurable: true,
-                        get: this.getAttrValue_.bind(this, name),
-                        set: this.setAttrValue_.bind(this, name)
+                        get: function get() {
+                            return this.getAttrValue_(name);
+                        },
+                        set: function set(val) {
+                            this.setAttrValue_(name, val);
+                        }
                     };
                 }
             },
@@ -2565,6 +2632,8 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
     var src$public$vendor$metaljs$src$events$EventEmitterProxy$$EventEmitterProxy = (function (_src$public$vendor$metaljs$src$disposable$Disposable$$default3) {
         function src$public$vendor$metaljs$src$events$EventEmitterProxy$$EventEmitterProxy(originEmitter, targetEmitter, opt_blacklist, opt_whitelist) {
             _classCallCheck(this, src$public$vendor$metaljs$src$events$EventEmitterProxy$$EventEmitterProxy);
+
+            _get(Object.getPrototypeOf(src$public$vendor$metaljs$src$events$EventEmitterProxy$$EventEmitterProxy.prototype), "constructor", this).call(this);
 
             /**
              * Map of events that should not be proxied.
@@ -3318,6 +3387,8 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
     var src$public$vendor$metaljs$src$events$EventHandler$$EventHandler = (function (_src$public$vendor$metaljs$src$disposable$Disposable$$default4) {
         function src$public$vendor$metaljs$src$events$EventHandler$$EventHandler() {
             _classCallCheck(this, src$public$vendor$metaljs$src$events$EventHandler$$EventHandler);
+
+            _get(Object.getPrototypeOf(src$public$vendor$metaljs$src$events$EventHandler$$EventHandler.prototype), "constructor", this).call(this);
 
             /**
              * An array that holds the added event handles, so the listeners can be
@@ -4683,7 +4754,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                     if (content.indexOf("data-on") === -1) {
                         return;
                     }
-                    var regex = /data-on([a-z]+)=['|"](\w+)['|"]/g;
+                    var regex = /data-on([a-z]+)=['|"](\w+)['"]/g;
                     var match = regex.exec(content);
                     while (match) {
                         this.attachListener_(match[1], match[2], groupName);
@@ -4753,10 +4824,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
     /**
      * @fileoverview Templates in namespace Templates.SoyComponent.
-     * @hassoydeltemplate {Component}
      * @hassoydeltemplate {ComponentChildren}
-     * @hassoydeltemplate {Surface}
-     * @hassoydelcall {ComponentTemplate}
      */
 
     if (typeof src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent == "undefined") {
@@ -4770,81 +4838,22 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.component = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("ComponentTemplate"), opt_data.componentName, true)(opt_data, null, opt_ijData));
-    };
-    if (goog.DEBUG) {
-        src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.component.soyTemplateName = "Templates.SoyComponent.component";
-    }
-
-    /**
-     * @param {Object.<string, *>=} opt_data
-     * @param {(null|undefined)=} opt_ignored
-     * @param {Object.<string, *>=} opt_ijData
-     * @return {!soydata.SanitizedHtml}
-     * @suppress {checkTypes}
-     */
-    src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.surface = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(opt_data.content));
-    };
-    if (goog.DEBUG) {
-        src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.surface.soyTemplateName = "Templates.SoyComponent.surface";
-    }
-
-    /**
-     * @param {Object.<string, *>=} opt_data
-     * @param {(null|undefined)=} opt_ignored
-     * @param {Object.<string, *>=} opt_ijData
-     * @return {!soydata.SanitizedHtml}
-     * @suppress {checkTypes}
-     */
-    src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s6_0084916f = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.component(opt_data, null, opt_ijData));
-    };
-    if (goog.DEBUG) {
-        src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s6_0084916f.soyTemplateName = "Templates.SoyComponent.__deltemplate_s6_0084916f";
-    }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Component"), "", 0, src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s6_0084916f);
-
-    /**
-     * @param {Object.<string, *>=} opt_data
-     * @param {(null|undefined)=} opt_ignored
-     * @param {Object.<string, *>=} opt_ijData
-     * @return {!soydata.SanitizedHtml}
-     * @suppress {checkTypes}
-     */
-    src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s8_26860e4b = function (opt_data, opt_ignored, opt_ijData) {
+    src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s2_26860e4b = function (opt_data, opt_ignored, opt_ijData) {
         return soydata.VERY_UNSAFE.ordainSanitizedHtml("<div id=\"" + soy.$$escapeHtmlAttribute(opt_data.id) + "-children-placeholder\" data-component-children=\"\">" + (opt_data.children ? soy.$$escapeHtml(opt_data.children) : "") + "</div>");
     };
     if (goog.DEBUG) {
-        src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s8_26860e4b.soyTemplateName = "Templates.SoyComponent.__deltemplate_s8_26860e4b";
+        src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s2_26860e4b.soyTemplateName = "Templates.SoyComponent.__deltemplate_s2_26860e4b";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentChildren"), "", 0, src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s8_26860e4b);
-
-    /**
-     * @param {Object.<string, *>=} opt_data
-     * @param {(null|undefined)=} opt_ignored
-     * @param {Object.<string, *>=} opt_ijData
-     * @return {!soydata.SanitizedHtml}
-     * @suppress {checkTypes}
-     */
-    src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s16_ec6fc81f = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.surface(opt_data, null, opt_ijData));
-    };
-    if (goog.DEBUG) {
-        src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s16_ec6fc81f.soyTemplateName = "Templates.SoyComponent.__deltemplate_s16_ec6fc81f";
-    }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Surface"), "", 0, src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s16_ec6fc81f);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentChildren"), "", 0, src$public$vendor$metaljs$src$soy$SoyComponent$soy$$Templates.SoyComponent.__deltemplate_s2_26860e4b);
 
     "use strict";
 
     /**
-     * We need to listen to calls to the SoyComponent template so we can use them to
+     * We need to listen to calls to soy deltemplates so we can use them to
      * properly instantiate and update child components defined through soy.
      * TODO: Switch to using proper AOP.
      */
-    var src$public$vendor$metaljs$src$soy$SoyComponent$$originalTemplate = src$public$vendor$metaljs$src$component$ComponentRegistry$$default.Templates.SoyComponent.component;
-    var src$public$vendor$metaljs$src$soy$SoyComponent$$originalSurfaceTemplate = src$public$vendor$metaljs$src$component$ComponentRegistry$$default.Templates.SoyComponent.surface;
+    var src$public$vendor$metaljs$src$soy$SoyComponent$$originalGetDelegateFn = soy.$$getDelegateFn;
 
     /**
      * Special Component class that handles a better integration between soy templates
@@ -4860,6 +4869,8 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
         function src$public$vendor$metaljs$src$soy$SoyComponent$$SoyComponent(opt_config) {
             _classCallCheck(this, src$public$vendor$metaljs$src$soy$SoyComponent$$SoyComponent);
 
+            _get(Object.getPrototypeOf(src$public$vendor$metaljs$src$soy$SoyComponent$$SoyComponent.prototype), "constructor", this).call(this, opt_config);
+
             src$public$vendor$metaljs$src$core$$default.mergeSuperClassesProperty(this.constructor, "TEMPLATES", this.mergeTemplates_);
 
             /**
@@ -4867,13 +4878,6 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
              * @type {!Array<!Component>}
              */
             this.components = {};
-
-            /**
-             * Helper responsible for extracting components from strings and config data.
-             * @type {!ComponentCollector}
-             * @protected
-             */
-            this.componentsCollector_ = new src$public$vendor$metaljs$src$component$ComponentCollector$$default();
 
             /**
              * Holds events that were listened through the element.
@@ -4907,8 +4911,6 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
              * @protected
              */
             this.recentlyAddedComponents_ = [];
-
-            _get(Object.getPrototypeOf(src$public$vendor$metaljs$src$soy$SoyComponent$$SoyComponent.prototype), "constructor", this).call(this, opt_config);
 
             this.addSurfacesFromTemplates_();
         }
@@ -5159,7 +5161,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
                 value: function extractComponents_(val) {
                     if (this.hasSubcomponents_(val)) {
-                        return this.componentsCollector_.extractComponentsFromString(val);
+                        return src$public$vendor$metaljs$src$soy$SoyComponent$$SoyComponent.componentsCollector.extractComponentsFromString(val);
                     }
                     return val;
                 }
@@ -5174,7 +5176,9 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
                 value: function finishProcessingRenderedTemplates_() {
                     src$public$vendor$metaljs$src$component$ComponentCollector$$default.components[this.id] = this;
-                    for (var id in this.renderedTemplates_) {
+                    var ids = Object.keys(this.renderedTemplates_);
+                    for (var i = 0; i < ids.length; i++) {
+                        var id = ids[i];
                         var componentId = id;
                         if (this.renderedTemplates_[id].isSurface) {
                             componentId = src$public$vendor$metaljs$src$component$Component$$default.extractComponentId(id);
@@ -5225,46 +5229,80 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                     return _get(Object.getPrototypeOf(src$public$vendor$metaljs$src$soy$SoyComponent$$SoyComponent.prototype), "getSurfaceContent_", this).call(this, surfaceId);
                 }
             },
+            handleGetDelegateFnCall_: {
+
+                /**
+                 * Handles a call to the soy function for getting delegate functions.
+                 * @param {string} delTemplateId
+                 * @param {string|number} delTemplateVariant
+                 * @param {boolean} allowsEmptyDefault
+                 * @return {!function}
+                 * @protected
+                 */
+
+                value: function handleGetDelegateFnCall_(delTemplateId, delTemplateVariant, allowsEmptyDefault) {
+                    var delegateFn = src$public$vendor$metaljs$src$soy$SoyComponent$$originalGetDelegateFn(delTemplateId, delTemplateVariant, allowsEmptyDefault);
+                    if (delTemplateVariant !== "content") {
+                        return delegateFn;
+                    }
+
+                    var splitId = delTemplateId.split(".");
+                    var componentName = splitId[0];
+                    var surfaceName = splitId[1];
+                    if (surfaceName) {
+                        return this.handleSurfaceCall_.bind(this, delegateFn, surfaceName);
+                    } else {
+                        return this.handleTemplateCall_.bind(this, delegateFn, componentName);
+                    }
+                }
+            },
             handleSurfaceCall_: {
 
                 /**
                  * Handles a call to the SoyComponent surface template.
+                 * @param {!function} templateFn The original surface template function.
+                 * @param {string} surfaceName The surface's name.
                  * @param {!Object} data The data the template was called with.
                  * @param {(null|undefined)=} ignored Second argument for soy templates.
                  * @param {Object.<string, *>=} ijData Optional injected data.
-                 * @return {string} The original return value of the template.
+                 * @return {string} A placeholder to be rendered instead of the content the template
+                 *   function would have returned.
                  * @protected
                  */
 
-                value: function handleSurfaceCall_(data, ignored, ijData) {
-                    var rendered = src$public$vendor$metaljs$src$soy$SoyComponent$$originalSurfaceTemplate(data, ignored, ijData);
-                    this.renderedTemplates_[data.id] = {
+                value: function handleSurfaceCall_(templateFn, surfaceName, data, ignored, ijData) {
+                    var elementId = data.id + "-" + surfaceName;
+                    var rendered = templateFn(data, ignored, ijData);
+                    this.renderedTemplates_[elementId] = {
                         content: rendered.content,
                         isSurface: true
                     };
-                    return "%%%%~surface-" + data.id + "~%%%%";
+                    return "%%%%~surface-" + elementId + "~%%%%";
                 }
             },
             handleTemplateCall_: {
 
                 /**
                  * Handles a call to the SoyComponent component template.
+                 * @param {!function} templateFn The original component template function.
+                 * @param {string} componentName The component's name.
                  * @param {!Object} data The data the template was called with.
                  * @param {(null|undefined)=} ignored Second argument for soy templates.
                  * @param {Object.<string, *>=} ijData Optional injected data.
-                 * @return {string} The original return value of the template.
+                 * @return {string} A placeholder to be rendered instead of the content the template
+                 *   function would have returned.
                  * @protected
                  */
 
-                value: function handleTemplateCall_(data, ignored, ijData) {
+                value: function handleTemplateCall_(templateFn, componentName, data, ignored, ijData) {
                     var config = this.buildComponentConfigData_(data);
-                    var component = this.componentsCollector_.createOrUpdateComponent(data.componentName, config);
+                    var component = src$public$vendor$metaljs$src$soy$SoyComponent$$SoyComponent.componentsCollector.createOrUpdateComponent(componentName, config);
                     this.componentInProcess_.addComponentRef(data.id, component);
 
                     var prevComponentInProcess = this.componentInProcess_;
                     this.componentInProcess_ = component;
                     var newData = this.buildTemplateData_(component, data);
-                    var renderedComponent = src$public$vendor$metaljs$src$soy$SoyComponent$$originalTemplate(newData, ignored, ijData);
+                    var renderedComponent = templateFn(newData, ignored, ijData);
                     this.renderedTemplates_[data.id] = renderedComponent;
                     this.componentInProcess_ = prevComponentInProcess;
 
@@ -5386,11 +5424,9 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                  */
 
                 value: function renderTemplate_(templateFn, opt_injectedData) {
-                    src$public$vendor$metaljs$src$component$ComponentRegistry$$default.Templates.SoyComponent.component = this.handleTemplateCall_.bind(this);
-                    src$public$vendor$metaljs$src$component$ComponentRegistry$$default.Templates.SoyComponent.surface = this.handleSurfaceCall_.bind(this);
+                    soy.$$getDelegateFn = this.handleGetDelegateFnCall_.bind(this);
                     var content = templateFn(this, null, opt_injectedData || {}).content;
-                    src$public$vendor$metaljs$src$component$ComponentRegistry$$default.Templates.SoyComponent.component = src$public$vendor$metaljs$src$soy$SoyComponent$$originalTemplate;
-                    src$public$vendor$metaljs$src$component$ComponentRegistry$$default.Templates.SoyComponent.surface = src$public$vendor$metaljs$src$soy$SoyComponent$$originalSurfaceTemplate;
+                    soy.$$getDelegateFn = src$public$vendor$metaljs$src$soy$SoyComponent$$originalGetDelegateFn;
                     return content;
                 }
             },
@@ -5413,7 +5449,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
             replaceComponentStringPlaceholders_: {
 
                 /**
-                 * Replaces all string placeholders added to the given content by `handleTemplateCall_`
+                 * Replaces all string placeholders added to the given content by `handleGetDelegateFnCall_`
                  * with the real component content that should have been inserted there instead.
                  * @param {string} content
                  * @return {string} The content string with the replaced placeholders.
@@ -5521,6 +5557,14 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
     })(src$public$vendor$metaljs$src$component$Component$$default);
 
     /**
+     * Helper responsible for extracting components from strings and config data.
+     * @type {!ComponentCollector}
+     * @protected
+     * @static
+     */
+    src$public$vendor$metaljs$src$soy$SoyComponent$$SoyComponent.componentsCollector = new src$public$vendor$metaljs$src$component$ComponentCollector$$default();
+
+    /**
      * SoyComponent attributes definition.
      * @type {Object}
      * @static
@@ -5586,7 +5630,6 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
     /**
      * @fileoverview Templates in namespace Templates.Modal.
-     * @hassoydeltemplate {ComponentTemplate}
      * @hassoydeltemplate {Modal}
      * @hassoydeltemplate {Modal.body}
      * @hassoydeltemplate {Modal.footer}
@@ -5710,7 +5753,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @suppress {checkTypes}
      */
     lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s37_45b138fb = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(lib$scripts$Modal$soy$$Templates.SoyComponent.component(soy.$$augmentMap(opt_data, { componentName: "Modal" }), null, opt_ijData)));
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal"), "element", true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal"), "content", true)(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
         lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s37_45b138fb.soyTemplateName = "Templates.Modal.__deltemplate_s37_45b138fb";
@@ -5724,13 +5767,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s40_29e4e741 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal"), "element", true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s43_77dbabf9 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(lib$scripts$Modal$soy$$Templates.Modal.content(opt_data, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s40_29e4e741.soyTemplateName = "Templates.Modal.__deltemplate_s40_29e4e741";
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s43_77dbabf9.soyTemplateName = "Templates.Modal.__deltemplate_s43_77dbabf9";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentTemplate"), "Modal", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s40_29e4e741);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal"), "content", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s43_77dbabf9);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -5739,13 +5782,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s46_df8ef55a = function (opt_data, opt_ignored, opt_ijData) {
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s45_df8ef55a = function (opt_data, opt_ignored, opt_ijData) {
         return soydata.VERY_UNSAFE.ordainSanitizedHtml("<div id=\"" + soy.$$escapeHtmlAttribute(opt_data.id) + "\" class=\"modal component" + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? " " + opt_data.elementClasses : "") + "\" data-component=\"\">" + soy.$$escapeHtml(opt_data.elementContent) + "</div>");
     };
     if (goog.DEBUG) {
-        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s46_df8ef55a.soyTemplateName = "Templates.Modal.__deltemplate_s46_df8ef55a";
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s45_df8ef55a.soyTemplateName = "Templates.Modal.__deltemplate_s45_df8ef55a";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal"), "element", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s46_df8ef55a);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal"), "element", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s45_df8ef55a);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -5754,13 +5797,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s54_90747620 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.body"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(lib$scripts$Modal$soy$$Templates.SoyComponent.surface({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.body(opt_data, null, opt_ijData)), id: opt_data.id + "-body" }, null, opt_ijData)) : "")), id: opt_data.id }, null, opt_ijData));
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s53_90747620 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.body"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.body"), "content", true)(opt_data, null, opt_ijData) : "")), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s54_90747620.soyTemplateName = "Templates.Modal.__deltemplate_s54_90747620";
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s53_90747620.soyTemplateName = "Templates.Modal.__deltemplate_s53_90747620";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.body"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s54_90747620);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.body"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s53_90747620);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -5769,13 +5812,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s64_231e36e7 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(lib$scripts$Modal$soy$$Templates.SoyComponent.surface({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.footer(opt_data, null, opt_ijData)), id: opt_data.id + "-footer" }, null, opt_ijData)) : "")), id: opt_data.id }, null, opt_ijData));
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s60_016394a5 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(lib$scripts$Modal$soy$$Templates.Modal.body(opt_data, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s64_231e36e7.soyTemplateName = "Templates.Modal.__deltemplate_s64_231e36e7";
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s60_016394a5.soyTemplateName = "Templates.Modal.__deltemplate_s60_016394a5";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s64_231e36e7);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.body"), "content", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s60_016394a5);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -5784,13 +5827,58 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s74_b8354b7d = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.header"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(lib$scripts$Modal$soy$$Templates.SoyComponent.surface({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Modal$soy$$Templates.Modal.header(opt_data, null, opt_ijData)), id: opt_data.id + "-header" }, null, opt_ijData)) : "")), id: opt_data.id }, null, opt_ijData));
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s62_231e36e7 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "content", true)(opt_data, null, opt_ijData) : "")), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s74_b8354b7d.soyTemplateName = "Templates.Modal.__deltemplate_s74_b8354b7d";
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s62_231e36e7.soyTemplateName = "Templates.Modal.__deltemplate_s62_231e36e7";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.header"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s74_b8354b7d);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s62_231e36e7);
+
+    /**
+     * @param {Object.<string, *>=} opt_data
+     * @param {(null|undefined)=} opt_ignored
+     * @param {Object.<string, *>=} opt_ijData
+     * @return {!soydata.SanitizedHtml}
+     * @suppress {checkTypes}
+     */
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s69_ff0238db = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(lib$scripts$Modal$soy$$Templates.Modal.footer(opt_data, null, opt_ijData));
+    };
+    if (goog.DEBUG) {
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s69_ff0238db.soyTemplateName = "Templates.Modal.__deltemplate_s69_ff0238db";
+    }
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.footer"), "content", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s69_ff0238db);
+
+    /**
+     * @param {Object.<string, *>=} opt_data
+     * @param {(null|undefined)=} opt_ignored
+     * @param {Object.<string, *>=} opt_ijData
+     * @return {!soydata.SanitizedHtml}
+     * @suppress {checkTypes}
+     */
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s71_b8354b7d = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.header"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.header"), "content", true)(opt_data, null, opt_ijData) : "")), id: opt_data.id }, null, opt_ijData));
+    };
+    if (goog.DEBUG) {
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s71_b8354b7d.soyTemplateName = "Templates.Modal.__deltemplate_s71_b8354b7d";
+    }
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.header"), "", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s71_b8354b7d);
+
+    /**
+     * @param {Object.<string, *>=} opt_data
+     * @param {(null|undefined)=} opt_ignored
+     * @param {Object.<string, *>=} opt_ijData
+     * @return {!soydata.SanitizedHtml}
+     * @suppress {checkTypes}
+     */
+    lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s78_7a6de6d1 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(lib$scripts$Modal$soy$$Templates.Modal.header(opt_data, null, opt_ijData));
+    };
+    if (goog.DEBUG) {
+        lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s78_7a6de6d1.soyTemplateName = "Templates.Modal.__deltemplate_s78_7a6de6d1";
+    }
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.header"), "content", 0, lib$scripts$Modal$soy$$Templates.Modal.__deltemplate_s78_7a6de6d1);
 
     lib$scripts$Modal$soy$$Templates.Modal.body.params = ["body"];
     lib$scripts$Modal$soy$$Templates.Modal.footer.params = ["footer"];
@@ -6415,7 +6503,6 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
     /**
      * @fileoverview Templates in namespace Templates.Tooltip.
-     * @hassoydeltemplate {ComponentTemplate}
      * @hassoydeltemplate {Tooltip}
      * @hassoydelcall {Tooltip}
      */
@@ -6445,13 +6532,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s87_8d49094e = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(lib$scripts$Tooltip$soy$$Templates.SoyComponent.component(soy.$$augmentMap(opt_data, { componentName: "Tooltip" }), null, opt_ijData)));
+    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s83_8d49094e = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Tooltip"), "element", true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + soy.$$getDelegateFn(soy.$$getDelTemplateId("Tooltip"), "content", true)(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s87_8d49094e.soyTemplateName = "Templates.Tooltip.__deltemplate_s87_8d49094e";
+        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s83_8d49094e.soyTemplateName = "Templates.Tooltip.__deltemplate_s83_8d49094e";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"), "", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s87_8d49094e);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"), "", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s83_8d49094e);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6460,13 +6547,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s90_606fdd83 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Tooltip"), "element", true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$Tooltip$soy$$Templates.Tooltip.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s89_5eaa83f8 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(lib$scripts$Tooltip$soy$$Templates.Tooltip.content(opt_data, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s90_606fdd83.soyTemplateName = "Templates.Tooltip.__deltemplate_s90_606fdd83";
+        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s89_5eaa83f8.soyTemplateName = "Templates.Tooltip.__deltemplate_s89_5eaa83f8";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentTemplate"), "Tooltip", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s90_606fdd83);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"), "content", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s89_5eaa83f8);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6475,13 +6562,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s96_71828d2a = function (opt_data, opt_ignored, opt_ijData) {
+    lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s91_71828d2a = function (opt_data, opt_ignored, opt_ijData) {
         return soydata.VERY_UNSAFE.ordainSanitizedHtml("<div id=\"" + soy.$$escapeHtmlAttribute(opt_data.id) + "\" class=\"tooltip component" + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? " " + opt_data.elementClasses : "") + "\" data-component=\"\">" + soy.$$escapeHtml(opt_data.elementContent) + "</div>");
     };
     if (goog.DEBUG) {
-        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s96_71828d2a.soyTemplateName = "Templates.Tooltip.__deltemplate_s96_71828d2a";
+        lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s91_71828d2a.soyTemplateName = "Templates.Tooltip.__deltemplate_s91_71828d2a";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"), "element", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s96_71828d2a);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"), "element", 0, lib$scripts$Tooltip$soy$$Templates.Tooltip.__deltemplate_s91_71828d2a);
 
     lib$scripts$Tooltip$soy$$Templates.Tooltip.content.params = ["content"];
     "use strict";
@@ -6499,6 +6586,8 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
             _classCallCheck(this, lib$scripts$Tooltip$$Tooltip);
 
             _get(Object.getPrototypeOf(lib$scripts$Tooltip$$Tooltip.prototype), "constructor", this).call(this, opt_config);
+
+            this.eventsHandler_ = new src$public$vendor$metaljs$src$events$EventHandler$$default();
         }
 
         _inherits(lib$scripts$Tooltip$$Tooltip, _lib$scripts$Component$$default2);
@@ -6512,6 +6601,17 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
                 value: function attached() {
                     this.align();
+                    this.syncEvents(this.events);
+                }
+            },
+            detached: {
+
+                /**
+                 * @inheritDoc
+                 */
+
+                value: function detached() {
+                    this.eventsHandler_.removeAllListeners();
                 }
             },
             align: {
@@ -6526,6 +6626,91 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
                 value: function align(opt_alignElement) {
                     this.syncAlignElement(opt_alignElement || this.alignElement);
+                }
+            },
+            callAsync_: {
+
+                /**
+                 * @param {Function} fn
+                 * @param {number} delay
+                 * @private
+                 */
+
+                value: function callAsync_(fn, delay) {
+                    clearTimeout(this.delay_);
+                    this.delay_ = setTimeout(fn.bind(this), delay);
+                }
+            },
+            handleHide: {
+
+                /**
+                 * Handles hide event triggered by `events`.
+                 * @param {Event} event
+                 * @protected
+                 */
+
+                value: function handleHide(event) {
+                    var interactingWithDifferentTarget = event.delegateTarget && event.delegateTarget !== this.alignElement;
+                    this.callAsync_(function () {
+                        if (this.locked_) {
+                            return;
+                        }
+                        if (interactingWithDifferentTarget) {
+                            this.alignElement = event.delegateTarget;
+                        } else {
+                            this.visible = false;
+                        }
+                    }, this.delay[1]);
+                }
+            },
+            handleShow: {
+
+                /**
+                 * Handles show event triggered by `events`.
+                 * @param {Event} event
+                 * @protected
+                 */
+
+                value: function handleShow(event) {
+                    this.callAsync_(function () {
+                        this.alignElement = event.delegateTarget;
+                        this.visible = true;
+                    }, this.delay[0]);
+                }
+            },
+            handleToggle: {
+
+                /**
+                 * Handles toggle event triggered by `events`.
+                 * @param {Event} event
+                 * @protected
+                 */
+
+                value: function handleToggle(event) {
+                    this.visible ? this.handleHide(event) : this.handleShow(event);
+                }
+            },
+            lock: {
+
+                /**
+                 * Locks tooltip visibility.
+                 * @param {Event} event
+                 */
+
+                value: function lock() {
+                    this.locked_ = true;
+                }
+            },
+            unlock: {
+
+                /**
+                 * Unlocks tooltip visibility.
+                 * @param {Event} event
+                 */
+
+                value: function unlock(event) {
+                    this.locked_ = false;
+                    this.handleHide(event);
                 }
             },
             syncAlignElement: {
@@ -6550,6 +6735,41 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
                     if (this.inDocument) {
                         src$public$vendor$metaljs$src$dom$dom$$default.removeChildren(this.element);
                         src$public$vendor$metaljs$src$dom$dom$$default.append(this.element, content);
+                    }
+                }
+            },
+            syncSelector: {
+
+                /**
+                 * @inheritDoc
+                 */
+
+                value: function syncSelector() {
+                    this.syncEvents(this.events);
+                }
+            },
+            syncEvents: {
+
+                /**
+                 * @inheritDoc
+                 */
+
+                value: function syncEvents(events) {
+                    if (!this.inDocument) {
+                        return;
+                    }
+                    this.eventsHandler_.removeAllListeners();
+                    var selector = this.selector;
+                    if (!selector) {
+                        return;
+                    }
+
+                    this.eventsHandler_.add(this.on("mouseenter", this.lock), this.on("mouseleave", this.unlock));
+
+                    if (events[0] === events[1]) {
+                        this.eventsHandler_.add(src$public$vendor$metaljs$src$dom$dom$$default.delegate(document, events[0], selector, this.handleToggle.bind(this)));
+                    } else {
+                        this.eventsHandler_.add(src$public$vendor$metaljs$src$dom$dom$$default.delegate(document, events[0], selector, this.handleShow.bind(this)), src$public$vendor$metaljs$src$dom$dom$$default.delegate(document, events[1], selector, this.handleHide.bind(this)));
                     }
                 }
             },
@@ -6599,6 +6819,35 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
         },
 
         /**
+         * Delay showing and hiding the tooltip (ms).
+         * @type {!Array.<number>}
+         * @default [ 500, 250 ]
+         */
+        delay: {
+            validator: Array.isArray,
+            value: [500, 250]
+        },
+
+        /**
+         * Trigger events used to bind handlers to show and hide tooltip.
+         * @type {!Array.<string>}
+         * @default ['mouseenter', 'mouseleave']
+         */
+        events: {
+            validator: Array.isArray,
+            value: ["mouseenter", "mouseleave"]
+        },
+
+        /**
+         * If a selector is provided, tooltip objects will be delegated to the
+         * specified targets by setting the `alignElement`.
+         * @type {?string}
+         */
+        selector: {
+            validator: src$public$vendor$metaljs$src$core$$default.isString
+        },
+
+        /**
          * Content to be placed inside tooltip.
          * @type {String}
          */
@@ -6627,7 +6876,6 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
     /**
      * @fileoverview Templates in namespace Templates.TooltipMenu.
-     * @hassoydeltemplate {ComponentTemplate}
      * @hassoydeltemplate {TooltipMenu}
      * @hassoydeltemplate {TooltipMenu.items}
      * @hassoydelcall {TooltipMenu}
@@ -6661,11 +6909,11 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      */
     lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.items = function (opt_data, opt_ignored, opt_ijData) {
         var output = "";
-        var itemList108 = opt_data.items;
-        var itemListLen108 = itemList108.length;
-        for (var itemIndex108 = 0; itemIndex108 < itemListLen108; itemIndex108++) {
-            var itemData108 = itemList108[itemIndex108];
-            output += "<li class=\"tooltip-menu-item\"><a class=\"tooltip-menu-link\" href=\"" + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData108.href ? itemData108.href : "#")) + "\">" + soy.$$escapeHtml(itemData108.content) + "</a></li>";
+        var itemList103 = opt_data.content;
+        var itemListLen103 = itemList103.length;
+        for (var itemIndex103 = 0; itemIndex103 < itemListLen103; itemIndex103++) {
+            var itemData103 = itemList103[itemIndex103];
+            output += "<li class=\"tooltip-menu-item\"><a class=\"tooltip-menu-link\" href=\"" + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData103.href ? itemData103.href : "#")) + "\">" + soy.$$escapeHtml(itemData103.content) + "</a></li>";
         }
         return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
     };
@@ -6680,13 +6928,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s115_cfc546d2 = function (opt_data, opt_ignored, opt_ijData) {
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s110_cfc546d2 = function (opt_data, opt_ignored, opt_ijData) {
         return soydata.VERY_UNSAFE.ordainSanitizedHtml("<nav id=\"" + soy.$$escapeHtmlAttribute(opt_data.id) + "\" class=\"tooltip-menu " + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? opt_data.elementClasses : "") + "\" data-component>" + soy.$$escapeHtml(opt_data.elementContent) + "</nav>");
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s115_cfc546d2.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s115_cfc546d2";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s110_cfc546d2.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s110_cfc546d2";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "element", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s115_cfc546d2);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "element", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s110_cfc546d2);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6695,13 +6943,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s123_c0ab3df3 = function (opt_data, opt_ignored, opt_ijData) {
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s118_c0ab3df3 = function (opt_data, opt_ignored, opt_ijData) {
         return soydata.VERY_UNSAFE.ordainSanitizedHtml("<ul id=\"" + soy.$$escapeHtmlAttribute(opt_data.id) + "-items\" class=\"tooltip-menu-list\">" + soy.$$escapeHtml(opt_data.elementContent) + "</ul>");
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s123_c0ab3df3.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s123_c0ab3df3";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s118_c0ab3df3.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s118_c0ab3df3";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "element", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s123_c0ab3df3);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "element", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s118_c0ab3df3);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6710,13 +6958,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s129_8f8c631d = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(lib$scripts$TooltipMenu$soy$$Templates.SoyComponent.component(soy.$$augmentMap(opt_data, { componentName: "TooltipMenu" }), null, opt_ijData)));
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s124_8f8c631d = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "element", true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "content", true)(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s129_8f8c631d.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s129_8f8c631d";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s124_8f8c631d.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s124_8f8c631d";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s129_8f8c631d);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s124_8f8c631d);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6725,13 +6973,13 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s132_270e148b = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "element", true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s130_f618b41e = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.content(opt_data, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s132_270e148b.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s132_270e148b";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s130_f618b41e.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s130_f618b41e";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("ComponentTemplate"), "TooltipMenu", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s132_270e148b);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"), "content", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s130_f618b41e);
 
     /**
      * @param {Object.<string, *>=} opt_data
@@ -6740,22 +6988,37 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @return {!soydata.SanitizedHtml}
      * @suppress {checkTypes}
      */
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s138_8278e063 = function (opt_data, opt_ignored, opt_ijData) {
-        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$escapeHtml(lib$scripts$TooltipMenu$soy$$Templates.SoyComponent.surface({ content: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.items(opt_data, null, opt_ijData)), id: opt_data.id + "-items" }, null, opt_ijData)) : "")), id: opt_data.id }, null, opt_ijData));
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s132_8278e063 = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "element", true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks("" + (!opt_ijData.skipSurfaceContents ? soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "content", true)(opt_data, null, opt_ijData) : "")), id: opt_data.id }, null, opt_ijData));
     };
     if (goog.DEBUG) {
-        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s138_8278e063.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s138_8278e063";
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s132_8278e063.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s132_8278e063";
     }
-    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s138_8278e063);
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s132_8278e063);
 
-    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.items.params = ["items"];
+    /**
+     * @param {Object.<string, *>=} opt_data
+     * @param {(null|undefined)=} opt_ignored
+     * @param {Object.<string, *>=} opt_ijData
+     * @return {!soydata.SanitizedHtml}
+     * @suppress {checkTypes}
+     */
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s139_d55fbf7b = function (opt_data, opt_ignored, opt_ijData) {
+        return soydata.VERY_UNSAFE.ordainSanitizedHtml(lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.items(opt_data, null, opt_ijData));
+    };
+    if (goog.DEBUG) {
+        lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s139_d55fbf7b.soyTemplateName = "Templates.TooltipMenu.__deltemplate_s139_d55fbf7b";
+    }
+    soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"), "content", 0, lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.__deltemplate_s139_d55fbf7b);
+
+    lib$scripts$TooltipMenu$soy$$Templates.TooltipMenu.items.params = ["content"];
     "use strict";
 
     /**
      * TooltipMenu component.
      */
 
-    var lib$scripts$TooltipMenu$$TooltipMenu = (function (_lib$scripts$Component$$default3) {
+    var lib$scripts$TooltipMenu$$TooltipMenu = (function (_lib$scripts$Tooltip$$default) {
         /**
          * @inheritDoc
          */
@@ -6766,67 +7029,21 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
             _get(Object.getPrototypeOf(lib$scripts$TooltipMenu$$TooltipMenu.prototype), "constructor", this).call(this, opt_config);
         }
 
-        _inherits(lib$scripts$TooltipMenu$$TooltipMenu, _lib$scripts$Component$$default3);
+        _inherits(lib$scripts$TooltipMenu$$TooltipMenu, _lib$scripts$Tooltip$$default);
 
         _createClass(lib$scripts$TooltipMenu$$TooltipMenu, {
-            attached: {
+            syncContent: {
 
                 /**
                  * @inheritDoc
                  */
 
-                value: function attached() {
-                    this.align();
-                }
-            },
-            align: {
-
-                /**
-                 * Aligns the tooltip with the best region around alignElement. The best
-                 * region is defined by clockwise rotation starting from the specified
-                 * `position`. The element is always aligned in the middle of alignElement
-                 * axis.
-                 * @param {Element=} opt_alignElement Optional element to align with.
-                 */
-
-                value: function align(opt_alignElement) {
-                    this.syncAlignElement(opt_alignElement || this.alignElement);
-                }
-            },
-            syncAlignElement: {
-
-                /**
-                 * @inheritDoc
-                 */
-
-                value: function syncAlignElement(alignElement) {
-                    if (this.inDocument && alignElement) {
-                        lib$scripts$TooltipMenu$$TooltipMenu.Position.align(this.element, alignElement, this.position);
-                    }
-                }
-            },
-            syncVisible: {
-
-                /**
-                 * @inheritDoc
-                 */
-
-                value: function syncVisible(visible) {
-                    _get(Object.getPrototypeOf(lib$scripts$TooltipMenu$$TooltipMenu.prototype), "syncVisible", this).call(this, visible);
-                    this.align();
-                }
+                value: function syncContent() {}
             }
         });
 
         return lib$scripts$TooltipMenu$$TooltipMenu;
-    })(lib$scripts$Component$$default);
-
-    /**
-     * @inheritDoc
-     * @see `Position` class.
-     * @static
-     */
-    lib$scripts$TooltipMenu$$TooltipMenu.Position = lib$scripts$Position$$default;
+    })(lib$scripts$Tooltip$$default);
 
     /**
      * Default tooltip elementClasses.
@@ -6834,7 +7051,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      * @type {String}
      * @static
      */
-    lib$scripts$TooltipMenu$$TooltipMenu.ELEMENT_CLASSES = "tooltip-menu";
+    lib$scripts$TooltipMenu$$TooltipMenu.ELEMENT_CLASSES_MERGED = "tooltip-menu component";
 
     /**
      * TooltipMenu attrbutes definition.
@@ -6843,11 +7060,23 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
      */
     lib$scripts$TooltipMenu$$TooltipMenu.ATTRS = {
         /**
-         * Element to align tooltip with.
-         * @type {Element}
+         * Delay showing and hiding the menu (ms).
+         * @type {!Array.<number>}
+         * @default [ 0, 0 ]
          */
-        alignElement: {
-            setter: src$public$vendor$metaljs$src$dom$dom$$default.toElement
+        delay: {
+            validator: Array.isArray,
+            value: [0, 0]
+        },
+
+        /**
+         * Trigger events used to bind handlers to show and hide tooltip.
+         * @type {!Array.<string>}
+         * @default ['click', 'mouseout']
+         */
+        events: {
+            validator: Array.isArray,
+            value: ["click", "click"]
         },
 
         /**
@@ -6855,22 +7084,11 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
          * label key.
          * @type {!Array.<!object>}
          */
-        items: {
+        content: {
             validator: Array.isArray,
             valueFn: function valueFn() {
                 return [];
             }
-        },
-
-        /**
-         * The position to try alignment. If not possible the best position will be
-         * found.
-         * @type {Position.Top|Position.Right|Position.Bottom|Position.Left}
-         * @default Position.Bottom
-         */
-        position: {
-            validator: lib$scripts$TooltipMenu$$TooltipMenu.Position.isValidPosition,
-            value: lib$scripts$TooltipMenu$$TooltipMenu.Position.Bottom
         }
     };
 
@@ -6893,6 +7111,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
     this.ui.EventEmitterProxy = src$public$vendor$metaljs$src$events$EventEmitterProxy$$EventEmitterProxy;
     this.ui.SoyComponent = src$public$vendor$metaljs$src$soy$SoyComponent$$SoyComponent;
     this.ui.ComponentRegistry = src$public$vendor$metaljs$src$component$ComponentRegistry$$ComponentRegistry;
+    this.ui.EventHandler = src$public$vendor$metaljs$src$events$EventHandler$$EventHandler;
     this.ui.object = src$public$vendor$metaljs$src$object$object$$object;
     this.ui.DomEventHandle = src$public$vendor$metaljs$src$events$DomEventHandle$$DomEventHandle;
     this.ui.math = src$public$vendor$metal$position$src$math$$math;
@@ -6906,7 +7125,6 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
     this.ui.features = src$public$vendor$metaljs$src$dom$features$$features;
     this.ui.html = src$public$vendor$metaljs$src$html$html$$html;
     this.ui.string = src$public$vendor$metaljs$src$string$string$$string;
-    this.ui.EventHandler = src$public$vendor$metaljs$src$events$EventHandler$$EventHandler;
 }).call(this);
 }());
 //# sourceMappingURL=main.js.map

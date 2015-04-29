@@ -523,6 +523,22 @@ label {
   width: 36px;
 }
 
+/* Navigation · Topbar Fill
+	 ========================================================================== */
+.topbar-fill.topbar {
+  background: #ff7175;
+}
+
+.topbar-fill .topbar-link:hover {
+  color: #fff;
+}
+
+.topbar-fill .topbar-link-selected,
+.topbar-fill .topbar-link-selected:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
 /* Navigation · Sidebar
 	 ========================================================================== */
 .sidebar {
@@ -879,6 +895,10 @@ h6 {
 	 ========================================================================== */
 #navTopbar .docs-cell-demo-container {
   padding: 0 4rem;
+}
+
+#navTopbar .topbar {
+  margin: 2rem 0;
 }
 
 #navSidebar .sidebar {

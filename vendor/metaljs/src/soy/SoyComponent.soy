@@ -1,31 +1,7 @@
 {namespace Templates.SoyComponent}
 
 /**
- * @param componentName
- * @param id
- */
-{template .component}
-	{delcall ComponentTemplate data="all" variant="$componentName" /}
-{/template}
-
-/**
- * @param content
- */
-{template .surface}
-	{$content}
-{/template}
-
-/**
- * @param componentName
- * @param id
- */
-{deltemplate Component}
-	{call Templates.SoyComponent.component data="all" /}
-{/deltemplate}
-
-/**
  * @param children
- * @param? childrenHtml
  * @param id
  */
 {deltemplate ComponentChildren}
@@ -34,10 +10,4 @@
 			{$children}
 		{/if}
 	</div>
-{/deltemplate}
-
-/**
- */
-{deltemplate Surface}
-	{call Templates.SoyComponent.surface data="all" /}
 {/deltemplate}

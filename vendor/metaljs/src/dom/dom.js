@@ -98,6 +98,11 @@ class dom {
 	 * @return {!DomEventHandle} Can be used to remove the listener.
 	 */
 	static delegate(element, eventName, selector, callback) {
+		var customConfig = dom.customEvents[eventName];
+		if (customConfig && customConfig.delegate) {
+			eventName = customConfig.originalEvent;
+			callback = customConfig.handler.bind(customConfig, callback);
+		}
 		return dom.on(
 			element,
 			eventName,
@@ -245,8 +250,23 @@ class dom {
 	 * @return {!DomEventHandle} Can be used to remove the listener.
 	 */
 	static on(element, eventName, callback) {
+		var customConfig = dom.customEvents[eventName];
+		if (customConfig && customConfig.event) {
+			eventName = customConfig.originalEvent;
+			callback = customConfig.handler.bind(customConfig, callback);
+		}
 		element.addEventListener(eventName, callback);
 		return new DomEventHandle(element, eventName, callback);
+	}
+
+	/**
+	 * Registers a custom event.
+	 * @param {string} eventName The name of the custom event.
+	 * @param {!Object} customConfig An object with information about how the event
+	 *   should be handled.
+	 */
+	static registerCustomEvent(eventName, customConfig) {
+		dom.customEvents[eventName] = customConfig;
 	}
 
 	/**
@@ -326,6 +346,10 @@ class dom {
 	 * @return {boolean}
 	 */
 	static supportsEvent(element, eventName) {
+		if (dom.customEvents[eventName]) {
+			return true;
+		}
+
 		if (core.isString(element)) {
 			if (!elementsByTag[element]) {
 				elementsByTag[element] = document.createElement(element);
@@ -373,5 +397,27 @@ class dom {
 }
 
 var elementsByTag = {};
+dom.customEvents = {};
+
+var eventMap = {
+	mouseenter: 'mouseover',
+	mouseleave: 'mouseout',
+	pointerenter: 'pointerover',
+	pointerleave: 'pointerout'
+};
+Object.keys(eventMap).forEach(function(eventName) {
+	dom.registerCustomEvent(eventName, {
+		delegate: true,
+		handler: function(callback, event) {
+			var related = event.relatedTarget;
+			var target = event.delegateTarget || event.target;
+			if (!related || (related !== target && !target.contains(related))) {
+				event.customType = eventName;
+				return callback(event);
+			}
+		},
+		originalEvent: eventMap[eventName]
+	});
+});
 
 export default dom;

@@ -70,23 +70,22 @@
  * @param id
  */
 {deltemplate Modal}
-	{call Templates.SoyComponent.component data="all"}
-		{param componentName: 'Modal' /}
-	{/call}
-{/deltemplate}
-
-/**
- * @param? elementClasses
- * @param id
- */
-{deltemplate ComponentTemplate variant="'Modal'"}
 	{delcall Modal variant="'element'"}
 		{param elementClasses: $elementClasses /}
 		{param elementContent kind="html"}
-			{call .content data="all" /}
+			{delcall Modal variant="'content'" data="all" /}
 		{/param}
 		{param id: $id /}
 	{/delcall}
+{/deltemplate}
+
+/**
+ * @param? elementContent
+ * @param? elementClasses
+ * @param id
+ */
+{deltemplate Modal variant="'content'"}
+	{call .content data="all" /}
 {/deltemplate}
 
 /**
@@ -108,16 +107,19 @@
 	{delcall Modal.body variant="'element'"}
 		{param elementContent kind="html"}
 			{if not $ij.skipSurfaceContents}
-				{call Templates.SoyComponent.surface}
-					{param content kind="html"}
-						{call .body data="all" /}
-					{/param}
-					{param id: $id + '-body' /}
-				{/call}
+				{delcall Modal.body variant="'content'" data="all" /}
 			{/if}
 		{/param}
 		{param id: $id /}
 	{/delcall}
+{/deltemplate}
+
+/**
+ * @param? elementContent
+ * @param id
+ */
+{deltemplate Modal.body variant="'content'"}
+	{call .body data="all" /}
 {/deltemplate}
 
 /**
@@ -128,12 +130,7 @@
 	{delcall Modal.footer variant="'element'"}
 		{param elementContent kind="html"}
 			{if not $ij.skipSurfaceContents}
-				{call Templates.SoyComponent.surface}
-					{param content kind="html"}
-						{call .footer data="all" /}
-					{/param}
-					{param id: $id + '-footer' /}
-				{/call}
+				{delcall Modal.footer variant="'content'" data="all" /}
 			{/if}
 		{/param}
 		{param id: $id /}
@@ -144,18 +141,29 @@
  * @param? elementContent
  * @param id
  */
+{deltemplate Modal.footer variant="'content'"}
+	{call .footer data="all" /}
+{/deltemplate}
+
+/**
+ * @param? elementContent
+ * @param id
+ */
 {deltemplate Modal.header}
 	{delcall Modal.header variant="'element'"}
 		{param elementContent kind="html"}
 			{if not $ij.skipSurfaceContents}
-				{call Templates.SoyComponent.surface}
-					{param content kind="html"}
-						{call .header data="all" /}
-					{/param}
-					{param id: $id + '-header' /}
-				{/call}
+				{delcall Modal.header variant="'content'" data="all" /}
 			{/if}
 		{/param}
 		{param id: $id /}
 	{/delcall}
+{/deltemplate}
+
+/**
+ * @param? elementContent
+ * @param id
+ */
+{deltemplate Modal.header variant="'content'"}
+	{call .header data="all" /}
 {/deltemplate}

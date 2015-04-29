@@ -17,23 +17,22 @@
  * @param id
  */
 {deltemplate Tooltip}
-	{call Templates.SoyComponent.component data="all"}
-		{param componentName: 'Tooltip' /}
-	{/call}
-{/deltemplate}
-
-/**
- * @param? elementClasses
- * @param id
- */
-{deltemplate ComponentTemplate variant="'Tooltip'"}
 	{delcall Tooltip variant="'element'"}
 		{param elementClasses: $elementClasses /}
 		{param elementContent kind="html"}
-			{call .content data="all" /}
+			{delcall Tooltip variant="'content'" data="all" /}
 		{/param}
 		{param id: $id /}
 	{/delcall}
+{/deltemplate}
+
+/**
+ * @param? elementContent
+ * @param? elementClasses
+ * @param id
+ */
+{deltemplate Tooltip variant="'content'"}
+	{call .content data="all" /}
 {/deltemplate}
 
 /**

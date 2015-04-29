@@ -62,6 +62,23 @@
 	width: 36px;
 }
 
+/* Navigation · Topbar Fill
+	 ========================================================================== */
+
+.topbar-fill.topbar {
+	background: $primary;
+}
+
+.topbar-fill .topbar-link:hover {
+	color: $white;
+}
+
+.topbar-fill .topbar-link-selected,
+.topbar-fill .topbar-link-selected:hover {
+	color: $white;
+	border-color: $white;
+}
+
 /* Navigation · Sidebar
 	 ========================================================================== */
 

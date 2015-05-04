@@ -5,7 +5,7 @@ var renamer = require('browserify-imports-renamer');
 
 module.exports = function (config) {
 	config.set({
-		frameworks: ['mocha', 'chai', 'browserify'],
+		frameworks: ['mocha', 'chai', 'browserify', 'sinon'],
 
 		files: [
 			'node_modules/closure-templates/soyutils.js',

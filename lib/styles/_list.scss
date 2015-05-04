@@ -1,0 +1,30 @@
+/* List
+	 ========================================================================== */
+
+.list .list-item {
+	border-radius: 4px;
+	margin: 0;
+	padding: 11px;
+	width: 100%;
+}
+
+.list .list-item:hover {
+	background-color: #f3f7fd;
+}
+
+.list .list-main-content {
+	margin-left: 12px;
+}
+
+.list .list-text {
+	font-size: 14px;
+}
+
+.list .list-help {
+	font-size: 12px;
+	opacity: 0.4;
+}
+
+.list .list-icon {
+	margin-left: 3px;
+}

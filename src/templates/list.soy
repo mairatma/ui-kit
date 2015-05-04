@@ -1,0 +1,43 @@
+{namespace components}
+
+/**
+ * List
+ */
+{template .list}
+	{let $id: 'list' /}
+	{let $title: 'List' /}
+	{let $description: 'The List component allows rendering rich lists.' /}
+	{let $html kind="html"}
+	{delcall List}
+		{param id: 'myList' /}
+		{param elementClasses: 'centered' /}
+		{param items: [
+			[
+				'help': 'chloe.hart@foobar.com',
+				'icons': ['icon-12-trash'],
+				'img': ['src': 'images/avatar-person-1.png', 'class': 'avatar-photo avatar-small'],
+				'content': 'Chloe Hart'
+			],
+			[
+				'help': 'bobbie.flores@foobar.com',
+				'icons': ['icon-12-star', 'icon-12-trash'],
+				'img': ['src': 'images/avatar-person-2.png', 'class': 'avatar-photo avatar-small'],
+				'content': 'Bobbie Flores'
+			],
+			[
+				'help': 'maureen.cruz@foobar.com',
+				'img': ['src': 'images/avatar-person-3.png', 'class': 'avatar-photo avatar-small'],
+				'content': 'Maureen Cruz'
+			]
+		] /}
+	{/delcall}
+	{/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
+{/template}

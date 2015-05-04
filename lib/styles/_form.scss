@@ -37,14 +37,6 @@ select:focus {
 	border: 1px solid $primary;
 }
 
-input::-moz-selection {
-	background: rgba($primary, 0.1);
-}
-
-input::selection {
-	background: rgba($primary, 0.1);
-}
-
 label,
 .form-field-aux {
 	font-weight: $regular;

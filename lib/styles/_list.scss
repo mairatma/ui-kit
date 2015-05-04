@@ -2,29 +2,30 @@
 	 ========================================================================== */
 
 .list .list-item {
-	border-radius: 4px;
+	@extend .round;
 	margin: 0;
-	padding: 11px;
+	padding: 1rem;
 	width: 100%;
 }
 
 .list .list-item:hover {
-	background-color: #f3f7fd;
+	background-color: rgba($primary, .05);
 }
 
 .list .list-main-content {
-	margin-left: 12px;
+	margin-left: 1.2rem;
 }
 
 .list .list-text {
-	font-size: 14px;
+	color: rgba($secondary, .8);
+	font-size: 1.4rem;
 }
 
 .list .list-help {
-	font-size: 12px;
-	opacity: 0.4;
+	color: rgba($secondary, .4);
+	font-size: 1.2rem;
 }
 
 .list .list-icon {
-	margin-left: 3px;
+	margin-left: .3rem;
 }

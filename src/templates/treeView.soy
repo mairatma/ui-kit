@@ -1,0 +1,48 @@
+{namespace components}
+
+/**
+ * List
+ */
+{template .treeView}
+	{let $id: 'treeView' /}
+	{let $title: 'Tree View' /}
+	{let $description: 'Renders trees with nested nodes that can be expanded or collapsed.' /}
+	{let $html kind="html"}
+	{delcall TreeView}
+		{param id: 'myTreeView' /}
+		{{param nodes: [
+			[
+				'name': 'Movies {2}',
+				'children': [
+					[
+						'name': 'Neuromancer {3}',
+						'children': [
+							['name': 'year : 1984'],
+							['name': 'isbn : "0441569595"'],
+							['name': 'authors [1]', 'children': [['name': '0 : "William Gibson"']]]
+						]
+					],
+					[
+						'name': 'The Man in the High Castle {3}',
+						'children': [
+							['name': 'year : 2001'],
+							['name': 'isbn : "9780141186672"'],
+							['name': 'authors [1]', 'children': [['name': '0 : "Philip K. Dick"']], 'expanded': true]
+						],
+						'expanded': true
+					]
+				],
+				'expanded': true
+			]
+		] /}}
+	{/delcall}
+	{/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
+{/template}

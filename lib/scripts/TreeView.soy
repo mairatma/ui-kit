@@ -1,0 +1,30 @@
+{namespace Templates.TreeView}
+
+/**
+ * This renders the main element.
+ */
+{template .content}
+	{delcall TreeView.nodes data="all" /}
+{/template}
+
+/**
+ * @param nodes
+ */
+{template .nodes}
+	<ul class="treeview-nodes">
+		{foreach $node in $nodes}
+			{let $expanded: $node.children and $node.expanded /}
+			<li class="treeview-node {$expanded ? 'expanded' : ''} {$node.children ? 'hasChildren' : ''}">
+				<div class="treeview-node-main u-cf" data-onclick="handleNodeClicked_">
+					<div class="treeview-node-toggler"></div>
+					<span class="treeview-node-name">{$node.name}</span>
+				</div>
+				{if $node.children}
+					{call .nodes}
+						{param nodes: $node.children /}
+					{/call}
+				{/if}
+			</li>
+		{/foreach}
+	</ul>
+{/template}

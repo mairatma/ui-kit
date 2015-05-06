@@ -3,8 +3,9 @@
 
 .list .list-item {
 	@extend .round;
+	@include anim(background);
 	margin: 0;
-	padding: 1rem;
+	padding: .8rem;
 	width: 100%;
 }
 
@@ -24,6 +25,10 @@
 .list .list-text-secondary {
 	color: rgba($secondary, .4);
 	font-size: 1.2rem;
+}
+
+.list .list-icons {
+	margin-top: .8rem;
 }
 
 .list .list-icon {

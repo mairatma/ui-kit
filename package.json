@@ -12,8 +12,8 @@
     "browserify-imports-renamer": "^0.1.1",
     "browserify-istanbul": "^0.2.0",
     "chai": "^2.2.0",
-    "closure-templates": "^20141017.0.0",
-    "gulp": "^3.8.8",
+    "closure-templates": "^20141017.0.1",
+    "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
     "gulp-gh-pages": "^0.4.0",
     "gulp-highlight": "0.0.3",
@@ -35,12 +35,10 @@
     "karma-mocha": "^0.1.10",
     "karma-safari-launcher": "^0.1.1",
     "karma-sauce-launcher": "^0.2.10",
+    "karma-sinon": "^1.0.4",
     "liferay-sdk": "git://github.com/liferay-apps/tasks.git",
     "mocha": "^2.2.1",
     "require-dir": "^0.1.0",
-    "run-sequence": "^1.0.2",
-    "browserify-imports-renamer": "^0.1.1",
-    "closure-templates": "^20141017.0.1",
-    "gulp": "^3.8.11"
+    "run-sequence": "^1.0.2"
   }
 }

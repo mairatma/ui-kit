@@ -1,0 +1,9 @@
+.autocomplete {
+	background-color: #fff;
+	overflow: hidden;
+	position: absolute;
+
+	&.hidden {
+		display: none;
+	}
+}

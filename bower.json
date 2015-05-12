@@ -5,6 +5,7 @@
   "dependencies": {
     "metaljs": "liferay/metal.js#master",
     "metal-position": "eduardolundgren/metal-position",
+    "metal-promise": "eduardolundgren/metal-promise",
     "skeleton": "~2.0.4"
   }
 }

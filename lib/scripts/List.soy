@@ -13,7 +13,7 @@
  */
 {template .items}
 	{foreach $item in $items}
-		<li class="list-item u-cf">
+		<li class="list-item u-cf" data-index="{index($item)}" data-onclick="handleClick">
 			{if $item.icons}
 				<div class="list-icons u-pull-right">
 					{foreach $icon in $item.icons}

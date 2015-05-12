@@ -4,7 +4,7 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "metaljs": "liferay/metal.js"
+    "metaljs": "liferay/metal.js#master"
   },
   "devDependencies": {
     "babel": "^4.7.3",

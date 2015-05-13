@@ -1,6 +1,6 @@
 module.exports = {
 	defaultConfig: {
-		globTemplateCopy: ['src/**/*.soy', 'src/public/vendor/metaljs/src/soy/SoyComponent.soy'],
+		globTemplateCopy: ['src/**/*.soy'],
 		templateData: {
 			renderChildComponents: true
 		},

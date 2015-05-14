@@ -13,7 +13,7 @@
 	margin-bottom: 0.5rem;
 }
 
-.treeview .treeview-node.hasChildren > .treeview-node-main {
+.treeview .treeview-node-main.hasChildren {
 	cursor: pointer;
 }
 
@@ -25,7 +25,6 @@
 	margin-top: .4rem;
 	line-height: 1rem;
 	text-align: center;
-	visibility: hidden;
 	width: 1rem;
 }
 
@@ -33,12 +32,8 @@
 	content: '+';
 }
 
-.treeview .treeview-node.expanded > .treeview-node-main > .treeview-node-toggler:before {
+.treeview .treeview-node-wrapper.expanded > .treeview-node-main > .treeview-node-toggler:before {
 	content: '-';
-}
-
-.treeview .treeview-node.hasChildren > .treeview-node-main > .treeview-node-toggler {
-	visibility: visible;
 }
 
 .treeview .treeview-node-name {
@@ -47,10 +42,10 @@
 	margin-left: .8rem;
 }
 
-.treeview .treeview-node .treeview-nodes {
+.treeview .treeview-node-wrapper > .treeview-nodes {
 	display: none;
 }
 
-.treeview .treeview-node.expanded > .treeview-nodes {
+.treeview .treeview-node-wrapper.expanded > .treeview-nodes {
 	display: block;
 }

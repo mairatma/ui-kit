@@ -7,6 +7,7 @@ require('metaljs')({
 	cssSrc: 'lib/scripts/*.css',
 	lintSrc: ['lib/scripts/*.js', 'lib/tests/*.js'],
 	soyDest: 'lib/scripts/',
+	soyGeneratedDest: 'build/templates/',
 	soySrc: 'lib/scripts/*.soy',
 	testSrc: 'lib/tests/*.js',
 	watchSrc: 'lib/scripts/*'

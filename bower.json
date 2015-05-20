@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "dependencies": {
     "soyutils": "2014.04.22",
-    "metaljs": "liferay/metal.js#master",
+    "metaljs": "ipeychev/metal.js#add-annotations",
     "metal-position": "eduardolundgren/metal-position",
     "metal-promise": "eduardolundgren/metal-promise",
     "skeleton": "~2.0.4"

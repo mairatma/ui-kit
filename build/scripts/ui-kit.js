@@ -7110,7 +7110,7 @@ this.uiNamed = {};
         }
         output += '</div>';
       }
-      output += (itemData5.img ? '<span class="list-image u-pull-left ' + soy.$$escapeHtmlAttribute(itemData5.img['class']) + '"><img src="' + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData5.img.src)) + '"></span>' : '') + '<div class="list-main-content u-pull-left"><div class="list-text-primary">' + soy.$$escapeHtml(itemData5.content) + '</div>' + (itemData5.help ? '<div class="list-text-secondary">' + soy.$$escapeHtml(itemData5.help) + '</div>' : '') + '</div></li>';
+      output += (itemData5.avatar ? '<span class="list-image u-pull-left ' + soy.$$escapeHtmlAttribute(itemData5.avatar['class']) + '">' + soy.$$escapeHtml(itemData5.avatar.content) + '</span>' : '') + '<div class="list-main-content u-pull-left"><div class="list-text-primary">' + soy.$$escapeHtml(itemData5.textPrimary) + '</div>' + (itemData5.textSecondary ? '<div class="list-text-secondary">' + soy.$$escapeHtml(itemData5.textSecondary) + '</div>' : '') + '</div></li>';
     }
     return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
   };
@@ -8134,7 +8134,9 @@ this.uiNamed = {};
     * @inheritDoc
     */
 			value: function syncOverlay(overlay) {
-				dom[overlay && this.visible ? 'enterDocument' : 'exitDocument'](this.overlayElement);
+				var willShowOverlay = overlay && this.visible;
+				dom[willShowOverlay ? 'enterDocument' : 'exitDocument'](this.overlayElement);
+				dom[willShowOverlay ? 'addClasses' : 'removeClasses'](document.body, 'overlay-visible');
 			}
 		}, {
 			key: 'syncVisible',

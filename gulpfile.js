@@ -23,7 +23,7 @@ require('metaljs')({
 
 gulp.task('build:lib', function(done) {
 	del('build', function() {
-		runSequence('soy', 'build:globals:js', 'styles:lib', 'fonts12:lib', 'fonts16:lib', done);
+		runSequence('soy', 'build:globals:js', ['styles:lib', 'fonts12:lib', 'fonts16:lib'], done);
 	});
 });
 
@@ -63,7 +63,7 @@ gulp.task('fonts16:lib', function() {
 
 gulp.task('build:site', function(done) {
 	del('dist', function() {
-		runSequence('copy:site', 'soy:site', 'styles:site', done);
+		runSequence('copy:site', ['soy:site', 'styles:site'], done);
 	});
 });
 

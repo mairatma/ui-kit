@@ -83,7 +83,7 @@ gulp.task('styles:lib', function() {
       css: 'lib/styles',
       sass: 'lib/styles'
     }))
-    .pipe(gulp.dest('lib/styles'));
+    .pipe(gulp.dest('build/styles'));
 });
 
 gulp.task('copy:site', function(done) {

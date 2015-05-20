@@ -39,6 +39,21 @@ bower install liferay-apps/ui-kit
 
 3. Copy & paste component's markup at [liferay-apps.github.io/ui-kit](http://liferay-apps.github.io/ui-kit/).
 
+## Development
+
+1. Run `bower install`
+2. Run `npm install`
+
+Bulding the library:
+
+1. `gulp build:lib`
+2. `gulp test`
+3. `gulp test:watch`
+
+Building the site:
+
+1. `gulp build:site` - Note that the site requires the library to be built first, so remember to run `gulp build:lib` before.
+
 ## License
 
 [BSD License](http://opensource.org/licenses/BSD-2-Clause) © Liferay, Inc.

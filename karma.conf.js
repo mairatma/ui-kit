@@ -9,12 +9,12 @@ module.exports = function (config) {
 
 		files: [
 			'node_modules/closure-templates/soyutils.js',
-			'lib/scripts/**/*.js',
+			'lib/scripts/*.js',
 			'lib/tests/unit/*.js'
 		],
 
 		preprocessors: {
-			'lib/scripts/**/*.js': ['browserify'],
+			'lib/scripts/*.js': ['browserify'],
 			'lib/tests/unit/*.js': ['browserify']
 		},
 
@@ -31,7 +31,7 @@ module.exports = function (config) {
 		reporters: ['coverage', 'progress'],
 
 		coverageReporter: {
-			ignore: ['**/src/public/vendor/**', '**/tests/**', '**/*.soy.js'],
+			ignore: ['**/vendor/**', '**/test/**', '**/*.soy.js'],
 			reporters: [
 				{type: 'text-summary'},
 				{type: 'html'},

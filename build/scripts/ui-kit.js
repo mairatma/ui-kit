@@ -1,6 +1,9374 @@
-var goog=goog||{};goog.DEBUG=!1,goog.inherits=function(e,t){function n(){}n.prototype=t.prototype,e.superClass_=t.prototype,e.prototype=new n,e.prototype.constructor=e,e.base=function(e,n,i){var o=Array.prototype.slice.call(arguments,2);return t.prototype[n].apply(e,o)}},goog.userAgent||(goog.userAgent=function(){var e="";"undefined"!=typeof navigator&&navigator&&"string"==typeof navigator.userAgent&&(e=navigator.userAgent);var t=0==e.indexOf("Opera");return{jscript:{HAS_JSCRIPT:"ScriptEngine"in this},OPERA:t,IE:!t&&-1!=e.indexOf("MSIE"),WEBKIT:!t&&-1!=e.indexOf("WebKit")}}()),goog.asserts||(goog.asserts={assert:function(e){if(!e)throw Error("Assertion error")},fail:function(e){}}),goog.dom||(goog.dom={},goog.dom.DomHelper=function(e){this.document_=e||document},goog.dom.DomHelper.prototype.getDocument=function(){return this.document_},goog.dom.DomHelper.prototype.createElement=function(e){return this.document_.createElement(e)},goog.dom.DomHelper.prototype.createDocumentFragment=function(){return this.document_.createDocumentFragment()}),goog.format||(goog.format={insertWordBreaks:function(e,t){e=String(e);for(var n=[],i=0,o=!1,s=!1,a=0,r=0,l=0,c=e.length;c>l;++l){var u=e.charCodeAt(l);if(a>=t&&32!=u&&(n[i++]=e.substring(r,l),r=l,n[i++]=goog.format.WORD_BREAK,a=0),o)62==u&&(o=!1);else if(s)switch(u){case 59:s=!1,++a;break;case 60:s=!1,o=!0;break;case 32:s=!1,a=0}else switch(u){case 60:o=!0;break;case 38:s=!0;break;case 32:a=0;break;default:++a}}return n[i++]=e.substring(r),n.join("")},WORD_BREAK:goog.userAgent.WEBKIT?"<wbr></wbr>":goog.userAgent.OPERA?"&shy;":goog.userAgent.IE?"&#8203;":"<wbr>"}),goog.i18n||(goog.i18n={bidi:{}}),goog.i18n.bidi.IS_RTL=!1,goog.i18n.bidi.Dir={LTR:1,RTL:-1,NEUTRAL:0,UNKNOWN:0},goog.i18n.bidi.toDir=function(e,t){return"number"==typeof e?e>0?goog.i18n.bidi.Dir.LTR:0>e?goog.i18n.bidi.Dir.RTL:t?null:goog.i18n.bidi.Dir.NEUTRAL:null==e?null:e?goog.i18n.bidi.Dir.RTL:goog.i18n.bidi.Dir.LTR},goog.i18n.bidi.estimateDirection=function(e,t){for(var n=0,i=0,o=!1,s=soyshim.$$bidiStripHtmlIfNecessary_(e,t).split(soyshim.$$bidiWordSeparatorRe_),a=0;a<s.length;a++){var r=s[a];soyshim.$$bidiRtlDirCheckRe_.test(r)?(n++,i++):soyshim.$$bidiIsRequiredLtrRe_.test(r)?o=!0:soyshim.$$bidiLtrCharRe_.test(r)?i++:soyshim.$$bidiHasNumeralsRe_.test(r)&&(o=!0)}return 0==i?o?goog.i18n.bidi.Dir.LTR:goog.i18n.bidi.Dir.NEUTRAL:n/i>soyshim.$$bidiRtlDetectionThreshold_?goog.i18n.bidi.Dir.RTL:goog.i18n.bidi.Dir.LTR},goog.i18n.BidiFormatter=function(e){this.dir_=goog.i18n.bidi.toDir(e,!0)},goog.i18n.BidiFormatter.prototype.getContextDir=function(){return this.dir_},goog.i18n.BidiFormatter.prototype.knownDirAttr=function(e){return e&&e!=this.dir_?0>e?'dir="rtl"':'dir="ltr"':""},goog.i18n.BidiFormatter.prototype.endEdge=function(){return this.dir_<0?"left":"right"},goog.i18n.BidiFormatter.prototype.mark=function(){return this.dir_>0?"‎":this.dir_<0?"‏":""},goog.i18n.BidiFormatter.prototype.markAfterKnownDir=function(e,t,n){return null==e&&(e=goog.i18n.bidi.estimateDirection(t,n)),this.dir_>0&&(0>e||soyshim.$$bidiIsRtlExitText_(t,n))?"‎":this.dir_<0&&(e>0||soyshim.$$bidiIsLtrExitText_(t,n))?"‏":""},goog.i18n.BidiFormatter.prototype.spanWrapWithKnownDir=function(e,t,n){null==e&&(e=goog.i18n.bidi.estimateDirection(t,!0));var i=this.markAfterKnownDir(e,t,!0);return e>0&&this.dir_<=0?t='<span dir="ltr">'+t+"</span>":0>e&&this.dir_>=0&&(t='<span dir="rtl">'+t+"</span>"),t+i},goog.i18n.BidiFormatter.prototype.startEdge=function(){return this.dir_<0?"right":"left"},goog.i18n.BidiFormatter.prototype.unicodeWrapWithKnownDir=function(e,t,n){null==e&&(e=goog.i18n.bidi.estimateDirection(t,n));var i=this.markAfterKnownDir(e,t,n);return e>0&&this.dir_<=0?t="‪"+t+"‬":0>e&&this.dir_>=0&&(t="‫"+t+"‬"),t+i},goog.string||(goog.string={newLineToBr:function(e,t){return e=String(e),goog.string.NEWLINE_TO_BR_RE_.test(e)?e.replace(/(\r\n|\r|\n)/g,t?"<br />":"<br>"):e},htmlEscape:function(e,t){return t?e=e.replace(goog.string.AMP_RE_,"&amp;").replace(goog.string.LT_RE_,"&lt;").replace(goog.string.GT_RE_,"&gt;").replace(goog.string.QUOT_RE_,"&quot;").replace(goog.string.SINGLE_QUOTE_RE_,"&#39;").replace(goog.string.NULL_RE_,"&#0;"):goog.string.ALL_RE_.test(e)?(-1!=e.indexOf("&")&&(e=e.replace(goog.string.AMP_RE_,"&amp;")),-1!=e.indexOf("<")&&(e=e.replace(goog.string.LT_RE_,"&lt;")),-1!=e.indexOf(">")&&(e=e.replace(goog.string.GT_RE_,"&gt;")),-1!=e.indexOf('"')&&(e=e.replace(goog.string.QUOT_RE_,"&quot;")),-1!=e.indexOf("'")&&(e=e.replace(goog.string.SINGLE_QUOTE_RE_,"&#39;")),-1!=e.indexOf("\x00")&&(e=e.replace(goog.string.NULL_RE_,"&#0;")),e):e},urlEncode:encodeURIComponent,AMP_RE_:/&/g,LT_RE_:/</g,GT_RE_:/>/g,QUOT_RE_:/"/g,SINGLE_QUOTE_RE_:/'/g,NULL_RE_:/\x00/g,ALL_RE_:/[&<>"']/,NEWLINE_TO_BR_RE_:/[\r\n]/}),goog.string.StringBuffer=function(e,t){this.buffer_=goog.userAgent.jscript.HAS_JSCRIPT?[]:"",null!=e&&this.append.apply(this,arguments)},goog.string.StringBuffer.prototype.bufferLength_=0,goog.string.StringBuffer.prototype.append=function(e,t,n){if(goog.userAgent.jscript.HAS_JSCRIPT)if(null==t)this.buffer_[this.bufferLength_++]=e;else{var i=this.buffer_;i.push.apply(i,arguments),this.bufferLength_=this.buffer_.length}else if(this.buffer_+=e,null!=t)for(var o=1;o<arguments.length;o++)this.buffer_+=arguments[o];return this},goog.string.StringBuffer.prototype.clear=function(){goog.userAgent.jscript.HAS_JSCRIPT?(this.buffer_.length=0,this.bufferLength_=0):this.buffer_=""},goog.string.StringBuffer.prototype.toString=function(){if(goog.userAgent.jscript.HAS_JSCRIPT){var e=this.buffer_.join("");return this.clear(),e&&this.append(e),e}return this.buffer_},goog.soy||(goog.soy={renderAsElement:function(e,t,n,i){return soyshim.$$renderWithWrapper_(e,t,i,!0,n)},renderAsFragment:function(e,t,n,i){return soyshim.$$renderWithWrapper_(e,t,i,!1,n)},renderElement:function(e,t,n,i){e.innerHTML=t(n,null,i)},data:{}}),goog.soy.data.SanitizedContentKind={HTML:goog.DEBUG?{sanitizedContentKindHtml:!0}:{},JS:goog.DEBUG?{sanitizedContentJsChars:!0}:{},URI:goog.DEBUG?{sanitizedContentUri:!0}:{},ATTRIBUTES:goog.DEBUG?{sanitizedContentHtmlAttribute:!0}:{},CSS:goog.DEBUG?{sanitizedContentCss:!0}:{},TEXT:goog.DEBUG?{sanitizedContentKindText:!0}:{}},goog.soy.data.SanitizedContent=function(){throw Error("Do not instantiate directly")},goog.soy.data.SanitizedContent.prototype.contentKind,goog.soy.data.SanitizedContent.prototype.contentDir=null,goog.soy.data.SanitizedContent.prototype.content,goog.soy.data.SanitizedContent.prototype.toString=function(){return this.content};var soy={esc:{}},soydata={};soydata.VERY_UNSAFE={};var soyshim={$$DEFAULT_TEMPLATE_DATA_:{}};soyshim.$$renderWithWrapper_=function(e,t,n,i,o){var s=n||document,a=s.createElement("div");if(a.innerHTML=e(t||soyshim.$$DEFAULT_TEMPLATE_DATA_,void 0,o),1==a.childNodes.length){var r=a.firstChild;if(!i||1==r.nodeType)return r}if(i)return a;for(var l=s.createDocumentFragment();a.firstChild;)l.appendChild(a.firstChild);return l},soyshim.$$bidiStripHtmlIfNecessary_=function(e,t){return t?e.replace(soyshim.$$BIDI_HTML_SKIP_RE_,""):e},soyshim.$$BIDI_HTML_SKIP_RE_=/<[^>]*>|&[^;]+;/g,soyshim.$$bidiLtrChars_="A-Za-zÀ-ÖØ-öø-ʸ̀-֐ࠀ-῿‎Ⰰ-﬜︀-﹯﻽-￿",soyshim.$$bidiRtlChars_="֑-߿‏יִ-﷿ﹰ-ﻼ",soyshim.$$bidiRtlDirCheckRe_=new RegExp("^[^"+soyshim.$$bidiLtrChars_+"]*["+soyshim.$$bidiRtlChars_+"]"),soyshim.$$bidiLtrCharRe_=new RegExp("["+soyshim.$$bidiLtrChars_+"]"),soyshim.$$bidiIsRequiredLtrRe_=/^http:\/\/.*/,soyshim.$$bidiHasNumeralsRe_=/\d/,soyshim.$$bidiWordSeparatorRe_=/\s+/,soyshim.$$bidiRtlDetectionThreshold_=.4,soyshim.$$bidiLtrExitDirCheckRe_=new RegExp("["+soyshim.$$bidiLtrChars_+"][^"+soyshim.$$bidiRtlChars_+"]*$"),soyshim.$$bidiRtlExitDirCheckRe_=new RegExp("["+soyshim.$$bidiRtlChars_+"][^"+soyshim.$$bidiLtrChars_+"]*$"),soyshim.$$bidiIsLtrExitText_=function(e,t){return e=soyshim.$$bidiStripHtmlIfNecessary_(e,t),soyshim.$$bidiLtrExitDirCheckRe_.test(e)},soyshim.$$bidiIsRtlExitText_=function(e,t){return e=soyshim.$$bidiStripHtmlIfNecessary_(e,t),soyshim.$$bidiRtlExitDirCheckRe_.test(e)},soy.StringBuilder=goog.string.StringBuffer,soydata.SanitizedContentKind=goog.soy.data.SanitizedContentKind,soydata.isContentKind=function(e,t){return null!=e&&e.contentKind===t},soydata.getContentDir=function(e){if(null!=e)switch(e.contentDir){case goog.i18n.bidi.Dir.LTR:return goog.i18n.bidi.Dir.LTR;case goog.i18n.bidi.Dir.RTL:return goog.i18n.bidi.Dir.RTL;case goog.i18n.bidi.Dir.NEUTRAL:return goog.i18n.bidi.Dir.NEUTRAL}return null},soydata.SanitizedHtml=function(){goog.soy.data.SanitizedContent.call(this)},goog.inherits(soydata.SanitizedHtml,goog.soy.data.SanitizedContent),soydata.SanitizedHtml.prototype.contentKind=soydata.SanitizedContentKind.HTML,soydata.SanitizedHtml.from=function(e){return null!=e&&e.contentKind===soydata.SanitizedContentKind.HTML?(goog.asserts.assert(e.constructor===soydata.SanitizedHtml),e):soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.esc.$$escapeHtmlHelper(String(e)),soydata.getContentDir(e))},soydata.SanitizedJs=function(){goog.soy.data.SanitizedContent.call(this)},goog.inherits(soydata.SanitizedJs,goog.soy.data.SanitizedContent),soydata.SanitizedJs.prototype.contentKind=soydata.SanitizedContentKind.JS,soydata.SanitizedJs.prototype.contentDir=goog.i18n.bidi.Dir.LTR,soydata.SanitizedUri=function(){goog.soy.data.SanitizedContent.call(this)},goog.inherits(soydata.SanitizedUri,goog.soy.data.SanitizedContent),soydata.SanitizedUri.prototype.contentKind=soydata.SanitizedContentKind.URI,soydata.SanitizedUri.prototype.contentDir=goog.i18n.bidi.Dir.LTR,soydata.SanitizedHtmlAttribute=function(){goog.soy.data.SanitizedContent.call(this)},goog.inherits(soydata.SanitizedHtmlAttribute,goog.soy.data.SanitizedContent),soydata.SanitizedHtmlAttribute.prototype.contentKind=soydata.SanitizedContentKind.ATTRIBUTES,soydata.SanitizedHtmlAttribute.prototype.contentDir=goog.i18n.bidi.Dir.LTR,soydata.SanitizedCss=function(){goog.soy.data.SanitizedContent.call(this)},goog.inherits(soydata.SanitizedCss,goog.soy.data.SanitizedContent),soydata.SanitizedCss.prototype.contentKind=soydata.SanitizedContentKind.CSS,soydata.SanitizedCss.prototype.contentDir=goog.i18n.bidi.Dir.LTR,soydata.UnsanitizedText=function(e,t){this.content=String(e),this.contentDir=null!=t?t:null},goog.inherits(soydata.UnsanitizedText,goog.soy.data.SanitizedContent),soydata.UnsanitizedText.prototype.contentKind=soydata.SanitizedContentKind.TEXT,soydata.$$EMPTY_STRING_={VALUE:""},soydata.$$makeSanitizedContentFactory_=function(e){function t(){}function n(e,n){var i=new t;return i.content=String(e),void 0!==n&&(i.contentDir=n),i}return t.prototype=e.prototype,n},soydata.$$makeSanitizedContentFactoryWithDefaultDirOnly_=function(e){function t(){}function n(e){var n=new t;return n.content=String(e),n}return t.prototype=e.prototype,n},soydata.markUnsanitizedText=function(e,t){return new soydata.UnsanitizedText(e,t)},soydata.VERY_UNSAFE.ordainSanitizedHtml=soydata.$$makeSanitizedContentFactory_(soydata.SanitizedHtml),soydata.VERY_UNSAFE.ordainSanitizedJs=soydata.$$makeSanitizedContentFactoryWithDefaultDirOnly_(soydata.SanitizedJs),soydata.VERY_UNSAFE.ordainSanitizedUri=soydata.$$makeSanitizedContentFactoryWithDefaultDirOnly_(soydata.SanitizedUri),soydata.VERY_UNSAFE.ordainSanitizedHtmlAttribute=soydata.$$makeSanitizedContentFactoryWithDefaultDirOnly_(soydata.SanitizedHtmlAttribute),soydata.VERY_UNSAFE.ordainSanitizedCss=soydata.$$makeSanitizedContentFactoryWithDefaultDirOnly_(soydata.SanitizedCss),soy.renderElement=goog.soy.renderElement,soy.renderAsFragment=function(e,t,n,i){return goog.soy.renderAsFragment(e,t,i,new goog.dom.DomHelper(n))},soy.renderAsElement=function(e,t,n,i){return goog.soy.renderAsElement(e,t,i,new goog.dom.DomHelper(n))},soy.$$IS_LOCALE_RTL=goog.i18n.bidi.IS_RTL,soy.$$augmentMap=function(e,t){function n(){}n.prototype=e;var i=new n;for(var o in t)i[o]=t[o];return i},soy.$$checkMapKey=function(e){if("string"!=typeof e)throw Error("Map literal's key expression must evaluate to string (encountered type \""+typeof e+'").');return e},soy.$$getMapKeys=function(e){var t=[];for(var n in e)t.push(n);return t},soy.$$getDelTemplateId=function(e){return e},soy.$$DELEGATE_REGISTRY_PRIORITIES_={},soy.$$DELEGATE_REGISTRY_FUNCTIONS_={},soy.$$registerDelegateFn=function(e,t,n,i){var o="key_"+e+":"+t,s=soy.$$DELEGATE_REGISTRY_PRIORITIES_[o];if(void 0===s||n>s)soy.$$DELEGATE_REGISTRY_PRIORITIES_[o]=n,soy.$$DELEGATE_REGISTRY_FUNCTIONS_[o]=i;else if(n==s)throw Error('Encountered two active delegates with the same priority ("'+e+":"+t+'").')},soy.$$getDelegateFn=function(e,t,n){var i=soy.$$DELEGATE_REGISTRY_FUNCTIONS_["key_"+e+":"+t];if(i||""==t||(i=soy.$$DELEGATE_REGISTRY_FUNCTIONS_["key_"+e+":"]),i)return i;if(n)return soy.$$EMPTY_TEMPLATE_FN_;throw Error('Found no active impl for delegate call to "'+e+":"+t+'" (and not allowemptydefault="true").')},soy.$$EMPTY_TEMPLATE_FN_=function(e,t,n){return""},soydata.$$makeSanitizedContentFactoryForInternalBlocks_=function(e){function t(){}function n(e,n){var i=String(e);if(!i)return soydata.$$EMPTY_STRING_.VALUE;var o=new t;return o.content=String(e),void 0!==n&&(o.contentDir=n),o}return t.prototype=e.prototype,n},soydata.$$makeSanitizedContentFactoryWithDefaultDirOnlyForInternalBlocks_=function(e){function t(){}function n(e){var n=String(e);if(!n)return soydata.$$EMPTY_STRING_.VALUE;var i=new t;return i.content=String(e),i}return t.prototype=e.prototype,n},soydata.$$markUnsanitizedTextForInternalBlocks=function(e,t){var n=String(e);return n?new soydata.UnsanitizedText(n,t):soydata.$$EMPTY_STRING_.VALUE},soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks=soydata.$$makeSanitizedContentFactoryForInternalBlocks_(soydata.SanitizedHtml),soydata.VERY_UNSAFE.$$ordainSanitizedJsForInternalBlocks=soydata.$$makeSanitizedContentFactoryWithDefaultDirOnlyForInternalBlocks_(soydata.SanitizedJs),soydata.VERY_UNSAFE.$$ordainSanitizedUriForInternalBlocks=soydata.$$makeSanitizedContentFactoryWithDefaultDirOnlyForInternalBlocks_(soydata.SanitizedUri),soydata.VERY_UNSAFE.$$ordainSanitizedAttributesForInternalBlocks=soydata.$$makeSanitizedContentFactoryWithDefaultDirOnlyForInternalBlocks_(soydata.SanitizedHtmlAttribute),soydata.VERY_UNSAFE.$$ordainSanitizedCssForInternalBlocks=soydata.$$makeSanitizedContentFactoryWithDefaultDirOnlyForInternalBlocks_(soydata.SanitizedCss),soy.$$escapeHtml=function(e){return soydata.SanitizedHtml.from(e)},soy.$$cleanHtml=function(e){return soydata.isContentKind(e,soydata.SanitizedContentKind.HTML)?(goog.asserts.assert(e.constructor===soydata.SanitizedHtml),e):soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$stripHtmlTags(e,soy.esc.$$SAFE_TAG_WHITELIST_),soydata.getContentDir(e))},soy.$$escapeHtmlRcdata=function(e){return soydata.isContentKind(e,soydata.SanitizedContentKind.HTML)?(goog.asserts.assert(e.constructor===soydata.SanitizedHtml),soy.esc.$$normalizeHtmlHelper(e.content)):soy.esc.$$escapeHtmlHelper(e)},soy.$$HTML5_VOID_ELEMENTS_=new RegExp("^<(?:area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)\\b"),soy.$$stripHtmlTags=function(e,t){if(!t)return String(e).replace(soy.esc.$$HTML_TAG_REGEX_,"").replace(soy.esc.$$LT_REGEX_,"&lt;");var n=String(e).replace(/\[/g,"&#91;"),i=[];n=n.replace(soy.esc.$$HTML_TAG_REGEX_,function(e,n){if(n&&(n=n.toLowerCase(),t.hasOwnProperty(n)&&t[n])){var o="/"===e.charAt(1)?"</":"<",s=i.length;return i[s]=o+n+">","["+s+"]"}return""}),n=soy.esc.$$normalizeHtmlHelper(n);var o=soy.$$balanceTags_(i);return n=n.replace(/\[(\d+)\]/g,function(e,t){return i[t]}),n+o},soy.$$balanceTags_=function(e){for(var t=[],n=0,i=e.length;i>n;++n){var o=e[n];if("/"===o.charAt(1)){for(var s=t.length-1;s>=0&&t[s]!=o;)s--;0>s?e[n]="":(e[n]=t.slice(s).reverse().join(""),t.length=s)}else soy.$$HTML5_VOID_ELEMENTS_.test(o)||t.push("</"+o.substring(1))}return t.reverse().join("")},soy.$$escapeHtmlAttribute=function(e){return soydata.isContentKind(e,soydata.SanitizedContentKind.HTML)?(goog.asserts.assert(e.constructor===soydata.SanitizedHtml),soy.esc.$$normalizeHtmlHelper(soy.$$stripHtmlTags(e.content))):soy.esc.$$escapeHtmlHelper(e)},soy.$$escapeHtmlAttributeNospace=function(e){return soydata.isContentKind(e,soydata.SanitizedContentKind.HTML)?(goog.asserts.assert(e.constructor===soydata.SanitizedHtml),soy.esc.$$normalizeHtmlNospaceHelper(soy.$$stripHtmlTags(e.content))):soy.esc.$$escapeHtmlNospaceHelper(e)},soy.$$filterHtmlAttributes=function(e){return soydata.isContentKind(e,soydata.SanitizedContentKind.ATTRIBUTES)?(goog.asserts.assert(e.constructor===soydata.SanitizedHtmlAttribute),e.content.replace(/([^"'\s])$/,"$1 ")):soy.esc.$$filterHtmlAttributesHelper(e)},soy.$$filterHtmlElementName=function(e){return soy.esc.$$filterHtmlElementNameHelper(e)},soy.$$escapeJs=function(e){return soy.$$escapeJsString(e)},soy.$$escapeJsString=function(e){return soy.esc.$$escapeJsStringHelper(e)},soy.$$escapeJsValue=function(e){if(null==e)return" null ";if(soydata.isContentKind(e,soydata.SanitizedContentKind.JS))return goog.asserts.assert(e.constructor===soydata.SanitizedJs),e.content;switch(typeof e){case"boolean":case"number":return" "+e+" ";default:return"'"+soy.esc.$$escapeJsStringHelper(String(e))+"'"}},soy.$$escapeJsRegex=function(e){return soy.esc.$$escapeJsRegexHelper(e)},soy.$$problematicUriMarks_=/['()]/g,soy.$$pctEncode_=function(e){return"%"+e.charCodeAt(0).toString(16)},soy.$$escapeUri=function(e){if(soydata.isContentKind(e,soydata.SanitizedContentKind.URI))return goog.asserts.assert(e.constructor===soydata.SanitizedUri),soy.$$normalizeUri(e);var t=soy.esc.$$escapeUriHelper(e);return soy.$$problematicUriMarks_.lastIndex=0,soy.$$problematicUriMarks_.test(t)?t.replace(soy.$$problematicUriMarks_,soy.$$pctEncode_):t},soy.$$normalizeUri=function(e){return soy.esc.$$normalizeUriHelper(e)},soy.$$filterNormalizeUri=function(e){return soydata.isContentKind(e,soydata.SanitizedContentKind.URI)?(goog.asserts.assert(e.constructor===soydata.SanitizedUri),soy.$$normalizeUri(e)):soy.esc.$$filterNormalizeUriHelper(e)},soy.$$filterImageDataUri=function(e){return soydata.VERY_UNSAFE.ordainSanitizedUri(soy.esc.$$filterImageDataUriHelper(e))},soy.$$escapeCssString=function(e){return soy.esc.$$escapeCssStringHelper(e)},soy.$$filterCssValue=function(e){return soydata.isContentKind(e,soydata.SanitizedContentKind.CSS)?(goog.asserts.assert(e.constructor===soydata.SanitizedCss),e.content):null==e?"":soy.esc.$$filterCssValueHelper(e)},soy.$$filterNoAutoescape=function(e){return soydata.isContentKind(e,soydata.SanitizedContentKind.TEXT)?(goog.asserts.fail("Tainted SanitizedContentKind.TEXT for |noAutoescape: `%s`",[e.content]),"zSoyz"):e},soy.$$changeNewlineToBr=function(e){var t=goog.string.newLineToBr(String(e),!1);return soydata.isContentKind(e,soydata.SanitizedContentKind.HTML)?soydata.VERY_UNSAFE.ordainSanitizedHtml(t,soydata.getContentDir(e)):t},soy.$$insertWordBreaks=function(e,t){var n=goog.format.insertWordBreaks(String(e),t);return soydata.isContentKind(e,soydata.SanitizedContentKind.HTML)?soydata.VERY_UNSAFE.ordainSanitizedHtml(n,soydata.getContentDir(e)):n},soy.$$truncate=function(e,t,n){return e=String(e),e.length<=t?e:(n&&(t>3?t-=3:n=!1),soy.$$isHighSurrogate_(e.charAt(t-1))&&soy.$$isLowSurrogate_(e.charAt(t))&&(t-=1),e=e.substring(0,t),n&&(e+="..."),e)},soy.$$isHighSurrogate_=function(e){return e>=55296&&56319>=e},soy.$$isLowSurrogate_=function(e){return e>=56320&&57343>=e},soy.$$bidiFormatterCache_={},soy.$$getBidiFormatterInstance_=function(e){return soy.$$bidiFormatterCache_[e]||(soy.$$bidiFormatterCache_[e]=new goog.i18n.BidiFormatter(e))},soy.$$bidiTextDir=function(e,t){var n=soydata.getContentDir(e);if(null!=n)return n;var i=t||soydata.isContentKind(e,soydata.SanitizedContentKind.HTML);return goog.i18n.bidi.estimateDirection(e+"",i)},soy.$$bidiDirAttr=function(e,t,n){var i=soy.$$getBidiFormatterInstance_(e),o=soydata.getContentDir(t);if(null==o){var s=n||soydata.isContentKind(t,soydata.SanitizedContentKind.HTML);o=goog.i18n.bidi.estimateDirection(t+"",s)}return soydata.VERY_UNSAFE.ordainSanitizedHtmlAttribute(i.knownDirAttr(o))},soy.$$bidiMarkAfter=function(e,t,n){var i=soy.$$getBidiFormatterInstance_(e),o=n||soydata.isContentKind(t,soydata.SanitizedContentKind.HTML);return i.markAfterKnownDir(soydata.getContentDir(t),t+"",o)},soy.$$bidiSpanWrap=function(e,t){var n=soy.$$getBidiFormatterInstance_(e),i=n.spanWrapWithKnownDir(soydata.getContentDir(t),t+"",!0);return i},soy.$$bidiUnicodeWrap=function(e,t){var n=soy.$$getBidiFormatterInstance_(e),i=soydata.isContentKind(t,soydata.SanitizedContentKind.HTML),o=n.unicodeWrapWithKnownDir(soydata.getContentDir(t),t+"",i),s=n.getContextDir();return soydata.isContentKind(t,soydata.SanitizedContentKind.TEXT)?new soydata.UnsanitizedText(o,s):i?soydata.VERY_UNSAFE.ordainSanitizedHtml(o,s):o},soy.esc.$$escapeUriHelper=function(e){return encodeURIComponent(String(e))},soy.esc.$$ESCAPE_MAP_FOR_ESCAPE_HTML__AND__NORMALIZE_HTML__AND__ESCAPE_HTML_NOSPACE__AND__NORMALIZE_HTML_NOSPACE_={"\x00":"&#0;","	":"&#9;","\n":"&#10;","":"&#11;","\f":"&#12;","\r":"&#13;"," ":"&#32;",'"':"&quot;","&":"&amp;","'":"&#39;","-":"&#45;","/":"&#47;","<":"&lt;","=":"&#61;",">":"&gt;","`":"&#96;","":"&#133;"," ":"&#160;","\u2028":"&#8232;","\u2029":"&#8233;"},soy.esc.$$REPLACER_FOR_ESCAPE_HTML__AND__NORMALIZE_HTML__AND__ESCAPE_HTML_NOSPACE__AND__NORMALIZE_HTML_NOSPACE_=function(e){return soy.esc.$$ESCAPE_MAP_FOR_ESCAPE_HTML__AND__NORMALIZE_HTML__AND__ESCAPE_HTML_NOSPACE__AND__NORMALIZE_HTML_NOSPACE_[e]},soy.esc.$$ESCAPE_MAP_FOR_ESCAPE_JS_STRING__AND__ESCAPE_JS_REGEX_={"\x00":"\\x00","\b":"\\x08","	":"\\t","\n":"\\n","":"\\x0b","\f":"\\f","\r":"\\r",'"':"\\x22",$:"\\x24","&":"\\x26","'":"\\x27","(":"\\x28",")":"\\x29","*":"\\x2a","+":"\\x2b",",":"\\x2c","-":"\\x2d",".":"\\x2e","/":"\\/",":":"\\x3a","<":"\\x3c","=":"\\x3d",">":"\\x3e","?":"\\x3f","[":"\\x5b","\\":"\\\\","]":"\\x5d","^":"\\x5e","{":"\\x7b","|":"\\x7c","}":"\\x7d","":"\\x85","\u2028":"\\u2028","\u2029":"\\u2029"},soy.esc.$$REPLACER_FOR_ESCAPE_JS_STRING__AND__ESCAPE_JS_REGEX_=function(e){return soy.esc.$$ESCAPE_MAP_FOR_ESCAPE_JS_STRING__AND__ESCAPE_JS_REGEX_[e]},soy.esc.$$ESCAPE_MAP_FOR_ESCAPE_CSS_STRING_={"\x00":"\\0 ","\b":"\\8 ","	":"\\9 ","\n":"\\a ","":"\\b ","\f":"\\c ","\r":"\\d ",'"':"\\22 ","&":"\\26 ","'":"\\27 ","(":"\\28 ",")":"\\29 ","*":"\\2a ","/":"\\2f ",":":"\\3a ",";":"\\3b ","<":"\\3c ","=":"\\3d ",">":"\\3e ","@":"\\40 ","\\":"\\5c ","{":"\\7b ","}":"\\7d ","":"\\85 "," ":"\\a0 ","\u2028":"\\2028 ","\u2029":"\\2029 "},soy.esc.$$REPLACER_FOR_ESCAPE_CSS_STRING_=function(e){return soy.esc.$$ESCAPE_MAP_FOR_ESCAPE_CSS_STRING_[e]},soy.esc.$$ESCAPE_MAP_FOR_NORMALIZE_URI__AND__FILTER_NORMALIZE_URI_={"\x00":"%00","":"%01","":"%02","":"%03","":"%04","":"%05","":"%06","":"%07","\b":"%08","	":"%09","\n":"%0A","":"%0B","\f":"%0C","\r":"%0D","":"%0E","":"%0F","":"%10","":"%11","":"%12","":"%13","":"%14","":"%15","":"%16","":"%17","":"%18","":"%19","":"%1A","":"%1B","":"%1C","":"%1D","":"%1E","":"%1F"," ":"%20",'"':"%22","'":"%27","(":"%28",")":"%29","<":"%3C",">":"%3E","\\":"%5C","{":"%7B","}":"%7D","":"%7F","":"%C2%85"," ":"%C2%A0","\u2028":"%E2%80%A8","\u2029":"%E2%80%A9","！":"%EF%BC%81","＃":"%EF%BC%83","＄":"%EF%BC%84","＆":"%EF%BC%86","＇":"%EF%BC%87","（":"%EF%BC%88","）":"%EF%BC%89","＊":"%EF%BC%8A","＋":"%EF%BC%8B","，":"%EF%BC%8C","／":"%EF%BC%8F","：":"%EF%BC%9A","；":"%EF%BC%9B","＝":"%EF%BC%9D","？":"%EF%BC%9F","＠":"%EF%BC%A0","［":"%EF%BC%BB","］":"%EF%BC%BD"},soy.esc.$$REPLACER_FOR_NORMALIZE_URI__AND__FILTER_NORMALIZE_URI_=function(e){return soy.esc.$$ESCAPE_MAP_FOR_NORMALIZE_URI__AND__FILTER_NORMALIZE_URI_[e]},soy.esc.$$MATCHER_FOR_ESCAPE_HTML_=/[\x00\x22\x26\x27\x3c\x3e]/g,soy.esc.$$MATCHER_FOR_NORMALIZE_HTML_=/[\x00\x22\x27\x3c\x3e]/g,soy.esc.$$MATCHER_FOR_ESCAPE_HTML_NOSPACE_=/[\x00\x09-\x0d \x22\x26\x27\x2d\/\x3c-\x3e`\x85\xa0\u2028\u2029]/g,soy.esc.$$MATCHER_FOR_NORMALIZE_HTML_NOSPACE_=/[\x00\x09-\x0d \x22\x27\x2d\/\x3c-\x3e`\x85\xa0\u2028\u2029]/g,soy.esc.$$MATCHER_FOR_ESCAPE_JS_STRING_=/[\x00\x08-\x0d\x22\x26\x27\/\x3c-\x3e\\\x85\u2028\u2029]/g,soy.esc.$$MATCHER_FOR_ESCAPE_JS_REGEX_=/[\x00\x08-\x0d\x22\x24\x26-\/\x3a\x3c-\x3f\x5b-\x5e\x7b-\x7d\x85\u2028\u2029]/g,soy.esc.$$MATCHER_FOR_ESCAPE_CSS_STRING_=/[\x00\x08-\x0d\x22\x26-\x2a\/\x3a-\x3e@\\\x7b\x7d\x85\xa0\u2028\u2029]/g,soy.esc.$$MATCHER_FOR_NORMALIZE_URI__AND__FILTER_NORMALIZE_URI_=/[\x00- \x22\x27-\x29\x3c\x3e\\\x7b\x7d\x7f\x85\xa0\u2028\u2029\uff01\uff03\uff04\uff06-\uff0c\uff0f\uff1a\uff1b\uff1d\uff1f\uff20\uff3b\uff3d]/g,soy.esc.$$FILTER_FOR_FILTER_CSS_VALUE_=/^(?!-*(?:expression|(?:moz-)?binding))(?:[.#]?-?(?:[_a-z0-9-]+)(?:-[_a-z0-9-]+)*-?|-?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[a-z]{1,2}|%)?|!important|)$/i,soy.esc.$$FILTER_FOR_FILTER_NORMALIZE_URI_=/^(?![^#?]*\/(?:\.|%2E){2}(?:[\/?#]|$))(?:(?:https?|mailto):|[^&:\/?#]*(?:[\/?#]|$))/i,soy.esc.$$FILTER_FOR_FILTER_IMAGE_DATA_URI_=/^data:image\/(?:bmp|gif|jpe?g|png|tiff|webp);base64,[a-z0-9+\/]+=*$/i,soy.esc.$$FILTER_FOR_FILTER_HTML_ATTRIBUTES_=/^(?!style|on|action|archive|background|cite|classid|codebase|data|dsync|href|longdesc|src|usemap)(?:[a-z0-9_$:-]*)$/i,soy.esc.$$FILTER_FOR_FILTER_HTML_ELEMENT_NAME_=/^(?!script|style|title|textarea|xmp|no)[a-z0-9_$:-]*$/i,soy.esc.$$escapeHtmlHelper=function(e){var t=String(e);return t.replace(soy.esc.$$MATCHER_FOR_ESCAPE_HTML_,soy.esc.$$REPLACER_FOR_ESCAPE_HTML__AND__NORMALIZE_HTML__AND__ESCAPE_HTML_NOSPACE__AND__NORMALIZE_HTML_NOSPACE_)},soy.esc.$$normalizeHtmlHelper=function(e){var t=String(e);return t.replace(soy.esc.$$MATCHER_FOR_NORMALIZE_HTML_,soy.esc.$$REPLACER_FOR_ESCAPE_HTML__AND__NORMALIZE_HTML__AND__ESCAPE_HTML_NOSPACE__AND__NORMALIZE_HTML_NOSPACE_)},soy.esc.$$escapeHtmlNospaceHelper=function(e){var t=String(e);return t.replace(soy.esc.$$MATCHER_FOR_ESCAPE_HTML_NOSPACE_,soy.esc.$$REPLACER_FOR_ESCAPE_HTML__AND__NORMALIZE_HTML__AND__ESCAPE_HTML_NOSPACE__AND__NORMALIZE_HTML_NOSPACE_)},soy.esc.$$normalizeHtmlNospaceHelper=function(e){var t=String(e);return t.replace(soy.esc.$$MATCHER_FOR_NORMALIZE_HTML_NOSPACE_,soy.esc.$$REPLACER_FOR_ESCAPE_HTML__AND__NORMALIZE_HTML__AND__ESCAPE_HTML_NOSPACE__AND__NORMALIZE_HTML_NOSPACE_)},soy.esc.$$escapeJsStringHelper=function(e){var t=String(e);return t.replace(soy.esc.$$MATCHER_FOR_ESCAPE_JS_STRING_,soy.esc.$$REPLACER_FOR_ESCAPE_JS_STRING__AND__ESCAPE_JS_REGEX_)},soy.esc.$$escapeJsRegexHelper=function(e){var t=String(e);return t.replace(soy.esc.$$MATCHER_FOR_ESCAPE_JS_REGEX_,soy.esc.$$REPLACER_FOR_ESCAPE_JS_STRING__AND__ESCAPE_JS_REGEX_)},soy.esc.$$escapeCssStringHelper=function(e){var t=String(e);return t.replace(soy.esc.$$MATCHER_FOR_ESCAPE_CSS_STRING_,soy.esc.$$REPLACER_FOR_ESCAPE_CSS_STRING_)},soy.esc.$$filterCssValueHelper=function(e){var t=String(e);return soy.esc.$$FILTER_FOR_FILTER_CSS_VALUE_.test(t)?t:"zSoyz"},soy.esc.$$normalizeUriHelper=function(e){var t=String(e);return t.replace(soy.esc.$$MATCHER_FOR_NORMALIZE_URI__AND__FILTER_NORMALIZE_URI_,soy.esc.$$REPLACER_FOR_NORMALIZE_URI__AND__FILTER_NORMALIZE_URI_)},soy.esc.$$filterNormalizeUriHelper=function(e){var t=String(e);return soy.esc.$$FILTER_FOR_FILTER_NORMALIZE_URI_.test(t)?t.replace(soy.esc.$$MATCHER_FOR_NORMALIZE_URI__AND__FILTER_NORMALIZE_URI_,soy.esc.$$REPLACER_FOR_NORMALIZE_URI__AND__FILTER_NORMALIZE_URI_):"#zSoyz"},soy.esc.$$filterImageDataUriHelper=function(e){var t=String(e);return soy.esc.$$FILTER_FOR_FILTER_IMAGE_DATA_URI_.test(t)?t:"data:image/gif;base64,zSoyz"},soy.esc.$$filterHtmlAttributesHelper=function(e){var t=String(e);return soy.esc.$$FILTER_FOR_FILTER_HTML_ATTRIBUTES_.test(t)?t:"zSoyz"},soy.esc.$$filterHtmlElementNameHelper=function(e){var t=String(e);return soy.esc.$$FILTER_FOR_FILTER_HTML_ELEMENT_NAME_.test(t)?t:"zSoyz"},soy.esc.$$HTML_TAG_REGEX_=/<(?:!|\/?([a-zA-Z][a-zA-Z0-9:\-]*))(?:[^>'"]|"[^"]*"|'[^']*')*>/g,soy.esc.$$LT_REGEX_=/</g,soy.esc.$$SAFE_TAG_WHITELIST_={b:1,br:1,em:1,i:1,s:1,sub:1,sup:1,u:1},this.ui={},function(e){var t=e.babelHelpers={};t.inherits=function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(e.__proto__=t)},t.createClass=function(){function e(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(t,n,i){return n&&e(t.prototype,n),i&&e(t,i),t}}(),t.get=function n(e,t,i){var o=Object.getOwnPropertyDescriptor(e,t);if(void 0===o){var s=Object.getPrototypeOf(e);return null===s?void 0:n(s,t,i)}if("value"in o)return o.value;var a=o.get;return void 0===a?void 0:a.call(i)},t.classCallCheck=function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}}("undefined"==typeof global?self:global),function(){"use strict";var e=function(){function e(){babelHelpers.classCallCheck(this,e)}return babelHelpers.createClass(e,null,[{key:"abstractMethod",value:function(){throw Error("Unimplemented abstract method")}},{key:"collectSuperClassesProperty",value:function(e,t){for(var n=[e[t]];e.__proto__&&!e.__proto__.isPrototypeOf(Function);)e=e.__proto__,n.push(e[t]);return n}},{key:"getUid",value:function(t){return t?t[e.UID_PROPERTY]||(t[e.UID_PROPERTY]=e.uniqueIdCounter_++):e.uniqueIdCounter_++}},{key:"identityFunction",value:function(e){return e}},{key:"isBoolean",value:function(e){return"boolean"==typeof e}},{key:"isDef",value:function(e){return void 0!==e}},{key:"isDefAndNotNull",value:function(t){return e.isDef(t)&&!e.isNull(t)}},{key:"isDocument",value:function(e){return e&&"object"==typeof e&&9===e.nodeType}},{key:"isElement",value:function(e){return e&&"object"==typeof e&&1===e.nodeType}},{key:"isFunction",value:function(e){return"function"==typeof e}},{key:"isNull",value:function(e){return null===e}},{key:"isNumber",value:function(e){return"number"==typeof e}},{key:"isWindow",value:function(e){return null!==e&&e===e.window}},{key:"isObject",value:function(e){var t=typeof e;return"object"===t&&null!==e||"function"===t}},{key:"isString",value:function(e){return"string"==typeof e}},{key:"mergeSuperClassesProperty",value:function(t,n,i){var o=n+"_MERGED";if(t.hasOwnProperty(o))return!1;var s=e.collectSuperClassesProperty(t,n);return i&&(s=i(s)),t[o]=s,!0}},{key:"nullFunction",value:function(){}}]),e}();e.UID_PROPERTY="core_"+(1e9*Math.random()>>>0),e.uniqueIdCounter_=1,this.ui.core=e}.call(this),function(){"use strict";var e=function(){function e(){babelHelpers.classCallCheck(this,e)}return babelHelpers.createClass(e,null,[{key:"mixin",value:function(e){for(var t,n,i=1;i<arguments.length;i++){n=arguments[i];for(t in n)e[t]=n[t]}return e}}]),e}();this.ui.object=e}.call(this),function(){"use strict";var e=function(){function e(){babelHelpers.classCallCheck(this,e),this.disposed_=!1}return babelHelpers.createClass(e,[{key:"dispose",value:function(){this.disposed_||(this.disposeInternal(),this.disposed_=!0)}},{key:"disposeInternal",value:function(){}},{key:"isDisposed",value:function(){return this.disposed_}}]),e}();this.ui.Disposable=e}.call(this),function(){"use strict";var e=this.ui.Disposable,t=function(e){function t(e,n,i){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this),this.emitter_=e,this.event_=n,this.listener_=i}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"disposeInternal",value:function(){this.removeListener(),this.emitter_=null,this.listener_=null}},{key:"removeListener",value:function(){this.emitter_.isDisposed()||this.emitter_.removeListener(this.event_,this.listener_)}}]),t}(e);this.ui.EventHandle=t}.call(this),function(){"use strict";var e=this.ui.EventHandle,t=function(e){function t(e,n,i){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this,e,n,i)}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"removeListener",value:function(){this.emitter_.removeEventListener(this.event_,this.listener_);
+this.ui = {};
+this.uiNamed = {};
+(function (global) {
+  var babelHelpers = global.babelHelpers = {};
 
-}}]),t}(e);this.ui.DomEventHandle=t}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.object,n=this.ui.DomEventHandle,i=function(){function i(){babelHelpers.classCallCheck(this,i)}return babelHelpers.createClass(i,null,[{key:"addClasses",value:function(t,n){e.isObject(t)&&e.isString(n)&&("classList"in t?i.addClassesWithNative_(t,n):i.addClassesWithoutNative_(t,n))}},{key:"addClassesWithNative_",value:function(e,t){t.split(" ").forEach(function(t){e.classList.add(t)})}},{key:"addClassesWithoutNative_",value:function(e,t){var n=" "+e.className+" ",i="";t=t.split(" ");for(var o=0;o<t.length;o++){var s=t[o];-1===n.indexOf(" "+s+" ")&&(i+=" "+s)}i&&(e.className=e.className+i)}},{key:"append",value:function(t,n){return e.isString(n)&&(n=i.buildFragment(n)),t.appendChild(n)}},{key:"buildFragment",value:function(e){var t=document.createElement("div");t.innerHTML="<br>"+e,t.removeChild(t.firstChild);for(var n=document.createDocumentFragment();t.firstChild;)n.appendChild(t.firstChild);return n}},{key:"delegate",value:function(e,t,n,o){var s=i.customEvents[t];return s&&s.delegate&&(t=s.originalEvent,o=s.handler.bind(s,o)),i.on(e,t,i.handleDelegateEvent_.bind(null,n,o))}},{key:"enterDocument",value:function(e){i.append(document.body,e)}},{key:"exitDocument",value:function(e){e.parentNode&&e.parentNode.removeChild(e)}},{key:"handleDelegateEvent_",value:function(t,n,o){i.normalizeDelegateEvent_(o);for(var s=o.target,a=!0;s&&!o.stopped;)e.isString(t)&&i.match(s,t)&&(o.delegateTarget=s,a&=n(o)),s=s.parentNode;return a}},{key:"hasClass",value:function(e,t){return"classList"in e?i.hasClassWithNative_(e,t):i.hasClassWithoutNative_(e,t)}},{key:"hasClassWithNative_",value:function(e,t){return e.classList.contains(t)}},{key:"hasClassWithoutNative_",value:function(e,t){return(" "+e.className+" ").indexOf(" "+t+" ")>=0}},{key:"isEmpty",value:function(e){return 0===e.childNodes.length}},{key:"match",value:function(e,t){if(!e||1!==e.nodeType)return!1;var n=Element.prototype,o=n.matches||n.webkitMatchesSelector||n.mozMatchesSelector||n.msMatchesSelector||n.oMatchesSelector;return o?o.call(e,t):i.matchFallback_(e,t)}},{key:"matchFallback_",value:function(e,t){for(var n=document.querySelectorAll(t,e.parentNode),i=0;i<n.length;++i)if(n[i]===e)return!0;return!1}},{key:"normalizeDelegateEvent_",value:function(e){e.stopPropagation=i.stopPropagation_,e.stopImmediatePropagation=i.stopImmediatePropagation_}},{key:"on",value:function(e,t,o){var s=i.customEvents[t];return s&&s.event&&(t=s.originalEvent,o=s.handler.bind(s,o)),e.addEventListener(t,o),new n(e,t,o)}},{key:"registerCustomEvent",value:function(e,t){i.customEvents[e]=t}},{key:"removeChildren",value:function(e){for(var t;t=e.firstChild;)e.removeChild(t)}},{key:"removeClasses",value:function(t,n){e.isObject(t)&&e.isString(n)&&("classList"in t?i.removeClassesWithNative_(t,n):i.removeClassesWithoutNative_(t,n))}},{key:"removeClassesWithNative_",value:function(e,t){t.split(" ").forEach(function(t){e.classList.remove(t)})}},{key:"removeClassesWithoutNative_",value:function(e,t){var n=" "+e.className+" ";t=t.split(" ");for(var i=0;i<t.length;i++)n=n.replace(" "+t[i]+" "," ");e.className=n.trim()}},{key:"replace",value:function(e,t){e&&t&&e!==t&&(e.parentNode.insertBefore(t,e),e.parentNode.removeChild(e))}},{key:"stopImmediatePropagation_",value:function(){this.stopped=!0,Event.prototype.stopImmediatePropagation.call(this)}},{key:"stopPropagation_",value:function(){this.stopped=!0,Event.prototype.stopPropagation.call(this)}},{key:"supportsEvent",value:function(t,n){return i.customEvents[n]?!0:(e.isString(t)&&(o[t]||(o[t]=document.createElement(t)),t=o[t]),"on"+n in t)}},{key:"toElement",value:function(t){return e.isElement(t)||e.isDocument(t)?t:e.isString(t)?"#"===t[0]&&-1===t.indexOf(" ")?document.getElementById(t.substr(1)):document.querySelector(t):null}},{key:"toggleClasses",value:function(t,n){e.isObject(t)&&e.isString(n)&&("classList"in t?i.toggleClassesWithNative_(t,n):i.toggleClassesWithoutNative_(t,n))}},{key:"toggleClassesWithNative_",value:function(e,t){t.split(" ").forEach(function(t){e.classList.toggle(t)})}},{key:"toggleClassesWithoutNative_",value:function(e,t){var n=" "+e.className+" ";t=t.split(" ");for(var i=0;i<t.length;i++){var o=" "+t[i]+" ",s=n.indexOf(o);n=-1===s?n+t[i]+" ":n.substring(0,s)+" "+n.substring(s+o.length)}e.className=n.trim()}},{key:"triggerEvent",value:function(e,n,i){var o=document.createEvent("HTMLEvents");o.initEvent(n,!0,!0),t.mixin(o,i),e.dispatchEvent(o)}}]),i}(),o={};i.customEvents={};var s={mouseenter:"mouseover",mouseleave:"mouseout",pointerenter:"pointerover",pointerleave:"pointerout"};Object.keys(s).forEach(function(e){i.registerCustomEvent(e,{delegate:!0,handler:function(t,n){var i=n.relatedTarget,o=n.delegateTarget||n.target;return!i||i!==o&&!o.contains(i)?(n.customType=e,t(n)):void 0},originalEvent:s[e]})}),this.ui.dom=i}.call(this),function(){"use strict";var e=function(){function e(){babelHelpers.classCallCheck(this,e)}return babelHelpers.createClass(e,null,[{key:"intersectRect",value:function(e,t,n,i,o,s,a,r){return!(o>n||e>a||s>i||t>r)}}]),e}();this.ui.math=e}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.math,n=function(){function n(){babelHelpers.classCallCheck(this,n)}return babelHelpers.createClass(n,null,[{key:"getClientHeight",value:function(e){return this.getClientSize_(e,"Height")}},{key:"getClientSize_",value:function(t,n){var i=t;return e.isWindow(t)&&(i=t.document.documentElement),e.isDocument(t)&&(i=t.documentElement),i["client"+n]}},{key:"getClientWidth",value:function(e){return this.getClientSize_(e,"Width")}},{key:"getDocumentRegion_",value:function(e){var t=this.getHeight(e),n=this.getWidth(e);return this.makeRegion(t,t,0,n,0,n)}},{key:"getHeight",value:function(e){return this.getSize_(e,"Height")}},{key:"getRegion",value:function(t){return e.isDocument(t)||e.isWindow(t)?this.getDocumentRegion_(t):this.makeRegionFromBoundingRect_(t.getBoundingClientRect())}},{key:"getScrollLeft",value:function(t){return e.isWindow(t)?t.pageXOffset:e.isDocument(t)?t.defaultView.pageXOffset:t.scrollLeft}},{key:"getScrollTop",value:function(t){return e.isWindow(t)?t.pageYOffset:e.isDocument(t)?t.defaultView.pageYOffset:t.scrollTop}},{key:"getSize_",value:function(t,n){if(e.isWindow(t))return this.getClientSize_(t,n);if(e.isDocument(t)){var i=t.documentElement;return Math.max(t.body["scroll"+n],i["scroll"+n],t.body["offset"+n],i["offset"+n],i["client"+n])}return Math.max(t["client"+n],t["scroll"+n],t["offset"+n])}},{key:"getWidth",value:function(e){return this.getSize_(e,"Width")}},{key:"intersectRegion",value:function(e,n){return t.intersectRect(e.top,e.left,e.bottom,e.right,n.top,n.left,n.bottom,n.right)}},{key:"insideRegion",value:function(e,t){return t.top>=e.top&&t.bottom<=e.bottom&&t.right<=e.right&&t.left>=e.left}},{key:"insideViewport",value:function(e){return this.insideRegion(this.getRegion(window),e)}},{key:"intersection",value:function(e,t){if(!this.intersectRegion(e,t))return null;var n=Math.min(e.bottom,t.bottom),i=Math.min(e.right,t.right),o=Math.max(e.left,t.left),s=Math.max(e.top,t.top);return this.makeRegion(n,n-s,o,i,s,i-o)}},{key:"makeRegion",value:function(e,t,n,i,o,s){return{bottom:e,height:t,left:n,right:i,top:o,width:s}}},{key:"makeRegionFromBoundingRect_",value:function(e){return this.makeRegion(e.bottom,e.height,e.left,e.right,e.top,e.width)}}]),n}();this.ui.position=n}.call(this),function(){"use strict";var e=function(){function e(){babelHelpers.classCallCheck(this,e)}return babelHelpers.createClass(e,null,[{key:"equal",value:function(e,t){for(var n=0;n<e.length;n++)if(e[n]!==t[n])return!1;return e.length===t.length}},{key:"firstDefinedValue",value:function(e){for(var t=0;t<e.length;t++)if(void 0!==e[t])return e[t]}},{key:"flatten",value:function(t,n){for(var i=n||[],o=0;o<t.length;o++)Array.isArray(t[o])?e.flatten(t[o],i):i.push(t[o]);return i}},{key:"remove",value:function(t,n){var i,o=t.indexOf(n);return(i=o>=0)&&e.removeAt(t,o),i}},{key:"removeAt",value:function(e,t){return 1===Array.prototype.splice.call(e,t,1).length}}]),e}();this.ui.array=e}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.Disposable,n=this.ui.EventHandle,i=function(t){function i(){babelHelpers.classCallCheck(this,i),babelHelpers.get(Object.getPrototypeOf(i.prototype),"constructor",this).call(this),this.events_=[],this.maxListeners_=10,this.shouldUseFacade_=!1}return babelHelpers.inherits(i,t),babelHelpers.createClass(i,[{key:"addListener",value:function(e,t){this.validateListener_(t),e=this.normalizeEvents_(e);for(var i=0;i<e.length;i++)this.addSingleListener_(e[i],t);return new n(this,e,t)}},{key:"addSingleListener_",value:function(e,t,n){this.emit("newListener",e,t),this.events_[e]||(this.events_[e]=[]),this.events_[e].push({fn:t,origin:n});var i=this.events_[e];i.length>this.maxListeners_&&!i.warned&&(console.warn("Possible EventEmitter memory leak detected. %d listeners added for event %s. Use emitter.setMaxListeners() to increase limit.",i.length,e),i.warned=!0)}},{key:"disposeInternal",value:function(){this.events_=[]}},{key:"emit",value:function(e){var t=Array.prototype.slice.call(arguments,1),n=!1,i=this.listeners(e);if(this.getShouldUseFacade()){var o={type:e};t=[o].concat(t)}for(var s=0;s<i.length;s++)i[s].apply(this,t),n=!0;return n}},{key:"getShouldUseFacade",value:function(){return this.shouldUseFacade_}},{key:"listeners",value:function(e){return(this.events_[e]||[]).map(function(e){return e.fn})}},{key:"many",value:function(e,t,i){e=this.normalizeEvents_(e);for(var o=0;o<e.length;o++)this.many_(e[o],t,i);return new n(this,e,i)}},{key:"many_",value:function(e,t,n){function i(){0===--t&&o.removeListener(e,i),n.apply(o,arguments)}var o=this;0>=t||o.addSingleListener_(e,i,n)}},{key:"matchesListener_",value:function(e,t){return e.fn===t||e.origin&&e.origin===t}},{key:"normalizeEvents_",value:function(t){return e.isString(t)?[t]:t}},{key:"off",value:function(e,t){this.validateListener_(t),e=this.normalizeEvents_(e);for(var n=0;n<e.length;n++){var i=this.events_[e[n]]||[];this.removeMatchingListenerObjs_(i,t)}return this}},{key:"on",value:function(){return this.addListener.apply(this,arguments)}},{key:"once",value:function(e,t){return this.many(e,1,t)}},{key:"removeAllListeners",value:function(e){if(e)for(var t=this.normalizeEvents_(e),n=0;n<t.length;n++)this.events_[t[n]]=null;else this.events_={};return this}},{key:"removeMatchingListenerObjs_",value:function(e,t){for(var n=e.length-1;n>=0;n--)this.matchesListener_(e[n],t)&&e.splice(n,1)}},{key:"removeListener",value:function(){return this.off.apply(this,arguments)}},{key:"setMaxListeners",value:function(e){return this.maxListeners_=e,this}},{key:"setShouldUseFacade",value:function(e){return this.shouldUseFacade_=e,this}},{key:"validateListener_",value:function(t){if(!e.isFunction(t))throw new TypeError("Listener must be a function")}}]),i}(t);this.ui.EventEmitter=i}.call(this),function(){"use strict";var e=this.ui.core,t={};t.throwException=function(e){t.nextTick(function(){throw e})},t.run=function(e,n){t.run.workQueueScheduled_||(t.nextTick(t.run.processWorkQueue),t.run.workQueueScheduled_=!0),t.run.workQueue_.push(new t.run.WorkItem_(e,n))},t.run.workQueueScheduled_=!1,t.run.workQueue_=[],t.run.processWorkQueue=function(){for(;t.run.workQueue_.length;){var e=t.run.workQueue_;t.run.workQueue_=[];for(var n=0;n<e.length;n++){var i=e[n];try{i.fn.call(i.scope)}catch(o){t.throwException(o)}}}t.run.workQueueScheduled_=!1},t.run.WorkItem_=function(e,t){this.fn=e,this.scope=t},t.nextTick=function(n,i){var o=n;return i&&(o=n.bind(i)),o=t.nextTick.wrapCallback_(o),e.isFunction(window.setImmediate)?void window.setImmediate(o):(t.nextTick.setImmediate_||(t.nextTick.setImmediate_=t.nextTick.getSetImmediateEmulator_()),void t.nextTick.setImmediate_(o))},t.nextTick.setImmediate_=null,t.nextTick.getSetImmediateEmulator_=function(){var e=window.MessageChannel;if("undefined"==typeof e&&"undefined"!=typeof window&&window.postMessage&&window.addEventListener&&(e=function(){var e=document.createElement("iframe");e.style.display="none",e.src="",document.documentElement.appendChild(e);var t=e.contentWindow,n=t.document;n.open(),n.write(""),n.close();var i="callImmediate"+Math.random(),o=t.location.protocol+"//"+t.location.host,s=function(e){(e.origin===o||e.data===i)&&this.port1.onmessage()}.bind(this);t.addEventListener("message",s,!1),this.port1={},this.port2={postMessage:function(){t.postMessage(i,o)}}}),"undefined"!=typeof e){var t=new e,n={},i=n;return t.port1.onmessage=function(){n=n.next;var e=n.cb;n.cb=null,e()},function(e){i.next={cb:e},i=i.next,t.port2.postMessage(0)}}return"undefined"!=typeof document&&"onreadystatechange"in document.createElement("script")?function(e){var t=document.createElement("script");t.onreadystatechange=function(){t.onreadystatechange=null,t.parentNode.removeChild(t),t=null,e(),e=null},document.documentElement.appendChild(t)}:function(e){setTimeout(e,0)}},t.nextTick.wrapCallback_=function(e){return e},this.ui.async=t}.call(this),function(){"use strict";var e=this.ui.array,t=this.ui.core,n=this.ui.object,i=this.ui.EventEmitter,o=this.ui.async,s=function(i){function s(e){babelHelpers.classCallCheck(this,s),babelHelpers.get(Object.getPrototypeOf(s.prototype),"constructor",this).call(this),this.scheduledBatchData_=null,this.attrsInfo_={},this.mergeInvalidAttrs_(),this.addAttrsFromStaticHint_(e)}return babelHelpers.inherits(s,i),babelHelpers.createClass(s,[{key:"addAttr",value:function(e,t,n){this.buildAttrInfo_(e,t,n),Object.defineProperty(this,e,{configurable:!0,get:this.getAttrValue_.bind(this,e),set:this.setAttrValue_.bind(this,e)})}},{key:"addAttrs",value:function(e,t,n){t=t||{};for(var i=Object.keys(e),o={},s=0;s<i.length;s++){var a=i[s];this.buildAttrInfo_(a,e[a],t[a]),o[a]=this.buildAttrPropertyDef_(a)}n!==!1&&Object.defineProperties(n||this,o)}},{key:"addAttrsFromStaticHint_",value:function(e){var n=this.constructor,i=!1;t.mergeSuperClassesProperty(n,"ATTRS",this.mergeAttrs_)&&(i=n.prototype),this.addAttrs(n.ATTRS_MERGED,e,i)}},{key:"assertValidAttrName_",value:function(e){if(this.constructor.INVALID_ATTRS_MERGED[e])throw new Error("It's not allowed to create an attribute with the name \""+e+'".')}},{key:"buildAttrInfo_",value:function(e,t,n){this.assertValidAttrName_(e),this.attrsInfo_[e]={config:t||{},initialValue:n,state:s.States.UNINITIALIZED}}},{key:"buildAttrPropertyDef_",value:function(e){return{configurable:!0,get:function(){return this.getAttrValue_(e)},set:function(t){this.setAttrValue_(e,t)}}}},{key:"callFunction_",value:function(e,n){return t.isString(e)?this[e].apply(this,n):t.isFunction(e)?e.apply(this,n):void 0}},{key:"callSetter_",value:function(e,t){var n=this.attrsInfo_[e],i=n.config;return i.setter&&(t=this.callFunction_(i.setter,[t])),t}},{key:"callValidator_",value:function(e,t){var n=this.attrsInfo_[e],i=n.config;return i.validator?this.callFunction_(i.validator,[t]):!0}},{key:"canSetAttribute",value:function(e){var t=this.attrsInfo_[e];return!t.config.writeOnce||!t.written}},{key:"disposeInternal",value:function(){babelHelpers.get(Object.getPrototypeOf(s.prototype),"disposeInternal",this).call(this),this.attrsInfo_=null,this.scheduledBatchData_=null}},{key:"emitBatchEvent_",value:function(){if(!this.isDisposed()){var e=this.scheduledBatchData_;this.scheduledBatchData_=null,this.emit("attrsChanged",e)}}},{key:"getAttrConfig",value:function(e){return(this.attrsInfo_[e]||{}).config}},{key:"getAttrs",value:function(){for(var e={},t=this.getAttrNames(),n=0;n<t.length;n++)e[t[n]]=this[t[n]];return e}},{key:"getAttrNames",value:function(){return Object.keys(this.attrsInfo_)}},{key:"getAttrValue_",value:function(e){return this.initAttr_(e),this.attrsInfo_[e].value}},{key:"informChange_",value:function(e,t){if(this.shouldInformChange_(e,t)){var n={attrName:e,newVal:this[e],prevVal:t};this.emit(e+"Changed",n),this.scheduleBatchEvent_(n)}}},{key:"initAttr_",value:function(e){var t=this.attrsInfo_[e];t.state===s.States.UNINITIALIZED&&(t.state=s.States.INITIALIZING,this.setInitialValue_(e),t.written||(t.state=s.States.INITIALIZING_DEFAULT,this.setDefaultValue_(e)),t.state=s.States.INITIALIZED)}},{key:"mergeAttrs_",value:function(e){return n.mixin.apply(null,[{}].concat(e.reverse()))}},{key:"mergeInvalidAttrs_",value:function(){t.mergeSuperClassesProperty(this.constructor,"INVALID_ATTRS",function(t){return e.flatten(t).reduce(function(e,t){return t&&(e[t]=!0),e},{})})}},{key:"removeAttr",value:function(e){this.attrsInfo_[e]=null,delete this[e]}},{key:"scheduleBatchEvent_",value:function(e){this.scheduledBatchData_||(o.nextTick(this.emitBatchEvent_,this),this.scheduledBatchData_={changes:{}});var t=e.attrName,n=this.scheduledBatchData_.changes;n[t]?n[t].newVal=e.newVal:n[t]=e}},{key:"setAttrs",value:function(e){for(var t=Object.keys(e),n=0;n<t.length;n++)this[t[n]]=e[t[n]]}},{key:"setAttrValue_",value:function(e,t){if(this.canSetAttribute(e)&&this.validateAttrValue_(e,t)){var n=this.attrsInfo_[e];void 0===n.initialValue&&n.state===s.States.UNINITIALIZED&&(n.state=s.States.INITIALIZED);var i=this[e];n.value=this.callSetter_(e,t),n.written=!0,this.informChange_(e,i)}}},{key:"setDefaultValue_",value:function(e){var t=this.attrsInfo_[e].config;this[e]=void 0!==t.value?t.value:this.callFunction_(t.valueFn)}},{key:"setInitialValue_",value:function(e){var t=this.attrsInfo_[e];void 0!==t.initialValue&&(this[e]=t.initialValue,t.initialValue=void 0)}},{key:"shouldInformChange_",value:function(e,n){var i=this.attrsInfo_[e];return i.state===s.States.INITIALIZED&&(t.isObject(n)||n!==this[e])}},{key:"validateAttrValue_",value:function(e,t){var n=this.attrsInfo_[e];return n.state===s.States.INITIALIZING_DEFAULT||this.callValidator_(e,t)}}]),s}(i);s.INVALID_ATTRS=["attrs"],s.States={UNINITIALIZED:0,INITIALIZING:1,INITIALIZING_DEFAULT:2,INITIALIZED:3},this.ui.Attribute=s}.call(this),function(){"use strict";var e=this.ui.dom,t=this.ui.Disposable,n=function(t){function n(e,t,i,o){babelHelpers.classCallCheck(this,n),babelHelpers.get(Object.getPrototypeOf(n.prototype),"constructor",this).call(this),this.blacklist_=i||{},this.originEmitter_=e,this.proxiedEvents_={},this.targetEmitter_=t,this.whitelist_=o,this.startProxy_()}return babelHelpers.inherits(n,t),babelHelpers.createClass(n,[{key:"disposeInternal",value:function(){var e=this.originEmitter_.removeEventListener?"removeEventListener":"removeListener";for(var t in this.proxiedEvents_)this.originEmitter_[e](t,this.proxiedEvents_[t]);this.proxiedEvents_=null,this.originEmitter_=null,this.targetEmitter_=null}},{key:"proxyEvent_",value:function(e){if(this.shouldProxyEvent_(e)){var t=this;this.proxiedEvents_[e]=function(){var n=[e].concat(Array.prototype.slice.call(arguments,0));t.targetEmitter_.emit.apply(t.targetEmitter_,n)};var n=this.originEmitter_.addEventListener?"addEventListener":"on";this.originEmitter_[n](e,this.proxiedEvents_[e])}}},{key:"shouldProxyEvent_",value:function(t){return this.whitelist_&&!this.whitelist_[t]?!1:this.blacklist_[t]?!1:!this.proxiedEvents_[t]&&(!(this.originEmitter_.removeEventListener||this.originEmitter_.addEventListener)||e.supportsEvent(this.originEmitter_,t))}},{key:"startProxy_",value:function(){this.targetEmitter_.on("newListener",this.proxyEvent_.bind(this))}}]),n}(t);this.ui.EventEmitterProxy=n}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.dom,n=this.ui.position,i=this.ui.Attribute,o=this.ui.EventEmitter,s=this.ui.EventEmitterProxy,a=function(i){function a(e){babelHelpers.classCallCheck(this,a),babelHelpers.get(Object.getPrototypeOf(a.prototype),"constructor",this).call(this,e),a.emitter_||(a.emitter_=new o,a.proxy_=new s(document,a.emitter_,null,{scroll:!0})),this.lastPosition_=null,this.scrollHandle_=a.emitter_.on("scroll",this.checkPosition.bind(this)),this.on("elementChanged",this.checkPosition),this.on("offsetTopChanged",this.checkPosition),this.on("offsetBottomChanged",this.checkPosition),this.checkPosition()}return babelHelpers.inherits(a,i),babelHelpers.createClass(a,[{key:"disposeInternal",value:function(){t.removeClasses(this.element,a.Position.Bottom+" "+a.Position.Default+" "+a.Position.Top),this.scrollHandle_.dispose(),babelHelpers.get(Object.getPrototypeOf(a.prototype),"disposeInternal",this).call(this)}},{key:"checkPosition",value:function(){this.syncPosition(this.intersectTopRegion()?a.Position.Top:this.intersectBottomRegion()?a.Position.Bottom:a.Position.Default)}},{key:"intersectBottomRegion",value:function(){if(!e.isDef(this.offsetBottom))return!1;var t=n.getHeight(this.scrollElement),i=n.getClientHeight(this.scrollElement);return n.getScrollTop(this.scrollElement)+i>=t-this.offsetBottom}},{key:"intersectTopRegion",value:function(){return e.isDef(this.offsetTop)?n.getScrollTop(this.scrollElement)<=this.offsetTop:!1}},{key:"syncPosition",value:function(e){this.lastPosition_!==e&&(t.addClasses(this.element,e),t.removeClasses(this.element,this.lastPosition_),this.lastPosition_=e)}}]),a}(i);a.Position={Top:"affix-top",Bottom:"affix-bottom",Default:"affix-default"},a.ATTRS={scrollElement:{setter:t.toElement,value:document},offsetTop:{validator:e.isNumber},offsetBottom:{validator:e.isNumber},element:{setter:t.toElement}},this.ui.Affix=a}.call(this),function(){"use strict";var e=this.ui.dom,t=function(){function t(){babelHelpers.classCallCheck(this,t)}return babelHelpers.createClass(t,null,[{key:"checkAttrOrderChange",value:function(){if(void 0===t.attrOrderChange_){var n='<div data-component="" data-ref=""></div>',i=document.createElement("div");e.append(i,n),t.attrOrderChange_=n!==i.innerHTML}return t.attrOrderChange_}}]),t}();t.attrOrderChange_=void 0,this.ui.features=t}.call(this),function(){"use strict";var e=function(){function e(){babelHelpers.classCallCheck(this,e)}return babelHelpers.createClass(e,null,[{key:"collapseBreakingSpaces",value:function(e){return e.replace(/[\t\r\n ]+/g," ").replace(/^[\t\r\n ]+|[\t\r\n ]+$/g,"")}},{key:"hashCode",value:function(e){for(var t=0,n=0,i=e.length;i>n;n++)t=31*t+e.charCodeAt(n),t%=4294967296;return t}},{key:"replaceInterval",value:function(e,t,n,i){return e.substring(0,t)+i+e.substring(n)}}]),e}();this.ui.string=e}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.string,n=function(){function n(){babelHelpers.classCallCheck(this,n)}return babelHelpers.createClass(n,null,[{key:"compress",value:function(e){var t={};return e=n.preserveBlocks_(e,t),e=n.simplifyDoctype_(e),e=n.removeComments_(e),e=n.removeIntertagSpaces_(e),e=n.collapseBreakingSpaces_(e),e=n.removeSpacesInsideTags_(e),e=n.removeSurroundingSpaces_(e),e=n.returnBlocks_(e,t),e.trim()}},{key:"collapseBreakingSpaces_",value:function(e){return t.collapseBreakingSpaces(e)}},{key:"lookupPossibleTagBoundary_",value:function(e,t){var n=e.indexOf(t);return n>-1&&(n+=e.substring(n).indexOf(">")+1),n}},{key:"preserveBlocks_",value:function(e,t){return e=n.preserveOuterHtml_(e,"<!--[if","<![endif]-->",t),e=n.preserveInnerHtml_(e,"<code","</code",t),e=n.preserveInnerHtml_(e,"<pre","</pre",t),e=n.preserveInnerHtml_(e,"<script","</script",t),e=n.preserveInnerHtml_(e,"<style","</style",t),e=n.preserveInnerHtml_(e,"<textarea","</textarea",t)}},{key:"preserveInnerHtml_",value:function(e,t,i,o){for(var s=n.lookupPossibleTagBoundary_(e,t);s>-1;){var a=e.indexOf(i);e=n.preserveInterval_(e,s,a,o),e=e.replace(t,"%%%~1~%%%"),e=e.replace(i,"%%%~2~%%%"),s=n.lookupPossibleTagBoundary_(e,t)}return e=e.replace(/%%%~1~%%%/g,t),e=e.replace(/%%%~2~%%%/g,i)}},{key:"preserveInterval_",value:function(n,i,o,s){var a="%%%~BLOCK~"+e.getUid()+"~%%%";return s[a]=n.substring(i,o),t.replaceInterval(n,i,o,a)}},{key:"preserveOuterHtml_",value:function(e,t,i,o){for(var s=e.indexOf(t);s>-1;){var a=e.indexOf(i)+i.length;e=n.preserveInterval_(e,s,a,o),s=e.indexOf(t)}return e}},{key:"removeComments_",value:function(e){var t={};return e=n.preserveOuterHtml_(e,"<![CDATA[","]]>",t),e=n.preserveOuterHtml_(e,"<!--","-->",t),e=n.replacePreservedBlocks_(e,t,"")}},{key:"removeIntertagSpaces_",value:function(e){return e=e.replace(n.Patterns.INTERTAG_CUSTOM_CUSTOM,"~%%%%%%~"),e=e.replace(n.Patterns.INTERTAG_CUSTOM_TAG,"~%%%<"),e=e.replace(n.Patterns.INTERTAG_TAG,"><"),e=e.replace(n.Patterns.INTERTAG_TAG_CUSTOM,">%%%~")}},{key:"removeSpacesInsideTags_",value:function(e){return e=e.replace(n.Patterns.TAG_END_SPACES,"$1$2"),e=e.replace(n.Patterns.TAG_QUOTE_SPACES,"=$1$2$3")}},{key:"removeSurroundingSpaces_",value:function(e){return e.replace(n.Patterns.SURROUNDING_SPACES,"$1")}},{key:"replacePreservedBlocks_",value:function(e,t,n){for(var i in t)e=e.replace(i,n);return e}},{key:"simplifyDoctype_",value:function(e){var t={};return e=n.preserveOuterHtml_(e,"<!DOCTYPE",">",t),e=n.replacePreservedBlocks_(e,t,"<!DOCTYPE html>")}},{key:"returnBlocks_",value:function(e,t){for(var n in t)e=e.replace(n,t[n]);return e}}]),n}();n.Patterns={INTERTAG_CUSTOM_CUSTOM:/~%%%\s+%%%~/g,INTERTAG_TAG_CUSTOM:/>\s+%%%~/g,INTERTAG_CUSTOM_TAG:/~%%%\s+</g,INTERTAG_TAG:/>\s+</g,SURROUNDING_SPACES:/\s*(<[^>]+>)\s*/g,TAG_END_SPACES:/(<(?:[^>]+?))(?:\s+?)(\/?>)/g,TAG_QUOTE_SPACES:/\s*=\s*(["']?)\s*(.*?)\s*(\1)/g},this.ui.html=n}.call(this),function(){"use strict";var e=function(){function e(){babelHelpers.classCallCheck(this,e)}return babelHelpers.createClass(e,null,[{key:"getConstructor",value:function(t){var n=e.components_[t];return n||console.error("There's no constructor registered for the component named "+t+". Components need to be registered via ComponentRegistry.register."),n}},{key:"register",value:function(t,n){e.components_[t]=n,n.NAME=t,n.TEMPLATES=e.Templates[t]}}]),e}();e.components_={},e.Templates={},this.ui.ComponentRegistry=e}.call(this),function(){"use strict";var e=this.ui.ComponentRegistry,t=this.ui.Disposable,n=function(t){function n(){babelHelpers.classCallCheck(this,n),babelHelpers.get(Object.getPrototypeOf(n.prototype),"constructor",this).call(this),this.nextComponentData_={}}return babelHelpers.inherits(n,t),babelHelpers.createClass(n,[{key:"createComponent",value:function(t,i){var o=n.components[i];if(!o){var s=e.getConstructor(t),a=this.getNextComponentData(i);a.element="#"+i,o=new s(a),n.components[i]=o}return o}},{key:"getNextComponentData",value:function(e){var t=this.nextComponentData_[e]||{};return t.id=e,t}},{key:"setNextComponentData",value:function(e,t){this.nextComponentData_[e]=t}},{key:"updateComponent",value:function(e){var t=n.components[e];if(t){var i=this.getNextComponentData(e);t.setAttrs(i)}return t}}]),n}(t);n.components={},this.ui.ComponentCollector=n}.call(this),function(){"use strict";var e=this.ui.Disposable,t=function(e){function t(){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this),this.eventHandles_=[]}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"add",value:function(){for(var e=0;e<arguments.length;e++)this.eventHandles_.push(arguments[e])}},{key:"disposeInternal",value:function(){this.eventHandles_=null}},{key:"removeAllListeners",value:function(){for(var e=0;e<this.eventHandles_.length;e++)this.eventHandles_[e].removeListener();this.eventHandles_=[]}}]),t}(e);this.ui.EventHandler=t}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.ComponentCollector,n=this.ui.Disposable,i=function(n){function i(e){if(babelHelpers.classCallCheck(this,i),babelHelpers.get(Object.getPrototypeOf(i.prototype),"constructor",this).call(this),!e)throw new Error("The component instance is mandatory");this.component_=e,this.eventHandles_={},this.groupHasListener_={}}return babelHelpers.inherits(i,n),babelHelpers.createClass(i,[{key:"attachListener_",value:function(e,t,n){var i="[data-on"+e+'="'+t+'"]';if(this.groupHasListener_[n][i]=!0,!this.eventHandles_[i]){var o=this.getListenerFn_(t);this.eventHandles_[i]=this.component_.delegate(e,i,o)}}},{key:"attachListeners",value:function(t,n){e.isString(t)&&(this.groupHasListener_[n]={},this.attachListenersFromHtml_(t,n))}},{key:"attachListenersFromHtml_",value:function(e,t){if(-1!==e.indexOf("data-on"))for(var n=/data-on([a-z]+)=['"]([^'"]+)['"]/g,i=n.exec(e);i;)this.attachListener_(i[1],i[2],t),i=n.exec(e)}},{key:"detachAllListeners",value:function(){for(var e in this.eventHandles_)this.eventHandles_[e]&&this.eventHandles_[e].removeListener();this.eventHandles_={},this.listenerCounts_={}}},{key:"detachUnusedListeners",value:function(){for(var e in this.eventHandles_){var t=!0;for(var n in this.groupHasListener_)if(this.groupHasListener_[n][e]){t=!1;break}t&&(this.eventHandles_[e].removeListener(),this.eventHandles_[e]=null)}}},{key:"disposeInternal",value:function(){this.detachAllListeners(),this.component_=null}},{key:"getListenerFn_",value:function(e){var n,i=e.split(":");return 2===i.length&&(e=i[1],n=t.components[i[0]],n||console.error("No component with the id "+i[0]+" has been collectedyet. Make sure that you specify an id for an existing component when adding inline listeners.")),n=n||this.component_,n[e].bind(n)}}]),i}(n);this.ui.EventsCollector=i}.call(this),function(){"use strict";var e=this.ui.array,t=this.ui.core,n=this.ui.dom,i=this.ui.features,o=this.ui.html,s=this.ui.object,a=this.ui.string,r=this.ui.Attribute,l=this.ui.ComponentCollector,c=this.ui.EventEmitterProxy,u=this.ui.EventHandler,d=this.ui.EventsCollector,_=function(r){function l(n){babelHelpers.classCallCheck(this,l),babelHelpers.get(Object.getPrototypeOf(l.prototype),"constructor",this).call(this,n),this.collectedSurfaces_=[],this.components={},this.decorating_=!1,this.delegateEventHandler_=null,this.elementEventProxy_=null,this.eventsCollector_=new d(this),this.generatedIdCount_={},this.inDocument=!1,this.surfaces_=null,this.wasRendered=!1,this.DEFAULT_ELEMENT_PARENT=document.body,t.mergeSuperClassesProperty(this.constructor,"ELEMENT_CLASSES",this.mergeElementClasses_),t.mergeSuperClassesProperty(this.constructor,"ELEMENT_TAG_NAME",e.firstDefinedValue),t.mergeSuperClassesProperty(this.constructor,"SURFACE_TAG_NAME",e.firstDefinedValue),this.addSurfacesFromStaticHint_(),this.delegateEventHandler_=new u,this.created_()}return babelHelpers.inherits(l,r),babelHelpers.createClass(l,[{key:"addSingleListener_",value:function(e,t,i){!this.elementEventProxy_&&n.supportsEvent(this.constructor.ELEMENT_TAG_NAME_MERGED,e)&&(this.elementEventProxy_=new c(this.element,this)),babelHelpers.get(Object.getPrototypeOf(l.prototype),"addSingleListener_",this).call(this,e,t,i)}},{key:"addSurface",value:function(e,t){var n=t||{};return this.surfaces_[e]=n,n.componentName&&this.createSubComponent_(n.componentName,e),this.cacheSurfaceRenderAttrs_(e),this}},{key:"addSurfaces",value:function(e){for(var t in e)this.addSurface(t,e[t]);return this}},{key:"addSurfacesFromStaticHint_",value:function(){t.mergeSuperClassesProperty(this.constructor,"SURFACES",this.mergeObjects_),this.surfaces_={},this.surfacesRenderAttrs_={};var e=this.constructor.SURFACES_MERGED;for(var n in e)this.addSurface(n,s.mixin({},e[n]))}},{key:"attach",value:function(e,t){return this.inDocument||(this.renderElement_(e,t),this.inDocument=!0,this.wasRendered||this.updatePlaceholderSurfaces_(),this.attached()),this}},{key:"attachInlineListeners_",value:function(){this.eventsCollector_.attachListeners(this.getElementContent_()),this.elementContent_=null}},{key:"attached",value:function(){}},{key:"buildPlaceholderSurfaceData_",value:function(e,t){return{componentName:e===l.SurfaceType.COMPONENT?t:null}}},{key:"cacheSurfaceContent",value:function(e,t){var n=this.computeSurfaceCacheState_(t),i=this.getSurface(e);i.cacheState=n}},{key:"cacheSurfaceRenderAttrs_",value:function(e){for(var t=this.getSurface(e).renderAttrs||[],n=0;n<t.length;n++)this.surfacesRenderAttrs_[t[n]]=this.surfacesRenderAttrs_[t[n]]||{},this.surfacesRenderAttrs_[t[n]][e]=!0}},{key:"clearSurfacesCache_",value:function(){for(var e in this.surfaces_)this.getSurface(e).cacheState=l.Cache.NOT_INITIALIZED}},{key:"compareCacheStates_",value:function(e,t){return e!==l.Cache.NOT_INITIALIZED&&e!==l.Cache.NOT_CACHEABLE&&e===t;
+  babelHelpers.inherits = function (subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
 
-}},{key:"computeSurfaceCacheState_",value:function(e){return t.isString(e)?(i.checkAttrOrderChange()&&(e=this.convertHtmlToBrowserFormat_(e)),a.hashCode(e)):l.Cache.NOT_CACHEABLE}},{key:"computeSurfacesCacheStateFromDom_",value:function(){for(var e in this.surfaces_)this.getSurface(e).componentName||this.cacheSurfaceContent(e,o.compress(this.getSurfaceElement(e).innerHTML))}},{key:"convertHtmlToBrowserFormat_",value:function(e){var t=document.createElement("div");return n.append(t,e),t.innerHTML}},{key:"created",value:function(){}},{key:"createPlaceholderSurface_",value:function(e,t,n,i){return e=e||this.generateSurfaceId_(t,i),this.getSurface(e)||this.addSurface(e,this.buildPlaceholderSurfaceData_(t,n)),e}},{key:"createSubComponent_",value:function(e,t){return this.components[t]=l.componentsCollector.createComponent(e,t),this.components[t]}},{key:"createSurfaceElement_",value:function(e){var t=document.createElement(this.constructor.SURFACE_TAG_NAME_MERGED);return t.id=e,t}},{key:"decorateAsSubComponent",value:function(){this.decorating_=!0,this.computeSurfacesCacheStateFromDom_(),this.renderAsSubComponent(),this.decorating_=!1}},{key:"decorateInternal",value:function(){}},{key:"delegate",value:function(e,t,i){var o=n.delegate(this.element,e,t,i);return this.delegateEventHandler_.add(o),o}},{key:"detach",value:function(){return this.inDocument&&(this.element.parentNode.removeChild(this.element),this.inDocument=!1,this.detached()),this.eventsCollector_.detachAllListeners(),this}},{key:"detached",value:function(){}},{key:"created_",value:function(){this.on("attrsChanged",this.handleAttributesChanges_),this.created()}},{key:"decorate",value:function(){if(this.inDocument)throw new Error(l.Error.ALREADY_RENDERED);return this.decorating_=!0,this.decorateInternal(),this.replaceSurfacePlaceholders_(this.getElementContent_()),this.computeSurfacesCacheStateFromDom_(),this.renderSurfacesContent_(this.surfaces_),this.attachInlineListeners_(),this.syncAttrs_(),this.attach(),this.decorating_=!1,this.wasRendered=!0,this}},{key:"disposeInternal",value:function(){this.detach(),this.elementEventProxy_&&(this.elementEventProxy_.dispose(),this.elementEventProxy_=null),this.delegateEventHandler_.removeAllListeners(),this.delegateEventHandler_=null,this.components=null,this.generatedIdCount_=null,this.surfaces_=null,this.surfacesRenderAttrs_=null,babelHelpers.get(Object.getPrototypeOf(l.prototype),"disposeInternal",this).call(this)}},{key:"syncAttrs_",value:function(){for(var e=this.getAttrNames(),t=0;t<e.length;t++)this.fireAttrChange_(e[t])}},{key:"syncAttrsFromChanges_",value:function(e){for(var t in e)this.fireAttrChange_(t,e[t])}},{key:"findElementById_",value:function(e){return document.getElementById(e)||this.element.querySelector("#"+e)}},{key:"fireAttrChange_",value:function(e,n){var i=this["sync"+e.charAt(0).toUpperCase()+e.slice(1)];t.isFunction(i)&&(n||(n={newVal:this[e],prevVal:void 0}),i.call(this,n.newVal,n.prevVal))}},{key:"generateSurfaceId_",value:function(e,t){var n=t||"",i=n?n+"-":"";this.generatedIdCount_[n]=(this.generatedIdCount_[n]||0)+1;var o=i+e+this.generatedIdCount_[n];return e===l.SurfaceType.COMPONENT?this.makeSurfaceId_(o):o}},{key:"getComponentHtml",value:function(e){return this.getWrapperHtml_(this.constructor.ELEMENT_TAG_NAME_MERGED,this.id,e)}},{key:"getElementContent",value:function(){}},{key:"getElementContent_",value:function(){return this.elementContent_=this.elementContent_||this.getElementContent(),this.elementContent_}},{key:"getElementExtendedContent",value:function(){return this.replaceSurfacePlaceholders_(this.getElementContent_())}},{key:"getModifiedSurfacesFromChanges_",value:function(e){var t=[];for(var n in e)t.push(this.surfacesRenderAttrs_[n]);return s.mixin.apply(null,t)}},{key:"getNonComponentSurfaceHtml",value:function(e,t){var n=this.makeSurfaceId_(e);return this.getWrapperHtml_(this.constructor.SURFACE_TAG_NAME_MERGED,n,t)}},{key:"getSurface",value:function(e){return this.surfaces_[e]||null}},{key:"getSurfaceContent",value:function(){}},{key:"getSurfaceContent_",value:function(e){var t=this.getSurface(e);return t.componentName?this.components[e].wasRendered?"":this.components[e].getElementExtendedContent():this.getSurfaceContent(e)}},{key:"getSurfaceElement",value:function(e){var t=this.getSurface(e);if(!t)return null;if(!t.element)if(t.componentName)t.element=this.components[e].element;else{var n=this.makeSurfaceId_(e);t.element=this.findElementById_(n)||this.createSurfaceElement_(n)}return t.element}},{key:"getSurfaceHtml",value:function(e,t){var n=this.getSurface(e);return n.componentName?this.components[e].getComponentHtml(t):this.getNonComponentSurfaceHtml(e,t)}},{key:"getWrapperHtml_",value:function(e,t,n){return"<"+e+' id="'+t+'">'+n+"</"+e+">"}},{key:"getSurfaces",value:function(){return this.surfaces_}},{key:"handleAttributesChanges_",value:function(e){this.inDocument&&this.renderSurfacesContent_(this.getModifiedSurfacesFromChanges_(e.changes)),this.syncAttrsFromChanges_(e.changes)}},{key:"makeId_",value:function(){return"metal_c_"+t.getUid(this)}},{key:"makeSurfaceId_",value:function(e){return this.id+"-"+e}},{key:"mergeElementClasses_",value:function(e){return e.filter(function(e){return e}).join(" ")}},{key:"mergeObjects_",value:function(e){return s.mixin.apply(null,[{}].concat(e.reverse()))}},{key:"removeSurface",value:function(e){var t=this.getSurfaceElement(e);return t&&t.parentNode&&t.parentNode.removeChild(t),delete this.surfaces_[e],this}},{key:"render",value:function(e,t){if(this.wasRendered)throw new Error(l.Error.ALREADY_RENDERED);return this.renderInternal(),this.clearSurfacesCache_(),this.renderSurfacesContent_(this.surfaces_),this.attachInlineListeners_(),this.syncAttrs_(),this.attach(e,t),this.wasRendered=!0,this}},{key:"renderAsSubComponent",value:function(){this.attachInlineListeners_(),this.syncAttrs_(),this.attach(),this.wasRendered=!0}},{key:"renderComponentSurface_",value:function(e,t){var i=this.components[e];if(i.wasRendered)l.componentsCollector.updateComponent(e);else if(t){var o=i.element;n.isEmpty(o)&&n.append(o,t),this.decorating_?i.decorateAsSubComponent():i.renderAsSubComponent()}else i.render()}},{key:"renderElement_",value:function(e,t){var i=this.element;if(i.id=this.id,t||!i.parentNode){var o=n.toElement(e)||this.DEFAULT_ELEMENT_PARENT;o.insertBefore(i,n.toElement(t))}}},{key:"renderInternal",value:function(){var e=this.getElementExtendedContent();e&&n.append(this.element,e)}},{key:"renderPlaceholderSurfaceContents_",value:function(e,t){var n=this;e.replace(l.SURFACE_REGEX,function(e,i,o){return o=o||n.generateSurfaceId_(i,t),n.renderSurfaceContent(o),e})}},{key:"renderSurfaceContent",value:function(e,n,i){var o=this.getSurface(e);if(o.componentName)return void this.renderComponentSurface_(e,n);var s=n||this.getSurfaceContent_(e);if(t.isDefAndNotNull(s)){var a=o.cacheState,r=i||s;this.cacheSurfaceContent(e,this.decorating_?s:r);var l=this.compareCacheStates_(o.cacheState,a);this.decorating_&&this.cacheSurfaceContent(e,r),l?(this.decorating_&&this.eventsCollector_.attachListeners(r,e),this.renderPlaceholderSurfaceContents_(s,e)):(this.eventsCollector_.attachListeners(r,e),this.replaceSurfaceContent_(e,s))}}},{key:"renderSurfacesContent_",value:function(e){this.generatedIdCount_={};for(var t in e)this.getSurface(t).handled||this.renderSurfaceContent(t);this.wasRendered&&(this.updatePlaceholderSurfaces_(),this.eventsCollector_.detachUnusedListeners())}},{key:"replaceSurfaceContent_",value:function(e,t){t=this.replaceSurfacePlaceholders_(t,e);var i=this.getSurfaceElement(e);n.removeChildren(i),n.append(i,t)}},{key:"replaceSurfacePlaceholders_",value:function(e,n){if(!t.isString(e))return e;var i=this;return e.replace(l.SURFACE_REGEX,function(e,t,o,s){o=i.createPlaceholderSurface_(o,t,s,n),i.getSurface(o).handled=!0;var a=i.getSurfaceContent_(o),r=i.replaceSurfacePlaceholders_(a,o),l=i.getSurfaceHtml(o,r);return i.collectedSurfaces_.push({cacheContent:a,content:r,surfaceId:o}),l})}},{key:"setterElementFn_",value:function(e){var t=n.toElement(e);return t||(t=this.valueElementFn_()),t}},{key:"syncElementClasses",value:function(e,t){var i=this.constructor.ELEMENT_CLASSES_MERGED;e&&(i=i+" "+e),t&&n.removeClasses(this.element,t),n.addClasses(this.element,i)}},{key:"updatePlaceholderSurface_",value:function(e){var t=e.surfaceId,i=this.getSurface(t);if(this.decorating_||i.element||i.componentName){var o=i.componentName?t:this.makeSurfaceId_(t),s=this.findElementById_(o);n.replace(s,this.getSurfaceElement(t)),this.renderSurfaceContent(t,e.content,e.cacheContent)}else this.cacheSurfaceContent(t,e.cacheContent),this.eventsCollector_.attachListeners(e.cacheContent,t)}},{key:"updatePlaceholderSurfaces_",value:function(){for(var e=this.collectedSurfaces_.length-1;e>=0;e--)this.updatePlaceholderSurface_(this.collectedSurfaces_[e]),this.getSurface(this.collectedSurfaces_[e].surfaceId).handled=!1;this.collectedSurfaces_=[]}},{key:"validatorElementFn_",value:function(e){return t.isElement(e)||t.isString(e)}},{key:"validatorElementClassesFn_",value:function(e){return t.isString(e)}},{key:"validatorIdFn_",value:function(e){return t.isString(e)}},{key:"valueElementFn_",value:function(){return document.createElement(this.constructor.ELEMENT_TAG_NAME_MERGED)}},{key:"valueIdFn_",value:function(){var e=this.element;return e&&e.id?e.id:this.makeId_()}}]),l}(r);_.componentsCollector=new l,_.ATTRS={element:{setter:"setterElementFn_",validator:"validatorElementFn_",valueFn:"valueElementFn_",writeOnce:!0},elementClasses:{validator:"validatorElementClassesFn_"},id:{validator:"validatorIdFn_",valueFn:"valueIdFn_",writeOnce:!0}},_.ELEMENT_CLASSES="component",_.ELEMENT_TAG_NAME="div",_.SURFACE_REGEX=/\%\%\%\%~(s|c)(?:-([^~:]+))?(?::([^~]+))?~\%\%\%\%/g,_.SURFACE_TAG_NAME="div",_.Cache={NOT_CACHEABLE:-1,NOT_INITIALIZED:-2},_.Error={ALREADY_RENDERED:"Component already rendered"},_.SurfaceType={COMPONENT:"c",NORMAL:"s"},_.INVALID_ATTRS=["components","elementContent"],this.ui.Component=_}.call(this),function(){"use strict";var e=this.ui.core,t=function(){};t.prototype.then=function(){},t.IMPLEMENTED_BY_PROP="$goog_Thenable",t.addImplementation=function(e){e.prototype.then=e.prototype.then,e.prototype.$goog_Thenable=!0},t.isImplementedBy=function(e){if(!e)return!1;try{return!!e.$goog_Thenable}catch(t){return!1}};var n=function(e){var t=Array.prototype.slice.call(arguments,1);return function(){var n=t.slice();return n.push.apply(n,arguments),e.apply(this,n)}},i={};i.throwException=function(e){i.nextTick(function(){throw e})},i.run=function(e,t){i.run.workQueueScheduled_||(i.nextTick(i.run.processWorkQueue),i.run.workQueueScheduled_=!0),i.run.workQueue_.push(new i.run.WorkItem_(e,t))},i.run.workQueueScheduled_=!1,i.run.workQueue_=[],i.run.processWorkQueue=function(){for(;i.run.workQueue_.length;){var e=i.run.workQueue_;i.run.workQueue_=[];for(var t=0;t<e.length;t++){var n=e[t];try{n.fn.call(n.scope)}catch(o){i.throwException(o)}}}i.run.workQueueScheduled_=!1},i.run.WorkItem_=function(e,t){this.fn=e,this.scope=t},i.nextTick=function(t,n){var o=t;return n&&(o=t.bind(n)),o=i.nextTick.wrapCallback_(o),e.isFunction(window.setImmediate)?void window.setImmediate(o):(i.nextTick.setImmediate_||(i.nextTick.setImmediate_=i.nextTick.getSetImmediateEmulator_()),void i.nextTick.setImmediate_(o))},i.nextTick.setImmediate_=null,i.nextTick.getSetImmediateEmulator_=function(){var e=window.MessageChannel;if("undefined"==typeof e&&"undefined"!=typeof window&&window.postMessage&&window.addEventListener&&(e=function(){var e=document.createElement("iframe");e.style.display="none",e.src="",document.documentElement.appendChild(e);var t=e.contentWindow,n=t.document;n.open(),n.write(""),n.close();var i="callImmediate"+Math.random(),o=t.location.protocol+"//"+t.location.host,s=function(e){(e.origin===o||e.data===i)&&this.port1.onmessage()}.bind(this);t.addEventListener("message",s,!1),this.port1={},this.port2={postMessage:function(){t.postMessage(i,o)}}}),"undefined"!=typeof e){var t=new e,n={},i=n;return t.port1.onmessage=function(){n=n.next;var e=n.cb;n.cb=null,e()},function(e){i.next={cb:e},i=i.next,t.port2.postMessage(0)}}return"undefined"!=typeof document&&"onreadystatechange"in document.createElement("script")?function(e){var t=document.createElement("script");t.onreadystatechange=function(){t.onreadystatechange=null,t.parentNode.removeChild(t),t=null,e(),e=null},document.documentElement.appendChild(t)}:function(e){setTimeout(e,0)}},i.nextTick.wrapCallback_=function(e){return e};var o=function s(e,t){this.state_=s.State_.PENDING,this.result_=void 0,this.parent_=null,this.callbackEntries_=null,this.executing_=!1,s.UNHANDLED_REJECTION_DELAY>0?this.unhandledRejectionId_=0:0===s.UNHANDLED_REJECTION_DELAY&&(this.hadUnhandledRejection_=!1);try{var n=this;e.call(t,function(e){n.resolve_(s.State_.FULFILLED,e)},function(e){n.resolve_(s.State_.REJECTED,e)})}catch(i){this.resolve_(s.State_.REJECTED,i)}};o.UNHANDLED_REJECTION_DELAY=0,o.State_={PENDING:0,BLOCKED:1,FULFILLED:2,REJECTED:3},o.CallbackEntry_=null,o.resolve=function(e){return new o(function(t){t(e)})},o.reject=function(e){return new o(function(t,n){n(e)})},o.race=function(e){return new o(function(t,n){e.length||t(void 0);for(var i,o=0;i=e[o];o++)i.then(t,n)})},o.all=function(e){return new o(function(t,i){var o=e.length,s=[];if(!o)return void t(s);for(var a,r=function(e,n){o--,s[e]=n,0===o&&t(s)},l=function(e){i(e)},c=0;a=e[c];c++)a.then(n(r,c),l)})},o.firstFulfilled=function(e){return new o(function(t,i){var o=e.length,s=[];if(!o)return void t(void 0);for(var a,r=function(e){t(e)},l=function(e,t){o--,s[e]=t,0===o&&i(s)},c=0;a=e[c];c++)a.then(r,n(l,c))})},o.prototype.then=function(t,n,i){return this.addChildPromise_(e.isFunction(t)?t:null,e.isFunction(n)?n:null,i)},t.addImplementation(o),o.prototype.thenAlways=function(e,t){var n=function(){try{e.call(t)}catch(n){o.handleRejection_.call(null,n)}};return this.addCallbackEntry_({child:null,onRejected:n,onFulfilled:n}),this},o.prototype.thenCatch=function(e,t){return this.addChildPromise_(null,e,t)},o.prototype["catch"]=o.prototype.thenCatch,o.prototype.cancel=function(e){this.state_===o.State_.PENDING&&i.run(function(){var t=new o.CancellationError(e);this.cancelInternal_(t)},this)},o.prototype.cancelInternal_=function(e){this.state_===o.State_.PENDING&&(this.parent_?this.parent_.cancelChild_(this,e):this.resolve_(o.State_.REJECTED,e))},o.prototype.cancelChild_=function(e,t){if(this.callbackEntries_){for(var n,i=0,s=-1,a=0;n=this.callbackEntries_[a];a++){var r=n.child;if(r&&(i++,r===e&&(s=a),s>=0&&i>1))break}if(s>=0)if(this.state_===o.State_.PENDING&&1===i)this.cancelInternal_(t);else{var l=this.callbackEntries_.splice(s,1)[0];this.executeCallback_(l,o.State_.REJECTED,t)}}},o.prototype.addCallbackEntry_=function(e){this.callbackEntries_&&this.callbackEntries_.length||this.state_!==o.State_.FULFILLED&&this.state_!==o.State_.REJECTED||this.scheduleCallbacks_(),this.callbackEntries_||(this.callbackEntries_=[]),this.callbackEntries_.push(e)},o.prototype.addChildPromise_=function(t,n,i){var s={child:null,onFulfilled:null,onRejected:null};return s.child=new o(function(a,r){s.onFulfilled=t?function(e){try{var n=t.call(i,e);a(n)}catch(o){r(o)}}:a,s.onRejected=n?function(t){try{var s=n.call(i,t);!e.isDef(s)&&t instanceof o.CancellationError?r(t):a(s)}catch(l){r(l)}}:r}),s.child.parent_=this,this.addCallbackEntry_(s),s.child},o.prototype.unblockAndFulfill_=function(e){if(this.state_!==o.State_.BLOCKED)throw new Error("CancellablePromise is not blocked.");this.state_=o.State_.PENDING,this.resolve_(o.State_.FULFILLED,e)},o.prototype.unblockAndReject_=function(e){if(this.state_!==o.State_.BLOCKED)throw new Error("CancellablePromise is not blocked.");this.state_=o.State_.PENDING,this.resolve_(o.State_.REJECTED,e)},o.prototype.resolve_=function(n,i){if(this.state_===o.State_.PENDING){if(this===i)n=o.State_.REJECTED,i=new TypeError("CancellablePromise cannot resolve to itself");else{if(t.isImplementedBy(i))return i=i,this.state_=o.State_.BLOCKED,void i.then(this.unblockAndFulfill_,this.unblockAndReject_,this);if(e.isObject(i))try{var s=i.then;if(e.isFunction(s))return void this.tryThen_(i,s)}catch(a){n=o.State_.REJECTED,i=a}}this.result_=i,this.state_=n,this.scheduleCallbacks_(),n!==o.State_.REJECTED||i instanceof o.CancellationError||o.addUnhandledRejection_(this,i)}},o.prototype.tryThen_=function(e,t){this.state_=o.State_.BLOCKED;var n=this,i=!1,s=function(e){i||(i=!0,n.unblockAndFulfill_(e))},a=function(e){i||(i=!0,n.unblockAndReject_(e))};try{t.call(e,s,a)}catch(r){a(r)}},o.prototype.scheduleCallbacks_=function(){this.executing_||(this.executing_=!0,i.run(this.executeCallbacks_,this))},o.prototype.executeCallbacks_=function(){for(;this.callbackEntries_&&this.callbackEntries_.length;){var e=this.callbackEntries_;this.callbackEntries_=[];for(var t=0;t<e.length;t++)this.executeCallback_(e[t],this.state_,this.result_)}this.executing_=!1},o.prototype.executeCallback_=function(e,t,n){t===o.State_.FULFILLED?e.onFulfilled(n):(this.removeUnhandledRejection_(),e.onRejected(n))},o.prototype.removeUnhandledRejection_=function(){var e;if(o.UNHANDLED_REJECTION_DELAY>0)for(e=this;e&&e.unhandledRejectionId_;e=e.parent_)clearTimeout(e.unhandledRejectionId_),e.unhandledRejectionId_=0;else if(0===o.UNHANDLED_REJECTION_DELAY)for(e=this;e&&e.hadUnhandledRejection_;e=e.parent_)e.hadUnhandledRejection_=!1},o.addUnhandledRejection_=function(e,t){o.UNHANDLED_REJECTION_DELAY>0?e.unhandledRejectionId_=setTimeout(function(){o.handleRejection_.call(null,t)},o.UNHANDLED_REJECTION_DELAY):0===o.UNHANDLED_REJECTION_DELAY&&(e.hadUnhandledRejection_=!0,i.run(function(){e.hadUnhandledRejection_&&o.handleRejection_.call(null,t)}))},o.handleRejection_=i.throwException,o.setUnhandledRejectionHandler=function(e){o.handleRejection_=e},o.CancellationError=function(e){var t=function(e){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this,e),e&&(this.message=e)};return babelHelpers.inherits(t,e),t}(Error),o.CancellationError.prototype.name="cancel","undefined"==typeof window.Promise&&(window.Promise=o),this.uiNamed.Promise={},this.uiNamed.Promise.CancellablePromise=o,this.uiNamed.Promise.async=i}.call(this),function(){"use strict";var e=this.ui.Component,t=this.ui.ComponentRegistry,n=this.ui.core,i=this.ui.dom,o=this.ui.EventHandler,s=this.uiNamed.Promise.CancellablePromise,a=function(e){function t(e){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this,e)}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"attached",value:function(){this.eventHandler_=new o,this.eventHandler_.add(i.on(this.inputElement,"input",this.onInput_.bind(this))),this.on("select",this.selectValue_.bind(this))}},{key:"detached",value:function(){this.eventHandler_.removeAllListeners()}},{key:"formatData_",value:function(e){return this.format&&(e=e.map(function(e){return this.format(e)}.bind(this))),e}},{key:"loadData_",value:function(e){return new s(function(t,i){if(n.isFunction(this.data)){var o=this.data(e);Array.isArray(o)?t(o):o&&n.isFunction(o.then)?o.then(function(e){t(e)}):i("The returned value from data loader should be an array or a Promise")}else i("There is no provided data loader")}.bind(this))}},{key:"onInput_",value:function(){var e=this.inputElement.value;this.emit("query",e),this.loadData_(e).then(function(e){this.emit("result",this.formatData_(e))}.bind(this))["catch"](function(e){this.emit("error",e)}.bind(this))}},{key:"selectValue_",value:function(e){this.select&&(e=this.select(this.inputElement.value,e)),this.inputElement.value=e,this.inputElement.focus()}}]),t}(e);a.ATTRS={data:{validator:n.isFunction},format:{validator:n.isFunction},inputElement:{setter:i.toElement},select:{validator:n.isFunction}},t.register("AutoCompleteBase",a),this.ui.AutoCompleteBase=a}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.dom,n=this.ui.Component,i=soy.$$getDelegateFn,o=function(o){function s(t){babelHelpers.classCallCheck(this,s),babelHelpers.get(Object.getPrototypeOf(s.prototype),"constructor",this).call(this,t),e.mergeSuperClassesProperty(this.constructor,"TEMPLATES",this.mergeObjects_),this.addSurfacesFromTemplates_(),this.surfaceBeingRendered_=null,this.firstSurfaceFound_={},this.nextSurfaceCallData_={}}return babelHelpers.inherits(s,o),babelHelpers.createClass(s,[{key:"addSurfacesFromTemplates_",value:function(){for(var e=this.constructor.TEMPLATES_MERGED,t=Object.keys(e),n=0;n<t.length;n++){var i=t[n];if("content"!==i&&"__deltemplate"!==i.substr(0,13)){var o=this.getSurface(i);o||this.addSurface(i,{renderAttrs:e[i].params,templateName:i})}}}},{key:"buildComponentConfigData_",value:function(e,t){var n={id:e};for(var i in t)n[i]=t[i];return n}},{key:"buildPlaceholderSurfaceData_",value:function(e,t){var i=babelHelpers.get(Object.getPrototypeOf(s.prototype),"buildPlaceholderSurfaceData_",this).call(this,e,t);return e===n.SurfaceType.NORMAL&&(i.templateName=t),i}},{key:"generateSoySurfaceId_",value:function(e){return this.surfaceBeingRendered_||this.firstSurfaceFound_[e]?this.generateSurfaceId_(n.SurfaceType.NORMAL,this.surfaceBeingRendered_):(this.firstSurfaceFound_[e]=!0,e)}},{key:"getComponentHtml",value:function(e){return this.renderElementDelTemplate_(e)}},{key:"getElementContent",value:function(){return this.surfaceBeingRendered_=null,this.renderTemplateByName_("content",this)}},{key:"getNonComponentSurfaceHtml",value:function(e,t){return this.renderElementDelTemplate_(t,e)}},{key:"getSurfaceContent",value:function(e){var t=this.getSurface(e),n=this.nextSurfaceCallData_[e];return this.nextSurfaceCallData_[e]=null,this.surfaceBeingRendered_=e,this.renderTemplateByName_(t.templateName,n)}},{key:"handleGetDelegateFnCall_",value:function(e){var t=e.indexOf(".");return-1===t?this.handleTemplateCall_.bind(this,e):this.handleSurfaceCall_.bind(this,e.substr(t+1))}},{key:"handleSurfaceCall_",value:function(t,n){var i=n.surfaceId;return e.isDefAndNotNull(i)||(i=this.generateSoySurfaceId_(t)),this.nextSurfaceCallData_[i]=n,"%%%%~s-"+i+":"+t+"~%%%%"}},{key:"handleTemplateCall_",value:function(e,t){var i=(t||{}).id||this.generateSurfaceId_(n.SurfaceType.COMPONENT,this.surfaceBeingRendered_);return n.componentsCollector.setNextComponentData(i,this.buildComponentConfigData_(i,t)),"%%%%~c-"+i+":"+e+"~%%%%"}},{key:"renderElementDelTemplate_",value:function(e,t){var n=this.constructor.NAME;t&&(n+="."+this.getSurface(t).templateName);var i=soy.$$getDelegateFn(n,"element",!0),o={elementClasses:this.elementClasses,elementContent:s.sanitizeHtml(e||""),id:this.id||this.makeId_(),surfaceId:t};return i(o,null,{}).content}},{key:"renderTemplate_",value:function(e,t){soy.$$getDelegateFn=this.handleGetDelegateFnCall_.bind(this);var n=e(t||this,null,{}).content;return soy.$$getDelegateFn=i,n}},{key:"renderTemplateByName_",value:function(t,n){var i=this.constructor.TEMPLATES_MERGED[t];return e.isFunction(i)?this.renderTemplate_(i,n):void 0}},{key:"valueElementFn_",value:function(){var e=this.getComponentHtml();if(e){var n=t.buildFragment(e),i=n.childNodes[0];return n.removeChild(i),i}return babelHelpers.get(Object.getPrototypeOf(s.prototype),"valueElementFn_",this).call(this)}}],[{key:"sanitizeHtml",value:function(e){return soydata.VERY_UNSAFE.ordainSanitizedHtml(e)}}]),s}(n);o.TEMPLATES={},this.ui.SoyComponent=o}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.SoyComponent,n=function(e){function t(e){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this,e)}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"hide",value:function(){this.visible=!1}},{key:"show",value:function(){this.visible=!0}},{key:"syncVisible",value:function(e){this.element.style.display=e?null:"none"}}]),t}(t);n.ATTRS={visible:{validator:e.isBoolean,value:!0}},this.ui.Component=n}.call(this),function(){"use strict";var e=this.ui.ComponentRegistry,t=e.Templates;"undefined"==typeof t.List&&(t.List={}),t.List.content=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("List.items"),"",!0)(e,null,n))},goog.DEBUG&&(t.List.content.soyTemplateName="Templates.List.content"),t.List.items=function(e,t,n){for(var i="",o=e.items,s=o.length,a=0;s>a;a++){var r=o[a];if(i+='<li class="list-item u-cf" data-index="'+soy.$$escapeHtmlAttribute(a)+'" data-onclick="handleClick">',r.icons){i+='<div class="list-icons u-pull-right">';for(var l=r.icons,c=l.length,u=0;c>u;u++){var d=l[u];i+='<span class="list-icon '+soy.$$escapeHtmlAttribute(d)+'"></span>'}i+="</div>"}i+=(r.img?'<span class="list-image u-pull-left '+soy.$$escapeHtmlAttribute(r.img["class"])+'"><img src="'+soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(r.img.src))+'"></span>':"")+'<div class="list-main-content u-pull-left"><div class="list-text-primary">'+soy.$$escapeHtml(r.content)+"</div>"+(r.help?'<div class="list-text-secondary">'+soy.$$escapeHtml(r.help)+"</div>":"")+"</div></li>"}return soydata.VERY_UNSAFE.ordainSanitizedHtml(i)},goog.DEBUG&&(t.List.items.soyTemplateName="Templates.List.items"),t.List.__deltemplate_s35_e3f298e9=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml('<ul id="'+soy.$$escapeHtmlAttribute(e.id)+'-items">'+soy.$$escapeHtml(e.elementContent)+"</ul>")},goog.DEBUG&&(t.List.__deltemplate_s35_e3f298e9.soyTemplateName="Templates.List.__deltemplate_s35_e3f298e9"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("List.items"),"element",0,t.List.__deltemplate_s35_e3f298e9),t.List.__deltemplate_s41_88d36183=function(e,n,i){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("List"),"element",!0)({elementClasses:e.elementClasses,elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.List.content(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.List.__deltemplate_s41_88d36183.soyTemplateName="Templates.List.__deltemplate_s41_88d36183"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("List"),"",0,t.List.__deltemplate_s41_88d36183),t.List.__deltemplate_s47_4ac84340=function(e,t,n){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="'+soy.$$escapeHtmlAttribute(e.id)+'" class="list component'+soy.$$escapeHtmlAttribute(e.elementClasses?" "+e.elementClasses:"")+'">'+soy.$$escapeHtml(e.elementContent)+"</div>")},goog.DEBUG&&(t.List.__deltemplate_s47_4ac84340.soyTemplateName="Templates.List.__deltemplate_s47_4ac84340"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("List"),"element",0,t.List.__deltemplate_s47_4ac84340),t.List.__deltemplate_s55_605e1843=function(e,n,i){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("List.items"),"element",!0)({elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.List.items(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.List.__deltemplate_s55_605e1843.soyTemplateName="Templates.List.__deltemplate_s55_605e1843"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("List.items"),"",0,t.List.__deltemplate_s55_605e1843),t.List.items.params=["items"]}.call(this),function(){"use strict";var e=this.ui.Component,t=this.ui.ComponentRegistry,n=function(e){function t(e){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this,e)}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"handleClick",value:function(e){this.emit("itemSelected",e.delegateTarget)}}]),t}(e);n.ELEMENT_CLASSES="list",n.ATTRS={items:{validator:Array.isArray,valueFn:function(){return[]}}},t.register("List",n),this.ui.List=n}.call(this),function(){"use strict";var e=this.ui.AutoCompleteBase,t=this.ui.ComponentRegistry,n=this.ui.core,i=this.ui.dom,o=this.ui.List,s=this.ui.position,a=function(e){function t(e){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this,e)}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"attached",value:function(){babelHelpers.get(Object.getPrototypeOf(t.prototype),"attached",this).call(this),this.on("result",this.onDataResult_.bind(this)),this.list_.on("itemSelected",this.onItemSelected_.bind(this))}},{key:"created",value:function(){this.DEFAULT_ELEMENT_PARENT=this.inputElement.parentNode}},{key:"detached",value:function(){babelHelpers.get(Object.getPrototypeOf(t.prototype),"detached",this).call(this),this.list_.dispose(),this.disposeDocumentClickEvents_()}},{key:"renderInternal",value:function(){var e=s.getRegion(this.inputElement);this.element.style.top=e.bottom+"px",this.element.style.width=e.width+"px",this.list_=(new o).render(this.element)}},{key:"attachDocumentClickEvents_",value:function(){this.documentClickHandler_=i.on(document,"click",this.onDocumentClick_.bind(this)),this.listClickHandler_=i.on(this.list_.element,"click",this.onListClick_.bind(this))}},{key:"disposeDocumentClickEvents_",value:function(){this.documentClickHandler_&&(this.documentClickHandler_.dispose(),this.documentClickHandler_=null),this.listClickHandler_&&(this.listClickHandler_.dispose(),this.listClickHandler_=null)}},{key:"onDataResult_",value:function(e){e&&e.length>0?(this.list_.items=e,this.visible=!0):this.visible=!1}},{key:"onDocumentClick_",value:function(){this.visible=!1}},{key:"onItemSelected_",value:function(e){var t=parseInt(e.getAttribute("data-index"),10);this.emit("select",this.list_.items[t].text),this.visible=!1}},{key:"onListClick_",value:function(e){e.stopPropagation()}},{key:"syncVisible",value:function(e){e?(this.element.style.display=null,this.attachDocumentClickEvents_()):(this.element.style.display="none",this.disposeDocumentClickEvents_())}}]),t}(e);a.ELEMENT_CLASSES="autocomplete autocomplete-list",a.ATTRS={visible:{validator:n.isBoolean,value:!1}},t.register("AutoComplete",a),this.ui.AutoComplete=a}.call(this),function(){"use strict";var e={dragDrop:function(){return"undefined"!=typeof FileReader&&"draggable"in document.createElement("span")},ajaxUpload:function(){return!!window.FormData&&"upload"in new XMLHttpRequest}};this.ui.Features=e}.call(this),function(){"use strict";var e=this.ui.Component,t=this.ui.ComponentRegistry,n=this.ui.core,i=this.ui.dom,o=this.ui.EventHandler,s=this.ui.Features,a=function(e){function t(e){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this,e)}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"attached",value:function(){this.isCompatible_&&(this.eventHandler_=new o,this.eventHandler_.add(this.on("dragenter",this.onDragEnter_,this),this.on("dragleave",this.onDragLeave_,this),this.on("dragover",this.preventEvent_,this),this.on("drop",this.onDrop_,this)))}},{key:"created",value:function(){this.isCompatible_=s.dragDrop()&&s.ajaxUpload()}},{key:"detached",value:function(){this.isCompatible_&&this.eventHandler_.removeAllListeners()}},{key:"onDragEnter_",value:function(e){this.preventEvent_(e),this.hoverClass&&i.addClasses(this.element,this.hoverClass)}},{key:"onDragLeave_",value:function(e){this.preventEvent_(e),this.hoverClass&&i.hasClass(e.target,this.hoverClass)&&i.removeClasses(this.element,this.hoverClass)}},{key:"onDrop_",value:function(e){this.preventEvent_(e),this.uploadFiles_(e.dataTransfer.files)}},{key:"preventEvent_",value:function(e){e.preventDefault(),e.stopImmediatePropagation()}},{key:"uploadFiles_",value:function(e){for(var t=new FormData,n=0;n<e.length;n++)t.append("file",e[n]);var i=new XMLHttpRequest;i.open("POST",this.uploadURL),i.onerror=function(){this.emit("uploadFailed")}.bind(this),i.onload=function(){this.emit("uploadFinished")}.bind(this),i.upload.onprogress=function(e){e.lengthComputable&&this.emit("uploadProgress",e.loaded/e.total*100|0)}.bind(this),i.send(t),this.emit("uploadStart",i)}}]),t}(e);a.ATTRS={hoverClass:{validator:function(e){return n.isString(e)||n.isNull(e)},value:"dragdrop-hover"
-},uploadURL:{validator:n.isString}},t.register("DragDropUpload",a),this.ui.DragDropUpload=a}.call(this),function(){"use strict";var e=this.ui.ComponentRegistry,t=e.Templates;"undefined"==typeof t.Modal&&(t.Modal={}),t.Modal.content=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.header"),"",!0)(e,null,n)+soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.body"),"",!0)(e,null,n)+soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.footer"),"",!0)(e,null,n))},goog.DEBUG&&(t.Modal.content.soyTemplateName="Templates.Modal.content"),t.Modal.body=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml(e.body?soy.$$escapeHtml(e.body):"")},goog.DEBUG&&(t.Modal.body.soyTemplateName="Templates.Modal.body"),t.Modal.footer=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml(e.footer?soy.$$escapeHtml(e.footer):"")},goog.DEBUG&&(t.Modal.footer.soyTemplateName="Templates.Modal.footer"),t.Modal.header=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml(e.header?'<a class="modal-close icon-12-close-long" data-onclick="hide"></a>'+soy.$$escapeHtml(e.header):"")},goog.DEBUG&&(t.Modal.header.soyTemplateName="Templates.Modal.header"),t.Modal.__deltemplate_s78_65c2d4d4=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml('<section id="'+soy.$$escapeHtmlAttribute(e.id)+'-body">'+soy.$$escapeHtml(e.elementContent)+"</section>")},goog.DEBUG&&(t.Modal.__deltemplate_s78_65c2d4d4.soyTemplateName="Templates.Modal.__deltemplate_s78_65c2d4d4"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.body"),"element",0,t.Modal.__deltemplate_s78_65c2d4d4),t.Modal.__deltemplate_s84_c9897a65=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml('<footer id="'+soy.$$escapeHtmlAttribute(e.id)+'-footer">'+soy.$$escapeHtml(e.elementContent)+"</footer>")},goog.DEBUG&&(t.Modal.__deltemplate_s84_c9897a65.soyTemplateName="Templates.Modal.__deltemplate_s84_c9897a65"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.footer"),"element",0,t.Modal.__deltemplate_s84_c9897a65),t.Modal.__deltemplate_s90_499dc9aa=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml('<header id="'+soy.$$escapeHtmlAttribute(e.id)+'-header">'+soy.$$escapeHtml(e.elementContent)+"</header>")},goog.DEBUG&&(t.Modal.__deltemplate_s90_499dc9aa.soyTemplateName="Templates.Modal.__deltemplate_s90_499dc9aa"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.header"),"element",0,t.Modal.__deltemplate_s90_499dc9aa),t.Modal.__deltemplate_s96_45b138fb=function(e,n,i){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal"),"element",!0)({elementClasses:e.elementClasses,elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.Modal.content(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.Modal.__deltemplate_s96_45b138fb.soyTemplateName="Templates.Modal.__deltemplate_s96_45b138fb"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal"),"",0,t.Modal.__deltemplate_s96_45b138fb),t.Modal.__deltemplate_s102_df8ef55a=function(e,t,n){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="'+soy.$$escapeHtmlAttribute(e.id)+'" class="modal component'+soy.$$escapeHtmlAttribute(e.elementClasses?" "+e.elementClasses:"")+'">'+soy.$$escapeHtml(e.elementContent)+"</div>")},goog.DEBUG&&(t.Modal.__deltemplate_s102_df8ef55a.soyTemplateName="Templates.Modal.__deltemplate_s102_df8ef55a"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal"),"element",0,t.Modal.__deltemplate_s102_df8ef55a),t.Modal.__deltemplate_s110_90747620=function(e,n,i){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.body"),"element",!0)({elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.Modal.body(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.Modal.__deltemplate_s110_90747620.soyTemplateName="Templates.Modal.__deltemplate_s110_90747620"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.body"),"",0,t.Modal.__deltemplate_s110_90747620),t.Modal.__deltemplate_s115_231e36e7=function(e,n,i){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.footer"),"element",!0)({elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.Modal.footer(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.Modal.__deltemplate_s115_231e36e7.soyTemplateName="Templates.Modal.__deltemplate_s115_231e36e7"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.footer"),"",0,t.Modal.__deltemplate_s115_231e36e7),t.Modal.__deltemplate_s120_b8354b7d=function(e,n,i){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Modal.header"),"element",!0)({elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.Modal.header(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.Modal.__deltemplate_s120_b8354b7d.soyTemplateName="Templates.Modal.__deltemplate_s120_b8354b7d"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Modal.header"),"",0,t.Modal.__deltemplate_s120_b8354b7d),t.Modal.body.params=["body"],t.Modal.footer.params=["footer"],t.Modal.header.params=["header"]}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.dom,n=this.ui.Component,i=this.ui.ComponentRegistry,o=function(e){function n(e){babelHelpers.classCallCheck(this,n),babelHelpers.get(Object.getPrototypeOf(n.prototype),"constructor",this).call(this,e)}return babelHelpers.inherits(n,e),babelHelpers.createClass(n,[{key:"disposeInternal",value:function(){t.exitDocument(this.overlayElement),babelHelpers.get(Object.getPrototypeOf(n.prototype),"disposeInternal",this).call(this)}},{key:"syncOverlay",value:function(e){t[e&&this.visible?"enterDocument":"exitDocument"](this.overlayElement)}},{key:"syncVisible",value:function(e){babelHelpers.get(Object.getPrototypeOf(n.prototype),"syncVisible",this).call(this,e),this.syncOverlay(this.overlay)}},{key:"valueOverlayElementFn_",value:function(){return t.buildFragment('<div class="overlay"></div>').firstChild}}]),n}(n);o.ELEMENT_CLASSES="modal",o.ATTRS={body:{},elementClasses:{value:"centered"},footer:{},header:{},overlay:{validator:e.isBoolean,value:!0},overlayElement:{initOnly:!0,valueFn:"valueOverlayElementFn_"}},i.register("Modal",o),this.ui.Modal=o}.call(this),function(){"use strict";var e=this.ui.position,t=function(){function t(){babelHelpers.classCallCheck(this,t)}return babelHelpers.createClass(t,null,[{key:"align",value:function(e,t,n){var i=this.getAlignBestRegion(e,t,n),o=window.getComputedStyle(e,null);if("fixed"!==o.getPropertyValue("position")){var s=window.document.documentElement;i.top+=s.clientTop+window.pageYOffset,i.left+=s.clientLeft+window.pageXOffset}e.style.top=i.top+"px",e.style.left=i.left+"px"}},{key:"getAlignBestRegion",value:function(t,n,i){for(var o=0,s=i,a=this.getAlignRegion(t,n,s),r=s,l=a,c=e.getRegion(window),u=0;4>u;){if(e.intersectRegion(c,l)){var d=e.intersection(c,l),_=d.width*d.height;if(_>o&&(o=_,a=l,s=r),e.insideViewport(l))break}r=(i+ ++u)%4,l=this.getAlignRegion(t,n,r)}return a}},{key:"getAlignRegion",value:function(n,i,o){var s=e.getRegion(i),a=e.getRegion(n),r=0,l=0;switch(o){case t.Top:r=s.top-a.height,l=s.left+s.width/2-a.width/2;break;case t.Right:r=s.top+s.height/2-a.height/2,l=s.left+s.width;break;case t.Bottom:r=s.bottom,l=s.left+s.width/2-a.width/2;break;case t.Left:r=s.top+s.height/2-a.height/2,l=s.left-a.width}return{bottom:r+a.height,height:a.height,left:l,right:l+a.width,top:r,width:a.width}}},{key:"isValidPosition",value:function(e){return e>=0&&3>=e}}]),t}();t.Top=0,t.Right=1,t.Bottom=2,t.Left=3,this.ui.Position=t}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.dom,n=this.ui.position,i=this.ui.Attribute,o=function(e){function i(e){babelHelpers.classCallCheck(this,i),babelHelpers.get(Object.getPrototypeOf(i.prototype),"constructor",this).call(this,e),this.activeIndex=-1,this.regions=[],this.scrollHandle_=t.on(this.scrollElement,"scroll",this.checkPosition.bind(this)),this.refresh(),this.checkPosition(),this.on("elementChanged",this.refresh),this.on("offsetChanged",this.refresh),this.on("scrollElementChanged",this.refresh),this.on("selectorChanged",this.refresh)}return babelHelpers.inherits(i,e),babelHelpers.createClass(i,[{key:"disposeInternal",value:function(){this.deactivateAll(),this.scrollHandle_.dispose(),babelHelpers.get(Object.getPrototypeOf(i.prototype),"disposeInternal",this).call(this)}},{key:"activate",value:function(e){this.activeIndex>=0&&this.deactivate(this.activeIndex),this.activeIndex=e,t.addClasses(this.resolveElement(this.regions[e].link),this.activeClass)}},{key:"checkPosition",value:function(){var e=this.getScrollHeight_(),t=n.getScrollTop(this.scrollElement);if(this.activeIndex>=0&&t<this.offset)return void this.deactivateAll();if(e!==this.scrollHeight_)return void this.refresh();if(e<t+this.offset)return void this.activate(this.regions.length-1);var i=this.findBestRegionAt_(t);i>=0&&i!==this.activeIndex&&this.activate(i)}},{key:"deactivate",value:function(e){t.removeClasses(this.resolveElement(this.regions[e].link),this.activeClass)}},{key:"deactivateAll",value:function(){for(var e=0;e<this.regions.length;e++)this.deactivate(e);this.activeIndex=-1}},{key:"findBestRegionAt_",value:function(e){for(var t=-1,n=e+this.offset+this.scrollElementRegion_.top,i=0;i<this.regions.length;i++){var o=this.regions[i];if(n>=o.top&&n<o.bottom){t=i;break}}return t}},{key:"getScrollHeight_",value:function(){var e=n.getHeight(this.scrollElement);return e+=this.scrollElementRegion_.top,e-=n.getClientHeight(this.scrollElement)}},{key:"refresh",value:function(){this.deactivateAll(),this.scrollElementRegion_=n.getRegion(this.scrollElement),this.scrollHeight_=this.getScrollHeight_(),this.regions=[];for(var e=this.element.querySelectorAll(this.selector),t=n.getScrollTop(this.scrollElement),i=0;i<e.length;++i){var o=e[i];if(o.hash&&o.hash.length>1){var s=document.getElementById(o.hash.substring(1));if(s){var a=n.getRegion(s);this.regions.push({link:o,top:a.top+t,bottom:a.bottom+t})}}}this.sortRegions_()}},{key:"sortRegions_",value:function(){this.regions.sort(function(e,t){return e.top-t.top})}}]),i}(i);o.ATTRS={activeClass:{validator:e.isString,value:"active"},resolveElement:{validator:e.isFunction,value:e.identityFunction},scrollElement:{setter:t.toElement,value:document},offset:{validator:e.isNumber,value:0},element:{setter:t.toElement},selector:{validator:e.isString,value:"a"}},this.ui.Scrollspy=o}.call(this),function(){"use strict";var e=this.ui.ComponentRegistry,t=e.Templates;"undefined"==typeof t.Tooltip&&(t.Tooltip={}),t.Tooltip.content=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(e.content))},goog.DEBUG&&(t.Tooltip.content.soyTemplateName="Templates.Tooltip.content"),t.Tooltip.__deltemplate_s128_8d49094e=function(e,n,i){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("Tooltip"),"element",!0)({elementClasses:e.elementClasses,elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.Tooltip.content(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.Tooltip.__deltemplate_s128_8d49094e.soyTemplateName="Templates.Tooltip.__deltemplate_s128_8d49094e"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"),"",0,t.Tooltip.__deltemplate_s128_8d49094e),t.Tooltip.__deltemplate_s134_71828d2a=function(e,t,n){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="'+soy.$$escapeHtmlAttribute(e.id)+'" class="tooltip component'+soy.$$escapeHtmlAttribute(e.elementClasses?" "+e.elementClasses:"")+'">'+soy.$$escapeHtml(e.elementContent)+"</div>")},goog.DEBUG&&(t.Tooltip.__deltemplate_s134_71828d2a.soyTemplateName="Templates.Tooltip.__deltemplate_s134_71828d2a"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("Tooltip"),"element",0,t.Tooltip.__deltemplate_s134_71828d2a),t.Tooltip.content.params=["content"]}.call(this),function(){"use strict";var e=this.ui.core,t=this.ui.dom,n=this.ui.Component,i=this.ui.EventHandler,o=this.ui.Position,s=this.ui.ComponentRegistry,a=function(e){function n(e){babelHelpers.classCallCheck(this,n),babelHelpers.get(Object.getPrototypeOf(n.prototype),"constructor",this).call(this,e),this.eventsHandler_=new i}return babelHelpers.inherits(n,e),babelHelpers.createClass(n,[{key:"attached",value:function(){this.align(),this.syncEvents(this.events)}},{key:"detached",value:function(){this.eventsHandler_.removeAllListeners()}},{key:"align",value:function(e){this.syncAlignElement(e||this.alignElement)}},{key:"callAsync_",value:function(e,t){clearTimeout(this.delay_),this.delay_=setTimeout(e.bind(this),t)}},{key:"handleHide",value:function(e){var t=e.delegateTarget&&e.delegateTarget!==this.alignElement;this.callAsync_(function(){this.locked_||(t?this.alignElement=e.delegateTarget:this.visible=!1)},this.delay[1])}},{key:"handleShow",value:function(e){this.callAsync_(function(){this.alignElement=e.delegateTarget,this.visible=!0},this.delay[0])}},{key:"handleToggle",value:function(e){this.visible?this.handleHide(e):this.handleShow(e)}},{key:"lock",value:function(){this.locked_=!0}},{key:"unlock",value:function(e){this.locked_=!1,this.handleHide(e)}},{key:"syncAlignElement",value:function(e){this.inDocument&&e&&n.Position.align(this.element,e,this.position)}},{key:"syncContent",value:function(e){this.inDocument&&(t.removeChildren(this.element),t.append(this.element,e))}},{key:"syncSelector",value:function(){this.syncEvents(this.events)}},{key:"syncEvents",value:function(e){if(this.inDocument){this.eventsHandler_.removeAllListeners();var n=this.selector;n&&(this.eventsHandler_.add(this.on("mouseenter",this.lock),this.on("mouseleave",this.unlock)),e[0]===e[1]?this.eventsHandler_.add(t.delegate(document,e[0],n,this.handleToggle.bind(this))):this.eventsHandler_.add(t.delegate(document,e[0],n,this.handleShow.bind(this)),t.delegate(document,e[1],n,this.handleHide.bind(this))))}}},{key:"syncVisible",value:function(e){babelHelpers.get(Object.getPrototypeOf(n.prototype),"syncVisible",this).call(this,e),this.align()}}]),n}(n);a.Position=o,a.ELEMENT_CLASSES="tooltip",a.ATTRS={alignElement:{setter:t.toElement},delay:{validator:Array.isArray,value:[500,250]},events:{validator:Array.isArray,value:["mouseenter","mouseleave"]},selector:{validator:e.isString},content:{validator:e.isString},position:{validator:a.Position.isValidPosition,value:a.Position.Bottom}},s.register("Tooltip",a),this.ui.Tooltip=a}.call(this),function(){"use strict";var e=this.ui.ComponentRegistry,t=e.Templates;"undefined"==typeof t.TooltipMenu&&(t.TooltipMenu={}),t.TooltipMenu.content=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"),"",!0)(e,null,n))},goog.DEBUG&&(t.TooltipMenu.content.soyTemplateName="Templates.TooltipMenu.content"),t.TooltipMenu.items=function(e,t,n){for(var i="",o=e.content,s=o.length,a=0;s>a;a++){var r=o[a];i+='<li class="tooltip-menu-item"><a class="tooltip-menu-link" href="'+soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(r.href?r.href:"#"))+'">'+soy.$$escapeHtml(r.content)+"</a></li>"}return soydata.VERY_UNSAFE.ordainSanitizedHtml(i)},goog.DEBUG&&(t.TooltipMenu.items.soyTemplateName="Templates.TooltipMenu.items"),t.TooltipMenu.__deltemplate_s153_cfc546d2=function(e,t,n){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml('<nav id="'+soy.$$escapeHtmlAttribute(e.id)+'" class="tooltip-menu '+soy.$$escapeHtmlAttribute(e.elementClasses?e.elementClasses:"")+'" data-component>'+soy.$$escapeHtml(e.elementContent)+"</nav>")},goog.DEBUG&&(t.TooltipMenu.__deltemplate_s153_cfc546d2.soyTemplateName="Templates.TooltipMenu.__deltemplate_s153_cfc546d2"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"),"element",0,t.TooltipMenu.__deltemplate_s153_cfc546d2),t.TooltipMenu.__deltemplate_s161_c0ab3df3=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml('<ul id="'+soy.$$escapeHtmlAttribute(e.id)+'-items" class="tooltip-menu-list">'+soy.$$escapeHtml(e.elementContent)+"</ul>")},goog.DEBUG&&(t.TooltipMenu.__deltemplate_s161_c0ab3df3.soyTemplateName="Templates.TooltipMenu.__deltemplate_s161_c0ab3df3"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"),"element",0,t.TooltipMenu.__deltemplate_s161_c0ab3df3),t.TooltipMenu.__deltemplate_s167_8f8c631d=function(e,n,i){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu"),"element",!0)({elementClasses:e.elementClasses,elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.TooltipMenu.content(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.TooltipMenu.__deltemplate_s167_8f8c631d.soyTemplateName="Templates.TooltipMenu.__deltemplate_s167_8f8c631d"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu"),"",0,t.TooltipMenu.__deltemplate_s167_8f8c631d),t.TooltipMenu.__deltemplate_s173_8278e063=function(e,n,i){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"),"element",!0)({elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.TooltipMenu.items(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.TooltipMenu.__deltemplate_s173_8278e063.soyTemplateName="Templates.TooltipMenu.__deltemplate_s173_8278e063"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TooltipMenu.items"),"",0,t.TooltipMenu.__deltemplate_s173_8278e063),t.TooltipMenu.items.params=["content"]}.call(this),function(){"use strict";var e=this.ui.Tooltip,t=this.ui.ComponentRegistry,n=function(e){function t(e){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this,e)}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"syncContent",value:function(){}}]),t}(e);n.ELEMENT_CLASSES_MERGED="tooltip-menu component",n.ATTRS={delay:{validator:Array.isArray,value:[0,0]},events:{validator:Array.isArray,value:["click","click"]},content:{validator:Array.isArray,valueFn:function(){return[]}}},t.register("TooltipMenu",n),this.ui.TooltipMenu=n}.call(this),function(){"use strict";var e=this.ui.ComponentRegistry,t=e.Templates;"undefined"==typeof t.TreeView&&(t.TreeView={}),t.TreeView.content=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TreeView.nodes"),"",!0)(e,null,n))},goog.DEBUG&&(t.TreeView.content.soyTemplateName="Templates.TreeView.content"),t.TreeView.nodes=function(e,t,n){for(var i="",o=e.nodes,s=o.length,a=0;s>a;a++){var r=o[a],l=a;i+=soy.$$getDelegateFn(soy.$$getDelTemplateId("TreeView.node"),"",!0)({id:e.id,node:r,surfaceId:null!=e.parentSurfaceId?e.parentSurfaceId+"-"+l:l},null,n)}return soydata.VERY_UNSAFE.ordainSanitizedHtml(i)},goog.DEBUG&&(t.TreeView.nodes.soyTemplateName="Templates.TreeView.nodes"),t.TreeView.node=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml(e.node?'<div class="treeview-node-wrapper '+soy.$$escapeHtmlAttribute(e.node.expanded?"expanded":"")+'"><div class="treeview-node-main u-cf '+soy.$$escapeHtmlAttribute(e.node.children?"hasChildren":"")+'" data-onclick="handleNodeClicked_">'+(e.node.children?'<div class="treeview-node-toggler"></div>':"")+'<span class="treeview-node-name">'+soy.$$escapeHtml(e.node.name)+"</span></div>"+(e.node.children?soy.$$getDelegateFn(soy.$$getDelTemplateId("TreeView.nodes"),"",!0)({id:e.id,nodes:e.node.children,parentSurfaceId:e.surfaceId},null,n):"")+"</div>":"")},goog.DEBUG&&(t.TreeView.node.soyTemplateName="Templates.TreeView.node"),t.TreeView.__deltemplate_s210_6f4f2112=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml('<ul id="'+soy.$$escapeHtmlAttribute(e.id)+"-"+soy.$$escapeHtmlAttribute(e.surfaceId)+'" class="treeview-nodes">'+soy.$$escapeHtml(e.elementContent)+"</ul>")},goog.DEBUG&&(t.TreeView.__deltemplate_s210_6f4f2112.soyTemplateName="Templates.TreeView.__deltemplate_s210_6f4f2112"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TreeView.nodes"),"element",0,t.TreeView.__deltemplate_s210_6f4f2112),t.TreeView.__deltemplate_s218_68b4c502=function(e,t,n){return soydata.VERY_UNSAFE.ordainSanitizedHtml('<li id="'+soy.$$escapeHtmlAttribute(e.id)+"-"+soy.$$escapeHtmlAttribute(e.surfaceId)+'" class="treeview-node">'+soy.$$escapeHtml(e.elementContent)+"</li>")},goog.DEBUG&&(t.TreeView.__deltemplate_s218_68b4c502.soyTemplateName="Templates.TreeView.__deltemplate_s218_68b4c502"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TreeView.node"),"element",0,t.TreeView.__deltemplate_s218_68b4c502),t.TreeView.__deltemplate_s226_13da0f6e=function(e,n,i){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TreeView"),"element",!0)({elementClasses:e.elementClasses,elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.TreeView.content(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.TreeView.__deltemplate_s226_13da0f6e.soyTemplateName="Templates.TreeView.__deltemplate_s226_13da0f6e"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TreeView"),"",0,t.TreeView.__deltemplate_s226_13da0f6e),t.TreeView.__deltemplate_s232_38810b2c=function(e,t,n){return e=e||{},soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="'+soy.$$escapeHtmlAttribute(e.id)+'" class="treeview component'+soy.$$escapeHtmlAttribute(e.elementClasses?" "+e.elementClasses:"")+'">'+soy.$$escapeHtml(e.elementContent)+"</div>")},goog.DEBUG&&(t.TreeView.__deltemplate_s232_38810b2c.soyTemplateName="Templates.TreeView.__deltemplate_s232_38810b2c"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TreeView"),"element",0,t.TreeView.__deltemplate_s232_38810b2c),t.TreeView.__deltemplate_s240_c801199b=function(e,n,i){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TreeView.nodes"),"element",!0)({elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.TreeView.nodes(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.TreeView.__deltemplate_s240_c801199b.soyTemplateName="Templates.TreeView.__deltemplate_s240_c801199b"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TreeView.nodes"),"",0,t.TreeView.__deltemplate_s240_c801199b),t.TreeView.__deltemplate_s245_f6fc17d6=function(e,n,i){return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId("TreeView.node"),"element",!0)({elementContent:soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks(""+t.TreeView.node(e,null,i)),id:e.id},null,i))},goog.DEBUG&&(t.TreeView.__deltemplate_s245_f6fc17d6.soyTemplateName="Templates.TreeView.__deltemplate_s245_f6fc17d6"),soy.$$registerDelegateFn(soy.$$getDelTemplateId("TreeView.node"),"",0,t.TreeView.__deltemplate_s245_f6fc17d6),t.TreeView.nodes.params=["id","nodes"],t.TreeView.node.params=["id","node","surfaceId"]}.call(this),function(){"use strict";var e=this.ui.Component,t=this.ui.ComponentRegistry,n=this.ui.dom,i=function(e){function t(e){babelHelpers.classCallCheck(this,t),babelHelpers.get(Object.getPrototypeOf(t.prototype),"constructor",this).call(this,e)}return babelHelpers.inherits(t,e),babelHelpers.createClass(t,[{key:"attached",value:function(){this.on("nodesChanged",this.onNodesChanged_.bind(this))}},{key:"getNodeObj",value:function(e){for(var t=this.nodes[e[0]],n=1;n<e.length;n++)t=t.children[e[n]];return t}},{key:"getNodeObjFromId_",value:function(e){var t=e.substr(this.id.length+1).split("-");return this.getNodeObj(t)}},{key:"getSurfaceContent_",value:function(e){return this.ignoreSurfaceUpdate_?void(this.ignoreSurfaceUpdate_=!1):babelHelpers.get(Object.getPrototypeOf(t.prototype),"getSurfaceContent_",this).call(this,e)}},{key:"handleNodeClicked_",value:function(e){var t=e.delegateTarget.parentNode,i=this.getNodeObjFromId_(t.parentNode.id);i.expanded=!i.expanded,i.expanded?n.addClasses(t,"expanded"):n.removeClasses(t,"expanded"),this.nodes=this.nodes,this.ignoreSurfaceUpdate_=!0}},{key:"onNodesChanged_",value:function(){this.ignoreSurfaceUpdate_=!1}}]),t}(e);i.ELEMENT_CLASSES="treeview",i.ATTRS={nodes:{validator:Array.isArray,valueFn:function(){return[]}}},t.register("TreeView",i),this.ui.TreeView=i}.call(this);
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) subClass.__proto__ = superClass;
+  };
+
+  babelHelpers.createClass = (function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+
+  babelHelpers.get = function get(object, property, receiver) {
+    var desc = Object.getOwnPropertyDescriptor(object, property);
+
+    if (desc === undefined) {
+      var parent = Object.getPrototypeOf(object);
+
+      if (parent === null) {
+        return undefined;
+      } else {
+        return get(parent, property, receiver);
+      }
+    } else if ("value" in desc) {
+      return desc.value;
+    } else {
+      var getter = desc.get;
+
+      if (getter === undefined) {
+        return undefined;
+      }
+
+      return getter.call(receiver);
+    }
+  };
+
+  babelHelpers.classCallCheck = function (instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  };
+})(typeof global === "undefined" ? self : global);
+(function () {
+	'use strict';
+
+	/**
+  * A collection of core utility functions.
+  * @const
+  */
+
+	var core = (function () {
+		function core() {
+			babelHelpers.classCallCheck(this, core);
+		}
+
+		babelHelpers.createClass(core, null, [{
+			key: 'abstractMethod',
+
+			/**
+    * When defining a class Foo with an abstract method bar(), you can do:
+    * Foo.prototype.bar = core.abstractMethod
+    *
+    * Now if a subclass of Foo fails to override bar(), an error will be thrown
+    * when bar() is invoked.
+    *
+    * @type {!Function}
+    * @throws {Error} when invoked to indicate the method should be overridden.
+    */
+			value: function abstractMethod() {
+				throw Error('Unimplemented abstract method');
+			}
+		}, {
+			key: 'collectSuperClassesProperty',
+
+			/**
+    * Loops constructor super classes collecting its properties values. If
+    * property is not available on the super class `undefined` will be
+    * collected as value for the class hierarchy position.
+    * @param {!function()} constructor Class constructor.
+    * @param {string} propertyName Property name to be collected.
+    * @return {Array.<*>} Array of collected values.
+    * TODO(*): Rethink superclass loop.
+    */
+			value: function collectSuperClassesProperty(constructor, propertyName) {
+				var propertyValues = [constructor[propertyName]];
+				while (constructor.__proto__ && !constructor.__proto__.isPrototypeOf(Function)) {
+					constructor = constructor.__proto__;
+					propertyValues.push(constructor[propertyName]);
+				}
+				return propertyValues;
+			}
+		}, {
+			key: 'getUid',
+
+			/**
+    * Gets an unique id. If `opt_object` argument is passed, the object is
+    * mutated with an unique id. Consecutive calls with the same object
+    * reference won't mutate the object again, instead the current object uid
+    * returns. See {@link core.UID_PROPERTY}.
+    * @type {opt_object} Optional object to be mutated with the uid. If not
+    *     specified this method only returns the uid.
+    * @throws {Error} when invoked to indicate the method should be overridden.
+    */
+			value: function getUid(opt_object) {
+				if (opt_object) {
+					return opt_object[core.UID_PROPERTY] || (opt_object[core.UID_PROPERTY] = core.uniqueIdCounter_++);
+				}
+				return core.uniqueIdCounter_++;
+			}
+		}, {
+			key: 'identityFunction',
+
+			/**
+    * The identity function. Returns its first argument.
+    * @param {*=} opt_returnValue The single value that will be returned.
+    * @return {?} The first argument.
+    */
+			value: function identityFunction(opt_returnValue) {
+				return opt_returnValue;
+			}
+		}, {
+			key: 'isBoolean',
+
+			/**
+    * Returns true if the specified value is a boolean.
+    * @param {?} val Variable to test.
+    * @return {boolean} Whether variable is boolean.
+    */
+			value: function isBoolean(val) {
+				return typeof val === 'boolean';
+			}
+		}, {
+			key: 'isDef',
+
+			/**
+    * Returns true if the specified value is not undefined.
+    * @param {?} val Variable to test.
+    * @return {boolean} Whether variable is defined.
+    */
+			value: function isDef(val) {
+				return val !== undefined;
+			}
+		}, {
+			key: 'isDefAndNotNull',
+
+			/**
+    * Returns true if value is not undefined or null.
+    * @param {*} val
+    * @return {Boolean}
+    */
+			value: function isDefAndNotNull(val) {
+				return core.isDef(val) && !core.isNull(val);
+			}
+		}, {
+			key: 'isDocument',
+
+			/**
+    * Returns true if value is a document.
+    * @param {*} val
+    * @return {Boolean}
+    */
+			value: function isDocument(val) {
+				return val && typeof val === 'object' && val.nodeType === 9;
+			}
+		}, {
+			key: 'isElement',
+
+			/**
+    * Returns true if value is a dom element.
+    * @param {*} val
+    * @return {Boolean}
+    */
+			value: function isElement(val) {
+				return val && typeof val === 'object' && val.nodeType === 1;
+			}
+		}, {
+			key: 'isFunction',
+
+			/**
+    * Returns true if the specified value is a function.
+    * @param {?} val Variable to test.
+    * @return {boolean} Whether variable is a function.
+    */
+			value: function isFunction(val) {
+				return typeof val === 'function';
+			}
+		}, {
+			key: 'isNull',
+
+			/**
+    * Returns true if value is null.
+    * @param {*} val
+    * @return {Boolean}
+    */
+			value: function isNull(val) {
+				return val === null;
+			}
+		}, {
+			key: 'isNumber',
+
+			/**
+    * Returns true if the specified value is a number.
+    * @param {?} val Variable to test.
+    * @return {boolean} Whether variable is a number.
+    */
+			value: function isNumber(val) {
+				return typeof val === 'number';
+			}
+		}, {
+			key: 'isWindow',
+
+			/**
+    * Returns true if value is a window.
+    * @param {*} val
+    * @return {Boolean}
+    */
+			value: function isWindow(val) {
+				return val !== null && val === val.window;
+			}
+		}, {
+			key: 'isObject',
+
+			/**
+    * Returns true if the specified value is an object. This includes arrays
+    * and functions.
+    * @param {?} val Variable to test.
+    * @return {boolean} Whether variable is an object.
+    */
+			value: function isObject(val) {
+				var type = typeof val;
+				return type === 'object' && val !== null || type === 'function';
+			}
+		}, {
+			key: 'isString',
+
+			/**
+    * Returns true if value is a string.
+    * @param {*} val
+    * @return {Boolean}
+    */
+			value: function isString(val) {
+				return typeof val === 'string';
+			}
+		}, {
+			key: 'mergeSuperClassesProperty',
+
+			/**
+    * Merges the values of a static property a class with the values of that
+    * property for all its super classes, and stores it as a new static
+    * property of that class. If the static property already existed, it won't
+    * be recalculated.
+    * @param {!function()} constructor Class constructor.
+    * @param {string} propertyName Property name to be collected.
+    * @param {function(*, *):*=} opt_mergeFn Function that receives an array filled
+    *   with the values of the property for the current class and all its super classes.
+    *   Should return the merged value to be stored on the current class.
+    * @return {boolean} Returns true if merge happens, false otherwise.
+    */
+			value: function mergeSuperClassesProperty(constructor, propertyName, opt_mergeFn) {
+				var mergedName = propertyName + '_MERGED';
+				if (constructor.hasOwnProperty(mergedName)) {
+					return false;
+				}
+
+				var merged = core.collectSuperClassesProperty(constructor, propertyName);
+				if (opt_mergeFn) {
+					merged = opt_mergeFn(merged);
+				}
+				constructor[mergedName] = merged;
+				return true;
+			}
+		}, {
+			key: 'nullFunction',
+
+			/**
+    * Null function used for default values of callbacks, etc.
+    * @return {void} Nothing.
+    */
+			value: function nullFunction() {}
+		}]);
+		return core;
+	})();
+
+	/**
+  * Unique id property prefix.
+  * @type {String}
+  * @protected
+  */
+	core.UID_PROPERTY = 'core_' + (Math.random() * 1000000000 >>> 0);
+
+	/**
+  * Counter for unique id.
+  * @type {Number}
+  * @private
+  */
+	core.uniqueIdCounter_ = 1;
+
+	this.ui.core = core;
+}).call(this);
+(function () {
+	'use strict';
+
+	var object = (function () {
+		function object() {
+			babelHelpers.classCallCheck(this, object);
+		}
+
+		babelHelpers.createClass(object, null, [{
+			key: 'mixin',
+
+			/**
+    * Copies all the members of a source object to a target object.
+    * @param {Object} target Target object.
+    * @param {...Object} var_args The objects from which values will be copied.
+    * @return {Object} Returns the target object reference.
+    */
+			value: function mixin(target) {
+				var key, source;
+				for (var i = 1; i < arguments.length; i++) {
+					source = arguments[i];
+					for (key in source) {
+						target[key] = source[key];
+					}
+				}
+				return target;
+			}
+		}]);
+		return object;
+	})();
+
+	this.ui.object = object;
+}).call(this);
+(function () {
+	'use strict';
+
+	/**
+  * Disposable utility. When inherited provides the `dispose` function to its
+  * subclass, which is responsible for disposing of any object references
+  * when an instance won't be used anymore. Subclasses should override
+  * `disposeInternal` to implement any specific disposing logic.
+  * @constructor
+  */
+
+	var Disposable = (function () {
+		function Disposable() {
+			babelHelpers.classCallCheck(this, Disposable);
+
+			/**
+    * Flag indicating if this instance has already been disposed.
+    * @type {boolean}
+    * @protected
+    */
+			this.disposed_ = false;
+		}
+
+		babelHelpers.createClass(Disposable, [{
+			key: 'dispose',
+
+			/**
+    * Disposes of this instance's object references. Calls `disposeInternal`.
+    */
+			value: function dispose() {
+				if (!this.disposed_) {
+					this.disposeInternal();
+					this.disposed_ = true;
+				}
+			}
+		}, {
+			key: 'disposeInternal',
+
+			/**
+    * Subclasses should override this method to implement any specific
+    * disposing logic (like clearing references and calling `dispose` on other
+    * disposables).
+    */
+			value: function disposeInternal() {}
+		}, {
+			key: 'isDisposed',
+
+			/**
+    * Checks if this instance has already been disposed.
+    * @return {boolean}
+    */
+			value: function isDisposed() {
+				return this.disposed_;
+			}
+		}]);
+		return Disposable;
+	})();
+
+	this.ui.Disposable = Disposable;
+}).call(this);
+(function () {
+	'use strict';
+
+	var Disposable = this.ui.Disposable;
+
+	/**
+  * EventHandle utility. Holds information about an event subscription, and
+  * allows removing them easily.
+  * EventHandle is a Disposable, but it's important to note that the
+  * EventEmitter that created it is not the one responsible for disposing it.
+  * That responsibility is for the code that holds a reference to it.
+  * @param {!EventEmitter} emitter Emitter the event was subscribed to.
+  * @param {string} event The name of the event that was subscribed to.
+  * @param {!Function} listener The listener subscribed to the event.
+  * @constructor
+  * @extends {Disposable}
+  */
+
+	var EventHandle = (function (_Disposable) {
+		function EventHandle(emitter, event, listener) {
+			babelHelpers.classCallCheck(this, EventHandle);
+
+			babelHelpers.get(Object.getPrototypeOf(EventHandle.prototype), 'constructor', this).call(this);
+
+			/**
+    * The EventEmitter instance that the event was subscribed to.
+    * @type {EventEmitter}
+    * @protected
+    */
+			this.emitter_ = emitter;
+
+			/**
+    * The name of the event that was subscribed to.
+    * @type {string}
+    * @protected
+    */
+			this.event_ = event;
+
+			/**
+    * The listener subscribed to the event.
+    * @type {Function}
+    * @protected
+    */
+			this.listener_ = listener;
+		}
+
+		babelHelpers.inherits(EventHandle, _Disposable);
+		babelHelpers.createClass(EventHandle, [{
+			key: 'disposeInternal',
+
+			/**
+    * Disposes of this instance's object references.
+    * @override
+    */
+			value: function disposeInternal() {
+				this.removeListener();
+				this.emitter_ = null;
+				this.listener_ = null;
+			}
+		}, {
+			key: 'removeListener',
+
+			/**
+    * Removes the listener subscription from the emitter.
+    */
+			value: function removeListener() {
+				if (!this.emitter_.isDisposed()) {
+					this.emitter_.removeListener(this.event_, this.listener_);
+				}
+			}
+		}]);
+		return EventHandle;
+	})(Disposable);
+
+	this.ui.EventHandle = EventHandle;
+}).call(this);
+(function () {
+	'use strict';
+
+	var EventHandle = this.ui.EventHandle;
+
+	/**
+  * This is a special EventHandle, that is responsible for dom events, instead
+  * of EventEmitter events.
+  * @param {!EventEmitter} emitter Emitter the event was subscribed to.
+  * @param {string} event The name of the event that was subscribed to.
+  * @param {!Function} listener The listener subscribed to the event.
+  * @constructor
+  * @extends {EventHandle}
+  */
+
+	var DomEventHandle = (function (_EventHandle) {
+		function DomEventHandle(emitter, event, listener) {
+			babelHelpers.classCallCheck(this, DomEventHandle);
+
+			babelHelpers.get(Object.getPrototypeOf(DomEventHandle.prototype), 'constructor', this).call(this, emitter, event, listener);
+		}
+
+		babelHelpers.inherits(DomEventHandle, _EventHandle);
+		babelHelpers.createClass(DomEventHandle, [{
+			key: 'removeListener',
+
+			/**
+    * @inheritDoc
+    */
+			value: function removeListener() {
+				this.emitter_.removeEventListener(this.event_, this.listener_);
+			}
+		}]);
+		return DomEventHandle;
+	})(EventHandle);
+
+	this.ui.DomEventHandle = DomEventHandle;
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var object = this.ui.object;
+	var DomEventHandle = this.ui.DomEventHandle;
+
+	var dom = (function () {
+		function dom() {
+			babelHelpers.classCallCheck(this, dom);
+		}
+
+		babelHelpers.createClass(dom, null, [{
+			key: 'addClasses',
+
+			/**
+    * Adds the requested CSS classes to an element.
+    * @param {!Element} element The element to add CSS classes to.
+    * @param {string} classes CSS classes to add.
+    */
+			value: function addClasses(element, classes) {
+				if (!core.isObject(element) || !core.isString(classes)) {
+					return;
+				}
+
+				if ('classList' in element) {
+					dom.addClassesWithNative_(element, classes);
+				} else {
+					dom.addClassesWithoutNative_(element, classes);
+				}
+			}
+		}, {
+			key: 'addClassesWithNative_',
+
+			/**
+    * Adds the requested CSS classes to an element using classList.
+    * @param {!Element} element The element to add CSS classes to.
+    * @param {string} classes CSS classes to add.
+    * @protected
+    */
+			value: function addClassesWithNative_(element, classes) {
+				classes.split(' ').forEach(function (className) {
+					element.classList.add(className);
+				});
+			}
+		}, {
+			key: 'addClassesWithoutNative_',
+
+			/**
+    * Adds the requested CSS classes to an element without using classList.
+    * @param {!Element} element The element to add CSS classes to.
+    * @param {string} classes CSS classes to add.
+    * @protected
+    */
+			value: function addClassesWithoutNative_(element, classes) {
+				var elementClassName = ' ' + element.className + ' ';
+				var classesToAppend = '';
+
+				classes = classes.split(' ');
+
+				for (var i = 0; i < classes.length; i++) {
+					var className = classes[i];
+
+					if (elementClassName.indexOf(' ' + className + ' ') === -1) {
+						classesToAppend += ' ' + className;
+					}
+				}
+
+				if (classesToAppend) {
+					element.className = element.className + classesToAppend;
+				}
+			}
+		}, {
+			key: 'append',
+
+			/**
+    * Appends a child node with text or other nodes to a parent node. If
+    * child is a HTML string it will be automatically converted to a document
+    * fragment before appending it to the parent.
+    * @param {!Element} parent The node to append nodes to.
+    * @param {!Element|String} child The thing to append to the parent.
+    * @return {!Element} The appended child.
+    */
+			value: function append(parent, child) {
+				if (core.isString(child)) {
+					child = dom.buildFragment(child);
+				}
+				return parent.appendChild(child);
+			}
+		}, {
+			key: 'buildFragment',
+
+			/**
+    * Helper for converting a HTML string into a document fragment.
+    * @param {string} htmlString The HTML string to convert.
+    * @return {!Element} The resulting document fragment.
+    */
+			value: function buildFragment(htmlString) {
+				var tempDiv = document.createElement('div');
+				tempDiv.innerHTML = '<br>' + htmlString;
+				tempDiv.removeChild(tempDiv.firstChild);
+
+				var fragment = document.createDocumentFragment();
+				while (tempDiv.firstChild) {
+					fragment.appendChild(tempDiv.firstChild);
+				}
+				return fragment;
+			}
+		}, {
+			key: 'delegate',
+
+			/**
+    * Listens to the specified event on the given DOM element, but only calls the
+    * callback with the event when it triggered by elements that match the given
+    * selector.
+    * @param {!Element} element The container DOM element to listen to the event on.
+    * @param {string} eventName The name of the event to listen to.
+    * @param {string} selector The selector that matches the child elements that
+    *   the event should be triggered for.
+    * @param {!function(!Object)} callback Function to be called when the event is
+    *   triggered. It will receive the normalized event object.
+    * @return {!DomEventHandle} Can be used to remove the listener.
+    */
+			value: function delegate(element, eventName, selector, callback) {
+				var customConfig = dom.customEvents[eventName];
+				if (customConfig && customConfig.delegate) {
+					eventName = customConfig.originalEvent;
+					callback = customConfig.handler.bind(customConfig, callback);
+				}
+				return dom.on(element, eventName, dom.handleDelegateEvent_.bind(null, selector, callback));
+			}
+		}, {
+			key: 'enterDocument',
+
+			/**
+    * Inserts node in document as last element.
+    * @param {Element} node Element to remove children from.
+    */
+			value: function enterDocument(node) {
+				dom.append(document.body, node);
+			}
+		}, {
+			key: 'exitDocument',
+
+			/**
+    * Removes node from document.
+    * @param {Element} node Element to remove children from.
+    */
+			value: function exitDocument(node) {
+				if (node.parentNode) {
+					node.parentNode.removeChild(node);
+				}
+			}
+		}, {
+			key: 'handleDelegateEvent_',
+
+			/**
+    * This is called when an event is triggered by a delegate listener (see
+    * `dom.delegate` for more details).
+    * @param {string} selector The selector or element that matches the child
+    *   elements that the event should be triggered for.
+    * @param {!function(!Object)} callback Function to be called when the event
+    *   is triggered. It will receive the normalized event object.
+    * @param {!Event} event The event payload.
+    * @return {boolean} False if at least one of the triggered callbacks returns
+    *   false, or true otherwise.
+    */
+			value: function handleDelegateEvent_(selector, callback, event) {
+				dom.normalizeDelegateEvent_(event);
+
+				var currentElement = event.target;
+				var returnValue = true;
+
+				while (currentElement && !event.stopped) {
+					if (core.isString(selector) && dom.match(currentElement, selector)) {
+						event.delegateTarget = currentElement;
+						returnValue &= callback(event);
+					}
+					currentElement = currentElement.parentNode;
+				}
+
+				return returnValue;
+			}
+		}, {
+			key: 'hasClass',
+
+			/**
+    * Checks if the given element has the requested css class.
+    * @param {!Element} element
+    * @param {string} className
+    * @return {boolean}
+    */
+			value: function hasClass(element, className) {
+				if ('classList' in element) {
+					return dom.hasClassWithNative_(element, className);
+				} else {
+					return dom.hasClassWithoutNative_(element, className);
+				}
+			}
+		}, {
+			key: 'hasClassWithNative_',
+
+			/**
+    * Checks if the given element has the requested css class using classList.
+    * @param {!Element} element
+    * @param {string} className
+    * @return {boolean}
+    * @protected
+    */
+			value: function hasClassWithNative_(element, className) {
+				return element.classList.contains(className);
+			}
+		}, {
+			key: 'hasClassWithoutNative_',
+
+			/**
+    * Checks if the given element has the requested css class without using classList.
+    * @param {!Element} element
+    * @param {string} className
+    * @return {boolean}
+    * @protected
+    */
+			value: function hasClassWithoutNative_(element, className) {
+				return (' ' + element.className + ' ').indexOf(' ' + className + ' ') >= 0;
+			}
+		}, {
+			key: 'isEmpty',
+
+			/**
+    * Checks if the given element is empty or not.
+    * @param {!Element} element
+    * @return {boolean}
+    */
+			value: function isEmpty(element) {
+				return element.childNodes.length === 0;
+			}
+		}, {
+			key: 'match',
+
+			/**
+    * Check if an element matches a given selector.
+    * @param {Element} element
+    * @param {string} selector
+    * @return {boolean}
+    */
+			value: function match(element, selector) {
+				if (!element || element.nodeType !== 1) {
+					return false;
+				}
+
+				var p = Element.prototype;
+				var m = p.matches || p.webkitMatchesSelector || p.mozMatchesSelector || p.msMatchesSelector || p.oMatchesSelector;
+				if (m) {
+					return m.call(element, selector);
+				}
+
+				return dom.matchFallback_(element, selector);
+			}
+		}, {
+			key: 'matchFallback_',
+
+			/**
+    * Check if an element matches a given selector, using an internal implementation
+    * instead of calling existing javascript functions.
+    * @param {Element} element
+    * @param {string} selector
+    * @return {boolean}
+    * @protected
+    */
+			value: function matchFallback_(element, selector) {
+				var nodes = document.querySelectorAll(selector, element.parentNode);
+				for (var i = 0; i < nodes.length; ++i) {
+					if (nodes[i] === element) {
+						return true;
+					}
+				}
+				return false;
+			}
+		}, {
+			key: 'normalizeDelegateEvent_',
+
+			/**
+    * Normalizes the event payload for delegate listeners.
+    * @param {!Event} event
+    */
+			value: function normalizeDelegateEvent_(event) {
+				event.stopPropagation = dom.stopPropagation_;
+				event.stopImmediatePropagation = dom.stopImmediatePropagation_;
+			}
+		}, {
+			key: 'on',
+
+			/**
+    * Listens to the specified event on the given DOM element. This function normalizes
+    * DOM event payloads and functions so they'll work the same way on all supported
+    * browsers.
+    * @param {!Element} element The DOM element to listen to the event on.
+    * @param {string} eventName The name of the event to listen to.
+    * @param {!function(!Object)} callback Function to be called when the event is
+    *   triggered. It will receive the normalized event object.
+    * @return {!DomEventHandle} Can be used to remove the listener.
+    */
+			value: function on(element, eventName, callback) {
+				var customConfig = dom.customEvents[eventName];
+				if (customConfig && customConfig.event) {
+					eventName = customConfig.originalEvent;
+					callback = customConfig.handler.bind(customConfig, callback);
+				}
+				element.addEventListener(eventName, callback);
+				return new DomEventHandle(element, eventName, callback);
+			}
+		}, {
+			key: 'registerCustomEvent',
+
+			/**
+    * Registers a custom event.
+    * @param {string} eventName The name of the custom event.
+    * @param {!Object} customConfig An object with information about how the event
+    *   should be handled.
+    */
+			value: function registerCustomEvent(eventName, customConfig) {
+				dom.customEvents[eventName] = customConfig;
+			}
+		}, {
+			key: 'removeChildren',
+
+			/**
+    * Removes all the child nodes on a DOM node.
+    * @param {Element} node Element to remove children from.
+    */
+			value: function removeChildren(node) {
+				var child;
+				while (child = node.firstChild) {
+					node.removeChild(child);
+				}
+			}
+		}, {
+			key: 'removeClasses',
+
+			/**
+    * Removes the requested CSS classes from an element.
+    * @param {!Element} element The element to remove CSS classes from.
+    * @param {string} classes CSS classes to remove.
+    */
+			value: function removeClasses(element, classes) {
+				if (!core.isObject(element) || !core.isString(classes)) {
+					return;
+				}
+
+				if ('classList' in element) {
+					dom.removeClassesWithNative_(element, classes);
+				} else {
+					dom.removeClassesWithoutNative_(element, classes);
+				}
+			}
+		}, {
+			key: 'removeClassesWithNative_',
+
+			/**
+    * Removes the requested CSS classes from an element using classList.
+    * @param {!Element} element The element to remove CSS classes from.
+    * @param {string} classes CSS classes to remove.
+    * @protected
+    */
+			value: function removeClassesWithNative_(element, classes) {
+				classes.split(' ').forEach(function (className) {
+					element.classList.remove(className);
+				});
+			}
+		}, {
+			key: 'removeClassesWithoutNative_',
+
+			/**
+    * Removes the requested CSS classes from an element without using classList.
+    * @param {!Element} element The element to remove CSS classes from.
+    * @param {string} classes CSS classes to remove.
+    * @protected
+    */
+			value: function removeClassesWithoutNative_(element, classes) {
+				var elementClassName = ' ' + element.className + ' ';
+
+				classes = classes.split(' ');
+
+				for (var i = 0; i < classes.length; i++) {
+					elementClassName = elementClassName.replace(' ' + classes[i] + ' ', ' ');
+				}
+
+				element.className = elementClassName.trim();
+			}
+		}, {
+			key: 'replace',
+
+			/**
+    * Replaces the first element with the second.
+    * @param {Element} element1
+    * @param {Element} element2
+    */
+			value: function replace(element1, element2) {
+				if (element1 && element2 && element1 !== element2) {
+					element1.parentNode.insertBefore(element2, element1);
+					element1.parentNode.removeChild(element1);
+				}
+			}
+		}, {
+			key: 'stopImmediatePropagation_',
+
+			/**
+    * The function that replaces `stopImmediatePropagation_` for events.
+    * @protected
+    */
+			value: function stopImmediatePropagation_() {
+				this.stopped = true;
+				Event.prototype.stopImmediatePropagation.call(this);
+			}
+		}, {
+			key: 'stopPropagation_',
+
+			/**
+    * The function that replaces `stopPropagation` for events.
+    * @protected
+    */
+			value: function stopPropagation_() {
+				this.stopped = true;
+				Event.prototype.stopPropagation.call(this);
+			}
+		}, {
+			key: 'supportsEvent',
+
+			/**
+    * Checks if the given element supports the given event type.
+    * @param {!Element|string} element The DOM element or element tag name to check.
+    * @param {string} eventName The name of the event to check.
+    * @return {boolean}
+    */
+			value: function supportsEvent(element, eventName) {
+				if (dom.customEvents[eventName]) {
+					return true;
+				}
+
+				if (core.isString(element)) {
+					if (!elementsByTag[element]) {
+						elementsByTag[element] = document.createElement(element);
+					}
+					element = elementsByTag[element];
+				}
+				return 'on' + eventName in element;
+			}
+		}, {
+			key: 'toElement',
+
+			/**
+    * Converts the given argument to a DOM element. Strings are assumed to
+    * be selectors, and so a matched element will be returned. If the arg
+    * is already a DOM element it will be the return value.
+    * @param {string|Element|Document} selectorOrElement
+    * @return {Element} The converted element, or null if none was found.
+    */
+			value: function toElement(selectorOrElement) {
+				if (core.isElement(selectorOrElement) || core.isDocument(selectorOrElement)) {
+					return selectorOrElement;
+				} else if (core.isString(selectorOrElement)) {
+					if (selectorOrElement[0] === '#' && selectorOrElement.indexOf(' ') === -1) {
+						return document.getElementById(selectorOrElement.substr(1));
+					} else {
+						return document.querySelector(selectorOrElement);
+					}
+				} else {
+					return null;
+				}
+			}
+		}, {
+			key: 'toggleClasses',
+
+			/**
+    * Adds or removes one or more classes from an element. If any of the classes
+    * is present, it will be removed from the element, or added otherwise.
+    * @param {!Element} element The element which classes will be toggled.
+    * @param {string} classes The classes which have to added or removed from the element.
+    */
+			value: function toggleClasses(element, classes) {
+				if (!core.isObject(element) || !core.isString(classes)) {
+					return;
+				}
+
+				if ('classList' in element) {
+					dom.toggleClassesWithNative_(element, classes);
+				} else {
+					dom.toggleClassesWithoutNative_(element, classes);
+				}
+			}
+		}, {
+			key: 'toggleClassesWithNative_',
+
+			/**
+    * Adds or removes one or more classes from an element using classList.
+    * If any of the classes is present, it will be removed from the element,
+    * or added otherwise.
+    * @param {!Element} element The element which classes will be toggled.
+    * @param {string} classes The classes which have to added or removed from the element.
+    */
+			value: function toggleClassesWithNative_(element, classes) {
+				classes.split(' ').forEach(function (className) {
+					element.classList.toggle(className);
+				});
+			}
+		}, {
+			key: 'toggleClassesWithoutNative_',
+
+			/**
+    * Adds or removes one or more classes from an element without using classList.
+    * If any of the classes is present, it will be removed from the element,
+    * or added otherwise.
+    * @param {!Element} element The element which classes will be toggled.
+    * @param {string} classes The classes which have to added or removed from the element.
+    */
+			value: function toggleClassesWithoutNative_(element, classes) {
+				var elementClassName = ' ' + element.className + ' ';
+
+				classes = classes.split(' ');
+
+				for (var i = 0; i < classes.length; i++) {
+					var className = ' ' + classes[i] + ' ';
+					var classIndex = elementClassName.indexOf(className);
+
+					if (classIndex === -1) {
+						elementClassName = elementClassName + classes[i] + ' ';
+					} else {
+						elementClassName = elementClassName.substring(0, classIndex) + ' ' + elementClassName.substring(classIndex + className.length);
+					}
+				}
+
+				element.className = elementClassName.trim();
+			}
+		}, {
+			key: 'triggerEvent',
+
+			/**
+    * Triggers the specified event on the given element.
+    * NOTE: This should mostly be used for testing, not on real code.
+    * @param {!Element} element The node that should trigger the event.
+    * @param {string} eventName The name of the event to be triggred.
+    * @param {Object=} opt_eventObj An object with data that should be on the
+    *   triggered event's payload.
+    */
+			value: function triggerEvent(element, eventName, opt_eventObj) {
+				var eventObj = document.createEvent('HTMLEvents');
+				eventObj.initEvent(eventName, true, true);
+				object.mixin(eventObj, opt_eventObj);
+				element.dispatchEvent(eventObj);
+			}
+		}]);
+		return dom;
+	})();
+
+	var elementsByTag = {};
+	dom.customEvents = {};
+
+	var eventMap = {
+		mouseenter: 'mouseover',
+		mouseleave: 'mouseout',
+		pointerenter: 'pointerover',
+		pointerleave: 'pointerout'
+	};
+	Object.keys(eventMap).forEach(function (eventName) {
+		dom.registerCustomEvent(eventName, {
+			delegate: true,
+			handler: function handler(callback, event) {
+				var related = event.relatedTarget;
+				var target = event.delegateTarget || event.target;
+				if (!related || related !== target && !target.contains(related)) {
+					event.customType = eventName;
+					return callback(event);
+				}
+			},
+			originalEvent: eventMap[eventName]
+		});
+	});
+
+	this.ui.dom = dom;
+}).call(this);
+(function () {
+  "use strict";
+
+  var math = (function () {
+    function math() {
+      babelHelpers.classCallCheck(this, math);
+    }
+
+    babelHelpers.createClass(math, null, [{
+      key: "intersectRect",
+
+      /**
+         * Tests if a rectangle intersects with another.
+         *
+         * <pre>
+         *  x0y0 --------       x2y2 --------
+         *      |       |           |       |
+         *      -------- x1y1       -------- x3y3
+         * </pre>
+         *
+         * Note that coordinates starts from top to down (y), left to right (x):
+         *
+         * <pre>
+         *      ------> (x)
+         *      |
+         *      |
+         *     (y)
+         * </pre>
+         *
+         * @param {number} x0 Horizontal coordinate of P0.
+         * @param {number} y0 Vertical coordinate of P0.
+         * @param {number} x1 Horizontal coordinate of P1.
+         * @param {number} y1 Vertical coordinate of P1.
+         * @param {number} x2 Horizontal coordinate of P2.
+         * @param {number} y2 Vertical coordinate of P2.
+         * @param {number} x3 Horizontal coordinate of P3.
+         * @param {number} y3 Vertical coordinate of P3.
+         * @return {boolean}
+         */
+      value: function intersectRect(x0, y0, x1, y1, x2, y2, x3, y3) {
+        return !(x2 > x1 || x3 < x0 || y2 > y1 || y3 < y0);
+      }
+    }]);
+    return math;
+  })();
+
+  this.ui.math = math;
+}).call(this);
+(function () {
+  'use strict';
+
+  var core = this.ui.core;
+  var math = this.ui.math;
+
+  /**
+   * Class with static methods responsible for doing browser position checks.
+   */
+
+  var position = (function () {
+    function position() {
+      babelHelpers.classCallCheck(this, position);
+    }
+
+    babelHelpers.createClass(position, null, [{
+      key: 'getClientHeight',
+
+      /**
+       * Gets the client height of the specified node. Scroll height is not
+       * included.
+       * @param {Element|Document|Window=} node
+       * @return {Number}
+       */
+      value: function getClientHeight(node) {
+        return this.getClientSize_(node, 'Height');
+      }
+    }, {
+      key: 'getClientSize_',
+
+      /**
+       * Gets the client height or width of the specified node. Scroll height is
+       * not included.
+       * @param {Element|Document|Window=} node
+       * @param {string} `Width` or `Height` property.
+       * @return {Number}
+       * @protected
+       */
+      value: function getClientSize_(node, prop) {
+        var el = node;
+        if (core.isWindow(node)) {
+          el = node.document.documentElement;
+        }
+        if (core.isDocument(node)) {
+          el = node.documentElement;
+        }
+        return el['client' + prop];
+      }
+    }, {
+      key: 'getClientWidth',
+
+      /**
+       * Gets the client width of the specified node. Scroll width is not
+       * included.
+       * @param {Element|Document|Window=} node
+       * @return {Number}
+       */
+      value: function getClientWidth(node) {
+        return this.getClientSize_(node, 'Width');
+      }
+    }, {
+      key: 'getDocumentRegion_',
+
+      /**
+       * Gets the region of the element, document or window.
+       * @param {Element|Document|Window=} opt_element Optional element to test.
+       * @return {!DOMRect} The returned value is a simulated DOMRect object which
+       *     is the union of the rectangles returned by getClientRects() for the
+       *     element, i.e., the CSS border-boxes associated with the element.
+       * @protected
+       */
+      value: function getDocumentRegion_(opt_element) {
+        var height = this.getHeight(opt_element);
+        var width = this.getWidth(opt_element);
+        return this.makeRegion(height, height, 0, width, 0, width);
+      }
+    }, {
+      key: 'getHeight',
+
+      /**
+       * Gets the height of the specified node. Scroll height is included.
+       * @param {Element|Document|Window=} node
+       * @return {Number}
+       */
+      value: function getHeight(node) {
+        return this.getSize_(node, 'Height');
+      }
+    }, {
+      key: 'getRegion',
+
+      /**
+       * Gets the size of an element and its position relative to the viewport.
+       * @param {!Document|Element|Window} node
+       * @return {!DOMRect} The returned value is a DOMRect object which is the
+       *     union of the rectangles returned by getClientRects() for the element,
+       *     i.e., the CSS border-boxes associated with the element.
+       */
+      value: function getRegion(node) {
+        if (core.isDocument(node) || core.isWindow(node)) {
+          return this.getDocumentRegion_(node);
+        }
+        return this.makeRegionFromBoundingRect_(node.getBoundingClientRect());
+      }
+    }, {
+      key: 'getScrollLeft',
+
+      /**
+       * Gets the scroll left position of the specified node.
+       * @param {Element|Document|Window=} node
+       * @return {Number}
+       */
+      value: function getScrollLeft(node) {
+        if (core.isWindow(node)) {
+          return node.pageXOffset;
+        }
+        if (core.isDocument(node)) {
+          return node.defaultView.pageXOffset;
+        }
+        return node.scrollLeft;
+      }
+    }, {
+      key: 'getScrollTop',
+
+      /**
+       * Gets the scroll top position of the specified node.
+       * @param {Element|Document|Window=} node
+       * @return {Number}
+       */
+      value: function getScrollTop(node) {
+        if (core.isWindow(node)) {
+          return node.pageYOffset;
+        }
+        if (core.isDocument(node)) {
+          return node.defaultView.pageYOffset;
+        }
+        return node.scrollTop;
+      }
+    }, {
+      key: 'getSize_',
+
+      /**
+       * Gets the height or width of the specified node. Scroll height is
+       * included.
+       * @param {Element|Document|Window=} node
+       * @param {string} `Width` or `Height` property.
+       * @return {Number}
+       * @protected
+       */
+      value: function getSize_(node, prop) {
+        if (core.isWindow(node)) {
+          return this.getClientSize_(node, prop);
+        }
+        if (core.isDocument(node)) {
+          var docEl = node.documentElement;
+          return Math.max(node.body['scroll' + prop], docEl['scroll' + prop], node.body['offset' + prop], docEl['offset' + prop], docEl['client' + prop]);
+        }
+        return Math.max(node['client' + prop], node['scroll' + prop], node['offset' + prop]);
+      }
+    }, {
+      key: 'getWidth',
+
+      /**
+       * Gets the width of the specified node. Scroll width is included.
+       * @param {Element|Document|Window=} node
+       * @return {Number}
+       */
+      value: function getWidth(node) {
+        return this.getSize_(node, 'Width');
+      }
+    }, {
+      key: 'intersectRegion',
+
+      /**
+       * Tests if a region intersects with another.
+       * @param {DOMRect} r1
+       * @param {DOMRect} r2
+       * @return {boolean}
+       */
+      value: function intersectRegion(r1, r2) {
+        return math.intersectRect(r1.top, r1.left, r1.bottom, r1.right, r2.top, r2.left, r2.bottom, r2.right);
+      }
+    }, {
+      key: 'insideRegion',
+
+      /**
+       * Tests if a region is inside another.
+       * @param {DOMRect} r1
+       * @param {DOMRect} r2
+       * @return {boolean}
+       */
+      value: function insideRegion(r1, r2) {
+        return r2.top >= r1.top && r2.bottom <= r1.bottom && r2.right <= r1.right && r2.left >= r1.left;
+      }
+    }, {
+      key: 'insideViewport',
+
+      /**
+       * Tests if a region is inside viewport region.
+       * @param {DOMRect} region
+       * @return {boolean}
+       */
+      value: function insideViewport(region) {
+        return this.insideRegion(this.getRegion(window), region);
+      }
+    }, {
+      key: 'intersection',
+
+      /**
+       * Computes the intersection region between two regions.
+       * @param {DOMRect} r1
+       * @param {DOMRect} r2
+       * @return {?DOMRect} Intersection region or null if regions doesn't
+       *     intersects.
+       */
+      value: function intersection(r1, r2) {
+        if (!this.intersectRegion(r1, r2)) {
+          return null;
+        }
+        var bottom = Math.min(r1.bottom, r2.bottom);
+        var right = Math.min(r1.right, r2.right);
+        var left = Math.max(r1.left, r2.left);
+        var top = Math.max(r1.top, r2.top);
+        return this.makeRegion(bottom, bottom - top, left, right, top, right - left);
+      }
+    }, {
+      key: 'makeRegion',
+
+      /**
+       * Makes a region object. It's a writable version of DOMRect.
+       * @param {Number} bottom
+       * @param {Number} height
+       * @param {Number} left
+       * @param {Number} right
+       * @param {Number} top
+       * @param {Number} width
+       * @return {!DOMRect} The returned value is a DOMRect object which is the
+       *     union of the rectangles returned by getClientRects() for the element,
+       *     i.e., the CSS border-boxes associated with the element.
+       */
+      value: function makeRegion(bottom, height, left, right, top, width) {
+        return {
+          bottom: bottom,
+          height: height,
+          left: left,
+          right: right,
+          top: top,
+          width: width
+        };
+      }
+    }, {
+      key: 'makeRegionFromBoundingRect_',
+
+      /**
+       * Makes a region from a DOMRect result from `getBoundingClientRect`.
+       * @param  {!DOMRect} The returned value is a DOMRect object which is the
+       *     union of the rectangles returned by getClientRects() for the element,
+       *     i.e., the CSS border-boxes associated with the element.
+       * @return {DOMRect} Writable version of DOMRect.
+       * @protected
+       */
+      value: function makeRegionFromBoundingRect_(rect) {
+        return this.makeRegion(rect.bottom, rect.height, rect.left, rect.right, rect.top, rect.width);
+      }
+    }]);
+    return position;
+  })();
+
+  this.ui.position = position;
+}).call(this);
+(function () {
+	'use strict';
+
+	var array = (function () {
+		function array() {
+			babelHelpers.classCallCheck(this, array);
+		}
+
+		babelHelpers.createClass(array, null, [{
+			key: 'equal',
+
+			/**
+    * Checks if the given arrays have the same content.
+    * @param {!Array<*>} arr1
+    * @param {!Array<*>} arr2
+    * @return {boolean}
+    */
+			value: function equal(arr1, arr2) {
+				for (var i = 0; i < arr1.length; i++) {
+					if (arr1[i] !== arr2[i]) {
+						return false;
+					}
+				}
+				return arr1.length === arr2.length;
+			}
+		}, {
+			key: 'firstDefinedValue',
+
+			/**
+    * Returns the first value in the given array that isn't undefined.
+    * @param {!Array} arr
+    * @return {*}
+    */
+			value: function firstDefinedValue(arr) {
+				for (var i = 0; i < arr.length; i++) {
+					if (arr[i] !== undefined) {
+						return arr[i];
+					}
+				}
+			}
+		}, {
+			key: 'flatten',
+
+			/**
+    * Transforms the input nested array to become flat.
+    * @param {Array.<*|Array.<*>>} arr Nested array to flatten.
+    * @param {Array.<*>} opt_output Optional output array.
+    * @return {Array.<*>} Flat array.
+    */
+			value: function flatten(arr, opt_output) {
+				var output = opt_output || [];
+				for (var i = 0; i < arr.length; i++) {
+					if (Array.isArray(arr[i])) {
+						array.flatten(arr[i], output);
+					} else {
+						output.push(arr[i]);
+					}
+				}
+				return output;
+			}
+		}, {
+			key: 'remove',
+
+			/**
+    * Removes the first occurrence of a particular value from an array.
+    * @param {Array.<T>} arr Array from which to remove value.
+    * @param {T} obj Object to remove.
+    * @return {boolean} True if an element was removed.
+    * @template T
+    */
+			value: function remove(arr, obj) {
+				var i = arr.indexOf(obj);
+				var rv;
+				if (rv = i >= 0) {
+					array.removeAt(arr, i);
+				}
+				return rv;
+			}
+		}, {
+			key: 'removeAt',
+
+			/**
+    * Removes from an array the element at index i
+    * @param {Array} arr Array or array like object from which to remove value.
+    * @param {number} i The index to remove.
+    * @return {boolean} True if an element was removed.
+    */
+			value: function removeAt(arr, i) {
+				return Array.prototype.splice.call(arr, i, 1).length === 1;
+			}
+		}]);
+		return array;
+	})();
+
+	this.ui.array = array;
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var Disposable = this.ui.Disposable;
+	var EventHandle = this.ui.EventHandle;
+
+	/**
+  * EventEmitter utility.
+  * @constructor
+  * @extends {Disposable}
+  */
+
+	var EventEmitter = (function (_Disposable) {
+		function EventEmitter() {
+			babelHelpers.classCallCheck(this, EventEmitter);
+
+			babelHelpers.get(Object.getPrototypeOf(EventEmitter.prototype), 'constructor', this).call(this);
+
+			/**
+    * Holds event listeners scoped by event type.
+    * @type {!Object<string, !Array<!function()>>}
+    * @protected
+    */
+			this.events_ = [];
+
+			/**
+    * The maximum number of listeners allowed for each event type. If the number
+    * becomes higher than the max, a warning will be issued.
+    * @type {number}
+    * @protected
+    */
+			this.maxListeners_ = 10;
+
+			/**
+    * Configuration option which determines if an event facade should be sent
+    * as a param of listeners when emitting events. If set to true, the facade
+    * will be passed as the first argument of the listener.
+    * @type {boolean}
+    * @protected
+    */
+			this.shouldUseFacade_ = false;
+		}
+
+		babelHelpers.inherits(EventEmitter, _Disposable);
+		babelHelpers.createClass(EventEmitter, [{
+			key: 'addListener',
+
+			/**
+    * Adds a listener to the end of the listeners array for the specified events.
+    * @param {!(Array|string)} events
+    * @param {!Function} listener
+    * @return {!EventHandle} Can be used to remove the listener.
+    */
+			value: function addListener(events, listener) {
+				this.validateListener_(listener);
+
+				events = this.normalizeEvents_(events);
+				for (var i = 0; i < events.length; i++) {
+					this.addSingleListener_(events[i], listener);
+				}
+
+				return new EventHandle(this, events, listener);
+			}
+		}, {
+			key: 'addSingleListener_',
+
+			/**
+    * Adds a listener to the end of the listeners array for a single event.
+    * @param {string} event
+    * @param {!Function} listener
+    * @param {Function=} opt_origin The original function that was added as a
+    *   listener, if there is any.
+    * @protected
+    */
+			value: function addSingleListener_(event, listener, opt_origin) {
+				this.emit('newListener', event, listener);
+
+				if (!this.events_[event]) {
+					this.events_[event] = [];
+				}
+				this.events_[event].push({
+					fn: listener,
+					origin: opt_origin
+				});
+
+				var listeners = this.events_[event];
+				if (listeners.length > this.maxListeners_ && !listeners.warned) {
+					console.warn('Possible EventEmitter memory leak detected. %d listeners added ' + 'for event %s. Use emitter.setMaxListeners() to increase limit.', listeners.length, event);
+					listeners.warned = true;
+				}
+			}
+		}, {
+			key: 'disposeInternal',
+
+			/**
+    * Disposes of this instance's object references.
+    * @override
+    */
+			value: function disposeInternal() {
+				this.events_ = [];
+			}
+		}, {
+			key: 'emit',
+
+			/**
+    * Execute each of the listeners in order with the supplied arguments.
+    * @param {string} event
+    * @param {*} opt_args [arg1], [arg2], [...]
+    * @return {boolean} Returns true if event had listeners, false otherwise.
+    */
+			value: function emit(event) {
+				var args = Array.prototype.slice.call(arguments, 1);
+				var listened = false;
+				var listeners = this.listeners(event);
+
+				if (this.getShouldUseFacade()) {
+					var facade = {
+						type: event
+					};
+					args = [facade].concat(args);
+				}
+
+				for (var i = 0; i < listeners.length; i++) {
+					listeners[i].apply(this, args);
+					listened = true;
+				}
+
+				return listened;
+			}
+		}, {
+			key: 'getShouldUseFacade',
+
+			/**
+    * Gets the configuration option which determines if an event facade should
+    * be sent as a param of listeners when emitting events. If set to true, the
+    * facade will be passed as the first argument of the listener.
+    * @return {boolean}
+    */
+			value: function getShouldUseFacade() {
+				return this.shouldUseFacade_;
+			}
+		}, {
+			key: 'listeners',
+
+			/**
+    * Returns an array of listeners for the specified event.
+    * @param {string} event
+    * @return {Array} Array of listeners.
+    */
+			value: function listeners(event) {
+				return (this.events_[event] || []).map(function (listener) {
+					return listener.fn;
+				});
+			}
+		}, {
+			key: 'many',
+
+			/**
+    * Adds a listener that will be invoked a fixed number of times for the
+    * events. After each event is triggered the specified amount of times, the
+    * listener is removed for it.
+    * @param {!(Array|string)} events
+    * @param {number} amount The amount of times this event should be listened
+    * to.
+    * @param {!Function} listener
+    * @return {!EventHandle} Can be used to remove the listener.
+    */
+			value: function many(events, amount, listener) {
+				events = this.normalizeEvents_(events);
+				for (var i = 0; i < events.length; i++) {
+					this.many_(events[i], amount, listener);
+				}
+
+				return new EventHandle(this, events, listener);
+			}
+		}, {
+			key: 'many_',
+
+			/**
+    * Adds a listener that will be invoked a fixed number of times for a single
+    * event. After the event is triggered the specified amount of times, the
+    * listener is removed.
+    * @param {string} event
+    * @param {number} amount The amount of times this event should be listened
+    * to.
+    * @param {!Function} listener
+    * @protected
+    */
+			value: function many_(event, amount, listener) {
+				var self = this;
+
+				if (amount <= 0) {
+					return;
+				}
+
+				function handlerInternal() {
+					if (--amount === 0) {
+						self.removeListener(event, handlerInternal);
+					}
+					listener.apply(self, arguments);
+				}
+
+				self.addSingleListener_(event, handlerInternal, listener);
+			}
+		}, {
+			key: 'matchesListener_',
+
+			/**
+    * Checks if a listener object matches the given listener function. To match,
+    * it needs to either point to that listener or have it as its origin.
+    * @param {!Object} listenerObj
+    * @param {!Function} listener
+    * @return {boolean}
+    * @protected
+    */
+			value: function matchesListener_(listenerObj, listener) {
+				return listenerObj.fn === listener || listenerObj.origin && listenerObj.origin === listener;
+			}
+		}, {
+			key: 'normalizeEvents_',
+
+			/**
+    * Converts the parameter to an array if only one event is given.
+    * @param  {!(Array|string)} events
+    * @return {!Array}
+    * @protected
+    */
+			value: function normalizeEvents_(events) {
+				return core.isString(events) ? [events] : events;
+			}
+		}, {
+			key: 'off',
+
+			/**
+    * Removes a listener for the specified events.
+    * Caution: changes array indices in the listener array behind the listener.
+    * @param {!(Array|string)} events
+    * @param {!Function} listener
+    * @return {!Object} Returns emitter, so calls can be chained.
+    */
+			value: function off(events, listener) {
+				this.validateListener_(listener);
+
+				events = this.normalizeEvents_(events);
+				for (var i = 0; i < events.length; i++) {
+					var listenerObjs = this.events_[events[i]] || [];
+					this.removeMatchingListenerObjs_(listenerObjs, listener);
+				}
+
+				return this;
+			}
+		}, {
+			key: 'on',
+
+			/**
+    * Adds a listener to the end of the listeners array for the specified events.
+    * @param {!(Array|string)} events
+    * @param {!Function} listener
+    * @return {!EventHandle} Can be used to remove the listener.
+    */
+			value: function on() {
+				return this.addListener.apply(this, arguments);
+			}
+		}, {
+			key: 'once',
+
+			/**
+    * Adds a one time listener for the events. This listener is invoked only the
+    * next time each event is fired, after which it is removed.
+    * @param {!(Array|string)} events
+    * @param {!Function} listener
+    * @return {!EventHandle} Can be used to remove the listener.
+    */
+			value: function once(events, listener) {
+				return this.many(events, 1, listener);
+			}
+		}, {
+			key: 'removeAllListeners',
+
+			/**
+    * Removes all listeners, or those of the specified events. It's not a good
+    * idea to remove listeners that were added elsewhere in the code,
+    * especially when it's on an emitter that you didn't create.
+    * @param {(Array|string)=} opt_events
+    * @return {!Object} Returns emitter, so calls can be chained.
+    */
+			value: function removeAllListeners(opt_events) {
+				if (opt_events) {
+					var events = this.normalizeEvents_(opt_events);
+					for (var i = 0; i < events.length; i++) {
+						this.events_[events[i]] = null;
+					}
+				} else {
+					this.events_ = {};
+				}
+				return this;
+			}
+		}, {
+			key: 'removeMatchingListenerObjs_',
+
+			/**
+    * Removes all listener objects from the given array that match the given
+    * listener function.
+    * @param {!Array.<Object>} listenerObjs
+    * @param {!Function} listener
+    * @protected
+    */
+			value: function removeMatchingListenerObjs_(listenerObjs, listener) {
+				for (var i = listenerObjs.length - 1; i >= 0; i--) {
+					if (this.matchesListener_(listenerObjs[i], listener)) {
+						listenerObjs.splice(i, 1);
+					}
+				}
+			}
+		}, {
+			key: 'removeListener',
+
+			/**
+    * Removes a listener for the specified events.
+    * Caution: changes array indices in the listener array behind the listener.
+    * @param {!(Array|string)} events
+    * @param {!Function} listener
+    * @return {!Object} Returns emitter, so calls can be chained.
+    */
+			value: function removeListener() {
+				return this.off.apply(this, arguments);
+			}
+		}, {
+			key: 'setMaxListeners',
+
+			/**
+    * By default EventEmitters will print a warning if more than 10 listeners
+    * are added for a particular event. This is a useful default which helps
+    * finding memory leaks. Obviously not all Emitters should be limited to 10.
+    * This function allows that to be increased. Set to zero for unlimited.
+    * @param {number} max The maximum number of listeners.
+    * @return {!Object} Returns emitter, so calls can be chained.
+    */
+			value: function setMaxListeners(max) {
+				this.maxListeners_ = max;
+				return this;
+			}
+		}, {
+			key: 'setShouldUseFacade',
+
+			/**
+    * Sets the configuration option which determines if an event facade should
+    * be sent as a param of listeners when emitting events. If set to true, the
+    * facade will be passed as the first argument of the listener.
+    * @param {boolean} shouldUseFacade
+    * @return {!Object} Returns emitter, so calls can be chained.
+    */
+			value: function setShouldUseFacade(shouldUseFacade) {
+				this.shouldUseFacade_ = shouldUseFacade;
+				return this;
+			}
+		}, {
+			key: 'validateListener_',
+
+			/**
+    * Checks if the given listener is valid, throwing an exception when it's not.
+    * @param  {*} listener
+    * @protected
+    */
+			value: function validateListener_(listener) {
+				if (!core.isFunction(listener)) {
+					throw new TypeError('Listener must be a function');
+				}
+			}
+		}]);
+		return EventEmitter;
+	})(Disposable);
+
+	this.ui.EventEmitter = EventEmitter;
+}).call(this);
+(function () {
+	/*!
+  * Polyfill from Google's Closure Library.
+  * Copyright 2013 The Closure Library Authors. All Rights Reserved.
+  */
+
+	'use strict';
+
+	var core = this.ui.core;
+
+	var async = {};
+
+	/**
+  * Throw an item without interrupting the current execution context.  For
+  * example, if processing a group of items in a loop, sometimes it is useful
+  * to report an error while still allowing the rest of the batch to be
+  * processed.
+  * @param {*} exception
+  */
+	async.throwException = function (exception) {
+		// Each throw needs to be in its own context.
+		async.nextTick(function () {
+			throw exception;
+		});
+	};
+
+	/**
+  * Fires the provided callback just before the current callstack unwinds, or as
+  * soon as possible after the current JS execution context.
+  * @param {function(this:THIS)} callback
+  * @param {THIS=} opt_context Object to use as the "this value" when calling
+  *     the provided function.
+  * @template THIS
+  */
+	async.run = function (callback, opt_context) {
+		if (!async.run.workQueueScheduled_) {
+			// Nothing is currently scheduled, schedule it now.
+			async.nextTick(async.run.processWorkQueue);
+			async.run.workQueueScheduled_ = true;
+		}
+
+		async.run.workQueue_.push(new async.run.WorkItem_(callback, opt_context));
+	};
+
+	/** @private {boolean} */
+	async.run.workQueueScheduled_ = false;
+
+	/** @private {!Array.<!async.run.WorkItem_>} */
+	async.run.workQueue_ = [];
+
+	/**
+  * Run any pending async.run work items. This function is not intended
+  * for general use, but for use by entry point handlers to run items ahead of
+  * async.nextTick.
+  */
+	async.run.processWorkQueue = function () {
+		// NOTE: additional work queue items may be pushed while processing.
+		while (async.run.workQueue_.length) {
+			// Don't let the work queue grow indefinitely.
+			var workItems = async.run.workQueue_;
+			async.run.workQueue_ = [];
+			for (var i = 0; i < workItems.length; i++) {
+				var workItem = workItems[i];
+				try {
+					workItem.fn.call(workItem.scope);
+				} catch (e) {
+					async.throwException(e);
+				}
+			}
+		}
+
+		// There are no more work items, reset the work queue.
+		async.run.workQueueScheduled_ = false;
+	};
+
+	/**
+  * @constructor
+  * @final
+  * @struct
+  * @private
+  *
+  * @param {function()} fn
+  * @param {Object|null|undefined} scope
+  */
+	async.run.WorkItem_ = function (fn, scope) {
+		/** @const */
+		this.fn = fn;
+		/** @const */
+		this.scope = scope;
+	};
+
+	/**
+  * Fires the provided callbacks as soon as possible after the current JS
+  * execution context. setTimeout(…, 0) always takes at least 5ms for legacy
+  * reasons.
+  * @param {function(this:SCOPE)} callback Callback function to fire as soon as
+  *     possible.
+  * @param {SCOPE=} opt_context Object in whose scope to call the listener.
+  * @template SCOPE
+  */
+	async.nextTick = function (callback, opt_context) {
+		var cb = callback;
+		if (opt_context) {
+			cb = callback.bind(opt_context);
+		}
+		cb = async.nextTick.wrapCallback_(cb);
+		// Introduced and currently only supported by IE10.
+		if (core.isFunction(window.setImmediate)) {
+			window.setImmediate(cb);
+			return;
+		}
+		// Look for and cache the custom fallback version of setImmediate.
+		if (!async.nextTick.setImmediate_) {
+			async.nextTick.setImmediate_ = async.nextTick.getSetImmediateEmulator_();
+		}
+		async.nextTick.setImmediate_(cb);
+	};
+
+	/**
+  * Cache for the setImmediate implementation.
+  * @type {function(function())}
+  * @private
+  */
+	async.nextTick.setImmediate_ = null;
+
+	/**
+  * Determines the best possible implementation to run a function as soon as
+  * the JS event loop is idle.
+  * @return {function(function())} The "setImmediate" implementation.
+  * @private
+  */
+	async.nextTick.getSetImmediateEmulator_ = function () {
+		// Create a private message channel and use it to postMessage empty messages
+		// to ourselves.
+		var Channel = window.MessageChannel;
+		// If MessageChannel is not available and we are in a browser, implement
+		// an iframe based polyfill in browsers that have postMessage and
+		// document.addEventListener. The latter excludes IE8 because it has a
+		// synchronous postMessage implementation.
+		if (typeof Channel === 'undefined' && typeof window !== 'undefined' && window.postMessage && window.addEventListener) {
+			/** @constructor */
+			Channel = function () {
+				// Make an empty, invisible iframe.
+				var iframe = document.createElement('iframe');
+				iframe.style.display = 'none';
+				iframe.src = '';
+				document.documentElement.appendChild(iframe);
+				var win = iframe.contentWindow;
+				var doc = win.document;
+				doc.open();
+				doc.write('');
+				doc.close();
+				var message = 'callImmediate' + Math.random();
+				var origin = win.location.protocol + '//' + win.location.host;
+				var onmessage = (function (e) {
+					// Validate origin and message to make sure that this message was
+					// intended for us.
+					if (e.origin !== origin && e.data !== message) {
+						return;
+					}
+					this.port1.onmessage();
+				}).bind(this);
+				win.addEventListener('message', onmessage, false);
+				this.port1 = {};
+				this.port2 = {
+					postMessage: function postMessage() {
+						win.postMessage(message, origin);
+					}
+				};
+			};
+		}
+		if (typeof Channel !== 'undefined') {
+			var channel = new Channel();
+			// Use a fifo linked list to call callbacks in the right order.
+			var head = {};
+			var tail = head;
+			channel.port1.onmessage = function () {
+				head = head.next;
+				var cb = head.cb;
+				head.cb = null;
+				cb();
+			};
+			return function (cb) {
+				tail.next = {
+					cb: cb
+				};
+				tail = tail.next;
+				channel.port2.postMessage(0);
+			};
+		}
+		// Implementation for IE6-8: Script elements fire an asynchronous
+		// onreadystatechange event when inserted into the DOM.
+		if (typeof document !== 'undefined' && 'onreadystatechange' in document.createElement('script')) {
+			return function (cb) {
+				var script = document.createElement('script');
+				script.onreadystatechange = function () {
+					// Clean up and call the callback.
+					script.onreadystatechange = null;
+					script.parentNode.removeChild(script);
+					script = null;
+					cb();
+					cb = null;
+				};
+				document.documentElement.appendChild(script);
+			};
+		}
+		// Fall back to setTimeout with 0. In browsers this creates a delay of 5ms
+		// or more.
+		return function (cb) {
+			setTimeout(cb, 0);
+		};
+	};
+
+	/**
+  * Helper function that is overrided to protect callbacks with entry point
+  * monitor if the application monitors entry points.
+  * @param {function()} callback Callback function to fire as soon as possible.
+  * @return {function()} The wrapped callback.
+  * @private
+  */
+	async.nextTick.wrapCallback_ = function (opt_returnValue) {
+		return opt_returnValue;
+	};
+
+	this.ui.async = async;
+}).call(this);
+(function () {
+	'use strict';
+
+	var array = this.ui.array;
+	var core = this.ui.core;
+	var object = this.ui.object;
+	var EventEmitter = this.ui.EventEmitter;
+	var async = this.ui.async;
+
+	/**
+  * Attribute adds support for having object properties that can be watched for
+  * changes, as well as configured with validators, setters and other options.
+  * See the `addAttr` method for a complete list of available attribute
+  * configuration options.
+  * @constructor
+  * @extends {EventEmitter}
+  */
+
+	var Attribute = (function (_EventEmitter) {
+		function Attribute(opt_config) {
+			babelHelpers.classCallCheck(this, Attribute);
+
+			babelHelpers.get(Object.getPrototypeOf(Attribute.prototype), 'constructor', this).call(this);
+
+			/**
+    * Object with information about the batch event that is currently
+    * scheduled, or null if none is.
+    * @type {Object}
+    * @protected
+    */
+			this.scheduledBatchData_ = null;
+
+			/**
+    * Object that contains information about all this instance's attributes.
+    * @type {!Object<string, !Object>}
+    * @protected
+    */
+			this.attrsInfo_ = {};
+
+			this.mergeInvalidAttrs_();
+			this.addAttrsFromStaticHint_(opt_config);
+		}
+
+		babelHelpers.inherits(Attribute, _EventEmitter);
+		babelHelpers.createClass(Attribute, [{
+			key: 'addAttr',
+
+			/**
+    * Adds the given attribute.
+    * @param {string} name The name of the new attribute.
+    * @param {Object.<string, *>=} config The configuration object for the new attribute.
+    *   This object can have the following keys:
+    *   setter - Function for normalizing new attribute values. It receives the new value
+    *   that was set, and returns the value that should be stored.
+    *   validator - Function that validates new attribute values. When it returns false,
+    *   the new value is ignored.
+    *   value - The default value for this attribute. Note that setting this to an object
+    *   will cause all attribute instances to use the same reference to the object. To
+    *   have each attribute instance use a different reference, use the `valueFn` option
+    *   instead.
+    *   valueFn - A function that returns the default value for this attribute.
+    *   writeOnce - Ignores writes to the attribute after it's been first written to. That is,
+    *   allows writes only when setting the attribute for the first time.
+    * @param {*} initialValue The initial value of the new attribute. This value has higher
+    *   precedence than the default value specified in this attribute's configuration.
+    */
+			value: function addAttr(name, config, initialValue) {
+				this.buildAttrInfo_(name, config, initialValue);
+
+				Object.defineProperty(this, name, {
+					configurable: true,
+					get: this.getAttrValue_.bind(this, name),
+					set: this.setAttrValue_.bind(this, name)
+				});
+			}
+		}, {
+			key: 'addAttrs',
+
+			/**
+    * Adds the given attributes.
+    * @param {!Object.<string, !Object>} configs An object that maps the names of all the
+    *   attributes to be added to their configuration objects.
+    * @param {!Object.<string, *>} initialValues An object that maps the names of
+    *   attributes to their initial values. These values have higher precedence than the
+    *   default values specified in the attribute configurations.
+    * @param {boolean|Object=} opt_defineContext If value is false
+    *     `Object.defineProperties` will not be called. If value is a valid
+    *     context it will be used as definition context, otherwise `this`
+    *     will be the context.
+    */
+			value: function addAttrs(configs, initialValues, opt_defineContext) {
+				initialValues = initialValues || {};
+				var names = Object.keys(configs);
+
+				var props = {};
+				for (var i = 0; i < names.length; i++) {
+					var name = names[i];
+					this.buildAttrInfo_(name, configs[name], initialValues[name]);
+					props[name] = this.buildAttrPropertyDef_(name);
+				}
+
+				if (opt_defineContext !== false) {
+					Object.defineProperties(opt_defineContext || this, props);
+				}
+			}
+		}, {
+			key: 'addAttrsFromStaticHint_',
+
+			/**
+    * Adds attributes from super classes static hint `MyClass.ATTRS = {};`.
+    * @param {!Object.<string, !Object>} configs An object that maps the names
+    *     of all the attributes to be added to their configuration objects.
+    * @protected
+    */
+			value: function addAttrsFromStaticHint_(config) {
+				var ctor = this.constructor;
+				var defineContext = false;
+				if (core.mergeSuperClassesProperty(ctor, 'ATTRS', this.mergeAttrs_)) {
+					defineContext = ctor.prototype;
+				}
+				this.addAttrs(ctor.ATTRS_MERGED, config, defineContext);
+			}
+		}, {
+			key: 'assertValidAttrName_',
+
+			/**
+    * Checks that the given name is a valid attribute name. If it's not, an error
+    * will be thrown.
+    * @param {string} name The name to be validated.
+    * @throws {Error}
+    */
+			value: function assertValidAttrName_(name) {
+				if (this.constructor.INVALID_ATTRS_MERGED[name]) {
+					throw new Error('It\'s not allowed to create an attribute with the name "' + name + '".');
+				}
+			}
+		}, {
+			key: 'buildAttrInfo_',
+
+			/**
+    * Builds the info object for the requested attribute.
+    * @param {string} name The name of the attribute.
+    * @param {Object} config The config object of the attribute.
+    * @param {*} initialValue The initial value of the attribute.
+    * @protected
+    */
+			value: function buildAttrInfo_(name, config, initialValue) {
+				this.assertValidAttrName_(name);
+
+				this.attrsInfo_[name] = {
+					config: config || {},
+					initialValue: initialValue,
+					state: Attribute.States.UNINITIALIZED
+				};
+			}
+		}, {
+			key: 'buildAttrPropertyDef_',
+
+			/**
+    * Builds the property definition object for the requested attribute.
+    * @param {string} name The name of the attribute.
+    * @return {!Object}
+    * @protected
+    */
+			value: function buildAttrPropertyDef_(name) {
+				return {
+					configurable: true,
+					get: function get() {
+						return this.getAttrValue_(name);
+					},
+					set: function set(val) {
+						this.setAttrValue_(name, val);
+					}
+				};
+			}
+		}, {
+			key: 'callFunction_',
+
+			/**
+    * Calls the requested function, running the appropriate code for when it's
+    * passed as an actual function object or just the function's name.
+    * @param {!Function|string} fn Function, or name of the function to run.
+    * @param {!Array} An optional array of parameters to be passed to the
+    *   function that will be called.
+    * @return {*} The return value of the called function.
+    * @protected
+    */
+			value: function callFunction_(fn, args) {
+				if (core.isString(fn)) {
+					return this[fn].apply(this, args);
+				} else if (core.isFunction(fn)) {
+					return fn.apply(this, args);
+				}
+			}
+		}, {
+			key: 'callSetter_',
+
+			/**
+    * Calls the attribute's setter, if there is one.
+    * @param {string} name The name of the attribute.
+    * @param {*} value The value to be set.
+    * @return {*} The final value to be set.
+    */
+			value: function callSetter_(name, value) {
+				var info = this.attrsInfo_[name];
+				var config = info.config;
+				if (config.setter) {
+					value = this.callFunction_(config.setter, [value]);
+				}
+				return value;
+			}
+		}, {
+			key: 'callValidator_',
+
+			/**
+    * Calls the attribute's validator, if there is one.
+    * @param {string} name The name of the attribute.
+    * @param {*} value The value to be validated.
+    * @return {boolean} Flag indicating if value is valid or not.
+    */
+			value: function callValidator_(name, value) {
+				var info = this.attrsInfo_[name];
+				var config = info.config;
+				if (config.validator) {
+					return this.callFunction_(config.validator, [value]);
+				}
+				return true;
+			}
+		}, {
+			key: 'canSetAttribute',
+
+			/**
+    * Checks if the it's allowed to write on the requested attribute.
+    * @param {string} name The name of the attribute.
+    * @return {boolean}
+    */
+			value: function canSetAttribute(name) {
+				var info = this.attrsInfo_[name];
+				return !info.config.writeOnce || !info.written;
+			}
+		}, {
+			key: 'disposeInternal',
+
+			/**
+    * @inheritDoc
+    */
+			value: function disposeInternal() {
+				babelHelpers.get(Object.getPrototypeOf(Attribute.prototype), 'disposeInternal', this).call(this);
+				this.attrsInfo_ = null;
+				this.scheduledBatchData_ = null;
+			}
+		}, {
+			key: 'emitBatchEvent_',
+
+			/**
+    * Emits the attribute change batch event.
+    * @protected
+    */
+			value: function emitBatchEvent_() {
+				if (!this.isDisposed()) {
+					var data = this.scheduledBatchData_;
+					this.scheduledBatchData_ = null;
+					this.emit('attrsChanged', data);
+				}
+			}
+		}, {
+			key: 'getAttrConfig',
+
+			/**
+    * Gets the config object for the requested attribute.
+    * @param {string} name The attribute's name.
+    * @return {!Object}
+    * @protected
+    */
+			value: function getAttrConfig(name) {
+				return (this.attrsInfo_[name] || {}).config;
+			}
+		}, {
+			key: 'getAttrs',
+
+			/**
+    * Returns an object that maps all attribute names to their values.
+    * @return {Object.<string, *>}
+    */
+			value: function getAttrs() {
+				var attrsMap = {};
+				var names = this.getAttrNames();
+
+				for (var i = 0; i < names.length; i++) {
+					attrsMap[names[i]] = this[names[i]];
+				}
+
+				return attrsMap;
+			}
+		}, {
+			key: 'getAttrNames',
+
+			/**
+    * Returns an array with all attribute names.
+    * @return {Array.<string>}
+    */
+			value: function getAttrNames() {
+				return Object.keys(this.attrsInfo_);
+			}
+		}, {
+			key: 'getAttrValue_',
+
+			/**
+    * Gets the value of the specified attribute. This is passed as that attribute's
+    * getter to the `Object.defineProperty` call inside the `addAttr` method.
+    * @param {string} name The name of the attribute.
+    * @return {*}
+    * @protected
+    */
+			value: function getAttrValue_(name) {
+				this.initAttr_(name);
+
+				return this.attrsInfo_[name].value;
+			}
+		}, {
+			key: 'informChange_',
+
+			/**
+    * Informs of changes to an attributes value through an event. Won't trigger
+    * the event if the value hasn't changed or if it's being initialized.
+    * @param {string} name The name of the attribute.
+    * @param {*} prevVal The previous value of the attribute.
+    * @protected
+    */
+			value: function informChange_(name, prevVal) {
+				if (this.shouldInformChange_(name, prevVal)) {
+					var data = {
+						attrName: name,
+						newVal: this[name],
+						prevVal: prevVal
+					};
+					this.emit(name + 'Changed', data);
+					this.scheduleBatchEvent_(data);
+				}
+			}
+		}, {
+			key: 'initAttr_',
+
+			/**
+    * Initializes the specified attribute, giving it a first value.
+    * @param {string} name The name of the attribute.
+    * @protected
+    */
+			value: function initAttr_(name) {
+				var info = this.attrsInfo_[name];
+				if (info.state !== Attribute.States.UNINITIALIZED) {
+					return;
+				}
+
+				info.state = Attribute.States.INITIALIZING;
+				this.setInitialValue_(name);
+				if (!info.written) {
+					info.state = Attribute.States.INITIALIZING_DEFAULT;
+					this.setDefaultValue_(name);
+				}
+				info.state = Attribute.States.INITIALIZED;
+			}
+		}, {
+			key: 'mergeAttrs_',
+
+			/**
+    * Merges an array of values for the ATTRS property into a single object.
+    * @param {!Array} values The values to be merged.
+    * @return {!Object} The merged value.
+    * @protected
+    */
+			value: function mergeAttrs_(values) {
+				return object.mixin.apply(null, [{}].concat(values.reverse()));
+			}
+		}, {
+			key: 'mergeInvalidAttrs_',
+
+			/**
+    * Merges the values of the `INVALID_ATTRS` static for the whole hierarchy of
+    * the current instance.
+    * @protected
+    */
+			value: function mergeInvalidAttrs_() {
+				core.mergeSuperClassesProperty(this.constructor, 'INVALID_ATTRS', function (values) {
+					return array.flatten(values).reduce(function (merged, val) {
+						if (val) {
+							merged[val] = true;
+						}
+						return merged;
+					}, {});
+				});
+			}
+		}, {
+			key: 'removeAttr',
+
+			/**
+    * Removes the requested attribute.
+    * @param {string} name The name of the attribute.
+    */
+			value: function removeAttr(name) {
+				this.attrsInfo_[name] = null;
+				delete this[name];
+			}
+		}, {
+			key: 'scheduleBatchEvent_',
+
+			/**
+    * Schedules an attribute change batch event to be emitted asynchronously.
+    * @param {!Object} attrChangeData Information about an attribute's update.
+    * @protected
+    */
+			value: function scheduleBatchEvent_(attrChangeData) {
+				if (!this.scheduledBatchData_) {
+					async.nextTick(this.emitBatchEvent_, this);
+					this.scheduledBatchData_ = {
+						changes: {}
+					};
+				}
+
+				var name = attrChangeData.attrName;
+				var changes = this.scheduledBatchData_.changes;
+				if (changes[name]) {
+					changes[name].newVal = attrChangeData.newVal;
+				} else {
+					changes[name] = attrChangeData;
+				}
+			}
+		}, {
+			key: 'setAttrs',
+
+			/**
+    * Sets the value of all the specified attributes.
+    * @param {!Object.<string,*>} values A map of attribute names to the values they
+    *   should be set to.
+    */
+			value: function setAttrs(values) {
+				var names = Object.keys(values);
+
+				for (var i = 0; i < names.length; i++) {
+					this[names[i]] = values[names[i]];
+				}
+			}
+		}, {
+			key: 'setAttrValue_',
+
+			/**
+    * Sets the value of the specified attribute. This is passed as that attribute's
+    * setter to the `Object.defineProperty` call inside the `addAttr` method.
+    * @param {string} name The name of the attribute.
+    * @param {*} value The new value of the attribute.
+    * @protected
+    */
+			value: function setAttrValue_(name, value) {
+				if (!this.canSetAttribute(name) || !this.validateAttrValue_(name, value)) {
+					return;
+				}
+
+				var info = this.attrsInfo_[name];
+				if (info.initialValue === undefined && info.state === Attribute.States.UNINITIALIZED) {
+					info.state = Attribute.States.INITIALIZED;
+				}
+
+				var prevVal = this[name];
+				info.value = this.callSetter_(name, value);
+				info.written = true;
+				this.informChange_(name, prevVal);
+			}
+		}, {
+			key: 'setDefaultValue_',
+
+			/**
+    * Sets the default value of the requested attribute.
+    * @param {string} name The name of the attribute.
+    * @return {*}
+    */
+			value: function setDefaultValue_(name) {
+				var config = this.attrsInfo_[name].config;
+
+				if (config.value !== undefined) {
+					this[name] = config.value;
+				} else {
+					this[name] = this.callFunction_(config.valueFn);
+				}
+			}
+		}, {
+			key: 'setInitialValue_',
+
+			/**
+    * Sets the initial value of the requested attribute.
+    * @param {string} name The name of the attribute.
+    * @return {*}
+    */
+			value: function setInitialValue_(name) {
+				var info = this.attrsInfo_[name];
+				if (info.initialValue !== undefined) {
+					this[name] = info.initialValue;
+					info.initialValue = undefined;
+				}
+			}
+		}, {
+			key: 'shouldInformChange_',
+
+			/**
+    * Checks if we should inform about an attributes update. Updates are ignored
+    * during attribute initialization. Otherwise, updates to primitive values
+    * are only informed when the new value is different from the previous
+    * one. Updates to objects (which includes functions and arrays) are always
+    * informed outside initialization though, since we can't be sure if all of
+    * the internal data has stayed the same.
+    * @param {string} name The name of the attribute.
+    * @param {*} prevVal The previous value of the attribute.
+    * @return {boolean}
+    */
+			value: function shouldInformChange_(name, prevVal) {
+				var info = this.attrsInfo_[name];
+				return info.state === Attribute.States.INITIALIZED && (core.isObject(prevVal) || prevVal !== this[name]);
+			}
+		}, {
+			key: 'validateAttrValue_',
+
+			/**
+    * Validates the attribute's value, which includes calling the validator defined
+    * in the attribute's configuration object, if there is one.
+    * @param {string} name The name of the attribute.
+    * @param {*} value The value to be validated.
+    * @return {boolean} Flag indicating if value is valid or not.
+    */
+			value: function validateAttrValue_(name, value) {
+				var info = this.attrsInfo_[name];
+
+				return info.state === Attribute.States.INITIALIZING_DEFAULT || this.callValidator_(name, value);
+			}
+		}]);
+		return Attribute;
+	})(EventEmitter);
+
+	/**
+  * A list with attribute names that will automatically be rejected as invalid.
+  * Subclasses can define their own invalid attributes by setting this static
+  * on their constructors, which will be merged together and handled automatically.
+  * @type {!Array<string>}
+  */
+	Attribute.INVALID_ATTRS = ['attrs'];
+
+	/**
+  * Constants that represent the states that an attribute can be in.
+  * @type {!Object}
+  */
+	Attribute.States = {
+		UNINITIALIZED: 0,
+		INITIALIZING: 1,
+		INITIALIZING_DEFAULT: 2,
+		INITIALIZED: 3
+	};
+
+	this.ui.Attribute = Attribute;
+}).call(this);
+(function () {
+	'use strict';
+
+	var dom = this.ui.dom;
+	var Disposable = this.ui.Disposable;
+
+	/**
+  * EventEmitterProxy utility. It's responsible for linking two EventEmitter
+  * instances together, emitting events from the first emitter through the
+  * second one. That means that listening to a supported event on the target
+  * emitter will mean listening to it on the origin emitter as well.
+  * @param {EventEmitter | Element} originEmitter Events originated on this emitter
+  *   will be fired for the target emitter's listeners as well. Can be either a real
+  *   EventEmitter instance or a DOM element.
+  * @param {EventEmitter} targetEmitter Event listeners attached to this emitter
+  *   will also be triggered when the event is fired by the origin emitter.
+  * @param {Object} opt_blacklist Optional blacklist of events that should not be
+  *   proxied.
+  * @constructor
+  * @extends {Disposable}
+  */
+
+	var EventEmitterProxy = (function (_Disposable) {
+		function EventEmitterProxy(originEmitter, targetEmitter, opt_blacklist, opt_whitelist) {
+			babelHelpers.classCallCheck(this, EventEmitterProxy);
+
+			babelHelpers.get(Object.getPrototypeOf(EventEmitterProxy.prototype), 'constructor', this).call(this);
+
+			/**
+    * Map of events that should not be proxied.
+    * @type {Object}
+    * @protected
+    */
+			this.blacklist_ = opt_blacklist || {};
+
+			/**
+    * The origin emitter. This emitter's events will be proxied through the
+    * target emitter.
+    * @type {EventEmitter}
+    * @protected
+    */
+			this.originEmitter_ = originEmitter;
+
+			/**
+    * Holds a map of events from the origin emitter that are already being proxied.
+    * @type {Object}
+    * @protected
+    */
+			this.proxiedEvents_ = {};
+
+			/**
+    * The target emitter. This emitter will emit all events that come from
+    * the origin emitter.
+    * @type {EventEmitter}
+    * @protected
+    */
+			this.targetEmitter_ = targetEmitter;
+
+			/**
+   * Map of events that should be proxied. If whitelist is set blacklist is
+   * ignored.
+   * @type {Object}
+   * @protected
+   */
+			this.whitelist_ = opt_whitelist;
+
+			this.startProxy_();
+		}
+
+		babelHelpers.inherits(EventEmitterProxy, _Disposable);
+		babelHelpers.createClass(EventEmitterProxy, [{
+			key: 'disposeInternal',
+
+			/**
+    * @inheritDoc
+    */
+			value: function disposeInternal() {
+				var removeFnName = this.originEmitter_.removeEventListener ? 'removeEventListener' : 'removeListener';
+				for (var event in this.proxiedEvents_) {
+					this.originEmitter_[removeFnName](event, this.proxiedEvents_[event]);
+				}
+
+				this.proxiedEvents_ = null;
+				this.originEmitter_ = null;
+				this.targetEmitter_ = null;
+			}
+		}, {
+			key: 'proxyEvent_',
+
+			/**
+    * Proxies the given event from the origin to the target emitter.
+    * @param {string} event
+    */
+			value: function proxyEvent_(event) {
+				if (!this.shouldProxyEvent_(event)) {
+					return;
+				}
+
+				var self = this;
+				this.proxiedEvents_[event] = function () {
+					var args = [event].concat(Array.prototype.slice.call(arguments, 0));
+					self.targetEmitter_.emit.apply(self.targetEmitter_, args);
+				};
+
+				var addFnName = this.originEmitter_.addEventListener ? 'addEventListener' : 'on';
+				this.originEmitter_[addFnName](event, this.proxiedEvents_[event]);
+			}
+		}, {
+			key: 'shouldProxyEvent_',
+
+			/**
+    * Checks if the given event should be proxied.
+    * @param {string} event
+    * @return {boolean}
+    * @protected
+    */
+			value: function shouldProxyEvent_(event) {
+				if (this.whitelist_ && !this.whitelist_[event]) {
+					return false;
+				}
+				if (this.blacklist_[event]) {
+					return false;
+				}
+				return !this.proxiedEvents_[event] && (!(this.originEmitter_.removeEventListener || this.originEmitter_.addEventListener) || dom.supportsEvent(this.originEmitter_, event));
+			}
+		}, {
+			key: 'startProxy_',
+
+			/**
+    * Starts proxying all events from the origin to the target emitter.
+    * @protected
+    */
+			value: function startProxy_() {
+				this.targetEmitter_.on('newListener', this.proxyEvent_.bind(this));
+			}
+		}]);
+		return EventEmitterProxy;
+	})(Disposable);
+
+	this.ui.EventEmitterProxy = EventEmitterProxy;
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var domPosition = this.ui.position;
+	var Attribute = this.ui.Attribute;
+	var EventEmitter = this.ui.EventEmitter;
+	var EventEmitterProxy = this.ui.EventEmitterProxy;
+
+	/**
+  * Affix utility.
+  */
+
+	var Affix = (function (_Attribute) {
+		/**
+   * @inheritDoc
+   */
+
+		function Affix(opt_config) {
+			babelHelpers.classCallCheck(this, Affix);
+
+			babelHelpers.get(Object.getPrototypeOf(Affix.prototype), 'constructor', this).call(this, opt_config);
+
+			if (!Affix.emitter_) {
+				Affix.emitter_ = new EventEmitter();
+				Affix.proxy_ = new EventEmitterProxy(document, Affix.emitter_, null, { scroll: true });
+			}
+
+			/**
+    * Holds the last position.
+    * @type {Position.Bottom|Position.Default|Position.Top}
+    * @private
+    */
+			this.lastPosition_ = null;
+
+			/**
+    * Holds event handle that listens scroll shared event emitter proxy.
+    * @type {EventHandle}
+    * @protected
+    */
+			this.scrollHandle_ = Affix.emitter_.on('scroll', this.checkPosition.bind(this));
+
+			this.on('elementChanged', this.checkPosition);
+			this.on('offsetTopChanged', this.checkPosition);
+			this.on('offsetBottomChanged', this.checkPosition);
+			this.checkPosition();
+		}
+
+		babelHelpers.inherits(Affix, _Attribute);
+		babelHelpers.createClass(Affix, [{
+			key: 'disposeInternal',
+
+			/**
+    * @inheritDoc
+    */
+			value: function disposeInternal() {
+				dom.removeClasses(this.element, Affix.Position.Bottom + ' ' + Affix.Position.Default + ' ' + Affix.Position.Top);
+				this.scrollHandle_.dispose();
+				babelHelpers.get(Object.getPrototypeOf(Affix.prototype), 'disposeInternal', this).call(this);
+			}
+		}, {
+			key: 'checkPosition',
+
+			/**
+    * Synchronize bottom, top and element regions and checks if position has
+    * changed. If position has changed syncs position.
+    */
+			value: function checkPosition() {
+				if (this.intersectTopRegion()) {
+					this.syncPosition(Affix.Position.Top);
+				} else if (this.intersectBottomRegion()) {
+					this.syncPosition(Affix.Position.Bottom);
+				} else {
+					this.syncPosition(Affix.Position.Default);
+				}
+			}
+		}, {
+			key: 'intersectBottomRegion',
+
+			/**
+    * Whether the element is intersecting with bottom region defined by
+    * offsetBottom.
+    * @return {boolean}
+    */
+			value: function intersectBottomRegion() {
+				if (!core.isDef(this.offsetBottom)) {
+					return false;
+				}
+				var clientHeight = domPosition.getHeight(this.scrollElement);
+				var scrollElementClientHeight = domPosition.getClientHeight(this.scrollElement);
+				return domPosition.getScrollTop(this.scrollElement) + scrollElementClientHeight >= clientHeight - this.offsetBottom;
+			}
+		}, {
+			key: 'intersectTopRegion',
+
+			/**
+    * Whether the element is intersecting with top region defined by
+    * offsetTop.
+    * @return {boolean}
+    */
+			value: function intersectTopRegion() {
+				if (!core.isDef(this.offsetTop)) {
+					return false;
+				}
+				return domPosition.getScrollTop(this.scrollElement) <= this.offsetTop;
+			}
+		}, {
+			key: 'syncPosition',
+
+			/**
+    * Synchronizes element css classes to match with the specified position.
+    * @param {Position.Bottom|Position.Default|Position.Top} position
+    */
+			value: function syncPosition(position) {
+				if (this.lastPosition_ !== position) {
+					dom.addClasses(this.element, position);
+					dom.removeClasses(this.element, this.lastPosition_);
+					this.lastPosition_ = position;
+				}
+			}
+		}]);
+		return Affix;
+	})(Attribute);
+
+	/**
+  * Holds positions enum.
+  * @enum {string}
+  */
+	Affix.Position = {
+		Top: 'affix-top',
+		Bottom: 'affix-bottom',
+		Default: 'affix-default'
+	};
+
+	Affix.ATTRS = {
+		/**
+   * The scrollElement element to be used as scrollElement area for affix. The scrollElement is
+   * where the scroll event is listened from.
+   * @type {Element|Window}
+   */
+		scrollElement: {
+			setter: dom.toElement,
+			value: document
+		},
+
+		/**
+   * Defines the offset bottom that triggers affix.
+   * @type {Number}
+   */
+		offsetTop: {
+			validator: core.isNumber
+		},
+
+		/**
+   * Defines the offset top that triggers affix.
+   * @type {Number}
+   */
+		offsetBottom: {
+			validator: core.isNumber
+		},
+
+		/**
+   * Element to be used as alignment reference of affix.
+   * @type {Element}
+   */
+		element: {
+			setter: dom.toElement
+		}
+	};
+
+	this.ui.Affix = Affix;
+}).call(this);
+(function () {
+	'use strict';
+
+	var dom = this.ui.dom;
+
+	/**
+  * Class with static methods responsible for doing browser feature checks.
+  */
+
+	var features = (function () {
+		function features() {
+			babelHelpers.classCallCheck(this, features);
+		}
+
+		babelHelpers.createClass(features, null, [{
+			key: 'checkAttrOrderChange',
+
+			/**
+    * Some browsers (like IE9) change the order of element attributes, when html
+    * is rendered. This method can be used to check if this behavior happens on
+    * the current browser.
+    * @return {boolean}
+    */
+			value: function checkAttrOrderChange() {
+				if (features.attrOrderChange_ === undefined) {
+					var originalContent = '<div data-component="" data-ref=""></div>';
+					var element = document.createElement('div');
+					dom.append(element, originalContent);
+					features.attrOrderChange_ = originalContent !== element.innerHTML;
+				}
+				return features.attrOrderChange_;
+			}
+		}]);
+		return features;
+	})();
+
+	features.attrOrderChange_ = undefined;
+
+	this.ui.features = features;
+}).call(this);
+(function () {
+	'use strict';
+
+	var string = (function () {
+		function string() {
+			babelHelpers.classCallCheck(this, string);
+		}
+
+		babelHelpers.createClass(string, null, [{
+			key: 'collapseBreakingSpaces',
+
+			/**
+    * Removes the breaking spaces from the left and right of the string and
+    * collapses the sequences of breaking spaces in the middle into single spaces.
+    * The original and the result strings render the same way in HTML.
+    * @param {string} str A string in which to collapse spaces.
+    * @return {string} Copy of the string with normalized breaking spaces.
+    */
+			value: function collapseBreakingSpaces(str) {
+				return str.replace(/[\t\r\n ]+/g, ' ').replace(/^[\t\r\n ]+|[\t\r\n ]+$/g, '');
+			}
+		}, {
+			key: 'hashCode',
+
+			/**
+    * Calculates the hashcode for a string. The hashcode value is computed by
+    * the sum algorithm: s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]. A nice
+    * property of using 31 prime is that the multiplication can be replaced by
+    * a shift and a subtraction for better performance: 31*i == (i<<5)-i.
+    * Modern VMs do this sort of optimization automatically.
+    * @param {String} val Target string.
+    * @return {Number} Returns the string hashcode.
+    */
+			value: function hashCode(val) {
+				var hash = 0;
+				for (var i = 0, len = val.length; i < len; i++) {
+					hash = 31 * hash + val.charCodeAt(i);
+					hash %= 4294967296;
+				}
+				return hash;
+			}
+		}, {
+			key: 'replaceInterval',
+
+			/**
+    * Replaces interval into the string with specified value, e.g.
+    * `replaceInterval("abcde", 1, 4, "")` returns "ae".
+    * @param {string} str The input string.
+    * @param {Number} start Start interval position to be replaced.
+    * @param {Number} end End interval position to be replaced.
+    * @param {string} value The value that replaces the specified interval.
+    * @return {string}
+    */
+			value: function replaceInterval(str, start, end, value) {
+				return str.substring(0, start) + value + str.substring(end);
+			}
+		}]);
+		return string;
+	})();
+
+	this.ui.string = string;
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var string = this.ui.string;
+
+	var html = (function () {
+		function html() {
+			babelHelpers.classCallCheck(this, html);
+		}
+
+		babelHelpers.createClass(html, null, [{
+			key: 'compress',
+
+			/**
+    * Minifies given HTML source by removing extra white spaces, comments and
+    * other unneeded characters without breaking the content structure. As a
+    * result HTML become smaller in size.
+    * - Contents within <code>, <pre>, <script>, <style>, <textarea> and
+    *   conditional comments tags are preserved.
+    * - Comments are removed.
+    * - Conditional comments are preserved.
+    * - Breaking spaces are collapsed into a single space.
+    * - Unneeded spaces inside tags (around = and before />) are removed.
+    * - Spaces between tags are removed, even from inline-block elements.
+    * - Spaces surrounding tags are removed.
+    * - DOCTYPE declaration is simplified to <!DOCTYPE html>.
+    * - Does not remove default attributes from <script>, <style>, <link>,
+    *   <form>, <input>.
+    * - Does not remove values from boolean tag attributes.
+    * - Does not remove "javascript:" from in-line event handlers.
+    * - Does not remove http:// and https:// protocols.
+    * @param {string} htmlString Input HTML to be compressed.
+    * @return {string} Compressed version of the HTML.
+    */
+			value: function compress(htmlString) {
+				var preserved = {};
+				htmlString = html.preserveBlocks_(htmlString, preserved);
+				htmlString = html.simplifyDoctype_(htmlString);
+				htmlString = html.removeComments_(htmlString);
+				htmlString = html.removeIntertagSpaces_(htmlString);
+				htmlString = html.collapseBreakingSpaces_(htmlString);
+				htmlString = html.removeSpacesInsideTags_(htmlString);
+				htmlString = html.removeSurroundingSpaces_(htmlString);
+				htmlString = html.returnBlocks_(htmlString, preserved);
+				return htmlString.trim();
+			}
+		}, {
+			key: 'collapseBreakingSpaces_',
+
+			/**
+    * Collapses breaking spaces into a single space.
+    * @param {string} htmlString
+    * @return {string}
+    * @protected
+    */
+			value: function collapseBreakingSpaces_(htmlString) {
+				return string.collapseBreakingSpaces(htmlString);
+			}
+		}, {
+			key: 'lookupPossibleTagBoundary_',
+
+			/**
+    * Searches for first occurrence of the specified open tag string pattern
+    * and from that point finds next ">" position, identified as possible tag
+    * end position.
+    * @param {string} htmlString
+    * @param {string} openTag Open tag string pattern without open tag ending
+    *     character, e.g. "<textarea" or "<code".
+    * @return {string}
+    * @protected
+    */
+			value: function lookupPossibleTagBoundary_(htmlString, openTag) {
+				var tagPos = htmlString.indexOf(openTag);
+				if (tagPos > -1) {
+					tagPos += htmlString.substring(tagPos).indexOf('>') + 1;
+				}
+				return tagPos;
+			}
+		}, {
+			key: 'preserveBlocks_',
+
+			/**
+    * Preserves contents inside any <code>, <pre>, <script>, <style>,
+    * <textarea> and conditional comment tags. When preserved, original content
+    * are replaced with an unique generated block id and stored into
+    * `preserved` map.
+    * @param {string} htmlString
+    * @param {Object} preserved Object to preserve the content indexed by an
+    *     unique generated block id.
+    * @return {html} The preserved HTML.
+    * @protected
+    */
+			value: function preserveBlocks_(htmlString, preserved) {
+				htmlString = html.preserveOuterHtml_(htmlString, '<!--[if', '<![endif]-->', preserved);
+				htmlString = html.preserveInnerHtml_(htmlString, '<code', '</code', preserved);
+				htmlString = html.preserveInnerHtml_(htmlString, '<pre', '</pre', preserved);
+				htmlString = html.preserveInnerHtml_(htmlString, '<script', '</script', preserved);
+				htmlString = html.preserveInnerHtml_(htmlString, '<style', '</style', preserved);
+				htmlString = html.preserveInnerHtml_(htmlString, '<textarea', '</textarea', preserved);
+				return htmlString;
+			}
+		}, {
+			key: 'preserveInnerHtml_',
+
+			/**
+    * Preserves inner contents inside the specified tag. When preserved,
+    * original content are replaced with an unique generated block id and
+    * stored into `preserved` map.
+    * @param {string} htmlString
+    * @param {string} openTag Open tag string pattern without open tag ending
+    *     character, e.g. "<textarea" or "<code".
+    * @param {string} closeTag Close tag string pattern without close tag
+    *     ending character, e.g. "</textarea" or "</code".
+    * @param {Object} preserved Object to preserve the content indexed by an
+    *     unique generated block id.
+    * @return {html} The preserved HTML.
+    * @protected
+    */
+			value: function preserveInnerHtml_(htmlString, openTag, closeTag, preserved) {
+				var tagPosEnd = html.lookupPossibleTagBoundary_(htmlString, openTag);
+				while (tagPosEnd > -1) {
+					var tagEndPos = htmlString.indexOf(closeTag);
+					htmlString = html.preserveInterval_(htmlString, tagPosEnd, tagEndPos, preserved);
+					htmlString = htmlString.replace(openTag, '%%%~1~%%%');
+					htmlString = htmlString.replace(closeTag, '%%%~2~%%%');
+					tagPosEnd = html.lookupPossibleTagBoundary_(htmlString, openTag);
+				}
+				htmlString = htmlString.replace(/%%%~1~%%%/g, openTag);
+				htmlString = htmlString.replace(/%%%~2~%%%/g, closeTag);
+				return htmlString;
+			}
+		}, {
+			key: 'preserveInterval_',
+
+			/**
+    * Preserves interval of the specified HTML into the preserved map replacing
+    * original contents with an unique generated id.
+    * @param {string} htmlString
+    * @param {Number} start Start interval position to be replaced.
+    * @param {Number} end End interval position to be replaced.
+    * @param {Object} preserved Object to preserve the content indexed by an
+    *     unique generated block id.
+    * @return {string} The HTML with replaced interval.
+    * @protected
+    */
+			value: function preserveInterval_(htmlString, start, end, preserved) {
+				var blockId = '%%%~BLOCK~' + core.getUid() + '~%%%';
+				preserved[blockId] = htmlString.substring(start, end);
+				return string.replaceInterval(htmlString, start, end, blockId);
+			}
+		}, {
+			key: 'preserveOuterHtml_',
+
+			/**
+    * Preserves outer contents inside the specified tag. When preserved,
+    * original content are replaced with an unique generated block id and
+    * stored into `preserved` map.
+    * @param {string} htmlString
+    * @param {string} openTag Open tag string pattern without open tag ending
+    *     character, e.g. "<textarea" or "<code".
+    * @param {string} closeTag Close tag string pattern without close tag
+    *     ending character, e.g. "</textarea" or "</code".
+    * @param {Object} preserved Object to preserve the content indexed by an
+    *     unique generated block id.
+    * @return {html} The preserved HTML.
+    * @protected
+    */
+			value: function preserveOuterHtml_(htmlString, openTag, closeTag, preserved) {
+				var tagPos = htmlString.indexOf(openTag);
+				while (tagPos > -1) {
+					var tagEndPos = htmlString.indexOf(closeTag) + closeTag.length;
+					htmlString = html.preserveInterval_(htmlString, tagPos, tagEndPos, preserved);
+					tagPos = htmlString.indexOf(openTag);
+				}
+				return htmlString;
+			}
+		}, {
+			key: 'removeComments_',
+
+			/**
+    * Removes all comments of the HTML. Including conditional comments and
+    * "<![CDATA[" blocks.
+    * @param {string} htmlString
+    * @return {string} The HTML without comments.
+    * @protected
+    */
+			value: function removeComments_(htmlString) {
+				var preserved = {};
+				htmlString = html.preserveOuterHtml_(htmlString, '<![CDATA[', ']]>', preserved);
+				htmlString = html.preserveOuterHtml_(htmlString, '<!--', '-->', preserved);
+				htmlString = html.replacePreservedBlocks_(htmlString, preserved, '');
+				return htmlString;
+			}
+		}, {
+			key: 'removeIntertagSpaces_',
+
+			/**
+    * Removes spaces between tags, even from inline-block elements.
+    * @param {string} htmlString
+    * @return {string} The HTML without spaces between tags.
+    * @protected
+    */
+			value: function removeIntertagSpaces_(htmlString) {
+				htmlString = htmlString.replace(html.Patterns.INTERTAG_CUSTOM_CUSTOM, '~%%%%%%~');
+				htmlString = htmlString.replace(html.Patterns.INTERTAG_CUSTOM_TAG, '~%%%<');
+				htmlString = htmlString.replace(html.Patterns.INTERTAG_TAG, '><');
+				htmlString = htmlString.replace(html.Patterns.INTERTAG_TAG_CUSTOM, '>%%%~');
+				return htmlString;
+			}
+		}, {
+			key: 'removeSpacesInsideTags_',
+
+			/**
+    * Removes spaces inside tags.
+    * @param {string} htmlString
+    * @return {string} The HTML without spaces inside tags.
+    * @protected
+    */
+			value: function removeSpacesInsideTags_(htmlString) {
+				htmlString = htmlString.replace(html.Patterns.TAG_END_SPACES, '$1$2');
+				htmlString = htmlString.replace(html.Patterns.TAG_QUOTE_SPACES, '=$1$2$3');
+				return htmlString;
+			}
+		}, {
+			key: 'removeSurroundingSpaces_',
+
+			/**
+    * Removes spaces surrounding tags.
+    * @param {string} htmlString
+    * @return {string} The HTML without spaces surrounding tags.
+    * @protected
+    */
+			value: function removeSurroundingSpaces_(htmlString) {
+				return htmlString.replace(html.Patterns.SURROUNDING_SPACES, '$1');
+			}
+		}, {
+			key: 'replacePreservedBlocks_',
+
+			/**
+    * Restores preserved map keys inside the HTML. Note that the passed HTML
+    * should contain the unique generated block ids to be replaced.
+    * @param {string} htmlString
+    * @param {Object} preserved Object to preserve the content indexed by an
+    *     unique generated block id.
+    * @param {string} replaceValue The value to replace any block id inside the
+    * HTML.
+    * @return {string}
+    * @protected
+    */
+			value: function replacePreservedBlocks_(htmlString, preserved, replaceValue) {
+				for (var blockId in preserved) {
+					htmlString = htmlString.replace(blockId, replaceValue);
+				}
+				return htmlString;
+			}
+		}, {
+			key: 'simplifyDoctype_',
+
+			/**
+    * Simplifies DOCTYPE declaration to <!DOCTYPE html>.
+    * @param {string} htmlString
+    * @return {string}
+    * @protected
+    */
+			value: function simplifyDoctype_(htmlString) {
+				var preserved = {};
+				htmlString = html.preserveOuterHtml_(htmlString, '<!DOCTYPE', '>', preserved);
+				htmlString = html.replacePreservedBlocks_(htmlString, preserved, '<!DOCTYPE html>');
+				return htmlString;
+			}
+		}, {
+			key: 'returnBlocks_',
+
+			/**
+    * Restores preserved map original contents inside the HTML. Note that the
+    * passed HTML should contain the unique generated block ids to be restored.
+    * @param {string} htmlString
+    * @param {Object} preserved Object to preserve the content indexed by an
+    *     unique generated block id.
+    * @return {string}
+    * @protected
+    */
+			value: function returnBlocks_(htmlString, preserved) {
+				for (var blockId in preserved) {
+					htmlString = htmlString.replace(blockId, preserved[blockId]);
+				}
+				return htmlString;
+			}
+		}]);
+		return html;
+	})();
+
+	/**
+  * HTML regex patterns.
+  * @enum {RegExp}
+  * @protected
+  */
+	html.Patterns = {
+		/**
+   * @type {RegExp}
+   */
+		INTERTAG_CUSTOM_CUSTOM: /~%%%\s+%%%~/g,
+
+		/**
+   * @type {RegExp}
+   */
+		INTERTAG_TAG_CUSTOM: />\s+%%%~/g,
+
+		/**
+   * @type {RegExp}
+   */
+		INTERTAG_CUSTOM_TAG: /~%%%\s+</g,
+
+		/**
+   * @type {RegExp}
+   */
+		INTERTAG_TAG: />\s+</g,
+
+		/**
+   * @type {RegExp}
+   */
+		SURROUNDING_SPACES: /\s*(<[^>]+>)\s*/g,
+
+		/**
+   * @type {RegExp}
+   */
+		TAG_END_SPACES: /(<(?:[^>]+?))(?:\s+?)(\/?>)/g,
+
+		/**
+   * @type {RegExp}
+   */
+		TAG_QUOTE_SPACES: /\s*=\s*(["']?)\s*(.*?)\s*(\1)/g
+	};
+
+	this.ui.html = html;
+}).call(this);
+(function () {
+	'use strict';
+
+	/**
+  * The component registry is used to register components, so they can
+  * be accessible by name.
+  * @type {Object}
+  */
+
+	var ComponentRegistry = (function () {
+		function ComponentRegistry() {
+			babelHelpers.classCallCheck(this, ComponentRegistry);
+		}
+
+		babelHelpers.createClass(ComponentRegistry, null, [{
+			key: 'getConstructor',
+
+			/**
+    * Gets the constructor function for the given component name, or
+    * undefined if it hasn't been registered yet.
+    * @param {string} name The component's name.
+    * @return {?function}
+    * @static
+    */
+			value: function getConstructor(name) {
+				var constructorFn = ComponentRegistry.components_[name];
+				if (!constructorFn) {
+					console.error('There\'s no constructor registered for the component ' + 'named ' + name + '. Components need to be registered via ' + 'ComponentRegistry.register.');
+				}
+				return constructorFn;
+			}
+		}, {
+			key: 'register',
+
+			/**
+    * Registers a component.
+    * @param {string} name The component's name.
+    * @param {string} constructorFn The component's constructor function.
+    * @static
+    */
+			value: function register(name, constructorFn) {
+				ComponentRegistry.components_[name] = constructorFn;
+				constructorFn.NAME = name;
+				constructorFn.TEMPLATES = ComponentRegistry.Templates[name];
+			}
+		}]);
+		return ComponentRegistry;
+	})();
+
+	/**
+  * Holds all registered components, indexed by their names.
+  * @type {!Object<string, function()>}
+  * @protected
+  * @static
+  */
+	ComponentRegistry.components_ = {};
+
+	/**
+  * Holds all registered component templates, indexed by component names.
+  * Soy files automatically add their templates to this object when imported.
+  * @type {!Object<string, !Object<string, !function()>>}
+  * @static
+  */
+	ComponentRegistry.Templates = {};
+
+	this.ui.ComponentRegistry = ComponentRegistry;
+}).call(this);
+(function () {
+	'use strict';
+
+	var ComponentRegistry = this.ui.ComponentRegistry;
+	var Disposable = this.ui.Disposable;
+
+	var ComponentCollector = (function (_Disposable) {
+		function ComponentCollector() {
+			babelHelpers.classCallCheck(this, ComponentCollector);
+
+			babelHelpers.get(Object.getPrototypeOf(ComponentCollector.prototype), 'constructor', this).call(this);
+
+			/**
+    * Holds the data that should be passed to a component, mapped by component id.
+    * @type {!Object<string, Object>}
+    */
+			this.nextComponentData_ = {};
+		}
+
+		babelHelpers.inherits(ComponentCollector, _Disposable);
+		babelHelpers.createClass(ComponentCollector, [{
+			key: 'createComponent',
+
+			/**
+    * Creates the appropriate component from the given config data if it doesn't
+    * exist yet.
+    * @param {string} componentName The name of the component to be created.
+    * @param {string} id The id of the component to be created.
+    * @return {!Component} The component instance.
+    */
+			value: function createComponent(componentName, id) {
+				var component = ComponentCollector.components[id];
+				if (!component) {
+					var ConstructorFn = ComponentRegistry.getConstructor(componentName);
+					var data = this.getNextComponentData(id);
+					data.element = '#' + id;
+					component = new ConstructorFn(data);
+					ComponentCollector.components[id] = component;
+				}
+				return component;
+			}
+		}, {
+			key: 'getNextComponentData',
+
+			/**
+    * Gets the data that should be passed to the next creation or update of a
+    * component with the given id.
+    * @param {string} id
+    * @param {Object} data
+    */
+			value: function getNextComponentData(id) {
+				var data = this.nextComponentData_[id] || {};
+				data.id = id;
+				return data;
+			}
+		}, {
+			key: 'setNextComponentData',
+
+			/**
+    * Sets the data that should be passed to the next creation or update of a
+    * component with the given id.
+    * @param {string} id
+    * @param {Object} data
+    */
+			value: function setNextComponentData(id, data) {
+				this.nextComponentData_[id] = data;
+			}
+		}, {
+			key: 'updateComponent',
+
+			/**
+    * Updates an existing component instance with new attributes.
+    * @param {string} id The id of the component to be created or updated.
+    * @return {Component} The extracted component instance.
+    */
+			value: function updateComponent(id) {
+				var component = ComponentCollector.components[id];
+				if (component) {
+					var data = this.getNextComponentData(id);
+					component.setAttrs(data);
+				}
+				return component;
+			}
+		}]);
+		return ComponentCollector;
+	})(Disposable);
+
+	/**
+  * Holds all collected components, indexed by their id.
+  * @type {!Object<string, !Component>}
+  */
+	ComponentCollector.components = {};
+
+	this.ui.ComponentCollector = ComponentCollector;
+}).call(this);
+(function () {
+	'use strict';
+
+	var Disposable = this.ui.Disposable;
+
+	/**
+  * EventHandler utility. It's useful for easily removing a group of
+  * listeners from different EventEmitter instances.
+  * @constructor
+  * @extends {Disposable}
+  */
+
+	var EventHandler = (function (_Disposable) {
+		function EventHandler() {
+			babelHelpers.classCallCheck(this, EventHandler);
+
+			babelHelpers.get(Object.getPrototypeOf(EventHandler.prototype), 'constructor', this).call(this);
+
+			/**
+    * An array that holds the added event handles, so the listeners can be
+    * removed later.
+    * @type {Array.<EventHandle>}
+    * @protected
+    */
+			this.eventHandles_ = [];
+		}
+
+		babelHelpers.inherits(EventHandler, _Disposable);
+		babelHelpers.createClass(EventHandler, [{
+			key: 'add',
+
+			/**
+    * Adds event handles to be removed later through the `removeAllListeners`
+    * method.
+    * @param {...(!EventHandle)} var_args
+    */
+			value: function add() {
+				for (var i = 0; i < arguments.length; i++) {
+					this.eventHandles_.push(arguments[i]);
+				}
+			}
+		}, {
+			key: 'disposeInternal',
+
+			/**
+    * Disposes of this instance's object references.
+    * @override
+    */
+			value: function disposeInternal() {
+				this.eventHandles_ = null;
+			}
+		}, {
+			key: 'removeAllListeners',
+
+			/**
+    * Removes all listeners that have been added through the `add` method.
+    */
+			value: function removeAllListeners() {
+				for (var i = 0; i < this.eventHandles_.length; i++) {
+					this.eventHandles_[i].removeListener();
+				}
+
+				this.eventHandles_ = [];
+			}
+		}]);
+		return EventHandler;
+	})(Disposable);
+
+	this.ui.EventHandler = EventHandler;
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var ComponentCollector = this.ui.ComponentCollector;
+	var Disposable = this.ui.Disposable;
+
+	/**
+  * Collects inline events from a passed element, detaching previously
+  * attached events that are not being used anymore.
+  * @param {Component} component
+  * @constructor
+  * @extends {Disposable}
+  */
+
+	var EventsCollector = (function (_Disposable) {
+		function EventsCollector(component) {
+			babelHelpers.classCallCheck(this, EventsCollector);
+
+			babelHelpers.get(Object.getPrototypeOf(EventsCollector.prototype), 'constructor', this).call(this);
+
+			if (!component) {
+				throw new Error('The component instance is mandatory');
+			}
+
+			/**
+    * Holds the component intance.
+    * @type {!Component}
+    * @protected
+    */
+			this.component_ = component;
+
+			/**
+    * Holds the attached delegate event handles, indexed by the css selector.
+    * @type {!Object<string, !DomEventHandle>}
+    * @protected
+    */
+			this.eventHandles_ = {};
+
+			/**
+    * Holds flags indicating which selectors a group has listeners for.
+    * @type {!Object<string, !Object<string, boolean>>}
+    * @protected
+    */
+			this.groupHasListener_ = {};
+		}
+
+		babelHelpers.inherits(EventsCollector, _Disposable);
+		babelHelpers.createClass(EventsCollector, [{
+			key: 'attachListener_',
+
+			/**
+    * Attaches the listener described by the given params, unless it has already
+    * been attached.
+    * @param {string} eventType
+    * @param {string} fnName
+    * @param {boolean} permanent
+    * @protected
+    */
+			value: function attachListener_(eventType, fnName, groupName) {
+				var selector = '[data-on' + eventType + '="' + fnName + '"]';
+
+				this.groupHasListener_[groupName][selector] = true;
+
+				if (!this.eventHandles_[selector]) {
+					var fn = this.getListenerFn_(fnName);
+					this.eventHandles_[selector] = this.component_.delegate(eventType, selector, fn);
+				}
+			}
+		}, {
+			key: 'attachListeners',
+
+			/**
+    * Attaches all listeners declared as attributes on the given element and
+    * its children.
+    * @param {string} content
+    * @param {boolean} groupName
+    */
+			value: function attachListeners(content, groupName) {
+				if (!core.isString(content)) {
+					return;
+				}
+				this.groupHasListener_[groupName] = {};
+				this.attachListenersFromHtml_(content, groupName);
+			}
+		}, {
+			key: 'attachListenersFromHtml_',
+
+			/**
+    * Attaches listeners found in the given html content.
+    * @param {string} content
+    * @param {boolean} groupName
+    * @protected
+    */
+			value: function attachListenersFromHtml_(content, groupName) {
+				if (content.indexOf('data-on') === -1) {
+					return;
+				}
+				var regex = /data-on([a-z]+)=['"]([^'"]+)['"]/g;
+				var match = regex.exec(content);
+				while (match) {
+					this.attachListener_(match[1], match[2], groupName);
+					match = regex.exec(content);
+				}
+			}
+		}, {
+			key: 'detachAllListeners',
+
+			/**
+    * Removes all previously attached event listeners to the component.
+    */
+			value: function detachAllListeners() {
+				for (var selector in this.eventHandles_) {
+					if (this.eventHandles_[selector]) {
+						this.eventHandles_[selector].removeListener();
+					}
+				}
+				this.eventHandles_ = {};
+				this.listenerCounts_ = {};
+			}
+		}, {
+			key: 'detachUnusedListeners',
+
+			/**
+    * Detaches all existing listeners that are not being used anymore.
+    * @protected
+    */
+			value: function detachUnusedListeners() {
+				for (var selector in this.eventHandles_) {
+					var unused = true;
+					for (var groupName in this.groupHasListener_) {
+						if (this.groupHasListener_[groupName][selector]) {
+							unused = false;
+							break;
+						}
+					}
+					if (unused) {
+						this.eventHandles_[selector].removeListener();
+						this.eventHandles_[selector] = null;
+					}
+				}
+			}
+		}, {
+			key: 'disposeInternal',
+
+			/**
+    * @inheritDoc
+    */
+			value: function disposeInternal() {
+				this.detachAllListeners();
+				this.component_ = null;
+			}
+		}, {
+			key: 'getListenerFn_',
+
+			/**
+    * Gets the listener function from its name. If the name is prefixed with a
+    * component id, the function will be called on that specified component. Otherwise
+    * it will be called on this event collector's component instead.
+    * @param {string} fnName
+    * @return {!function()}
+    * @protected
+    */
+			value: function getListenerFn_(fnName) {
+				var fnComponent;
+				var split = fnName.split(':');
+				if (split.length === 2) {
+					fnName = split[1];
+					fnComponent = ComponentCollector.components[split[0]];
+					if (!fnComponent) {
+						console.error('No component with the id ' + split[0] + ' has been collected' + 'yet. Make sure that you specify an id for an existing component when ' + 'adding inline listeners.');
+					}
+				}
+				fnComponent = fnComponent || this.component_;
+				return fnComponent[fnName].bind(fnComponent);
+			}
+		}]);
+		return EventsCollector;
+	})(Disposable);
+
+	this.ui.EventsCollector = EventsCollector;
+}).call(this);
+(function () {
+	'use strict';
+
+	var array = this.ui.array;
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var features = this.ui.features;
+	var html = this.ui.html;
+	var object = this.ui.object;
+	var string = this.ui.string;
+	var Attribute = this.ui.Attribute;
+	var ComponentCollector = this.ui.ComponentCollector;
+	var EventEmitterProxy = this.ui.EventEmitterProxy;
+	var EventHandler = this.ui.EventHandler;
+	var EventsCollector = this.ui.EventsCollector;
+
+	/**
+  * Component collects common behaviors to be followed by UI components, such
+  * as Lifecycle, bounding box element creation, CSS classes management,
+  * events encapsulation and surfaces support. Surfaces are an area of the
+  * component that can have information rendered into it. A component
+  * manages multiple surfaces. Surfaces are only rendered when its content is
+  * modified, representing render performance gains. For each surface, render
+  * attributes could be associated, when the render context of a surface gets
+  * modified the component Lifecycle re-paints the modified surface
+  * automatically.
+  *
+  * Example:
+  *
+  * <code>
+  * class CustomComponent extends Component {
+  *   constructor(config) {
+  *     super(config);
+  *   }
+  *
+  *   created() {
+  *   }
+  *
+  *   decorateInternal() {
+  *   }
+  *
+  *   renderInternal() {
+  *     this.element.appendChild(this.getSurfaceElement('header'));
+  *     this.element.appendChild(this.getSurfaceElement('bottom'));
+  *   }
+  *
+  *   getSurfaceContent(surfaceId) {
+  *   }
+  *
+  *   attached() {
+  *   }
+  *
+  *   detached() {
+  *   }
+  * }
+  *
+  * CustomComponent.ATTRS = {
+  *   title: { value: 'Title' },
+  *   fontSize: { value: '10px' }
+  * };
+  *
+  * CustomComponent.SURFACES = {
+  *   header: { renderAttrs: ['title', 'fontSize'] },
+  *   bottom: { renderAttrs: ['fontSize'] }
+  * };
+  * </code>
+  *
+  * @param {!Object} opt_config An object with the initial values for this component's
+  *   attributes.
+  * @constructor
+  * @extends {Attribute}
+  */
+
+	var Component = (function (_Attribute) {
+		function Component(opt_config) {
+			babelHelpers.classCallCheck(this, Component);
+
+			babelHelpers.get(Object.getPrototypeOf(Component.prototype), 'constructor', this).call(this, opt_config);
+
+			/**
+    * Holds data about all surfaces that were collected through the
+    * `replaceSurfacePlaceholders_` method.
+    * @type {!Array}
+    * @protected
+    */
+			this.collectedSurfaces_ = [];
+
+			/**
+    * Gets all nested components.
+    * @type {!Array<!Component>}
+    */
+			this.components = {};
+
+			/**
+    * Whether the element is being decorated.
+    * @type {boolean}
+    * @protected
+    */
+			this.decorating_ = false;
+
+			/**
+    * Holds events that were listened through the `delegate` Component function.
+    * @type {EventHandler}
+    * @protected
+    */
+			this.delegateEventHandler_ = null;
+
+			/**
+    * Instance of `EventEmitterProxy` which proxies events from the component's
+    * element to the component itself.
+    * @type {EventEmitterProxy}
+    * @protected
+    */
+			this.elementEventProxy_ = null;
+
+			/**
+    * Collects inline events from html contents.
+    * @type {!EventsCollector}
+    * @protected
+    */
+			this.eventsCollector_ = new EventsCollector(this);
+
+			/**
+    * Holds the number of generated ids for each surface's contents.
+    * @type {!Object}
+    * @protected
+    */
+			this.generatedIdCount_ = {};
+
+			/**
+    * Whether the element is in document.
+    * @type {boolean}
+    */
+			this.inDocument = false;
+
+			/**
+    * Maps that index the surfaces instances by the surface id.
+    * @type {Object}
+    * @default null
+    * @protected
+    */
+			this.surfaces_ = null;
+
+			/**
+    * Whether the element was rendered.
+    * @type {boolean}
+    */
+			this.wasRendered = false;
+
+			/**
+    * The component's element will be appended to the element this variable is
+    * set to, unless the user specifies another parent when calling `render` or
+    * `attach`.
+    * @type {!Element}
+    */
+			this.DEFAULT_ELEMENT_PARENT = document.body;
+
+			core.mergeSuperClassesProperty(this.constructor, 'ELEMENT_CLASSES', this.mergeElementClasses_);
+			core.mergeSuperClassesProperty(this.constructor, 'ELEMENT_TAG_NAME', array.firstDefinedValue);
+			core.mergeSuperClassesProperty(this.constructor, 'SURFACE_TAG_NAME', array.firstDefinedValue);
+			this.addSurfacesFromStaticHint_();
+
+			this.delegateEventHandler_ = new EventHandler();
+
+			this.created_();
+		}
+
+		babelHelpers.inherits(Component, _Attribute);
+		babelHelpers.createClass(Component, [{
+			key: 'addSingleListener_',
+
+			/**
+    * Overrides `addSingleListener_` from `EventEmitter`, so we can create
+    * the `EventEmitterProxy` instance only when it's needed for the first
+    * time.
+    * @param {string} event
+    * @param {!Function} listener
+    * @param {Function=} opt_origin The original function that was added as a
+    *   listener, if there is any.
+    * @protected
+    * @override
+    */
+			value: function addSingleListener_(event, listener, opt_origin) {
+				if (!this.elementEventProxy_ && dom.supportsEvent(this.constructor.ELEMENT_TAG_NAME_MERGED, event)) {
+					this.elementEventProxy_ = new EventEmitterProxy(this.element, this);
+				}
+				babelHelpers.get(Object.getPrototypeOf(Component.prototype), 'addSingleListener_', this).call(this, event, listener, opt_origin);
+			}
+		}, {
+			key: 'addSurface',
+
+			/**
+    * Registers a surface to the component. Surface elements are not
+    * automatically appended to the component element.
+    * @param {string} surfaceId The surface id to be registered.
+    * @param {Object=} opt_config Optional surface configuration.
+    * @chainable
+    */
+			value: function addSurface(surfaceId, opt_config) {
+				var config = opt_config || {};
+				this.surfaces_[surfaceId] = config;
+				if (config.componentName) {
+					this.createSubComponent_(config.componentName, surfaceId);
+				}
+				this.cacheSurfaceRenderAttrs_(surfaceId);
+				return this;
+			}
+		}, {
+			key: 'addSurfaces',
+
+			/**
+    * Registers surfaces to the component. Surface elements are not
+    * automatically appended to the component element.
+    * @param {!Object.<string, Object=>} configs An object that maps the names
+    *     of all the surfaces to be added to their configuration objects.
+    * @chainable
+    */
+			value: function addSurfaces(configs) {
+				for (var surfaceId in configs) {
+					this.addSurface(surfaceId, configs[surfaceId]);
+				}
+				return this;
+			}
+		}, {
+			key: 'addSurfacesFromStaticHint_',
+
+			/**
+    * Adds surfaces from super classes static hint.
+    * @protected
+    */
+			value: function addSurfacesFromStaticHint_() {
+				core.mergeSuperClassesProperty(this.constructor, 'SURFACES', this.mergeObjects_);
+				this.surfaces_ = {};
+				this.surfacesRenderAttrs_ = {};
+
+				var configs = this.constructor.SURFACES_MERGED;
+				for (var surfaceId in configs) {
+					this.addSurface(surfaceId, object.mixin({}, configs[surfaceId]));
+				}
+			}
+		}, {
+			key: 'attach',
+
+			/**
+    * Invokes the attached Lifecycle. When attached, the component element is
+    * appended to the DOM and any other action to be performed must be
+    * implemented in this method, such as, binding DOM events. A component can
+    * be re-attached multiple times.
+    * @param {(string|Element)=} opt_parentElement Optional parent element
+    *     to render the component.
+    * @param {(string|Element)=} opt_siblingElement Optional sibling element
+    *     to render the component before it. Relevant when the component needs
+    *     to be rendered before an existing element in the DOM, e.g.
+    *     `component.render(null, existingElement)`.
+    * @protected
+    * @chainable
+    */
+			value: function attach(opt_parentElement, opt_siblingElement) {
+				if (!this.inDocument) {
+					this.renderElement_(opt_parentElement, opt_siblingElement);
+					this.inDocument = true;
+					if (!this.wasRendered) {
+						this.updatePlaceholderSurfaces_();
+					}
+					this.attached();
+				}
+				return this;
+			}
+		}, {
+			key: 'attachInlineListeners_',
+
+			/**
+    * Attaches inline listeners that are found on the element's string content.
+    * @protected
+    */
+			value: function attachInlineListeners_() {
+				this.eventsCollector_.attachListeners(this.getElementContent_());
+				this.elementContent_ = null;
+			}
+		}, {
+			key: 'attached',
+
+			/**
+    * Lifecycle. When attached, the component element is appended to the DOM
+    * and any other action to be performed must be implemented in this method,
+    * such as, binding DOM events. A component can be re-attached multiple
+    * times, therefore the undo behavior for any action performed in this phase
+    * must be implemented on the detach phase.
+    */
+			value: function attached() {}
+		}, {
+			key: 'buildPlaceholderSurfaceData_',
+
+			/**
+    * Builds the data that should be used to create a surface that was found via
+    * a string placeholder.
+    * @param {string} type The surface type (either "s" or "c").
+    * @param {string} extra String with extra information about the surface.
+    * @return {!Object}
+    * @protected
+    */
+			value: function buildPlaceholderSurfaceData_(type, extra) {
+				return { componentName: type === Component.SurfaceType.COMPONENT ? extra : null };
+			}
+		}, {
+			key: 'cacheSurfaceContent',
+
+			/**
+    * Caches the given content for the surface with the requested id.
+    * @param {string} surfaceId
+    * @param {string} content
+    */
+			value: function cacheSurfaceContent(surfaceId, content) {
+				var cacheState = this.computeSurfaceCacheState_(content);
+				var surface = this.getSurface(surfaceId);
+				surface.cacheState = cacheState;
+			}
+		}, {
+			key: 'cacheSurfaceRenderAttrs_',
+
+			/**
+    * Caches surface render attributes into a O(k) flat map representation.
+    * Relevant for performance to calculate the surfaces group that were
+    * modified by attributes mutation.
+    * @param {string} surfaceId The surface id to be cached into the flat map.
+    * @protected
+    */
+			value: function cacheSurfaceRenderAttrs_(surfaceId) {
+				var attrs = this.getSurface(surfaceId).renderAttrs || [];
+				for (var i = 0; i < attrs.length; i++) {
+					this.surfacesRenderAttrs_[attrs[i]] = this.surfacesRenderAttrs_[attrs[i]] || {};
+					this.surfacesRenderAttrs_[attrs[i]][surfaceId] = true;
+				}
+			}
+		}, {
+			key: 'clearSurfacesCache_',
+
+			/**
+    * Clears the surfaces content cache.
+    * @protected
+    */
+			value: function clearSurfacesCache_() {
+				for (var surfaceId in this.surfaces_) {
+					this.getSurface(surfaceId).cacheState = Component.Cache.NOT_INITIALIZED;
+				}
+			}
+		}, {
+			key: 'compareCacheStates_',
+
+			/**
+    * Compares cache states.
+    * @param {number} currentCacheState
+    * @param {number} previousCacheState
+    * @return {boolean} True if there's a cache hit, or false for cache miss.
+    */
+			value: function compareCacheStates_(currentCacheState, previousCacheState) {
+				return currentCacheState !== Component.Cache.NOT_INITIALIZED && currentCacheState !== Component.Cache.NOT_CACHEABLE && currentCacheState === previousCacheState;
+			}
+		}, {
+			key: 'computeSurfaceCacheState_',
+
+			/**
+    * Computes the cache state for the surface content. If value is string, the
+    * cache state is represented by its hashcode.
+    * @param {Object} value The value to calculate the cache state.
+    * @return {Object} The computed cache state.
+    * @protected
+    */
+			value: function computeSurfaceCacheState_(value) {
+				if (core.isString(value)) {
+					if (features.checkAttrOrderChange()) {
+						value = this.convertHtmlToBrowserFormat_(value);
+					}
+					return string.hashCode(value);
+				}
+				return Component.Cache.NOT_CACHEABLE;
+			}
+		}, {
+			key: 'computeSurfacesCacheStateFromDom_',
+
+			/**
+    * Computes the cache state for the surface content based on the decorated
+    * DOM element. The innerHTML of the surface element is read and compressed
+    * in order to minimize mismatches caused by breaking spaces or HTML
+    * formatting differences that does not affect the content structure.
+    * @protected
+    */
+			value: function computeSurfacesCacheStateFromDom_() {
+				for (var surfaceId in this.surfaces_) {
+					if (!this.getSurface(surfaceId).componentName) {
+						this.cacheSurfaceContent(surfaceId, html.compress(this.getSurfaceElement(surfaceId).innerHTML));
+					}
+				}
+			}
+		}, {
+			key: 'convertHtmlToBrowserFormat_',
+
+			/**
+    * Converts the given html string to the format the current browser uses
+    * when html is rendered. This is done by rendering the html in a temporary
+    * element, and returning its resulting rendered html.
+    * @param {string} htmlString The html to be converted.
+    * @return {string}
+    * @protected
+    */
+			value: function convertHtmlToBrowserFormat_(htmlString) {
+				var element = document.createElement('div');
+				dom.append(element, htmlString);
+				return element.innerHTML;
+			}
+		}, {
+			key: 'created',
+
+			/**
+    * Lifecycle. Creation phase of the component happens once after the
+    * component is instantiated, therefore its the initial phase of the
+    * component Lifecycle. Be conscious about actions performed in this phase
+    * to not compromise instantiation time with operations that can be
+    * postponed to further phases. It's recommended to bind component custom
+    * events in this phase, in contrast to DOM events that must be bind on
+    * attach phase.
+    */
+			value: function created() {}
+		}, {
+			key: 'createPlaceholderSurface_',
+
+			/**
+    * Creates a surface that was found via a string placeholder.
+    * @param {string?} surfaceId
+    * @param {string} type The surface type (either "s" or "c").
+    * @param {string?} extra String with extra information about the surface.
+    * @param {string=} opt_parentSurfaceId The id of the surface that contains
+    *   the surface to be created, or undefined if there is none.
+    * @return {string} The id of the created surface.
+    * @protected
+    */
+			value: function createPlaceholderSurface_(surfaceId, type, extra, opt_parentSurfaceId) {
+				surfaceId = surfaceId || this.generateSurfaceId_(type, opt_parentSurfaceId);
+				if (!this.getSurface(surfaceId)) {
+					this.addSurface(surfaceId, this.buildPlaceholderSurfaceData_(type, extra));
+				}
+				return surfaceId;
+			}
+		}, {
+			key: 'createSubComponent_',
+
+			/**
+    * Creates a sub component.
+    * @param {string} componentName
+    * @param {string} componentId
+    * @return {!Component}
+    * @protected
+    */
+			value: function createSubComponent_(componentName, componentId) {
+				this.components[componentId] = Component.componentsCollector.createComponent(componentName, componentId);
+				return this.components[componentId];
+			}
+		}, {
+			key: 'createSurfaceElement_',
+
+			/**
+    * Creates the surface element with its id namespaced to the component id.
+    * @param {string} surfaceElementId The id of the element for the surface to be
+    *   created.
+    * @return {Element} The surface element.
+    * @protected
+    */
+			value: function createSurfaceElement_(surfaceElementId) {
+				var el = document.createElement(this.constructor.SURFACE_TAG_NAME_MERGED);
+				el.id = surfaceElementId;
+				return el;
+			}
+		}, {
+			key: 'decorateAsSubComponent',
+
+			/**
+    * Decorates this component as a subcomponent, meaning that no rendering is
+    * needed since it was already rendered by the parent component. Handles the
+    * same logics that `renderAsSubComponent`, but also makes sure that the
+    * surfaces content is updated if the html is incorrect for the given data.
+    */
+			value: function decorateAsSubComponent() {
+				this.decorating_ = true;
+				this.computeSurfacesCacheStateFromDom_();
+				this.renderAsSubComponent();
+				this.decorating_ = false;
+			}
+		}, {
+			key: 'decorateInternal',
+
+			/**
+    * Lifecycle. Internal implementation for decoration. Any extra operation
+    * necessary to prepare the component DOM must be implemented in this phase.
+    */
+			value: function decorateInternal() {}
+		}, {
+			key: 'delegate',
+
+			/**
+    * Listens to a delegate event on the component's element.
+    * @param {string} eventName The name of the event to listen to.
+    * @param {string} selector The selector that matches the child elements that
+    *   the event should be triggered for.
+    * @param {!function(!Object)} callback Function to be called when the event is
+    *   triggered. It will receive the normalized event object.
+    * @return {!DomEventHandle} Can be used to remove the listener.
+    */
+			value: function delegate(eventName, selector, callback) {
+				var handle = dom.delegate(this.element, eventName, selector, callback);
+				this.delegateEventHandler_.add(handle);
+				return handle;
+			}
+		}, {
+			key: 'detach',
+
+			/**
+    * Invokes the detached Lifecycle. When detached, the component element is
+    * removed from the DOM and any other action to be performed must be
+    * implemented in this method, such as, unbinding DOM events. A component
+    * can be detached multiple times.
+    * @chainable
+    */
+			value: function detach() {
+				if (this.inDocument) {
+					this.element.parentNode.removeChild(this.element);
+					this.inDocument = false;
+					this.detached();
+				}
+				this.eventsCollector_.detachAllListeners();
+				return this;
+			}
+		}, {
+			key: 'detached',
+
+			/**
+    * Lifecycle. When detached, the component element is removed from the DOM
+    * and any other action to be performed must be implemented in this method,
+    * such as, unbinding DOM events. A component can be detached multiple
+    * times, therefore the undo behavior for any action performed in this phase
+    * must be implemented on the attach phase.
+    */
+			value: function detached() {}
+		}, {
+			key: 'created_',
+
+			/**
+    * Internal implementation for the creation phase of the component.
+    * @protected
+    */
+			value: function created_() {
+				this.on('attrsChanged', this.handleAttributesChanges_);
+				this.created();
+			}
+		}, {
+			key: 'decorate',
+
+			/**
+    * Lifecycle. Creates the component using existing DOM elements. Often the
+    * component can be created using existing elements in the DOM to leverage
+    * progressive enhancement. Any extra operation necessary to prepare the
+    * component DOM must be implemented in this phase. Decorate phase replaces
+    * render phase.
+    *
+    * Decoration Lifecycle:
+    *   decorate - Decorate is manually called.
+    *   decorateInternal - Internal implementation for decoration happens.
+    *   render surfaces - All surfaces content are rendered.
+    *   attribute synchronization - All synchronization methods are called.
+    *   attach - Attach Lifecycle is called.
+    * @chainable
+    */
+			value: function decorate() {
+				if (this.inDocument) {
+					throw new Error(Component.Error.ALREADY_RENDERED);
+				}
+				this.decorating_ = true;
+
+				this.decorateInternal();
+
+				// Need to go through all surface placeholders on decorate to make sure they are
+				// properly created for the first time.
+				this.replaceSurfacePlaceholders_(this.getElementContent_());
+
+				this.computeSurfacesCacheStateFromDom_(); // TODO(edu): This optimization seems worth it, analyze it.
+				this.renderSurfacesContent_(this.surfaces_); // TODO(edu): Sync surfaces on decorate?
+
+				this.attachInlineListeners_();
+				this.syncAttrs_();
+
+				this.attach();
+
+				this.decorating_ = false;
+				this.wasRendered = true;
+
+				return this;
+			}
+		}, {
+			key: 'disposeInternal',
+
+			/**
+    * @inheritDoc
+    */
+			value: function disposeInternal() {
+				this.detach();
+
+				if (this.elementEventProxy_) {
+					this.elementEventProxy_.dispose();
+					this.elementEventProxy_ = null;
+				}
+
+				this.delegateEventHandler_.removeAllListeners();
+				this.delegateEventHandler_ = null;
+
+				this.components = null;
+				this.generatedIdCount_ = null;
+				this.surfaces_ = null;
+				this.surfacesRenderAttrs_ = null;
+				babelHelpers.get(Object.getPrototypeOf(Component.prototype), 'disposeInternal', this).call(this);
+			}
+		}, {
+			key: 'syncAttrs_',
+
+			/**
+    * Fires attributes synchronization changes for attributes.
+    * @protected
+    */
+			value: function syncAttrs_() {
+				var attrNames = this.getAttrNames();
+				for (var i = 0; i < attrNames.length; i++) {
+					this.fireAttrChange_(attrNames[i]);
+				}
+			}
+		}, {
+			key: 'syncAttrsFromChanges_',
+
+			/**
+    * Fires attributes synchronization changes for attributes.
+    * @param {Object.<string, Object>} changes Object containing the attribute
+    *     name as key and an object with newVal and prevVal as value.
+    * @protected
+    */
+			value: function syncAttrsFromChanges_(changes) {
+				for (var attr in changes) {
+					this.fireAttrChange_(attr, changes[attr]);
+				}
+			}
+		}, {
+			key: 'findElementById_',
+
+			/**
+    * Finds the element that matches the given id on this component. This searches
+    * on the document first, for performance. If the element is not found, it's
+    * searched in the component's element directly.
+    * @param {string} id
+    * @return {Element}
+    * @protected
+    */
+			value: function findElementById_(id) {
+				return document.getElementById(id) || this.element.querySelector('#' + id);
+			}
+		}, {
+			key: 'fireAttrChange_',
+
+			/**
+    * Fires attribute synchronization change for the attribute.
+    * @param {Object.<string, Object>} change Object containing newVal and
+    *     prevVal keys.
+    * @protected
+    */
+			value: function fireAttrChange_(attr, opt_change) {
+				var fn = this['sync' + attr.charAt(0).toUpperCase() + attr.slice(1)];
+				if (core.isFunction(fn)) {
+					if (!opt_change) {
+						opt_change = {
+							newVal: this[attr],
+							prevVal: undefined
+						};
+					}
+					fn.call(this, opt_change.newVal, opt_change.prevVal);
+				}
+			}
+		}, {
+			key: 'generateSurfaceId_',
+
+			/**
+    * Generates an id for a surface that was found inside the contents of the main
+    * element or of a parent surface.
+    * @param {string} type Either "comp" or "surface", to indicate the surface's type.
+    * @param {string=} opt_parentSurfaceId The id of the parent surface, or undefined
+    *   if there is none.
+    * @return {string} The generated id.
+    */
+			value: function generateSurfaceId_(type, opt_parentSurfaceId) {
+				var parentSurfaceId = opt_parentSurfaceId || '';
+				var parentSurfacePrefix = parentSurfaceId ? parentSurfaceId + '-' : '';
+				this.generatedIdCount_[parentSurfaceId] = (this.generatedIdCount_[parentSurfaceId] || 0) + 1;
+				var id = parentSurfacePrefix + type + this.generatedIdCount_[parentSurfaceId];
+				return type === Component.SurfaceType.COMPONENT ? this.makeSurfaceId_(id) : id;
+			}
+		}, {
+			key: 'getComponentHtml',
+
+			/**
+    * Gets the html that should be used to build this component's main element with
+    * some content.
+    * @param {string} content
+    * @return {string}
+    */
+			value: function getComponentHtml(content) {
+				return this.getWrapperHtml_(this.constructor.ELEMENT_TAG_NAME_MERGED, this.id, content);
+			}
+		}, {
+			key: 'getElementContent',
+
+			/**
+    * Gets the content that should be rendered in the component's main element.
+    * Should be implemented by subclasses.
+    * @return {Object|string} The content to be rendered. If the content is a
+    *   string, surfaces can be represented by placeholders in the format specified
+    *   by Component.SURFACE_REGEX.
+    */
+			value: function getElementContent() {}
+		}, {
+			key: 'getElementContent_',
+
+			/**
+    * Internal function for getting the component element's content. Stores the
+    * result in a variable so it can be accessed later without building it again.
+    * @return {Object|string}
+    * @protected
+    */
+			value: function getElementContent_() {
+				this.elementContent_ = this.elementContent_ || this.getElementContent();
+				return this.elementContent_;
+			}
+		}, {
+			key: 'getElementExtendedContent',
+
+			/**
+    * Calls `getElementContent` and replaces all placeholders in the returned content.
+    * @return {string} The content with all placeholders already replaced.
+    */
+			value: function getElementExtendedContent() {
+				return this.replaceSurfacePlaceholders_(this.getElementContent_());
+			}
+		}, {
+			key: 'getModifiedSurfacesFromChanges_',
+
+			/**
+    * Gets surfaces that got modified by the specified attributes changes.
+    * @param {Object.<string, Object>} changes Object containing the attribute
+    *     name as key and an object with newVal and prevVal as value.
+    * @return {Object.<string, boolean>} Object containing modified surface ids
+    *     as key and true as value.
+    */
+			value: function getModifiedSurfacesFromChanges_(changes) {
+				var surfaces = [];
+				for (var attr in changes) {
+					surfaces.push(this.surfacesRenderAttrs_[attr]);
+				}
+				return object.mixin.apply(null, surfaces);
+			}
+		}, {
+			key: 'getNonComponentSurfaceHtml',
+
+			/**
+    * Same as `getSurfaceHtml`, but only called for non component surfaces.
+    * @param {string} surfaceId
+    * @param {string} content
+    * @return {string}
+    */
+			value: function getNonComponentSurfaceHtml(surfaceId, content) {
+				var surfaceElementId = this.makeSurfaceId_(surfaceId);
+				return this.getWrapperHtml_(this.constructor.SURFACE_TAG_NAME_MERGED, surfaceElementId, content);
+			}
+		}, {
+			key: 'getSurface',
+
+			/**
+    * Gets surface configuration object. If surface is not registered returns
+    * null.
+    * @param {string} surfaceId The surface id.
+    * @return {?Object} The surface configuration object.
+    */
+			value: function getSurface(surfaceId) {
+				return this.surfaces_[surfaceId] || null;
+			}
+		}, {
+			key: 'getSurfaceContent',
+
+			/**
+    * Gets the content for the requested surface. Should be implemented by subclasses.
+    * @param {string} surfaceId The surface id.
+    * @return {Object|string} The content to be rendered. If the content is a
+    *   string, surfaces can be represented by placeholders in the format specified
+    *   by Component.SURFACE_REGEX.
+    */
+			value: function getSurfaceContent() {}
+		}, {
+			key: 'getSurfaceContent_',
+
+			/**
+    * Gets the content for the requested surface. By default this just calls
+    * `getSurfaceContent`, but can be overriden to add more behavior (check
+    * `SoyComponent` for an example).
+    * @param {string} surfaceId The surface id.
+    * @return {Object|string} The content to be rendered.
+    * @protected
+    */
+			value: function getSurfaceContent_(surfaceId) {
+				var surface = this.getSurface(surfaceId);
+				if (surface.componentName) {
+					if (this.components[surfaceId].wasRendered) {
+						return '';
+					} else {
+						return this.components[surfaceId].getElementExtendedContent();
+					}
+				} else {
+					return this.getSurfaceContent(surfaceId);
+				}
+			}
+		}, {
+			key: 'getSurfaceElement',
+
+			/**
+    * Queries from the document or creates an element for the surface. Surface
+    * elements have its surface id namespaced to the component id, e.g. for a
+    * component with id `gallery` and a surface with id `pictures` the surface
+    * element will be represented by the id `gallery-pictures`. Surface
+    * elements must also be appended to the component element.
+    * @param {string} surfaceId The surface id.
+    * @return {Element} The surface element or null if surface not registered.
+    */
+			value: function getSurfaceElement(surfaceId) {
+				var surface = this.getSurface(surfaceId);
+				if (!surface) {
+					return null;
+				}
+				if (!surface.element) {
+					if (surface.componentName) {
+						surface.element = this.components[surfaceId].element;
+					} else {
+						var surfaceElementId = this.makeSurfaceId_(surfaceId);
+						surface.element = this.findElementById_(surfaceElementId) || this.createSurfaceElement_(surfaceElementId);
+					}
+				}
+				return surface.element;
+			}
+		}, {
+			key: 'getSurfaceHtml',
+
+			/**
+    * Gets the html that should be used to build a surface's main element with its
+    * content.
+    * @param {string} surfaceId
+    * @param {string} content
+    * @return {string}
+    */
+			value: function getSurfaceHtml(surfaceId, content) {
+				var surface = this.getSurface(surfaceId);
+				if (surface.componentName) {
+					return this.components[surfaceId].getComponentHtml(content);
+				} else {
+					return this.getNonComponentSurfaceHtml(surfaceId, content);
+				}
+			}
+		}, {
+			key: 'getWrapperHtml_',
+
+			/**
+    * Gets the html of an element.
+    * @param {string} tag
+    * @param {string} id
+    * @param {string} content
+    * @return {string}
+    * @protected
+    */
+			value: function getWrapperHtml_(tag, id, content) {
+				return '<' + tag + ' id="' + id + '">' + content + '</' + tag + '>';
+			}
+		}, {
+			key: 'getSurfaces',
+
+			/**
+    * A map of surface ids to the respective surface object.
+    * @return {!Object}
+    */
+			value: function getSurfaces() {
+				return this.surfaces_;
+			}
+		}, {
+			key: 'handleAttributesChanges_',
+
+			/**
+    * Handles attributes batch changes. Responsible for surface mutations and
+    * attributes synchronization.
+    * @param {Event} event
+    * @protected
+    */
+			value: function handleAttributesChanges_(event) {
+				if (this.inDocument) {
+					this.renderSurfacesContent_(this.getModifiedSurfacesFromChanges_(event.changes));
+				}
+				this.syncAttrsFromChanges_(event.changes);
+			}
+		}, {
+			key: 'makeId_',
+
+			/**
+    * Makes an unique id for the component.
+    * @return {string} Unique id.
+    * @protected
+    */
+			value: function makeId_() {
+				return 'metal_c_' + core.getUid(this);
+			}
+		}, {
+			key: 'makeSurfaceId_',
+
+			/**
+    * Makes the id for the surface scoped by the component.
+    * @param {string} surfaceId The surface id.
+    * @return {string}
+    * @protected
+    */
+			value: function makeSurfaceId_(surfaceId) {
+				return this.id + '-' + surfaceId;
+			}
+		}, {
+			key: 'mergeElementClasses_',
+
+			/**
+    * Merges an array of values for the ELEMENT_CLASSES property into a single object.
+    * @param {!Array.<string>} values The values to be merged.
+    * @return {!string} The merged value.
+    * @protected
+    */
+			value: function mergeElementClasses_(values) {
+				return values.filter(function (val) {
+					return val;
+				}).join(' ');
+			}
+		}, {
+			key: 'mergeObjects_',
+
+			/**
+    * Merges an array of objects into a single object. Used by the SURFACES static
+    * variable.
+    * @param {!Array} values The values to be merged.
+    * @return {!Object} The merged value.
+    * @protected
+    */
+			value: function mergeObjects_(values) {
+				return object.mixin.apply(null, [{}].concat(values.reverse()));
+			}
+		}, {
+			key: 'removeSurface',
+
+			/**
+    * Unregisters a surface and removes its element from the DOM.
+    * @param {string} surfaceId The surface id.
+    * @chainable
+    */
+			value: function removeSurface(surfaceId) {
+				var el = this.getSurfaceElement(surfaceId);
+				if (el && el.parentNode) {
+					el.parentNode.removeChild(el);
+				}
+				delete this.surfaces_[surfaceId];
+				return this;
+			}
+		}, {
+			key: 'render',
+
+			/**
+    * Lifecycle. Renders the component into the DOM. Render phase replaces
+    * decorate phase, without progressive enhancement support.
+    *
+    * Render Lifecycle:
+    *   render - Decorate is manually called.
+    *   renderInternal - Internal implementation for rendering happens.
+    *   render surfaces - All surfaces content are rendered.
+    *   attribute synchronization - All synchronization methods are called.
+    *   attach - Attach Lifecycle is called.
+    *
+    * @param {(string|Element)=} opt_parentElement Optional parent element
+    *     to render the component.
+    * @param {(string|Element)=} opt_siblingElement Optional sibling element
+    *     to render the component before it. Relevant when the component needs
+    *     to be rendered before an existing element in the DOM, e.g.
+    *     `component.render(null, existingElement)`.
+    * @chainable
+    */
+			value: function render(opt_parentElement, opt_siblingElement) {
+				if (this.wasRendered) {
+					throw new Error(Component.Error.ALREADY_RENDERED);
+				}
+
+				this.renderInternal();
+
+				this.clearSurfacesCache_();
+				this.renderSurfacesContent_(this.surfaces_);
+
+				this.attachInlineListeners_();
+				this.syncAttrs_();
+
+				this.attach(opt_parentElement, opt_siblingElement);
+
+				this.wasRendered = true;
+
+				return this;
+			}
+		}, {
+			key: 'renderAsSubComponent',
+
+			/**
+    * Renders this component as a subcomponent, meaning that no actual rendering is
+    * needed since it was already rendered by the parent component. This just handles
+    * other logics from the rendering lifecycle, like attaching event listeners.
+    */
+			value: function renderAsSubComponent() {
+				this.attachInlineListeners_();
+				this.syncAttrs_();
+				this.attach();
+				this.wasRendered = true;
+			}
+		}, {
+			key: 'renderComponentSurface_',
+
+			/**
+    * Renders a surface that holds a component.
+    * @param {string} surfaceId
+    * @param {(Object|string)?} opt_content The content to be rendered.
+    * @protected
+    */
+			value: function renderComponentSurface_(surfaceId, opt_content) {
+				var component = this.components[surfaceId];
+				if (component.wasRendered) {
+					Component.componentsCollector.updateComponent(surfaceId);
+				} else if (opt_content) {
+					var element = component.element;
+					if (dom.isEmpty(element)) {
+						// If we have the rendered content for this component, but it hasn't
+						// been rendered in its element yet, we render it manually here. That
+						// can happen if the subcomponent's element is set before the parent
+						// element renders its content.
+						dom.append(element, opt_content);
+					}
+					if (this.decorating_) {
+						component.decorateAsSubComponent();
+					} else {
+						component.renderAsSubComponent();
+					}
+				} else {
+					component.render();
+				}
+			}
+		}, {
+			key: 'renderElement_',
+
+			/**
+    * Renders the component element into the DOM.
+    * @param {(string|Element)=} opt_parentElement Optional parent element
+    *     to render the component.
+    * @param {(string|Element)=} opt_siblingElement Optional sibling element
+    *     to render the component before it. Relevant when the component needs
+    *     to be rendered before an existing element in the DOM, e.g.
+    *     `component.render(null, existingElement)`.
+    * @protected
+    */
+			value: function renderElement_(opt_parentElement, opt_siblingElement) {
+				var element = this.element;
+				element.id = this.id;
+				if (opt_siblingElement || !element.parentNode) {
+					var parent = dom.toElement(opt_parentElement) || this.DEFAULT_ELEMENT_PARENT;
+					parent.insertBefore(element, dom.toElement(opt_siblingElement));
+				}
+			}
+		}, {
+			key: 'renderInternal',
+
+			/**
+    * Lifecycle. Internal implementation for rendering. Any extra operation
+    * necessary to prepare the component DOM must be implemented in this phase.
+    */
+			value: function renderInternal() {
+				var content = this.getElementExtendedContent();
+				if (content) {
+					dom.append(this.element, content);
+				}
+			}
+		}, {
+			key: 'renderPlaceholderSurfaceContents_',
+
+			/**
+    * Renders the contents of all the surface placeholders found in the given content.
+    * @param {string} content
+    * @param {string} surfaceId The id of surface the content is from.
+    * @protected
+    */
+			value: function renderPlaceholderSurfaceContents_(content, surfaceId) {
+				var instance = this;
+				content.replace(Component.SURFACE_REGEX, function (match, type, id) {
+					id = id || instance.generateSurfaceId_(type, surfaceId);
+					instance.renderSurfaceContent(id);
+					return match;
+				});
+			}
+		}, {
+			key: 'renderSurfaceContent',
+
+			/**
+    * Render content into a surface. If the specified content is the same of
+    * the current surface content, nothing happens. If the surface cache state
+    * is not initialized or the content is not eligible for cache or content is
+    * different, the surfaces re-renders. It's not recommended to use this
+    * method directly since surface content can be provided by
+    * `getSurfaceContent(surfaceId)`.
+    * @param {string} surfaceId The surface id.
+    * @param {(Object|string)?} opt_content The content to be rendered.
+    * @param {string?} opt_cacheContent The content that should be cached for
+    *   this surface. If none is given, the rendered content will be used for this.
+    */
+			value: function renderSurfaceContent(surfaceId, opt_content, opt_cacheContent) {
+				var surface = this.getSurface(surfaceId);
+				if (surface.componentName) {
+					this.renderComponentSurface_(surfaceId, opt_content);
+					return;
+				}
+
+				var content = opt_content || this.getSurfaceContent_(surfaceId);
+				if (core.isDefAndNotNull(content)) {
+					var previousCacheState = surface.cacheState;
+					var cacheContent = opt_cacheContent || content;
+
+					// We cache the entire original content first when decorating so we can compare
+					// with the full content we got from the dom. After comparing, we cache the correct
+					// value so updates can work as expected for this surface.
+					this.cacheSurfaceContent(surfaceId, this.decorating_ ? content : cacheContent);
+					var cacheHit = this.compareCacheStates_(surface.cacheState, previousCacheState);
+					if (this.decorating_) {
+						this.cacheSurfaceContent(surfaceId, cacheContent);
+					}
+
+					if (cacheHit) {
+						if (this.decorating_) {
+							this.eventsCollector_.attachListeners(cacheContent, surfaceId);
+						}
+						this.renderPlaceholderSurfaceContents_(content, surfaceId);
+					} else {
+						this.eventsCollector_.attachListeners(cacheContent, surfaceId);
+						this.replaceSurfaceContent_(surfaceId, content);
+					}
+				}
+			}
+		}, {
+			key: 'renderSurfacesContent_',
+
+			/**
+    * Renders all surfaces contents ignoring the cache.
+    * @param {Object.<string, Object=>} surfaces Object map where the key is
+    *     the surface id and value the optional surface configuration.
+    * @protected
+    */
+			value: function renderSurfacesContent_(surfaces) {
+				this.generatedIdCount_ = {};
+				for (var surfaceId in surfaces) {
+					if (!this.getSurface(surfaceId).handled) {
+						this.renderSurfaceContent(surfaceId);
+					}
+				}
+				if (this.wasRendered) {
+					this.updatePlaceholderSurfaces_();
+					this.eventsCollector_.detachUnusedListeners();
+				}
+			}
+		}, {
+			key: 'replaceSurfaceContent_',
+
+			/**
+    * Replaces the content of a surface with a new one.
+    * @param {string} surfaceId The surface id.
+    * @param {Element|string} content The content to be rendered.
+    * @protected
+    */
+			value: function replaceSurfaceContent_(surfaceId, content) {
+				content = this.replaceSurfacePlaceholders_(content, surfaceId);
+				var el = this.getSurfaceElement(surfaceId);
+				dom.removeChildren(el);
+				dom.append(el, content);
+			}
+		}, {
+			key: 'replaceSurfacePlaceholders_',
+
+			/**
+    * Replaces the given content's surface placeholders with their real contents.
+    * @param {string|Element} content
+    * @param {string=} opt_surfaceId The id of the surface that contains the given
+    *   content, or undefined if the content is from the main element.
+    * @return {string} The final string with replaced placeholders.
+    * @protected
+    */
+			value: function replaceSurfacePlaceholders_(content, opt_surfaceId) {
+				if (!core.isString(content)) {
+					return content;
+				}
+
+				var instance = this;
+				return content.replace(Component.SURFACE_REGEX, function (match, type, id, extra) {
+					// Surfaces should already have been created before being rendered so they can be
+					// accessed from their getSurfaceContent calls.
+					id = instance.createPlaceholderSurface_(id, type, extra, opt_surfaceId);
+					instance.getSurface(id).handled = true;
+
+					var surfaceContent = instance.getSurfaceContent_(id);
+					var expandedContent = instance.replaceSurfacePlaceholders_(surfaceContent, id);
+					var surfaceHtml = instance.getSurfaceHtml(id, expandedContent);
+					instance.collectedSurfaces_.push({ cacheContent: surfaceContent, content: expandedContent, surfaceId: id });
+
+					return surfaceHtml;
+				});
+			}
+		}, {
+			key: 'setterElementFn_',
+
+			/**
+    * Setter logic for element attribute.
+    * @param {string|Element} val
+    * @return {Element}
+    * @protected
+    */
+			value: function setterElementFn_(val) {
+				var element = dom.toElement(val);
+				if (!element) {
+					element = this.valueElementFn_();
+				}
+				return element;
+			}
+		}, {
+			key: 'syncElementClasses',
+
+			/**
+    * Attribute synchronization logic for elementClasses attribute.
+    * @param {string} newVal
+    * @param {string} prevVal
+    */
+			value: function syncElementClasses(newVal, prevVal) {
+				var classesToAdd = this.constructor.ELEMENT_CLASSES_MERGED;
+				if (newVal) {
+					classesToAdd = classesToAdd + ' ' + newVal;
+				}
+				if (prevVal) {
+					dom.removeClasses(this.element, prevVal);
+				}
+				dom.addClasses(this.element, classesToAdd);
+			}
+		}, {
+			key: 'updatePlaceholderSurface_',
+
+			/**
+    * Updates a surface after it has been rendered through placeholders.
+    * @param {!{content: string, cacheContent: string, surfaceId: string}} collectedData
+    *   Data about the collected surface. Should have the surface's id, content and the
+    *   content that should be cached for it.
+    * @protected
+    */
+			value: function updatePlaceholderSurface_(collectedData) {
+				var surfaceId = collectedData.surfaceId;
+				var surface = this.getSurface(surfaceId);
+				if (this.decorating_ || surface.element || surface.componentName) {
+					// This surface already has an element, so it needs to replace the rendered
+					// element.
+					var elementId = surface.componentName ? surfaceId : this.makeSurfaceId_(surfaceId);
+					var placeholder = this.findElementById_(elementId);
+					dom.replace(placeholder, this.getSurfaceElement(surfaceId));
+					this.renderSurfaceContent(surfaceId, collectedData.content, collectedData.cacheContent);
+				} else {
+					// This surface's element hasn't been created yet, so it doesn't need
+					// to replace the rendered element. Let's cache the content so it won't rerender.
+					this.cacheSurfaceContent(surfaceId, collectedData.cacheContent);
+					this.eventsCollector_.attachListeners(collectedData.cacheContent, surfaceId);
+				}
+			}
+		}, {
+			key: 'updatePlaceholderSurfaces_',
+
+			/**
+    * Updates all collected surfaces.
+    * @protected
+    */
+			value: function updatePlaceholderSurfaces_() {
+				for (var i = this.collectedSurfaces_.length - 1; i >= 0; i--) {
+					this.updatePlaceholderSurface_(this.collectedSurfaces_[i]);
+					this.getSurface(this.collectedSurfaces_[i].surfaceId).handled = false;
+				}
+				this.collectedSurfaces_ = [];
+			}
+		}, {
+			key: 'validatorElementFn_',
+
+			/**
+    * Validator logic for element attribute.
+    * @param {string|Element} val
+    * @return {boolean} True if val is a valid element.
+    * @protected
+    */
+			value: function validatorElementFn_(val) {
+				return core.isElement(val) || core.isString(val);
+			}
+		}, {
+			key: 'validatorElementClassesFn_',
+
+			/**
+    * Validator logic for elementClasses attribute.
+    * @param {string} val
+    * @return {Boolean} True if val is a valid element classes.
+    * @protected
+    */
+			value: function validatorElementClassesFn_(val) {
+				return core.isString(val);
+			}
+		}, {
+			key: 'validatorIdFn_',
+
+			/**
+    * Validator logic for id attribute.
+    * @param {string} val
+    * @return {Boolean} True if val is a valid id.
+    * @protected
+    */
+			value: function validatorIdFn_(val) {
+				return core.isString(val);
+			}
+		}, {
+			key: 'valueElementFn_',
+
+			/**
+    * Provides the default value for element attribute.
+    * @return {Element} The element.
+    * @protected
+    */
+			value: function valueElementFn_() {
+				return document.createElement(this.constructor.ELEMENT_TAG_NAME_MERGED);
+			}
+		}, {
+			key: 'valueIdFn_',
+
+			/**
+    * Provides the default value for id attribute.
+    * @return {string} The id.
+    * @protected
+    */
+			value: function valueIdFn_() {
+				var element = this.element;
+				return element && element.id ? element.id : this.makeId_();
+			}
+		}]);
+		return Component;
+	})(Attribute);
+
+	/**
+  * Helper responsible for extracting components from strings and config data.
+  * @type {!ComponentCollector}
+  * @protected
+  * @static
+  */
+	Component.componentsCollector = new ComponentCollector();
+
+	/**
+  * Component attributes definition.
+  * @type {Object}
+  * @static
+  */
+	Component.ATTRS = {
+		/**
+   * Component element bounding box.
+   * @type {Element}
+   * @writeOnce
+   */
+		element: {
+			setter: 'setterElementFn_',
+			validator: 'validatorElementFn_',
+			valueFn: 'valueElementFn_',
+			writeOnce: true
+		},
+
+		/**
+   * CSS classes to be applied to the element.
+   * @type {Array.<string>}
+   */
+		elementClasses: {
+			validator: 'validatorElementClassesFn_'
+		},
+
+		/**
+   * Component element id. If not specified will be generated.
+   * @type {string}
+   * @writeOnce
+   */
+		id: {
+			validator: 'validatorIdFn_',
+			valueFn: 'valueIdFn_',
+			writeOnce: true
+		}
+	};
+
+	/**
+  * CSS classes to be applied to the element.
+  * @type {string}
+  * @protected
+  * @static
+  */
+	Component.ELEMENT_CLASSES = 'component';
+
+	/**
+  * Element tag name is a string that specifies the type of element to be
+  * created. The nodeName of the created element is initialized with the
+  * value of tag name.
+  * @type {string}
+  * @default div
+  * @protected
+  * @static
+  */
+	Component.ELEMENT_TAG_NAME = 'div';
+
+	/**
+  * The regex used to search for surface placeholders.
+  * @type {RegExp}
+  * @static
+  */
+	Component.SURFACE_REGEX = /\%\%\%\%~(s|c)(?:-([^~:]+))?(?::([^~]+))?~\%\%\%\%/g;
+
+	/**
+  * Surface tag name is a string that specifies the type of element to be
+  * created for the surfaces. The nodeName of the created element is
+  * initialized with the value of tag name.
+  * @type {string}
+  * @default div
+  * @protected
+  * @static
+  */
+	Component.SURFACE_TAG_NAME = 'div';
+
+	/**
+  * Cache states for the component.
+  * @enum {string}
+  */
+	Component.Cache = {
+		/**
+   * Cache is not allowed for this state.
+   */
+		NOT_CACHEABLE: -1,
+
+		/**
+   * Cache not initialized.
+   */
+		NOT_INITIALIZED: -2
+	};
+
+	/**
+  * Errors thrown by the component.
+  * @enum {string}
+  */
+	Component.Error = {
+		/**
+   * Error when the component is already rendered and another render attempt
+   * is made.
+   */
+		ALREADY_RENDERED: 'Component already rendered'
+	};
+
+	/**
+  * Valid surface types that can be used for string placeholders.
+  * @enum {string}
+  */
+	Component.SurfaceType = {
+		COMPONENT: 'c',
+		NORMAL: 's'
+	};
+
+	/**
+  * A list with attribute names that will automatically be rejected as invalid.
+  * @type {!Array<string>}
+  */
+	Component.INVALID_ATTRS = ['components', 'elementContent'];
+
+	this.ui.Component = Component;
+}).call(this);
+(function () {
+  /*!
+   * Promises polyfill from Google's Closure Library.
+   *
+   *      Copyright 2013 The Closure Library Authors. All Rights Reserved.
+   *
+   * NOTE(eduardo): Promise support is not ready on all supported browsers,
+   * therefore core.js is temporarily using Google's promises as polyfill. It
+   * supports cancellable promises and has clean and fast implementation.
+   */
+
+  'use strict';
+
+  var core = this.ui.core;
+
+  /**
+   * Provides a more strict interface for Thenables in terms of
+   * http://promisesaplus.com for interop with {@see CancellablePromise}.
+   *
+   * @interface
+   * @extends {IThenable.<TYPE>}
+   * @template TYPE
+   */
+  var Thenable = function Thenable() {};
+
+  /**
+   * Adds callbacks that will operate on the result of the Thenable, returning a
+   * new child Promise.
+   *
+   * If the Thenable is fulfilled, the {@code onFulfilled} callback will be
+   * invoked with the fulfillment value as argument, and the child Promise will
+   * be fulfilled with the return value of the callback. If the callback throws
+   * an exception, the child Promise will be rejected with the thrown value
+   * instead.
+   *
+   * If the Thenable is rejected, the {@code onRejected} callback will be invoked
+   * with the rejection reason as argument, and the child Promise will be rejected
+   * with the return value of the callback or thrown value.
+   *
+   * @param {?(function(this:THIS, TYPE):
+   *             (RESULT|IThenable.<RESULT>|Thenable))=} opt_onFulfilled A
+   *     function that will be invoked with the fulfillment value if the Promise
+   *     is fullfilled.
+   * @param {?(function(*): *)=} opt_onRejected A function that will be invoked
+   *     with the rejection reason if the Promise is rejected.
+   * @param {THIS=} opt_context An optional context object that will be the
+   *     execution context for the callbacks. By default, functions are executed
+   *     with the default this.
+   * @return {!CancellablePromise.<RESULT>} A new Promise that will receive the
+   *     result of the fulfillment or rejection callback.
+   * @template RESULT,THIS
+   */
+  Thenable.prototype.then = function () {};
+
+  /**
+   * An expando property to indicate that an object implements
+   * {@code Thenable}.
+   *
+   * {@see addImplementation}.
+   *
+   * @const
+   */
+  Thenable.IMPLEMENTED_BY_PROP = '$goog_Thenable';
+
+  /**
+   * Marks a given class (constructor) as an implementation of Thenable, so
+   * that we can query that fact at runtime. The class must have already
+   * implemented the interface.
+   * Exports a 'then' method on the constructor prototype, so that the objects
+   * also implement the extern {@see Thenable} interface for interop with
+   * other Promise implementations.
+   * @param {function(new:Thenable,...[?])} ctor The class constructor. The
+   *     corresponding class must have already implemented the interface.
+   */
+  Thenable.addImplementation = function (ctor) {
+    ctor.prototype.then = ctor.prototype.then;
+    ctor.prototype.$goog_Thenable = true;
+  };
+
+  /**
+   * @param {*} object
+   * @return {boolean} Whether a given instance implements {@code Thenable}.
+   *     The class/superclass of the instance must call {@code addImplementation}.
+   */
+  Thenable.isImplementedBy = function (object) {
+    if (!object) {
+      return false;
+    }
+    try {
+      return !!object.$goog_Thenable;
+    } catch (e) {
+      // Property access seems to be forbidden.
+      return false;
+    }
+  };
+
+  /**
+   * Like bind(), except that a 'this object' is not required. Useful when the
+   * target function is already bound.
+   *
+   * Usage:
+   * var g = partial(f, arg1, arg2);
+   * g(arg3, arg4);
+   *
+   * @param {Function} fn A function to partially apply.
+   * @param {...*} var_args Additional arguments that are partially applied to fn.
+   * @return {!Function} A partially-applied form of the function bind() was
+   *     invoked as a method of.
+   */
+  var partial = function partial(fn) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return function () {
+      // Clone the array (with slice()) and append additional arguments
+      // to the existing arguments.
+      var newArgs = args.slice();
+      newArgs.push.apply(newArgs, arguments);
+      return fn.apply(this, newArgs);
+    };
+  };
+
+  var async = {};
+
+  /**
+   * Throw an item without interrupting the current execution context.  For
+   * example, if processing a group of items in a loop, sometimes it is useful
+   * to report an error while still allowing the rest of the batch to be
+   * processed.
+   * @param {*} exception
+   */
+  async.throwException = function (exception) {
+    // Each throw needs to be in its own context.
+    async.nextTick(function () {
+      throw exception;
+    });
+  };
+
+  /**
+   * Fires the provided callback just before the current callstack unwinds, or as
+   * soon as possible after the current JS execution context.
+   * @param {function(this:THIS)} callback
+   * @param {THIS=} opt_context Object to use as the "this value" when calling
+   *     the provided function.
+   * @template THIS
+   */
+  async.run = function (callback, opt_context) {
+    if (!async.run.workQueueScheduled_) {
+      // Nothing is currently scheduled, schedule it now.
+      async.nextTick(async.run.processWorkQueue);
+      async.run.workQueueScheduled_ = true;
+    }
+
+    async.run.workQueue_.push(new async.run.WorkItem_(callback, opt_context));
+  };
+
+  /** @private {boolean} */
+  async.run.workQueueScheduled_ = false;
+
+  /** @private {!Array.<!async.run.WorkItem_>} */
+  async.run.workQueue_ = [];
+
+  /**
+   * Run any pending async.run work items. This function is not intended
+   * for general use, but for use by entry point handlers to run items ahead of
+   * async.nextTick.
+   */
+  async.run.processWorkQueue = function () {
+    // NOTE: additional work queue items may be pushed while processing.
+    while (async.run.workQueue_.length) {
+      // Don't let the work queue grow indefinitely.
+      var workItems = async.run.workQueue_;
+      async.run.workQueue_ = [];
+      for (var i = 0; i < workItems.length; i++) {
+        var workItem = workItems[i];
+        try {
+          workItem.fn.call(workItem.scope);
+        } catch (e) {
+          async.throwException(e);
+        }
+      }
+    }
+
+    // There are no more work items, reset the work queue.
+    async.run.workQueueScheduled_ = false;
+  };
+
+  /**
+   * @constructor
+   * @final
+   * @struct
+   * @private
+   *
+   * @param {function()} fn
+   * @param {Object|null|undefined} scope
+   */
+  async.run.WorkItem_ = function (fn, scope) {
+    /** @const */
+    this.fn = fn;
+    /** @const */
+    this.scope = scope;
+  };
+
+  /**
+   * Fires the provided callbacks as soon as possible after the current JS
+   * execution context. setTimeout(…, 0) always takes at least 5ms for legacy
+   * reasons.
+   * @param {function(this:SCOPE)} callback Callback function to fire as soon as
+   *     possible.
+   * @param {SCOPE=} opt_context Object in whose scope to call the listener.
+   * @template SCOPE
+   */
+  async.nextTick = function (callback, opt_context) {
+    var cb = callback;
+    if (opt_context) {
+      cb = callback.bind(opt_context);
+    }
+    cb = async.nextTick.wrapCallback_(cb);
+    // Introduced and currently only supported by IE10.
+    if (core.isFunction(window.setImmediate)) {
+      window.setImmediate(cb);
+      return;
+    }
+    // Look for and cache the custom fallback version of setImmediate.
+    if (!async.nextTick.setImmediate_) {
+      async.nextTick.setImmediate_ = async.nextTick.getSetImmediateEmulator_();
+    }
+    async.nextTick.setImmediate_(cb);
+  };
+
+  /**
+   * Cache for the setImmediate implementation.
+   * @type {function(function())}
+   * @private
+   */
+  async.nextTick.setImmediate_ = null;
+
+  /**
+   * Determines the best possible implementation to run a function as soon as
+   * the JS event loop is idle.
+   * @return {function(function())} The "setImmediate" implementation.
+   * @private
+   */
+  async.nextTick.getSetImmediateEmulator_ = function () {
+    // Create a private message channel and use it to postMessage empty messages
+    // to ourselves.
+    var Channel = window.MessageChannel;
+    // If MessageChannel is not available and we are in a browser, implement
+    // an iframe based polyfill in browsers that have postMessage and
+    // document.addEventListener. The latter excludes IE8 because it has a
+    // synchronous postMessage implementation.
+    if (typeof Channel === 'undefined' && typeof window !== 'undefined' && window.postMessage && window.addEventListener) {
+      /** @constructor */
+      Channel = function () {
+        // Make an empty, invisible iframe.
+        var iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = '';
+        document.documentElement.appendChild(iframe);
+        var win = iframe.contentWindow;
+        var doc = win.document;
+        doc.open();
+        doc.write('');
+        doc.close();
+        var message = 'callImmediate' + Math.random();
+        var origin = win.location.protocol + '//' + win.location.host;
+        var onmessage = (function (e) {
+          // Validate origin and message to make sure that this message was
+          // intended for us.
+          if (e.origin !== origin && e.data !== message) {
+            return;
+          }
+          this.port1.onmessage();
+        }).bind(this);
+        win.addEventListener('message', onmessage, false);
+        this.port1 = {};
+        this.port2 = {
+          postMessage: function postMessage() {
+            win.postMessage(message, origin);
+          }
+        };
+      };
+    }
+    if (typeof Channel !== 'undefined') {
+      var channel = new Channel();
+      // Use a fifo linked list to call callbacks in the right order.
+      var head = {};
+      var tail = head;
+      channel.port1.onmessage = function () {
+        head = head.next;
+        var cb = head.cb;
+        head.cb = null;
+        cb();
+      };
+      return function (cb) {
+        tail.next = {
+          cb: cb
+        };
+        tail = tail.next;
+        channel.port2.postMessage(0);
+      };
+    }
+    // Implementation for IE6-8: Script elements fire an asynchronous
+    // onreadystatechange event when inserted into the DOM.
+    if (typeof document !== 'undefined' && 'onreadystatechange' in document.createElement('script')) {
+      return function (cb) {
+        var script = document.createElement('script');
+        script.onreadystatechange = function () {
+          // Clean up and call the callback.
+          script.onreadystatechange = null;
+          script.parentNode.removeChild(script);
+          script = null;
+          cb();
+          cb = null;
+        };
+        document.documentElement.appendChild(script);
+      };
+    }
+    // Fall back to setTimeout with 0. In browsers this creates a delay of 5ms
+    // or more.
+    return function (cb) {
+      setTimeout(cb, 0);
+    };
+  };
+
+  /**
+   * Helper function that is overrided to protect callbacks with entry point
+   * monitor if the application monitors entry points.
+   * @param {function()} callback Callback function to fire as soon as possible.
+   * @return {function()} The wrapped callback.
+   * @private
+   */
+  async.nextTick.wrapCallback_ = function (opt_returnValue) {
+    return opt_returnValue;
+  };
+
+  /**
+   * Promises provide a result that may be resolved asynchronously. A Promise may
+   * be resolved by being fulfilled or rejected with a value, which will be known
+   * as the fulfillment value or the rejection reason. Whether fulfilled or
+   * rejected, the Promise result is immutable once it is set.
+   *
+   * Promises may represent results of any type, including undefined. Rejection
+   * reasons are typically Errors, but may also be of any type. Closure Promises
+   * allow for optional type annotations that enforce that fulfillment values are
+   * of the appropriate types at compile time.
+   *
+   * The result of a Promise is accessible by calling {@code then} and registering
+   * {@code onFulfilled} and {@code onRejected} callbacks. Once the Promise
+   * resolves, the relevant callbacks are invoked with the fulfillment value or
+   * rejection reason as argument. Callbacks are always invoked in the order they
+   * were registered, even when additional {@code then} calls are made from inside
+   * another callback. A callback is always run asynchronously sometime after the
+   * scope containing the registering {@code then} invocation has returned.
+   *
+   * If a Promise is resolved with another Promise, the first Promise will block
+   * until the second is resolved, and then assumes the same result as the second
+   * Promise. This allows Promises to depend on the results of other Promises,
+   * linking together multiple asynchronous operations.
+   *
+   * This implementation is compatible with the Promises/A+ specification and
+   * passes that specification's conformance test suite. A Closure Promise may be
+   * resolved with a Promise instance (or sufficiently compatible Promise-like
+   * object) created by other Promise implementations. From the specification,
+   * Promise-like objects are known as "Thenables".
+   *
+   * @see http://promisesaplus.com/
+   *
+   * @param {function(
+   *             this:RESOLVER_CONTEXT,
+   *             function((TYPE|IThenable.<TYPE>|Thenable)),
+   *             function(*)): void} resolver
+   *     Initialization function that is invoked immediately with {@code resolve}
+   *     and {@code reject} functions as arguments. The Promise is resolved or
+   *     rejected with the first argument passed to either function.
+   * @param {RESOLVER_CONTEXT=} opt_context An optional context for executing the
+   *     resolver function. If unspecified, the resolver function will be executed
+   *     in the default scope.
+   * @constructor
+   * @struct
+   * @final
+   * @implements {Thenable.<TYPE>}
+   * @template TYPE,RESOLVER_CONTEXT
+   */
+  var CancellablePromise = function CancellablePromise(resolver, opt_context) {
+    /**
+     * The internal state of this Promise. Either PENDING, FULFILLED, REJECTED, or
+     * BLOCKED.
+     * @private {CancellablePromise.State_}
+     */
+    this.state_ = CancellablePromise.State_.PENDING;
+
+    /**
+     * The resolved result of the Promise. Immutable once set with either a
+     * fulfillment value or rejection reason.
+     * @private {*}
+     */
+    this.result_ = undefined;
+
+    /**
+     * For Promises created by calling {@code then()}, the originating parent.
+     * @private {CancellablePromise}
+     */
+    this.parent_ = null;
+
+    /**
+     * The list of {@code onFulfilled} and {@code onRejected} callbacks added to
+     * this Promise by calls to {@code then()}.
+     * @private {Array.<CancellablePromise.CallbackEntry_>}
+     */
+    this.callbackEntries_ = null;
+
+    /**
+     * Whether the Promise is in the queue of Promises to execute.
+     * @private {boolean}
+     */
+    this.executing_ = false;
+
+    if (CancellablePromise.UNHANDLED_REJECTION_DELAY > 0) {
+      /**
+       * A timeout ID used when the {@code UNHANDLED_REJECTION_DELAY} is greater
+       * than 0 milliseconds. The ID is set when the Promise is rejected, and
+       * cleared only if an {@code onRejected} callback is invoked for the
+       * Promise (or one of its descendants) before the delay is exceeded.
+       *
+       * If the rejection is not handled before the timeout completes, the
+       * rejection reason is passed to the unhandled rejection handler.
+       * @private {number}
+       */
+      this.unhandledRejectionId_ = 0;
+    } else if (CancellablePromise.UNHANDLED_REJECTION_DELAY === 0) {
+      /**
+       * When the {@code UNHANDLED_REJECTION_DELAY} is set to 0 milliseconds, a
+       * boolean that is set if the Promise is rejected, and reset to false if an
+       * {@code onRejected} callback is invoked for the Promise (or one of its
+       * descendants). If the rejection is not handled before the next timestep,
+       * the rejection reason is passed to the unhandled rejection handler.
+       * @private {boolean}
+       */
+      this.hadUnhandledRejection_ = false;
+    }
+
+    try {
+      var self = this;
+      resolver.call(opt_context, function (value) {
+        self.resolve_(CancellablePromise.State_.FULFILLED, value);
+      }, function (reason) {
+        self.resolve_(CancellablePromise.State_.REJECTED, reason);
+      });
+    } catch (e) {
+      this.resolve_(CancellablePromise.State_.REJECTED, e);
+    }
+  };
+
+  /**
+   * @define {number} The delay in milliseconds before a rejected Promise's reason
+   * is passed to the rejection handler. By default, the rejection handler
+   * rethrows the rejection reason so that it appears in the developer console or
+   * {@code window.onerror} handler.
+   *
+   * Rejections are rethrown as quickly as possible by default. A negative value
+   * disables rejection handling entirely.
+   */
+  CancellablePromise.UNHANDLED_REJECTION_DELAY = 0;
+
+  /**
+   * The possible internal states for a Promise. These states are not directly
+   * observable to external callers.
+   * @enum {number}
+   * @private
+   */
+  CancellablePromise.State_ = {
+    /** The Promise is waiting for resolution. */
+    PENDING: 0,
+
+    /** The Promise is blocked waiting for the result of another Thenable. */
+    BLOCKED: 1,
+
+    /** The Promise has been resolved with a fulfillment value. */
+    FULFILLED: 2,
+
+    /** The Promise has been resolved with a rejection reason. */
+    REJECTED: 3
+  };
+
+  /**
+   * Typedef for entries in the callback chain. Each call to {@code then},
+   * {@code thenCatch}, or {@code thenAlways} creates an entry containing the
+   * functions that may be invoked once the Promise is resolved.
+   *
+   * @typedef {{
+   *   child: CancellablePromise,
+   *   onFulfilled: function(*),
+   *   onRejected: function(*)
+   * }}
+   * @private
+   */
+  CancellablePromise.CallbackEntry_ = null;
+
+  /**
+   * @param {(TYPE|Thenable.<TYPE>|Thenable)=} opt_value
+   * @return {!CancellablePromise.<TYPE>} A new Promise that is immediately resolved
+   *     with the given value.
+   * @template TYPE
+   */
+  CancellablePromise.resolve = function (opt_value) {
+    return new CancellablePromise(function (resolve) {
+      resolve(opt_value);
+    });
+  };
+
+  /**
+   * @param {*=} opt_reason
+   * @return {!CancellablePromise} A new Promise that is immediately rejected with the
+   *     given reason.
+   */
+  CancellablePromise.reject = function (opt_reason) {
+    return new CancellablePromise(function (resolve, reject) {
+      reject(opt_reason);
+    });
+  };
+
+  /**
+   * @param {!Array.<!(Thenable.<TYPE>|Thenable)>} promises
+   * @return {!CancellablePromise.<TYPE>} A Promise that receives the result of the
+   *     first Promise (or Promise-like) input to complete.
+   * @template TYPE
+   */
+  CancellablePromise.race = function (promises) {
+    return new CancellablePromise(function (resolve, reject) {
+      if (!promises.length) {
+        resolve(undefined);
+      }
+      for (var i = 0, promise; promise = promises[i]; i++) {
+        promise.then(resolve, reject);
+      }
+    });
+  };
+
+  /**
+   * @param {!Array.<!(Thenable.<TYPE>|Thenable)>} promises
+   * @return {!CancellablePromise.<!Array.<TYPE>>} A Promise that receives a list of
+   *     every fulfilled value once every input Promise (or Promise-like) is
+   *     successfully fulfilled, or is rejected by the first rejection result.
+   * @template TYPE
+   */
+  CancellablePromise.all = function (promises) {
+    return new CancellablePromise(function (resolve, reject) {
+      var toFulfill = promises.length;
+      var values = [];
+
+      if (!toFulfill) {
+        resolve(values);
+        return;
+      }
+
+      var onFulfill = function onFulfill(index, value) {
+        toFulfill--;
+        values[index] = value;
+        if (toFulfill === 0) {
+          resolve(values);
+        }
+      };
+
+      var onReject = function onReject(reason) {
+        reject(reason);
+      };
+
+      for (var i = 0, promise; promise = promises[i]; i++) {
+        promise.then(partial(onFulfill, i), onReject);
+      }
+    });
+  };
+
+  /**
+   * @param {!Array.<!(Thenable.<TYPE>|Thenable)>} promises
+   * @return {!CancellablePromise.<TYPE>} A Promise that receives the value of
+   *     the first input to be fulfilled, or is rejected with a list of every
+   *     rejection reason if all inputs are rejected.
+   * @template TYPE
+   */
+  CancellablePromise.firstFulfilled = function (promises) {
+    return new CancellablePromise(function (resolve, reject) {
+      var toReject = promises.length;
+      var reasons = [];
+
+      if (!toReject) {
+        resolve(undefined);
+        return;
+      }
+
+      var onFulfill = function onFulfill(value) {
+        resolve(value);
+      };
+
+      var onReject = function onReject(index, reason) {
+        toReject--;
+        reasons[index] = reason;
+        if (toReject === 0) {
+          reject(reasons);
+        }
+      };
+
+      for (var i = 0, promise; promise = promises[i]; i++) {
+        promise.then(onFulfill, partial(onReject, i));
+      }
+    });
+  };
+
+  /**
+   * Adds callbacks that will operate on the result of the Promise, returning a
+   * new child Promise.
+   *
+   * If the Promise is fulfilled, the {@code onFulfilled} callback will be invoked
+   * with the fulfillment value as argument, and the child Promise will be
+   * fulfilled with the return value of the callback. If the callback throws an
+   * exception, the child Promise will be rejected with the thrown value instead.
+   *
+   * If the Promise is rejected, the {@code onRejected} callback will be invoked
+   * with the rejection reason as argument, and the child Promise will be rejected
+   * with the return value (or thrown value) of the callback.
+   *
+   * @override
+   */
+  CancellablePromise.prototype.then = function (opt_onFulfilled, opt_onRejected, opt_context) {
+    return this.addChildPromise_(core.isFunction(opt_onFulfilled) ? opt_onFulfilled : null, core.isFunction(opt_onRejected) ? opt_onRejected : null, opt_context);
+  };
+  Thenable.addImplementation(CancellablePromise);
+
+  /**
+   * Adds a callback that will be invoked whether the Promise is fulfilled or
+   * rejected. The callback receives no argument, and no new child Promise is
+   * created. This is useful for ensuring that cleanup takes place after certain
+   * asynchronous operations. Callbacks added with {@code thenAlways} will be
+   * executed in the same order with other calls to {@code then},
+   * {@code thenAlways}, or {@code thenCatch}.
+   *
+   * Since it does not produce a new child Promise, cancellation propagation is
+   * not prevented by adding callbacks with {@code thenAlways}. A Promise that has
+   * a cleanup handler added with {@code thenAlways} will be canceled if all of
+   * its children created by {@code then} (or {@code thenCatch}) are canceled.
+   *
+   * @param {function(this:THIS): void} onResolved A function that will be invoked
+   *     when the Promise is resolved.
+   * @param {THIS=} opt_context An optional context object that will be the
+   *     execution context for the callbacks. By default, functions are executed
+   *     in the global scope.
+   * @return {!CancellablePromise.<TYPE>} This Promise, for chaining additional calls.
+   * @template THIS
+   */
+  CancellablePromise.prototype.thenAlways = function (onResolved, opt_context) {
+    var callback = function callback() {
+      try {
+        // Ensure that no arguments are passed to onResolved.
+        onResolved.call(opt_context);
+      } catch (err) {
+        CancellablePromise.handleRejection_.call(null, err);
+      }
+    };
+
+    this.addCallbackEntry_({
+      child: null,
+      onRejected: callback,
+      onFulfilled: callback
+    });
+    return this;
+  };
+
+  /**
+   * Adds a callback that will be invoked only if the Promise is rejected. This
+   * is equivalent to {@code then(null, onRejected)}.
+   *
+   * @param {!function(this:THIS, *): *} onRejected A function that will be
+   *     invoked with the rejection reason if the Promise is rejected.
+   * @param {THIS=} opt_context An optional context object that will be the
+   *     execution context for the callbacks. By default, functions are executed
+   *     in the global scope.
+   * @return {!CancellablePromise} A new Promise that will receive the result of the
+   *     callback.
+   * @template THIS
+   */
+  CancellablePromise.prototype.thenCatch = function (onRejected, opt_context) {
+    return this.addChildPromise_(null, onRejected, opt_context);
+  };
+
+  /**
+   * Alias of {@link CancellablePromise.prototype.thenCatch}
+   */
+  CancellablePromise.prototype['catch'] = CancellablePromise.prototype.thenCatch;
+
+  /**
+   * Cancels the Promise if it is still pending by rejecting it with a cancel
+   * Error. No action is performed if the Promise is already resolved.
+   *
+   * All child Promises of the canceled Promise will be rejected with the same
+   * cancel error, as with normal Promise rejection. If the Promise to be canceled
+   * is the only child of a pending Promise, the parent Promise will also be
+   * canceled. Cancellation may propagate upward through multiple generations.
+   *
+   * @param {string=} opt_message An optional debugging message for describing the
+   *     cancellation reason.
+   */
+  CancellablePromise.prototype.cancel = function (opt_message) {
+    if (this.state_ === CancellablePromise.State_.PENDING) {
+      async.run(function () {
+        var err = new CancellablePromise.CancellationError(opt_message);
+        this.cancelInternal_(err);
+      }, this);
+    }
+  };
+
+  /**
+   * Cancels this Promise with the given error.
+   *
+   * @param {!Error} err The cancellation error.
+   * @private
+   */
+  CancellablePromise.prototype.cancelInternal_ = function (err) {
+    if (this.state_ === CancellablePromise.State_.PENDING) {
+      if (this.parent_) {
+        // Cancel the Promise and remove it from the parent's child list.
+        this.parent_.cancelChild_(this, err);
+      } else {
+        this.resolve_(CancellablePromise.State_.REJECTED, err);
+      }
+    }
+  };
+
+  /**
+   * Cancels a child Promise from the list of callback entries. If the Promise has
+   * not already been resolved, reject it with a cancel error. If there are no
+   * other children in the list of callback entries, propagate the cancellation
+   * by canceling this Promise as well.
+   *
+   * @param {!CancellablePromise} childPromise The Promise to cancel.
+   * @param {!Error} err The cancel error to use for rejecting the Promise.
+   * @private
+   */
+  CancellablePromise.prototype.cancelChild_ = function (childPromise, err) {
+    if (!this.callbackEntries_) {
+      return;
+    }
+    var childCount = 0;
+    var childIndex = -1;
+
+    // Find the callback entry for the childPromise, and count whether there are
+    // additional child Promises.
+    for (var i = 0, entry; entry = this.callbackEntries_[i]; i++) {
+      var child = entry.child;
+      if (child) {
+        childCount++;
+        if (child === childPromise) {
+          childIndex = i;
+        }
+        if (childIndex >= 0 && childCount > 1) {
+          break;
+        }
+      }
+    }
+
+    // If the child Promise was the only child, cancel this Promise as well.
+    // Otherwise, reject only the child Promise with the cancel error.
+    if (childIndex >= 0) {
+      if (this.state_ === CancellablePromise.State_.PENDING && childCount === 1) {
+        this.cancelInternal_(err);
+      } else {
+        var callbackEntry = this.callbackEntries_.splice(childIndex, 1)[0];
+        this.executeCallback_(callbackEntry, CancellablePromise.State_.REJECTED, err);
+      }
+    }
+  };
+
+  /**
+   * Adds a callback entry to the current Promise, and schedules callback
+   * execution if the Promise has already been resolved.
+   *
+   * @param {CancellablePromise.CallbackEntry_} callbackEntry Record containing
+   *     {@code onFulfilled} and {@code onRejected} callbacks to execute after
+   *     the Promise is resolved.
+   * @private
+   */
+  CancellablePromise.prototype.addCallbackEntry_ = function (callbackEntry) {
+    if ((!this.callbackEntries_ || !this.callbackEntries_.length) && (this.state_ === CancellablePromise.State_.FULFILLED || this.state_ === CancellablePromise.State_.REJECTED)) {
+      this.scheduleCallbacks_();
+    }
+    if (!this.callbackEntries_) {
+      this.callbackEntries_ = [];
+    }
+    this.callbackEntries_.push(callbackEntry);
+  };
+
+  /**
+   * Creates a child Promise and adds it to the callback entry list. The result of
+   * the child Promise is determined by the state of the parent Promise and the
+   * result of the {@code onFulfilled} or {@code onRejected} callbacks as
+   * specified in the Promise resolution procedure.
+   *
+   * @see http://promisesaplus.com/#the__method
+   *
+   * @param {?function(this:THIS, TYPE):
+   *          (RESULT|CancellablePromise.<RESULT>|Thenable)} onFulfilled A callback that
+   *     will be invoked if the Promise is fullfilled, or null.
+   * @param {?function(this:THIS, *): *} onRejected A callback that will be
+   *     invoked if the Promise is rejected, or null.
+   * @param {THIS=} opt_context An optional execution context for the callbacks.
+   *     in the default calling context.
+   * @return {!CancellablePromise} The child Promise.
+   * @template RESULT,THIS
+   * @private
+   */
+  CancellablePromise.prototype.addChildPromise_ = function (onFulfilled, onRejected, opt_context) {
+
+    var callbackEntry = {
+      child: null,
+      onFulfilled: null,
+      onRejected: null
+    };
+
+    callbackEntry.child = new CancellablePromise(function (resolve, reject) {
+      // Invoke onFulfilled, or resolve with the parent's value if absent.
+      callbackEntry.onFulfilled = onFulfilled ? function (value) {
+        try {
+          var result = onFulfilled.call(opt_context, value);
+          resolve(result);
+        } catch (err) {
+          reject(err);
+        }
+      } : resolve;
+
+      // Invoke onRejected, or reject with the parent's reason if absent.
+      callbackEntry.onRejected = onRejected ? function (reason) {
+        try {
+          var result = onRejected.call(opt_context, reason);
+          if (!core.isDef(result) && reason instanceof CancellablePromise.CancellationError) {
+            // Propagate cancellation to children if no other result is returned.
+            reject(reason);
+          } else {
+            resolve(result);
+          }
+        } catch (err) {
+          reject(err);
+        }
+      } : reject;
+    });
+
+    callbackEntry.child.parent_ = this;
+    this.addCallbackEntry_(callbackEntry);
+    return callbackEntry.child;
+  };
+
+  /**
+   * Unblocks the Promise and fulfills it with the given value.
+   *
+   * @param {TYPE} value
+   * @private
+   */
+  CancellablePromise.prototype.unblockAndFulfill_ = function (value) {
+    if (this.state_ !== CancellablePromise.State_.BLOCKED) {
+      throw new Error('CancellablePromise is not blocked.');
+    }
+    this.state_ = CancellablePromise.State_.PENDING;
+    this.resolve_(CancellablePromise.State_.FULFILLED, value);
+  };
+
+  /**
+   * Unblocks the Promise and rejects it with the given rejection reason.
+   *
+   * @param {*} reason
+   * @private
+   */
+  CancellablePromise.prototype.unblockAndReject_ = function (reason) {
+    if (this.state_ !== CancellablePromise.State_.BLOCKED) {
+      throw new Error('CancellablePromise is not blocked.');
+    }
+    this.state_ = CancellablePromise.State_.PENDING;
+    this.resolve_(CancellablePromise.State_.REJECTED, reason);
+  };
+
+  /**
+   * Attempts to resolve a Promise with a given resolution state and value. This
+   * is a no-op if the given Promise has already been resolved.
+   *
+   * If the given result is a Thenable (such as another Promise), the Promise will
+   * be resolved with the same state and result as the Thenable once it is itself
+   * resolved.
+   *
+   * If the given result is not a Thenable, the Promise will be fulfilled or
+   * rejected with that result based on the given state.
+   *
+   * @see http://promisesaplus.com/#the_promise_resolution_procedure
+   *
+   * @param {CancellablePromise.State_} state
+   * @param {*} x The result to apply to the Promise.
+   * @private
+   */
+  CancellablePromise.prototype.resolve_ = function (state, x) {
+    if (this.state_ !== CancellablePromise.State_.PENDING) {
+      return;
+    }
+
+    if (this === x) {
+      state = CancellablePromise.State_.REJECTED;
+      x = new TypeError('CancellablePromise cannot resolve to itself');
+    } else if (Thenable.isImplementedBy(x)) {
+      x = x;
+      this.state_ = CancellablePromise.State_.BLOCKED;
+      x.then(this.unblockAndFulfill_, this.unblockAndReject_, this);
+      return;
+    } else if (core.isObject(x)) {
+      try {
+        var then = x.then;
+        if (core.isFunction(then)) {
+          this.tryThen_(x, then);
+          return;
+        }
+      } catch (e) {
+        state = CancellablePromise.State_.REJECTED;
+        x = e;
+      }
+    }
+
+    this.result_ = x;
+    this.state_ = state;
+    this.scheduleCallbacks_();
+
+    if (state === CancellablePromise.State_.REJECTED && !(x instanceof CancellablePromise.CancellationError)) {
+      CancellablePromise.addUnhandledRejection_(this, x);
+    }
+  };
+
+  /**
+   * Attempts to call the {@code then} method on an object in the hopes that it is
+   * a Promise-compatible instance. This allows interoperation between different
+   * Promise implementations, however a non-compliant object may cause a Promise
+   * to hang indefinitely. If the {@code then} method throws an exception, the
+   * dependent Promise will be rejected with the thrown value.
+   *
+   * @see http://promisesaplus.com/#point-70
+   *
+   * @param {Thenable} thenable An object with a {@code then} method that may be
+   *     compatible with the Promise/A+ specification.
+   * @param {!Function} then The {@code then} method of the Thenable object.
+   * @private
+   */
+  CancellablePromise.prototype.tryThen_ = function (thenable, then) {
+    this.state_ = CancellablePromise.State_.BLOCKED;
+    var promise = this;
+    var called = false;
+
+    var resolve = function resolve(value) {
+      if (!called) {
+        called = true;
+        promise.unblockAndFulfill_(value);
+      }
+    };
+
+    var reject = function reject(reason) {
+      if (!called) {
+        called = true;
+        promise.unblockAndReject_(reason);
+      }
+    };
+
+    try {
+      then.call(thenable, resolve, reject);
+    } catch (e) {
+      reject(e);
+    }
+  };
+
+  /**
+   * Executes the pending callbacks of a resolved Promise after a timeout.
+   *
+   * Section 2.2.4 of the Promises/A+ specification requires that Promise
+   * callbacks must only be invoked from a call stack that only contains Promise
+   * implementation code, which we accomplish by invoking callback execution after
+   * a timeout. If {@code startExecution_} is called multiple times for the same
+   * Promise, the callback chain will be evaluated only once. Additional callbacks
+   * may be added during the evaluation phase, and will be executed in the same
+   * event loop.
+   *
+   * All Promises added to the waiting list during the same browser event loop
+   * will be executed in one batch to avoid using a separate timeout per Promise.
+   *
+   * @private
+   */
+  CancellablePromise.prototype.scheduleCallbacks_ = function () {
+    if (!this.executing_) {
+      this.executing_ = true;
+      async.run(this.executeCallbacks_, this);
+    }
+  };
+
+  /**
+   * Executes all pending callbacks for this Promise.
+   *
+   * @private
+   */
+  CancellablePromise.prototype.executeCallbacks_ = function () {
+    while (this.callbackEntries_ && this.callbackEntries_.length) {
+      var entries = this.callbackEntries_;
+      this.callbackEntries_ = [];
+
+      for (var i = 0; i < entries.length; i++) {
+        this.executeCallback_(entries[i], this.state_, this.result_);
+      }
+    }
+    this.executing_ = false;
+  };
+
+  /**
+   * Executes a pending callback for this Promise. Invokes an {@code onFulfilled}
+   * or {@code onRejected} callback based on the resolved state of the Promise.
+   *
+   * @param {!CancellablePromise.CallbackEntry_} callbackEntry An entry containing the
+   *     onFulfilled and/or onRejected callbacks for this step.
+   * @param {CancellablePromise.State_} state The resolution status of the Promise,
+   *     either FULFILLED or REJECTED.
+   * @param {*} result The resolved result of the Promise.
+   * @private
+   */
+  CancellablePromise.prototype.executeCallback_ = function (callbackEntry, state, result) {
+    if (state === CancellablePromise.State_.FULFILLED) {
+      callbackEntry.onFulfilled(result);
+    } else {
+      this.removeUnhandledRejection_();
+      callbackEntry.onRejected(result);
+    }
+  };
+
+  /**
+   * Marks this rejected Promise as having being handled. Also marks any parent
+   * Promises in the rejected state as handled. The rejection handler will no
+   * longer be invoked for this Promise (if it has not been called already).
+   *
+   * @private
+   */
+  CancellablePromise.prototype.removeUnhandledRejection_ = function () {
+    var p;
+    if (CancellablePromise.UNHANDLED_REJECTION_DELAY > 0) {
+      for (p = this; p && p.unhandledRejectionId_; p = p.parent_) {
+        clearTimeout(p.unhandledRejectionId_);
+        p.unhandledRejectionId_ = 0;
+      }
+    } else if (CancellablePromise.UNHANDLED_REJECTION_DELAY === 0) {
+      for (p = this; p && p.hadUnhandledRejection_; p = p.parent_) {
+        p.hadUnhandledRejection_ = false;
+      }
+    }
+  };
+
+  /**
+   * Marks this rejected Promise as unhandled. If no {@code onRejected} callback
+   * is called for this Promise before the {@code UNHANDLED_REJECTION_DELAY}
+   * expires, the reason will be passed to the unhandled rejection handler. The
+   * handler typically rethrows the rejection reason so that it becomes visible in
+   * the developer console.
+   *
+   * @param {!CancellablePromise} promise The rejected Promise.
+   * @param {*} reason The Promise rejection reason.
+   * @private
+   */
+  CancellablePromise.addUnhandledRejection_ = function (promise, reason) {
+    if (CancellablePromise.UNHANDLED_REJECTION_DELAY > 0) {
+      promise.unhandledRejectionId_ = setTimeout(function () {
+        CancellablePromise.handleRejection_.call(null, reason);
+      }, CancellablePromise.UNHANDLED_REJECTION_DELAY);
+    } else if (CancellablePromise.UNHANDLED_REJECTION_DELAY === 0) {
+      promise.hadUnhandledRejection_ = true;
+      async.run(function () {
+        if (promise.hadUnhandledRejection_) {
+          CancellablePromise.handleRejection_.call(null, reason);
+        }
+      });
+    }
+  };
+
+  /**
+   * A method that is invoked with the rejection reasons for Promises that are
+   * rejected but have no {@code onRejected} callbacks registered yet.
+   * @type {function(*)}
+   * @private
+   */
+  CancellablePromise.handleRejection_ = async.throwException;
+
+  /**
+   * Sets a handler that will be called with reasons from unhandled rejected
+   * Promises. If the rejected Promise (or one of its descendants) has an
+   * {@code onRejected} callback registered, the rejection will be considered
+   * handled, and the rejection handler will not be called.
+   *
+   * By default, unhandled rejections are rethrown so that the error may be
+   * captured by the developer console or a {@code window.onerror} handler.
+   *
+   * @param {function(*)} handler A function that will be called with reasons from
+   *     rejected Promises. Defaults to {@code async.throwException}.
+   */
+  CancellablePromise.setUnhandledRejectionHandler = function (handler) {
+    CancellablePromise.handleRejection_ = handler;
+  };
+
+  /**
+   * Error used as a rejection reason for canceled Promises.
+   *
+   * @param {string=} opt_message
+   * @constructor
+   * @extends {Error}
+   * @final
+   */
+  CancellablePromise.CancellationError = (function (_Error) {
+    var _class = function (opt_message) {
+      babelHelpers.classCallCheck(this, _class);
+
+      babelHelpers.get(Object.getPrototypeOf(_class.prototype), 'constructor', this).call(this, opt_message);
+
+      if (opt_message) {
+        this.message = opt_message;
+      }
+    };
+
+    babelHelpers.inherits(_class, _Error);
+    return _class;
+  })(Error);
+
+  /** @override */
+  CancellablePromise.CancellationError.prototype.name = 'cancel';
+
+  if (typeof window.Promise === 'undefined') {
+    window.Promise = CancellablePromise;
+  }
+
+  this.uiNamed.Promise = {};
+  this.uiNamed.Promise.CancellablePromise = CancellablePromise;
+  this.uiNamed.Promise.async = async;
+}).call(this);
+
+/** @type {CancellablePromise.CallbackEntry_} */ /** @type {!Thenable} */
+(function () {
+	'use strict';
+
+	var Component = this.ui.Component;
+	var ComponentRegistry = this.ui.ComponentRegistry;
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var EventHandler = this.ui.EventHandler;
+	var Promise = this.uiNamed.Promise.CancellablePromise;
+
+	/*
+  * AutoCompleteBase component.
+  */
+
+	var AutoCompleteBase = (function (_Component) {
+		/**
+   * @inheritDoc
+   */
+
+		function AutoCompleteBase(opt_config) {
+			babelHelpers.classCallCheck(this, AutoCompleteBase);
+
+			babelHelpers.get(Object.getPrototypeOf(AutoCompleteBase.prototype), 'constructor', this).call(this, opt_config);
+		}
+
+		babelHelpers.inherits(AutoCompleteBase, _Component);
+		babelHelpers.createClass(AutoCompleteBase, [{
+			key: 'attached',
+
+			/**
+    * @inheritDoc
+    */
+			value: function attached() {
+				this.eventHandler_ = new EventHandler();
+				this.eventHandler_.add(dom.on(this.inputElement, 'input', this.onInput_.bind(this)));
+
+				this.on('select', this.selectValue_.bind(this));
+			}
+		}, {
+			key: 'detached',
+
+			/**
+    * @inheritDoc
+    */
+			value: function detached() {
+				this.eventHandler_.removeAllListeners();
+			}
+		}, {
+			key: 'formatData_',
+
+			/**
+    * Formats the data before to pass it to the UI for displaying.
+    * The `format` function will be called for each item from the data array.
+    *
+    * @protected
+    * @param {!Array} data The data which have to be formatted
+    * @return {Array} The formatted data
+    */
+			value: function formatData_(data) {
+				if (this.format) {
+					data = data.map((function (item) {
+						return this.format(item);
+					}).bind(this));
+				}
+
+				return data;
+			}
+		}, {
+			key: 'loadData_',
+
+			/**
+    * Loads the data for the passed `query` parameter.
+    *
+    * @protected
+    * @param {string} query The query for which results should be returned
+    */
+			value: function loadData_(query) {
+				return new Promise((function (resolve, reject) {
+
+					if (core.isFunction(this.data)) {
+						var result = this.data(query);
+
+						if (Array.isArray(result)) {
+							resolve(result);
+						} else if (result && core.isFunction(result.then)) {
+							result.then(function (data) {
+								resolve(data);
+							});
+						} else {
+							reject('The returned value from data loader should be an array or a Promise');
+						}
+					} else {
+						reject('There is no provided data loader');
+					}
+				}).bind(this));
+			}
+		}, {
+			key: 'onInput_',
+
+			/**
+    * Handles the input event in the input element. The function will
+    * load the data and emit `query` and `result` events.
+    *
+    * @protected
+    */
+			value: function onInput_() {
+				var query = this.inputElement.value;
+
+				this.emit('query', query);
+
+				this.loadData_(query).then((function (data) {
+					this.emit('result', this.formatData_(data));
+				}).bind(this))['catch']((function (error) {
+					this.emit('error', error);
+				}).bind(this));
+			}
+		}, {
+			key: 'selectValue_',
+
+			/**
+    * Selects a value from the UI and populates the input element with
+    * the selected value.
+    *
+    * @protected
+    * @param {!Object} value The value provided by the UI, which have
+    * to be put in the input element
+    */
+			value: function selectValue_(value) {
+				if (this.select) {
+					value = this.select(this.inputElement.value, value);
+				}
+
+				this.inputElement.value = value;
+
+				this.inputElement.focus();
+			}
+		}]);
+		return AutoCompleteBase;
+	})(Component);
+
+	/**
+  * AutoCompleteBase attributes definition.
+  * @type {Object}
+  * @static
+  */
+	AutoCompleteBase.ATTRS = {
+		/**
+   * Function, which have to return the results from the query.
+   * The function should return an `array` or a `Promise`. In case of
+   * Promise, it should be resolved with an array containing the results.
+   *
+   * @type {function()}
+   */
+		data: {
+			validator: core.isFunction
+		},
+
+		/**
+   * Function, which will be invoked for each item from the array of the results
+   * which have to be formatted. The function should return an object
+   * with at least one property called `text`.
+   *
+   * @type {function()}
+   */
+		format: {
+			validator: core.isFunction
+		},
+
+		/**
+   * The element which will be used source for the data queries.
+   *
+   * @type {DOMElement|string}
+   */
+		inputElement: {
+			setter: dom.toElement
+		},
+
+		/**
+   * Function, which have to format the chosen value from the user.
+   * It will receive two parameters - the selected value from the user
+   * and the current value from the input element.
+   *
+   * @type {function()}
+   */
+		select: {
+			validator: core.isFunction
+		}
+	};
+
+	ComponentRegistry.register('AutoCompleteBase', AutoCompleteBase);
+
+	this.ui.AutoCompleteBase = AutoCompleteBase;
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var Component = this.ui.Component;
+
+	/**
+  * We need to listen to calls to soy deltemplates so we can use them to
+  * properly instantiate and update child components defined through soy.
+  * TODO: Switch to using proper AOP.
+  */
+	var originalGetDelegateFn = soy.$$getDelegateFn;
+
+	/**
+  * Special Component class that handles a better integration between soy templates
+  * and the components. It allows for automatic rendering of surfaces that have soy
+  * templates defined with their names, skipping the call to `getSurfaceContent`.
+  * @param {Object} opt_config An object with the initial values for this component's
+  *   attributes.
+  * @constructor
+  * @extends {Component}
+  */
+
+	var SoyComponent = (function (_Component) {
+		function SoyComponent(opt_config) {
+			babelHelpers.classCallCheck(this, SoyComponent);
+
+			babelHelpers.get(Object.getPrototypeOf(SoyComponent.prototype), 'constructor', this).call(this, opt_config);
+
+			core.mergeSuperClassesProperty(this.constructor, 'TEMPLATES', this.mergeObjects_);
+			this.addSurfacesFromTemplates_();
+
+			/**
+    * Indicates which surface is currently being rendered, or null if none is.
+    * @type {boolean}
+    * @protected
+    */
+			this.surfaceBeingRendered_ = null;
+
+			/**
+    * Flags indicating which surface names have already been found on this component's content.
+    * @type {!Object<string, boolean>}
+    * @protected
+    */
+			this.firstSurfaceFound_ = {};
+
+			/**
+    * Holds the data that should be passed to the next template call for a surface,
+    * mapped by surface id.
+    * @type {!Object<string, Object>}
+    * @protected
+    */
+			this.nextSurfaceCallData_ = {};
+		}
+
+		babelHelpers.inherits(SoyComponent, _Component);
+		babelHelpers.createClass(SoyComponent, [{
+			key: 'addSurfacesFromTemplates_',
+
+			/**
+    * Adds surfaces for each registered template that is not named `element`.
+    * @protected
+    */
+			value: function addSurfacesFromTemplates_() {
+				var templates = this.constructor.TEMPLATES_MERGED;
+				var templateNames = Object.keys(templates);
+				for (var i = 0; i < templateNames.length; i++) {
+					var templateName = templateNames[i];
+					if (templateName !== 'content' && templateName.substr(0, 13) !== '__deltemplate') {
+						var surface = this.getSurface(templateName);
+						if (!surface) {
+							this.addSurface(templateName, {
+								renderAttrs: templates[templateName].params,
+								templateName: templateName
+							});
+						}
+					}
+				}
+			}
+		}, {
+			key: 'buildComponentConfigData_',
+
+			/**
+    * Builds the config data for a component from the data that was passed to its
+    * soy template function.
+    * @param {string} id The id of the component.
+    * @param {!Object} templateData
+    * @return {!Object} The component's config data.
+    * @protected
+    */
+			value: function buildComponentConfigData_(id, templateData) {
+				var config = { id: id };
+				for (var key in templateData) {
+					config[key] = templateData[key];
+				}
+				return config;
+			}
+		}, {
+			key: 'buildPlaceholderSurfaceData_',
+
+			/**
+    * Adds the template name to the creation data for placeholder surfaces.
+    * @param {string} type The surface type (either "s" or "c").
+    * @param {string} extra String with extra information about the surface.
+    * @return {!Object}
+    * @protected
+    */
+			value: function buildPlaceholderSurfaceData_(type, extra) {
+				var data = babelHelpers.get(Object.getPrototypeOf(SoyComponent.prototype), 'buildPlaceholderSurfaceData_', this).call(this, type, extra);
+				if (type === Component.SurfaceType.NORMAL) {
+					data.templateName = extra;
+				}
+				return data;
+			}
+		}, {
+			key: 'generateSoySurfaceId_',
+
+			/**
+    * Generates the id for a surface that was found by a soy template call.
+    * @param {string} templateName
+    * @return {string}
+    */
+			value: function generateSoySurfaceId_(templateName) {
+				if (!this.surfaceBeingRendered_ && !this.firstSurfaceFound_[templateName]) {
+					this.firstSurfaceFound_[templateName] = true;
+					return templateName;
+				} else {
+					return this.generateSurfaceId_(Component.SurfaceType.NORMAL, this.surfaceBeingRendered_);
+				}
+			}
+		}, {
+			key: 'getComponentHtml',
+
+			/**
+    * Overrides Component's original behavior so the component's html may be rendered
+    * by its template.
+    * @param {string} content
+    * @return {string}
+    * @override
+    */
+			value: function getComponentHtml(content) {
+				return this.renderElementDelTemplate_(content);
+			}
+		}, {
+			key: 'getElementContent',
+
+			/**
+    * Gets the content that should be rendered in the component's main element by
+    * rendering the `content` soy template.
+    * @return {?string} The template's result content, or undefined if the
+    *   template doesn't exist.
+    */
+			value: function getElementContent() {
+				this.surfaceBeingRendered_ = null;
+				return this.renderTemplateByName_('content', this);
+			}
+		}, {
+			key: 'getNonComponentSurfaceHtml',
+
+			/**
+    * Overrides Component's original behavior so surface's html may be rendered by
+    * their templates.
+    * @param {string} surfaceId
+    * @param {string} content
+    * @return {string}
+    */
+			value: function getNonComponentSurfaceHtml(surfaceId, content) {
+				return this.renderElementDelTemplate_(content, surfaceId);
+			}
+		}, {
+			key: 'getSurfaceContent',
+
+			/**
+    * Makes the default behavior of rendering surfaces automatically render the
+    * appropriate soy template when one exists.
+    * @param {string} surfaceId The surface id.
+    * @return {Object|string} The content to be rendered.
+    * @override
+    */
+			value: function getSurfaceContent(surfaceId) {
+				var surface = this.getSurface(surfaceId);
+				var data = this.nextSurfaceCallData_[surfaceId];
+				this.nextSurfaceCallData_[surfaceId] = null;
+				this.surfaceBeingRendered_ = surfaceId;
+				return this.renderTemplateByName_(surface.templateName, data);
+			}
+		}, {
+			key: 'handleGetDelegateFnCall_',
+
+			/**
+    * Handles a call to the soy function for getting delegate functions.
+    * @param {string} delTemplateId
+    * @return {!function}
+    * @protected
+    */
+			value: function handleGetDelegateFnCall_(delTemplateId) {
+				var index = delTemplateId.indexOf('.');
+				if (index === -1) {
+					return this.handleTemplateCall_.bind(this, delTemplateId);
+				} else {
+					return this.handleSurfaceCall_.bind(this, delTemplateId.substr(index + 1));
+				}
+			}
+		}, {
+			key: 'handleSurfaceCall_',
+
+			/**
+    * Handles a call to the SoyComponent surface template.
+    * @param {string} surfaceName The surface's name.
+    * @param {!Object} data The data the template was called with.
+    * @return {string} A placeholder to be rendered instead of the content the template
+    *   function would have returned.
+    * @protected
+    */
+			value: function handleSurfaceCall_(surfaceName, data) {
+				var surfaceId = data.surfaceId;
+				if (!core.isDefAndNotNull(surfaceId)) {
+					surfaceId = this.generateSoySurfaceId_(surfaceName);
+				}
+				this.nextSurfaceCallData_[surfaceId] = data;
+				return '%%%%~s-' + surfaceId + ':' + surfaceName + '~%%%%';
+			}
+		}, {
+			key: 'handleTemplateCall_',
+
+			/**
+    * Handles a call to the SoyComponent component template.
+    * @param {string} componentName The component's name.
+    * @param {Object} data The data the template was called with.
+    * @return {string} A placeholder to be rendered instead of the content the template
+    *   function would have returned.
+    * @protected
+    */
+			value: function handleTemplateCall_(componentName, data) {
+				var id = (data || {}).id || this.generateSurfaceId_(Component.SurfaceType.COMPONENT, this.surfaceBeingRendered_);
+				Component.componentsCollector.setNextComponentData(id, this.buildComponentConfigData_(id, data));
+				return '%%%%~c-' + id + ':' + componentName + '~%%%%';
+			}
+		}, {
+			key: 'renderElementDelTemplate_',
+
+			/**
+    * Renders the element deltemplate for this component or for one of its surfaces.
+    * @param {?string} content
+    * @param {string=} opt_surfaceId
+    * @return {string}
+    */
+			value: function renderElementDelTemplate_(content, opt_surfaceId) {
+				var templateName = this.constructor.NAME;
+				if (opt_surfaceId) {
+					templateName += '.' + this.getSurface(opt_surfaceId).templateName;
+				}
+				var templateFn = soy.$$getDelegateFn(templateName, 'element', true);
+				var data = {
+					elementClasses: this.elementClasses,
+					elementContent: SoyComponent.sanitizeHtml(content || ''),
+					id: this.id || this.makeId_(),
+					surfaceId: opt_surfaceId
+				};
+				return templateFn(data, null, {}).content;
+			}
+		}, {
+			key: 'renderTemplate_',
+
+			/**
+    * Renders the specified template.
+    * @param {!function()} templateFn
+    * @param {Object=} opt_data
+    * @return {string} The template's result content.
+    */
+			value: function renderTemplate_(templateFn, opt_data) {
+				soy.$$getDelegateFn = this.handleGetDelegateFnCall_.bind(this);
+				var content = templateFn(opt_data || this, null, {}).content;
+				soy.$$getDelegateFn = originalGetDelegateFn;
+				return content;
+			}
+		}, {
+			key: 'renderTemplateByName_',
+
+			/**
+    * Renders the template with the specified name.
+    * @param {string} templateName
+    * @param {Object=} opt_data
+    * @return {string} The template's result content.
+    */
+			value: function renderTemplateByName_(templateName, opt_data) {
+				var elementTemplate = this.constructor.TEMPLATES_MERGED[templateName];
+				if (core.isFunction(elementTemplate)) {
+					return this.renderTemplate_(elementTemplate, opt_data);
+				}
+			}
+		}, {
+			key: 'valueElementFn_',
+
+			/**
+    * Provides the default value for element attribute.
+    * @return {Element} The element.
+    * @protected
+    */
+			value: function valueElementFn_() {
+				var rendered = this.getComponentHtml();
+				if (rendered) {
+					var frag = dom.buildFragment(rendered);
+					var element = frag.childNodes[0];
+					// Remove element from fragment, so it won't have a parent. Otherwise,
+					// the `attach` method will think that the element has already been
+					// attached.
+					frag.removeChild(element);
+					return element;
+				}
+
+				return babelHelpers.get(Object.getPrototypeOf(SoyComponent.prototype), 'valueElementFn_', this).call(this);
+			}
+		}], [{
+			key: 'sanitizeHtml',
+
+			/**
+    * Sanitizes the given html string, so it can skip escaping when passed to a
+    * soy template.
+    * @param {string} html
+    * @return {soydata.SanitizedHtml}
+    * @protected
+    */
+			value: function sanitizeHtml(html) {
+				return soydata.VERY_UNSAFE.ordainSanitizedHtml(html);
+			}
+		}]);
+		return SoyComponent;
+	})(Component);
+
+	/**
+  * The soy templates for this component. Templates that have the same
+  * name of a registered surface will be used for automatically rendering
+  * it.
+  * @type {Object<string, !function(Object):Object>}
+  * @protected
+  * @static
+  */
+	SoyComponent.TEMPLATES = {};
+
+	this.ui.SoyComponent = SoyComponent;
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var SoyComponent = this.ui.SoyComponent;
+
+	var Component = (function (_SoyComponent) {
+		function Component(opt_config) {
+			babelHelpers.classCallCheck(this, Component);
+
+			babelHelpers.get(Object.getPrototypeOf(Component.prototype), 'constructor', this).call(this, opt_config);
+		}
+
+		babelHelpers.inherits(Component, _SoyComponent);
+		babelHelpers.createClass(Component, [{
+			key: 'hide',
+
+			/**
+    * Sets the component visibility to false.
+    */
+			value: function hide() {
+				this.visible = false;
+			}
+		}, {
+			key: 'show',
+
+			/**
+    * Sets the component visibility to true.
+    */
+			value: function show() {
+				this.visible = true;
+			}
+		}, {
+			key: 'syncVisible',
+			value: function syncVisible(visible) {
+				this.element.style.display = visible ? null : 'none';
+			}
+		}]);
+		return Component;
+	})(SoyComponent);
+
+	Component.ATTRS = {
+		visible: {
+			validator: core.isBoolean,
+			value: true
+		}
+	};
+
+	this.ui.Component = Component;
+}).call(this);
+(function () {
+  /* jshint ignore:start */
+  'use strict';
+
+  var ComponentRegistry = this.ui.ComponentRegistry;
+
+  var Templates = ComponentRegistry.Templates;
+  // This file was automatically generated from List.soy.
+  // Please don't edit this file by hand.
+
+  /**
+   * @fileoverview Templates in namespace Templates.List.
+   * @hassoydeltemplate {List}
+   * @hassoydeltemplate {List.items}
+   * @hassoydelcall {List}
+   * @hassoydelcall {List.items}
+   */
+
+  if (typeof Templates.List == 'undefined') {
+    Templates.List = {};
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.List.content = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('List.items'), '', true)(opt_data, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.List.content.soyTemplateName = 'Templates.List.content';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.List.items = function (opt_data, opt_ignored, opt_ijData) {
+    var output = '';
+    var itemList5 = opt_data.items;
+    var itemListLen5 = itemList5.length;
+    for (var itemIndex5 = 0; itemIndex5 < itemListLen5; itemIndex5++) {
+      var itemData5 = itemList5[itemIndex5];
+      output += '<li class="list-item u-cf" data-index="' + soy.$$escapeHtmlAttribute(itemIndex5) + '" data-onclick="handleClick">';
+      if (itemData5.icons) {
+        output += '<div class="list-icons u-pull-right">';
+        var iconList12 = itemData5.icons;
+        var iconListLen12 = iconList12.length;
+        for (var iconIndex12 = 0; iconIndex12 < iconListLen12; iconIndex12++) {
+          var iconData12 = iconList12[iconIndex12];
+          output += '<span class="list-icon ' + soy.$$escapeHtmlAttribute(iconData12) + '"></span>';
+        }
+        output += '</div>';
+      }
+      output += (itemData5.img ? '<span class="list-image u-pull-left ' + soy.$$escapeHtmlAttribute(itemData5.img['class']) + '"><img src="' + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData5.img.src)) + '"></span>' : '') + '<div class="list-main-content u-pull-left"><div class="list-text-primary">' + soy.$$escapeHtml(itemData5.content) + '</div>' + (itemData5.help ? '<div class="list-text-secondary">' + soy.$$escapeHtml(itemData5.help) + '</div>' : '') + '</div></li>';
+    }
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
+  };
+  if (goog.DEBUG) {
+    Templates.List.items.soyTemplateName = 'Templates.List.items';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.List.__deltemplate_s35_e3f298e9 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<ul id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-items">' + soy.$$escapeHtml(opt_data.elementContent) + '</ul>');
+  };
+  if (goog.DEBUG) {
+    Templates.List.__deltemplate_s35_e3f298e9.soyTemplateName = 'Templates.List.__deltemplate_s35_e3f298e9';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('List.items'), 'element', 0, Templates.List.__deltemplate_s35_e3f298e9);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.List.__deltemplate_s41_88d36183 = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('List'), 'element', true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.List.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.List.__deltemplate_s41_88d36183.soyTemplateName = 'Templates.List.__deltemplate_s41_88d36183';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('List'), '', 0, Templates.List.__deltemplate_s41_88d36183);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.List.__deltemplate_s47_4ac84340 = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="list component' + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? ' ' + opt_data.elementClasses : '') + '">' + soy.$$escapeHtml(opt_data.elementContent) + '</div>');
+  };
+  if (goog.DEBUG) {
+    Templates.List.__deltemplate_s47_4ac84340.soyTemplateName = 'Templates.List.__deltemplate_s47_4ac84340';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('List'), 'element', 0, Templates.List.__deltemplate_s47_4ac84340);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.List.__deltemplate_s55_605e1843 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('List.items'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.List.items(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.List.__deltemplate_s55_605e1843.soyTemplateName = 'Templates.List.__deltemplate_s55_605e1843';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('List.items'), '', 0, Templates.List.__deltemplate_s55_605e1843);
+
+  Templates.List.items.params = ['items'];
+  /* jshint ignore:end */
+}).call(this);
+(function () {
+	'use strict';
+
+	var Component = this.ui.Component;
+	var ComponentRegistry = this.ui.ComponentRegistry;
+
+	/**
+  * List component.
+  */
+
+	var List = (function (_Component) {
+		function List(opt_config) {
+			babelHelpers.classCallCheck(this, List);
+
+			babelHelpers.get(Object.getPrototypeOf(List.prototype), 'constructor', this).call(this, opt_config);
+		}
+
+		babelHelpers.inherits(List, _Component);
+		babelHelpers.createClass(List, [{
+			key: 'handleClick',
+
+			/**
+    * Handles click event on the list. The function fires an
+    * {@code itemSelected} event.
+    *
+    * @protected
+    * @param {Event} event The native click event
+    */
+			value: function handleClick(event) {
+				this.emit('itemSelected', event.delegateTarget);
+			}
+		}]);
+		return List;
+	})(Component);
+
+	/**
+  * Default list elementClasses.
+  * @default list
+  * @type {String}
+  * @static
+  */
+	List.ELEMENT_CLASSES = 'list';
+
+	/**
+  * List attributes definition.
+  * @type {Object}
+  * @static
+  */
+	List.ATTRS = {
+		/**
+   * The list items. Each is represented by an object that can have the following keys:
+   *   - content: The item's main content.
+   *   - help: (Optional) The item's help content.
+   *   - icons: (Optional) A list of icon css classes to render on the right side.
+   *   - img: (Optional) An object that specifies the image's src and, optionally, a css
+   *       class it should use.
+   * @type {!Array<!Object>}
+   * @default []
+   */
+		items: {
+			validator: Array.isArray,
+			valueFn: function valueFn() {
+				return [];
+			}
+		}
+	};
+
+	ComponentRegistry.register('List', List);
+
+	this.ui.List = List;
+}).call(this);
+(function () {
+	'use strict';
+
+	var AutoCompleteBase = this.ui.AutoCompleteBase;
+	var ComponentRegistry = this.ui.ComponentRegistry;
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var List = this.ui.List;
+	var position = this.ui.position;
+
+	/*
+  * AutoComplete component.
+  */
+
+	var AutoComplete = (function (_AutoCompleteBase) {
+		/**
+   * @inheritDoc
+   */
+
+		function AutoComplete(opt_config) {
+			babelHelpers.classCallCheck(this, AutoComplete);
+
+			babelHelpers.get(Object.getPrototypeOf(AutoComplete.prototype), 'constructor', this).call(this, opt_config);
+		}
+
+		babelHelpers.inherits(AutoComplete, _AutoCompleteBase);
+		babelHelpers.createClass(AutoComplete, [{
+			key: 'attached',
+
+			/**
+    * @inheritDoc
+    */
+			value: function attached() {
+				babelHelpers.get(Object.getPrototypeOf(AutoComplete.prototype), 'attached', this).call(this);
+
+				this.on('result', this.onDataResult_.bind(this));
+				this.list_.on('itemSelected', this.onItemSelected_.bind(this));
+			}
+		}, {
+			key: 'created',
+
+			/**
+    * @inheritDoc
+    */
+			value: function created() {
+				this.DEFAULT_ELEMENT_PARENT = this.inputElement.parentNode;
+			}
+		}, {
+			key: 'detached',
+
+			/**
+    * @inheritDoc
+    */
+			value: function detached() {
+				babelHelpers.get(Object.getPrototypeOf(AutoComplete.prototype), 'detached', this).call(this);
+
+				this.list_.dispose();
+
+				this.disposeDocumentClickEvents_();
+			}
+		}, {
+			key: 'renderInternal',
+
+			/**
+    * @inheritDoc
+    */
+			value: function renderInternal() {
+				var inputElementRegion = position.getRegion(this.inputElement);
+				this.element.style.top = inputElementRegion.bottom + 'px';
+				this.element.style.width = inputElementRegion.width + 'px';
+
+				this.list_ = new List().render(this.element);
+			}
+		}, {
+			key: 'attachDocumentClickEvents_',
+
+			/**
+    * Attaches click events to the list and to the document.
+    *
+    * @protected
+    */
+			value: function attachDocumentClickEvents_() {
+				this.documentClickHandler_ = dom.on(document, 'click', this.onDocumentClick_.bind(this));
+				this.listClickHandler_ = dom.on(this.list_.element, 'click', this.onListClick_.bind(this));
+			}
+		}, {
+			key: 'disposeDocumentClickEvents_',
+
+			/**
+    * Disposes the attached click events to the list and to the document.
+    *
+    * @protected
+    */
+			value: function disposeDocumentClickEvents_() {
+				if (this.documentClickHandler_) {
+					this.documentClickHandler_.dispose();
+					this.documentClickHandler_ = null;
+				}
+
+				if (this.listClickHandler_) {
+					this.listClickHandler_.dispose();
+					this.listClickHandler_ = null;
+				}
+			}
+		}, {
+			key: 'onDataResult_',
+
+			/**
+    * Populates the UI with the data results and shows/hides the component.
+    *
+    * @protected
+    * @param {!Array} data The loaded results from the user's query with
+    * which the UI should be populated
+    */
+			value: function onDataResult_(data) {
+				if (data && data.length > 0) {
+					this.list_.items = data;
+
+					this.visible = true;
+				} else {
+					this.visible = false;
+				}
+			}
+		}, {
+			key: 'onDocumentClick_',
+
+			/**
+    * Handles clicking on document. If the dropdown is visible, hides it.
+    *
+    * @protected
+    */
+			value: function onDocumentClick_() {
+				this.visible = false;
+			}
+		}, {
+			key: 'onItemSelected_',
+
+			/**
+    * Emits a `select` event with the information about the selected item
+    * and hides the UI.
+    *
+    * @param {!DOMElement} item The selected item from the UI
+    */
+			value: function onItemSelected_(item) {
+				var itemIndex = parseInt(item.getAttribute('data-index'), 10);
+
+				this.emit('select', this.list_.items[itemIndex].text);
+
+				this.visible = false;
+			}
+		}, {
+			key: 'onListClick_',
+
+			/**
+    * Handles clicking on the list. The function stops the event propagation.
+    *
+    * @protected
+    * @param {!Event} event The native click event
+    */
+			value: function onListClick_(event) {
+				event.stopPropagation();
+			}
+		}, {
+			key: 'syncVisible',
+
+			/**
+    * Synchronizes the visibility of the component.
+    *
+    * @protected
+    * @param {boolean} visible If true, shows the component, hides it otherwise
+    */
+			value: function syncVisible(visible) {
+				// Handles the change of visible property. The function
+				// attaches click listeners to document and the list and stops
+				// the event when user clicks on the list. In this case,
+				// if the event propagates to the document, this means user clicked
+				// outside of the list.
+				// TODO: Re-evaluate this approach
+
+				if (visible) {
+					this.element.style.display = null;
+
+					this.attachDocumentClickEvents_();
+				} else {
+					this.element.style.display = 'none';
+
+					this.disposeDocumentClickEvents_();
+				}
+			}
+		}]);
+		return AutoComplete;
+	})(AutoCompleteBase);
+
+	/**
+  * Provides a list of classes which have to be applied to the element's DOM element.
+  *
+  * @type {string}
+  * @static
+  * @default 'autocomplete autocomplete-list'
+  */
+	AutoComplete.ELEMENT_CLASSES = 'autocomplete autocomplete-list';
+
+	/**
+  * AutoComplete attributes definition.
+  *
+  * @type {Object}
+  * @static
+  */
+	AutoComplete.ATTRS = {
+		/**
+   * Toggles the visibility of a component.
+   *
+   * @type {boolean}
+   * @default false
+   */
+		visible: {
+			validator: core.isBoolean,
+			value: false
+		}
+	};
+
+	ComponentRegistry.register('AutoComplete', AutoComplete);
+
+	this.ui.AutoComplete = AutoComplete;
+}).call(this);
+(function () {
+	'use strict';
+
+	var Features = {
+		dragDrop: function dragDrop() {
+			return typeof FileReader !== 'undefined' && 'draggable' in document.createElement('span');
+		},
+
+		ajaxUpload: function ajaxUpload() {
+			return !!window.FormData && 'upload' in new XMLHttpRequest();
+		}
+	};
+
+	this.ui.Features = Features;
+}).call(this);
+(function () {
+	'use strict';
+
+	var Component = this.ui.Component;
+	var ComponentRegistry = this.ui.ComponentRegistry;
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var EventHandler = this.ui.EventHandler;
+	var Features = this.ui.Features;
+
+	/*
+  * DragDropUpload component.
+  */
+
+	var DragDropUpload = (function (_Component) {
+		/**
+   * @inheritDoc
+   */
+
+		function DragDropUpload(opt_config) {
+			babelHelpers.classCallCheck(this, DragDropUpload);
+
+			babelHelpers.get(Object.getPrototypeOf(DragDropUpload.prototype), 'constructor', this).call(this, opt_config);
+		}
+
+		babelHelpers.inherits(DragDropUpload, _Component);
+		babelHelpers.createClass(DragDropUpload, [{
+			key: 'attached',
+
+			/**
+    * @inheritDoc
+    */
+			value: function attached() {
+				if (this.isCompatible_) {
+					this.eventHandler_ = new EventHandler();
+					this.eventHandler_.add(this.on('dragenter', this.onDragEnter_, this), this.on('dragleave', this.onDragLeave_, this), this.on('dragover', this.preventEvent_, this), this.on('drop', this.onDrop_, this));
+				}
+			}
+		}, {
+			key: 'created',
+
+			/**
+    * @inheritDoc
+    */
+			value: function created() {
+				this.isCompatible_ = Features.dragDrop() && Features.ajaxUpload();
+			}
+		}, {
+			key: 'detached',
+
+			/**
+    * @inheritDoc
+    */
+			value: function detached() {
+				if (this.isCompatible_) {
+					this.eventHandler_.removeAllListeners();
+				}
+			}
+		}, {
+			key: 'onDragEnter_',
+
+			/**
+    * Adds a class, specified in `hoverClass` attribute, to the main element.
+    *
+    * @protected
+    * @param {!Event} event Drag enter event
+    */
+			value: function onDragEnter_(event) {
+				this.preventEvent_(event);
+
+				if (this.hoverClass) {
+					dom.addClasses(this.element, this.hoverClass);
+				}
+			}
+		}, {
+			key: 'onDragLeave_',
+
+			/**
+    * Removes a class, specified in `hoverClass` attribute, from the main element.
+    *
+    * @protected
+    * @param {!Event} event Drag leave event
+    */
+			value: function onDragLeave_(event) {
+				this.preventEvent_(event);
+
+				if (this.hoverClass && dom.hasClass(event.target, this.hoverClass)) {
+					dom.removeClasses(this.element, this.hoverClass);
+				}
+			}
+		}, {
+			key: 'onDrop_',
+
+			/**
+    * Handles dropping files in the main area.
+    *
+    * @protected
+    * @param {!Event} event Drop event
+    */
+			value: function onDrop_(event) {
+				this.preventEvent_(event);
+				this.uploadFiles_(event.dataTransfer.files);
+			}
+		}, {
+			key: 'preventEvent_',
+
+			/**
+    * Prevents a native event.
+    *
+    * @protected
+    * @param {!Event} event The event to be prevented
+    */
+			value: function preventEvent_(event) {
+				event.preventDefault();
+				event.stopImmediatePropagation();
+			}
+		}, {
+			key: 'uploadFiles_',
+
+			/**
+    * Uploads files to the provided URL from the `uploadURL` attribute.
+    *
+    * @param {!Array.<File>} files List of files to be uploaded to server
+    */
+			value: function uploadFiles_(files) {
+				var formData = new FormData();
+
+				for (var i = 0; i < files.length; i++) {
+					formData.append('file', files[i]);
+				}
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', this.uploadURL);
+
+				xhr.onerror = (function () {
+					this.emit('uploadFailed');
+				}).bind(this);
+
+				xhr.onload = (function () {
+					this.emit('uploadFinished');
+				}).bind(this);
+
+				xhr.upload.onprogress = (function (event) {
+					if (event.lengthComputable) {
+						this.emit('uploadProgress', event.loaded / event.total * 100 | 0);
+					}
+				}).bind(this);
+
+				xhr.send(formData);
+
+				this.emit('uploadStart', xhr);
+			}
+		}]);
+		return DragDropUpload;
+	})(Component);
+
+	/**
+  * DragDropUpload attributes definition.
+  * @type {Object}
+  * @static
+  */
+	DragDropUpload.ATTRS = {
+		/**
+   * The class which have to be added on the bounding box when user hovers on it.
+   *
+   * @type {string}
+   * @default dragdrop-hover
+   */
+		hoverClass: {
+			validator: function validator(value) {
+				return core.isString(value) || core.isNull(value);
+			},
+			value: 'dragdrop-hover'
+		},
+
+		/**
+   * The URL where the files should be uploaded.
+   *
+   * @type {string}
+   */
+		uploadURL: {
+			validator: core.isString
+		}
+	};
+
+	ComponentRegistry.register('DragDropUpload', DragDropUpload);
+
+	this.ui.DragDropUpload = DragDropUpload;
+}).call(this);
+(function () {
+  /* jshint ignore:start */
+  'use strict';
+
+  var ComponentRegistry = this.ui.ComponentRegistry;
+
+  var Templates = ComponentRegistry.Templates;
+  // This file was automatically generated from Modal.soy.
+  // Please don't edit this file by hand.
+
+  /**
+   * @fileoverview Templates in namespace Templates.Modal.
+   * @hassoydeltemplate {Modal}
+   * @hassoydeltemplate {Modal.body}
+   * @hassoydeltemplate {Modal.footer}
+   * @hassoydeltemplate {Modal.header}
+   * @hassoydelcall {Modal}
+   * @hassoydelcall {Modal.body}
+   * @hassoydelcall {Modal.footer}
+   * @hassoydelcall {Modal.header}
+   */
+
+  if (typeof Templates.Modal == 'undefined') {
+    Templates.Modal = {};
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.content = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('Modal.header'), '', true)(opt_data, null, opt_ijData) + soy.$$getDelegateFn(soy.$$getDelTemplateId('Modal.body'), '', true)(opt_data, null, opt_ijData) + soy.$$getDelegateFn(soy.$$getDelTemplateId('Modal.footer'), '', true)(opt_data, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.content.soyTemplateName = 'Templates.Modal.content';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.body = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(opt_data.body ? soy.$$escapeHtml(opt_data.body) : '');
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.body.soyTemplateName = 'Templates.Modal.body';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.footer = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(opt_data.footer ? soy.$$escapeHtml(opt_data.footer) : '');
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.footer.soyTemplateName = 'Templates.Modal.footer';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.header = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(opt_data.header ? '<a class="modal-close icon-12-close-long" data-onclick="hide"></a>' + soy.$$escapeHtml(opt_data.header) : '');
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.header.soyTemplateName = 'Templates.Modal.header';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.__deltemplate_s78_65c2d4d4 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<section id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-body">' + soy.$$escapeHtml(opt_data.elementContent) + '</section>');
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.__deltemplate_s78_65c2d4d4.soyTemplateName = 'Templates.Modal.__deltemplate_s78_65c2d4d4';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Modal.body'), 'element', 0, Templates.Modal.__deltemplate_s78_65c2d4d4);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.__deltemplate_s84_c9897a65 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<footer id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-footer">' + soy.$$escapeHtml(opt_data.elementContent) + '</footer>');
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.__deltemplate_s84_c9897a65.soyTemplateName = 'Templates.Modal.__deltemplate_s84_c9897a65';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Modal.footer'), 'element', 0, Templates.Modal.__deltemplate_s84_c9897a65);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.__deltemplate_s90_499dc9aa = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<header id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-header">' + soy.$$escapeHtml(opt_data.elementContent) + '</header>');
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.__deltemplate_s90_499dc9aa.soyTemplateName = 'Templates.Modal.__deltemplate_s90_499dc9aa';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Modal.header'), 'element', 0, Templates.Modal.__deltemplate_s90_499dc9aa);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.__deltemplate_s96_45b138fb = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('Modal'), 'element', true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.Modal.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.__deltemplate_s96_45b138fb.soyTemplateName = 'Templates.Modal.__deltemplate_s96_45b138fb';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Modal'), '', 0, Templates.Modal.__deltemplate_s96_45b138fb);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.__deltemplate_s102_df8ef55a = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="modal component' + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? ' ' + opt_data.elementClasses : '') + '">' + soy.$$escapeHtml(opt_data.elementContent) + '</div>');
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.__deltemplate_s102_df8ef55a.soyTemplateName = 'Templates.Modal.__deltemplate_s102_df8ef55a';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Modal'), 'element', 0, Templates.Modal.__deltemplate_s102_df8ef55a);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.__deltemplate_s110_90747620 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('Modal.body'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.Modal.body(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.__deltemplate_s110_90747620.soyTemplateName = 'Templates.Modal.__deltemplate_s110_90747620';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Modal.body'), '', 0, Templates.Modal.__deltemplate_s110_90747620);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.__deltemplate_s115_231e36e7 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('Modal.footer'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.Modal.footer(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.__deltemplate_s115_231e36e7.soyTemplateName = 'Templates.Modal.__deltemplate_s115_231e36e7';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Modal.footer'), '', 0, Templates.Modal.__deltemplate_s115_231e36e7);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Modal.__deltemplate_s120_b8354b7d = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('Modal.header'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.Modal.header(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.Modal.__deltemplate_s120_b8354b7d.soyTemplateName = 'Templates.Modal.__deltemplate_s120_b8354b7d';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Modal.header'), '', 0, Templates.Modal.__deltemplate_s120_b8354b7d);
+
+  Templates.Modal.body.params = ['body'];
+  Templates.Modal.footer.params = ['footer'];
+  Templates.Modal.header.params = ['header'];
+  /* jshint ignore:end */
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var Component = this.ui.Component;
+	var ComponentRegistry = this.ui.ComponentRegistry;
+
+	/**
+  * Modal component.
+  */
+
+	var Modal = (function (_Component) {
+		/**
+   * @inheritDoc
+   */
+
+		function Modal(opt_config) {
+			babelHelpers.classCallCheck(this, Modal);
+
+			babelHelpers.get(Object.getPrototypeOf(Modal.prototype), 'constructor', this).call(this, opt_config);
+		}
+
+		babelHelpers.inherits(Modal, _Component);
+		babelHelpers.createClass(Modal, [{
+			key: 'disposeInternal',
+
+			/**
+    * @inheritDoc
+    */
+			value: function disposeInternal() {
+				dom.exitDocument(this.overlayElement);
+				babelHelpers.get(Object.getPrototypeOf(Modal.prototype), 'disposeInternal', this).call(this);
+			}
+		}, {
+			key: 'syncOverlay',
+
+			/**
+    * @inheritDoc
+    */
+			value: function syncOverlay(overlay) {
+				dom[overlay && this.visible ? 'enterDocument' : 'exitDocument'](this.overlayElement);
+			}
+		}, {
+			key: 'syncVisible',
+
+			/**
+    * @inheritDoc
+    */
+			value: function syncVisible(visible) {
+				babelHelpers.get(Object.getPrototypeOf(Modal.prototype), 'syncVisible', this).call(this, visible);
+				this.syncOverlay(this.overlay);
+			}
+		}, {
+			key: 'valueOverlayElementFn_',
+
+			/**
+    * @inheritDoc
+    */
+			value: function valueOverlayElementFn_() {
+				return dom.buildFragment('<div class="overlay"></div>').firstChild;
+			}
+		}]);
+		return Modal;
+	})(Component);
+
+	/**
+  * Default modal elementClasses.
+  * @default modal
+  * @type {String}
+  * @static
+  */
+	Modal.ELEMENT_CLASSES = 'modal';
+
+	Modal.ATTRS = {
+		/**
+   * Content to be placed inside modal body.
+   * @type {String|SanitizedHtml}
+   */
+		body: {},
+
+		/**
+   * Modal default elementClasses attribute.
+   * @default centered
+   * @type {String}
+   */
+		elementClasses: {
+			value: 'centered'
+		},
+
+		/**
+   * Content to be placed inside modal footer.
+   * @type {String|SanitizedHtml}
+   */
+		footer: {},
+
+		/**
+   * Content to be placed inside modal header.
+   * @type {String|SanitizedHtml}
+   */
+		header: {},
+
+		/**
+   * Whether overlay should be visible when modal is visible.
+   * @type {boolean}
+   * @default true
+   */
+		overlay: {
+			validator: core.isBoolean,
+			value: true
+		},
+
+		/**
+   * Element to be used as overlay.
+   * @type {Element}
+   */
+		overlayElement: {
+			initOnly: true,
+			valueFn: 'valueOverlayElementFn_'
+		}
+	};
+
+	ComponentRegistry.register('Modal', Modal);
+
+	this.ui.Modal = Modal;
+}).call(this);
+(function () {
+	'use strict';
+
+	var domPosition = this.ui.position;
+
+	/**
+  * Position utility. Computes region or best region to align an element with
+  * another. Regions are relative to viewport, make sure to use element with
+  * position fixed, or position absolute when the element first positioned
+  * parent is the body element.
+  */
+
+	var Position = (function () {
+		function Position() {
+			babelHelpers.classCallCheck(this, Position);
+		}
+
+		babelHelpers.createClass(Position, null, [{
+			key: 'align',
+
+			/**
+    * Aligns the element with the best region around alignElement. The best
+    * region is defined by clockwise rotation starting from the specified
+    * `position`. The element is always aligned in the middle of alignElement
+    * axis.
+    * @param {!Element} element Element to be aligned.
+    * @param {!Element} alignElement Element to align with.
+    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} pos
+    *     The initial position to try. Options `Position.Top`, `Position.Right`,
+    *     `Position.Bottom`, `Position.Left`.
+    * @static
+    */
+			value: function align(element, alignElement, position) {
+				var bestRegion = this.getAlignBestRegion(element, alignElement, position);
+
+				var computedStyle = window.getComputedStyle(element, null);
+				if (computedStyle.getPropertyValue('position') !== 'fixed') {
+					var docEl = window.document.documentElement;
+					bestRegion.top += docEl.clientTop + window.pageYOffset;
+					bestRegion.left += docEl.clientLeft + window.pageXOffset;
+				}
+
+				element.style.top = bestRegion.top + 'px';
+				element.style.left = bestRegion.left + 'px';
+			}
+		}, {
+			key: 'getAlignBestRegion',
+
+			/**
+    * Returns the best region to align element with alignElement. The best
+    * region is defined by clockwise rotation starting from the specified
+    * `position`. The element is always aligned in the middle of alignElement
+    * axis.
+    * @param {!Element} element Element to be aligned.
+    * @param {!Element} alignElement Element to align with.
+    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} pos
+    *     The initial position to try. Options `Position.Top`, `Position.Right`,
+    *     `Position.Bottom`, `Position.Left`.
+    * @return {DOMRect} Best region to align element.
+    * @static
+    */
+			value: function getAlignBestRegion(element, alignElement, position) {
+				var bestArea = 0;
+				var bestPosition = position;
+				var bestRegion = this.getAlignRegion(element, alignElement, bestPosition);
+				var tryPosition = bestPosition;
+				var tryRegion = bestRegion;
+				var viewportRegion = domPosition.getRegion(window);
+
+				for (var i = 0; i < 4;) {
+					if (domPosition.intersectRegion(viewportRegion, tryRegion)) {
+						var visibleRegion = domPosition.intersection(viewportRegion, tryRegion);
+						var area = visibleRegion.width * visibleRegion.height;
+						if (area > bestArea) {
+							bestArea = area;
+							bestRegion = tryRegion;
+							bestPosition = tryPosition;
+						}
+						if (domPosition.insideViewport(tryRegion)) {
+							break;
+						}
+					}
+					tryPosition = (position + ++i) % 4;
+					tryRegion = this.getAlignRegion(element, alignElement, tryPosition);
+				}
+
+				return bestRegion;
+			}
+		}, {
+			key: 'getAlignRegion',
+
+			/**
+    * Returns the region to align element with alignElement. The element is
+    * always aligned in the middle of alignElement axis.
+    * @param {!Element} element Element to be aligned.
+    * @param {!Element} alignElement Element to align with.
+    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} pos
+    *     The position to align. Options `Position.Top`, `Position.Right`,
+    *     `Position.Bottom`, `Position.Left`.
+    * @return {DOMRect} Region to align element.
+    * @static
+    */
+			value: function getAlignRegion(element, alignElement, position) {
+				var r1 = domPosition.getRegion(alignElement);
+				var r2 = domPosition.getRegion(element);
+				var top = 0;
+				var left = 0;
+
+				switch (position) {
+					case Position.Top:
+						top = r1.top - r2.height;
+						left = r1.left + r1.width / 2 - r2.width / 2;
+						break;
+					case Position.Right:
+						top = r1.top + r1.height / 2 - r2.height / 2;
+						left = r1.left + r1.width;
+						break;
+					case Position.Bottom:
+						top = r1.bottom;
+						left = r1.left + r1.width / 2 - r2.width / 2;
+						break;
+					case Position.Left:
+						top = r1.top + r1.height / 2 - r2.height / 2;
+						left = r1.left - r2.width;
+						break;
+				}
+
+				return {
+					bottom: top + r2.height,
+					height: r2.height,
+					left: left,
+					right: left + r2.width,
+					top: top,
+					width: r2.width
+				};
+			}
+		}, {
+			key: 'isValidPosition',
+
+			/**
+    * Checks if specified value is a valid position. Options `Position.Top`,
+    *     `Position.Right`, `Position.Bottom`, `Position.Left`.
+    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} val
+    * @return {Boolean} Returns true if value is a valid position.
+    * @static
+    */
+			value: function isValidPosition(val) {
+				return 0 <= val && val <= 3;
+			}
+		}]);
+		return Position;
+	})();
+
+	/**
+  * Represents the `Position.Top` constant.
+  * @type {Number}
+  * @default 0
+  * @static
+  */
+	Position.Top = 0;
+
+	/**
+  * Represents the `Position.Right` constant.
+  * @type {Number}
+  * @default 1
+  * @static
+  */
+	Position.Right = 1;
+
+	/**
+  * Represents the `Position.Bottom` constant.
+  * @type {Number}
+  * @default 2
+  * @static
+  */
+	Position.Bottom = 2;
+
+	/**
+  * Represents the `Position.Left` constant.
+  * @type {Number}
+  * @default 3
+  * @static
+  */
+	Position.Left = 3;
+
+	this.ui.Position = Position;
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var domPosition = this.ui.position;
+	var Attribute = this.ui.Attribute;
+
+	/**
+  * Scrollspy utility.
+  */
+
+	var Scrollspy = (function (_Attribute) {
+		/**
+   * @inheritDoc
+   */
+
+		function Scrollspy(opt_config) {
+			babelHelpers.classCallCheck(this, Scrollspy);
+
+			babelHelpers.get(Object.getPrototypeOf(Scrollspy.prototype), 'constructor', this).call(this, opt_config);
+
+			/**
+    * Holds the active index.
+    * @type {Number}
+    * @private
+    * @default -1
+    */
+			this.activeIndex = -1;
+
+			/**
+    * Holds the regions cache.
+    * @type {Object}
+    * @private
+    * @default []
+    */
+			this.regions = [];
+
+			/**
+    * Holds event handle that listens scroll shared event emitter proxy.
+    * @type {EventHandle}
+    * @protected
+    */
+			this.scrollHandle_ = dom.on(this.scrollElement, 'scroll', this.checkPosition.bind(this));
+
+			this.refresh();
+			this.checkPosition();
+			this.on('elementChanged', this.refresh);
+			this.on('offsetChanged', this.refresh);
+			this.on('scrollElementChanged', this.refresh);
+			this.on('selectorChanged', this.refresh);
+		}
+
+		babelHelpers.inherits(Scrollspy, _Attribute);
+		babelHelpers.createClass(Scrollspy, [{
+			key: 'disposeInternal',
+
+			/**
+    * @inheritDoc
+    */
+			value: function disposeInternal() {
+				this.deactivateAll();
+				this.scrollHandle_.dispose();
+				babelHelpers.get(Object.getPrototypeOf(Scrollspy.prototype), 'disposeInternal', this).call(this);
+			}
+		}, {
+			key: 'activate',
+
+			/**
+    * Activates index matching element.
+    * @param {Number} index
+    */
+			value: function activate(index) {
+				if (this.activeIndex >= 0) {
+					this.deactivate(this.activeIndex);
+				}
+				this.activeIndex = index;
+				dom.addClasses(this.resolveElement(this.regions[index].link), this.activeClass);
+			}
+		}, {
+			key: 'checkPosition',
+
+			/**
+    * Checks position of elements and activate the one in region.
+    */
+			value: function checkPosition() {
+				var scrollHeight = this.getScrollHeight_();
+				var scrollTop = domPosition.getScrollTop(this.scrollElement);
+
+				if (this.activeIndex >= 0 && scrollTop < this.offset) {
+					this.deactivateAll();
+					return;
+				}
+
+				if (scrollHeight !== this.scrollHeight_) {
+					this.refresh();
+					return;
+				}
+
+				if (scrollHeight < scrollTop + this.offset) {
+					this.activate(this.regions.length - 1);
+					return;
+				}
+
+				var index = this.findBestRegionAt_(scrollTop);
+				if (index >= 0 && index !== this.activeIndex) {
+					this.activate(index);
+				}
+			}
+		}, {
+			key: 'deactivate',
+
+			/**
+    * Deactivates index matching element.
+    * @param {Number} index
+    */
+			value: function deactivate(index) {
+				dom.removeClasses(this.resolveElement(this.regions[index].link), this.activeClass);
+			}
+		}, {
+			key: 'deactivateAll',
+
+			/**
+    * Deactivates all elements.
+    */
+			value: function deactivateAll() {
+				for (var i = 0; i < this.regions.length; i++) {
+					this.deactivate(i);
+				}
+				this.activeIndex = -1;
+			}
+		}, {
+			key: 'findBestRegionAt_',
+
+			/**
+    * Finds best region to activate.
+    * @param {number} scrollTop The scrollTop to use as reference.
+    * @return {number} The index of best region found.
+    */
+			value: function findBestRegionAt_(scrollTop) {
+				var index = -1;
+				var origin = scrollTop + this.offset + this.scrollElementRegion_.top;
+				for (var i = 0; i < this.regions.length; i++) {
+					var region = this.regions[i];
+					if (origin >= region.top && origin < region.bottom) {
+						index = i;
+						break;
+					}
+				}
+				return index;
+			}
+		}, {
+			key: 'getScrollHeight_',
+
+			/**
+    * Gets the scroll height of `scrollElement`.
+    * @return {Number}
+    */
+			value: function getScrollHeight_() {
+				var scrollHeight = domPosition.getHeight(this.scrollElement);
+				scrollHeight += this.scrollElementRegion_.top;
+				scrollHeight -= domPosition.getClientHeight(this.scrollElement);
+				return scrollHeight;
+			}
+		}, {
+			key: 'refresh',
+
+			/**
+    * Refreshes all regions from document. Relevant when spying elements that
+    * nodes can be added and removed.
+    */
+			value: function refresh() {
+				this.deactivateAll();
+
+				this.scrollElementRegion_ = domPosition.getRegion(this.scrollElement);
+				this.scrollHeight_ = this.getScrollHeight_();
+
+				this.regions = [];
+				var links = this.element.querySelectorAll(this.selector);
+				var scrollTop = domPosition.getScrollTop(this.scrollElement);
+				for (var i = 0; i < links.length; ++i) {
+					var link = links[i];
+					if (link.hash && link.hash.length > 1) {
+						var element = document.getElementById(link.hash.substring(1));
+						if (element) {
+							var region = domPosition.getRegion(element);
+							this.regions.push({
+								link: link,
+								top: region.top + scrollTop,
+								bottom: region.bottom + scrollTop
+							});
+						}
+					}
+				}
+				this.sortRegions_();
+			}
+		}, {
+			key: 'sortRegions_',
+
+			/**
+    * Sorts regions from lower to higher on y-axis.
+    * @protected
+    */
+			value: function sortRegions_() {
+				this.regions.sort(function (a, b) {
+					return a.top - b.top;
+				});
+			}
+		}]);
+		return Scrollspy;
+	})(Attribute);
+
+	Scrollspy.ATTRS = {
+		/**
+   * Class to be used as active class.
+   * @attribute activeClass
+   * @type {string}
+   */
+		activeClass: {
+			validator: core.isString,
+			value: 'active'
+		},
+
+		/**
+   * Function that receives the matching element as argument and return
+   * itself. Relevant when the `activeClass` must be applied to a different
+   * element, e.g. a parentNode.
+   * @type {function}
+   * @default core.identityFunction
+   */
+		resolveElement: {
+			validator: core.isFunction,
+			value: core.identityFunction
+		},
+
+		/**
+   * The scrollElement element to be used as scrollElement area for affix. The scrollElement is
+   * where the scroll event is listened from.
+   * @type {Element|Window}
+   */
+		scrollElement: {
+			setter: dom.toElement,
+			value: document
+		},
+
+		/**
+   * Defines the offset that triggers scrollspy.
+   * @type {Number}
+   * @default 0
+   */
+		offset: {
+			validator: core.isNumber,
+			value: 0
+		},
+
+		/**
+   * Element to be used as alignment reference of affix.
+   * @type {Element}
+   */
+		element: {
+			setter: dom.toElement
+		},
+
+		/**
+   * Selector to query elements inside `element` to be activated.
+   * @type {Element}
+   * @default 'a'
+   */
+		selector: {
+			validator: core.isString,
+			value: 'a'
+		}
+	};
+
+	this.ui.Scrollspy = Scrollspy;
+}).call(this);
+(function () {
+  /* jshint ignore:start */
+  'use strict';
+
+  var ComponentRegistry = this.ui.ComponentRegistry;
+
+  var Templates = ComponentRegistry.Templates;
+  // This file was automatically generated from Tooltip.soy.
+  // Please don't edit this file by hand.
+
+  /**
+   * @fileoverview Templates in namespace Templates.Tooltip.
+   * @hassoydeltemplate {Tooltip}
+   * @hassoydelcall {Tooltip}
+   */
+
+  if (typeof Templates.Tooltip == 'undefined') {
+    Templates.Tooltip = {};
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Tooltip.content = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$escapeHtml(opt_data.content));
+  };
+  if (goog.DEBUG) {
+    Templates.Tooltip.content.soyTemplateName = 'Templates.Tooltip.content';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Tooltip.__deltemplate_s128_8d49094e = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('Tooltip'), 'element', true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.Tooltip.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.Tooltip.__deltemplate_s128_8d49094e.soyTemplateName = 'Templates.Tooltip.__deltemplate_s128_8d49094e';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Tooltip'), '', 0, Templates.Tooltip.__deltemplate_s128_8d49094e);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Tooltip.__deltemplate_s134_71828d2a = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="tooltip component' + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? ' ' + opt_data.elementClasses : '') + '">' + soy.$$escapeHtml(opt_data.elementContent) + '</div>');
+  };
+  if (goog.DEBUG) {
+    Templates.Tooltip.__deltemplate_s134_71828d2a.soyTemplateName = 'Templates.Tooltip.__deltemplate_s134_71828d2a';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Tooltip'), 'element', 0, Templates.Tooltip.__deltemplate_s134_71828d2a);
+
+  Templates.Tooltip.content.params = ['content'];
+  /* jshint ignore:end */
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var Component = this.ui.Component;
+	var EventHandler = this.ui.EventHandler;
+	var Position = this.ui.Position;
+	var ComponentRegistry = this.ui.ComponentRegistry;
+
+	/**
+  * Tooltip component.
+  */
+
+	var Tooltip = (function (_Component) {
+		/**
+   * @inheritDoc
+   */
+
+		function Tooltip(opt_config) {
+			babelHelpers.classCallCheck(this, Tooltip);
+
+			babelHelpers.get(Object.getPrototypeOf(Tooltip.prototype), 'constructor', this).call(this, opt_config);
+
+			this.eventsHandler_ = new EventHandler();
+		}
+
+		babelHelpers.inherits(Tooltip, _Component);
+		babelHelpers.createClass(Tooltip, [{
+			key: 'attached',
+
+			/**
+    * @inheritDoc
+    */
+			value: function attached() {
+				this.align();
+				this.syncEvents(this.events);
+			}
+		}, {
+			key: 'detached',
+
+			/**
+    * @inheritDoc
+    */
+			value: function detached() {
+				this.eventsHandler_.removeAllListeners();
+			}
+		}, {
+			key: 'align',
+
+			/**
+    * Aligns the tooltip with the best region around alignElement. The best
+    * region is defined by clockwise rotation starting from the specified
+    * `position`. The element is always aligned in the middle of alignElement
+    * axis.
+    * @param {Element=} opt_alignElement Optional element to align with.
+    */
+			value: function align(opt_alignElement) {
+				this.syncAlignElement(opt_alignElement || this.alignElement);
+			}
+		}, {
+			key: 'callAsync_',
+
+			/**
+    * @param {Function} fn
+    * @param {number} delay
+    * @private
+    */
+			value: function callAsync_(fn, delay) {
+				clearTimeout(this.delay_);
+				this.delay_ = setTimeout(fn.bind(this), delay);
+			}
+		}, {
+			key: 'handleHide',
+
+			/**
+    * Handles hide event triggered by `events`.
+    * @param {Event} event
+    * @protected
+    */
+			value: function handleHide(event) {
+				var interactingWithDifferentTarget = event.delegateTarget && event.delegateTarget !== this.alignElement;
+				this.callAsync_(function () {
+					if (this.locked_) {
+						return;
+					}
+					if (interactingWithDifferentTarget) {
+						this.alignElement = event.delegateTarget;
+					} else {
+						this.visible = false;
+					}
+				}, this.delay[1]);
+			}
+		}, {
+			key: 'handleShow',
+
+			/**
+    * Handles show event triggered by `events`.
+    * @param {Event} event
+    * @protected
+    */
+			value: function handleShow(event) {
+				this.callAsync_(function () {
+					this.alignElement = event.delegateTarget;
+					this.visible = true;
+				}, this.delay[0]);
+			}
+		}, {
+			key: 'handleToggle',
+
+			/**
+    * Handles toggle event triggered by `events`.
+    * @param {Event} event
+    * @protected
+    */
+			value: function handleToggle(event) {
+				this.visible ? this.handleHide(event) : this.handleShow(event);
+			}
+		}, {
+			key: 'lock',
+
+			/**
+    * Locks tooltip visibility.
+    * @param {Event} event
+    */
+			value: function lock() {
+				this.locked_ = true;
+			}
+		}, {
+			key: 'unlock',
+
+			/**
+    * Unlocks tooltip visibility.
+    * @param {Event} event
+    */
+			value: function unlock(event) {
+				this.locked_ = false;
+				this.handleHide(event);
+			}
+		}, {
+			key: 'syncAlignElement',
+
+			/**
+    * @inheritDoc
+    */
+			value: function syncAlignElement(alignElement) {
+				if (this.inDocument && alignElement) {
+					Tooltip.Position.align(this.element, alignElement, this.position);
+				}
+			}
+		}, {
+			key: 'syncContent',
+
+			/**
+    * @inheritDoc
+    */
+			value: function syncContent(content) {
+				if (this.inDocument) {
+					dom.removeChildren(this.element);
+					dom.append(this.element, content);
+				}
+			}
+		}, {
+			key: 'syncSelector',
+
+			/**
+    * @inheritDoc
+    */
+			value: function syncSelector() {
+				this.syncEvents(this.events);
+			}
+		}, {
+			key: 'syncEvents',
+
+			/**
+    * @inheritDoc
+    */
+			value: function syncEvents(events) {
+				if (!this.inDocument) {
+					return;
+				}
+				this.eventsHandler_.removeAllListeners();
+				var selector = this.selector;
+				if (!selector) {
+					return;
+				}
+
+				this.eventsHandler_.add(this.on('mouseenter', this.lock), this.on('mouseleave', this.unlock));
+
+				if (events[0] === events[1]) {
+					this.eventsHandler_.add(dom.delegate(document, events[0], selector, this.handleToggle.bind(this)));
+				} else {
+					this.eventsHandler_.add(dom.delegate(document, events[0], selector, this.handleShow.bind(this)), dom.delegate(document, events[1], selector, this.handleHide.bind(this)));
+				}
+			}
+		}, {
+			key: 'syncVisible',
+
+			/**
+    * @inheritDoc
+    */
+			value: function syncVisible(visible) {
+				babelHelpers.get(Object.getPrototypeOf(Tooltip.prototype), 'syncVisible', this).call(this, visible);
+				this.align();
+			}
+		}]);
+		return Tooltip;
+	})(Component);
+
+	/**
+  * @inheritDoc
+  * @see `Position` class.
+  * @static
+  */
+	Tooltip.Position = Position;
+
+	/**
+  * Default tooltip elementClasses.
+  * @default tooltip
+  * @type {String}
+  * @static
+  */
+	Tooltip.ELEMENT_CLASSES = 'tooltip';
+
+	/**
+  * Tooltip attrbutes definition.
+  * @type {Object}
+  * @static
+  */
+	Tooltip.ATTRS = {
+		/**
+   * Element to align tooltip with.
+   * @type {Element}
+   */
+		alignElement: {
+			setter: dom.toElement
+		},
+
+		/**
+   * Delay showing and hiding the tooltip (ms).
+   * @type {!Array.<number>}
+   * @default [ 500, 250 ]
+   */
+		delay: {
+			validator: Array.isArray,
+			value: [500, 250]
+		},
+
+		/**
+   * Trigger events used to bind handlers to show and hide tooltip.
+   * @type {!Array.<string>}
+   * @default ['mouseenter', 'mouseleave']
+   */
+		events: {
+			validator: Array.isArray,
+			value: ['mouseenter', 'mouseleave']
+		},
+
+		/**
+   * If a selector is provided, tooltip objects will be delegated to the
+   * specified targets by setting the `alignElement`.
+   * @type {?string}
+   */
+		selector: {
+			validator: core.isString
+		},
+
+		/**
+   * Content to be placed inside tooltip.
+   * @type {String}
+   */
+		content: {
+			validator: core.isString
+		},
+
+		/**
+   * The position to try alignment. If not possible the best position will be
+   * found.
+   * @type {Position.Top|Position.Right|Position.Bottom|Position.Left}
+   * @default Position.Bottom
+   */
+		position: {
+			validator: Tooltip.Position.isValidPosition,
+			value: Tooltip.Position.Bottom
+		}
+	};
+
+	ComponentRegistry.register('Tooltip', Tooltip);
+
+	this.ui.Tooltip = Tooltip;
+}).call(this);
+(function () {
+  /* jshint ignore:start */
+  'use strict';
+
+  var ComponentRegistry = this.ui.ComponentRegistry;
+
+  var Templates = ComponentRegistry.Templates;
+  // This file was automatically generated from TooltipMenu.soy.
+  // Please don't edit this file by hand.
+
+  /**
+   * @fileoverview Templates in namespace Templates.TooltipMenu.
+   * @hassoydeltemplate {TooltipMenu}
+   * @hassoydeltemplate {TooltipMenu.items}
+   * @hassoydelcall {TooltipMenu}
+   * @hassoydelcall {TooltipMenu.items}
+   */
+
+  if (typeof Templates.TooltipMenu == 'undefined') {
+    Templates.TooltipMenu = {};
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TooltipMenu.content = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TooltipMenu.items'), '', true)(opt_data, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.TooltipMenu.content.soyTemplateName = 'Templates.TooltipMenu.content';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TooltipMenu.items = function (opt_data, opt_ignored, opt_ijData) {
+    var output = '';
+    var itemList146 = opt_data.content;
+    var itemListLen146 = itemList146.length;
+    for (var itemIndex146 = 0; itemIndex146 < itemListLen146; itemIndex146++) {
+      var itemData146 = itemList146[itemIndex146];
+      output += '<li class="tooltip-menu-item"><a class="tooltip-menu-link" href="' + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData146.href ? itemData146.href : '#')) + '">' + soy.$$escapeHtml(itemData146.content) + '</a></li>';
+    }
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
+  };
+  if (goog.DEBUG) {
+    Templates.TooltipMenu.items.soyTemplateName = 'Templates.TooltipMenu.items';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TooltipMenu.__deltemplate_s153_cfc546d2 = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<nav id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="tooltip-menu ' + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? opt_data.elementClasses : '') + '" data-component>' + soy.$$escapeHtml(opt_data.elementContent) + '</nav>');
+  };
+  if (goog.DEBUG) {
+    Templates.TooltipMenu.__deltemplate_s153_cfc546d2.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s153_cfc546d2';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu'), 'element', 0, Templates.TooltipMenu.__deltemplate_s153_cfc546d2);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TooltipMenu.__deltemplate_s161_c0ab3df3 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<ul id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-items" class="tooltip-menu-list">' + soy.$$escapeHtml(opt_data.elementContent) + '</ul>');
+  };
+  if (goog.DEBUG) {
+    Templates.TooltipMenu.__deltemplate_s161_c0ab3df3.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s161_c0ab3df3';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu.items'), 'element', 0, Templates.TooltipMenu.__deltemplate_s161_c0ab3df3);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TooltipMenu.__deltemplate_s167_8f8c631d = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TooltipMenu'), 'element', true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TooltipMenu.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.TooltipMenu.__deltemplate_s167_8f8c631d.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s167_8f8c631d';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu'), '', 0, Templates.TooltipMenu.__deltemplate_s167_8f8c631d);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TooltipMenu.__deltemplate_s173_8278e063 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TooltipMenu.items'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TooltipMenu.items(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.TooltipMenu.__deltemplate_s173_8278e063.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s173_8278e063';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu.items'), '', 0, Templates.TooltipMenu.__deltemplate_s173_8278e063);
+
+  Templates.TooltipMenu.items.params = ['content'];
+  /* jshint ignore:end */
+}).call(this);
+(function () {
+	'use strict';
+
+	var Tooltip = this.ui.Tooltip;
+	var ComponentRegistry = this.ui.ComponentRegistry;
+
+	/**
+  * TooltipMenu component.
+  */
+
+	var TooltipMenu = (function (_Tooltip) {
+		/**
+   * @inheritDoc
+   */
+
+		function TooltipMenu(opt_config) {
+			babelHelpers.classCallCheck(this, TooltipMenu);
+
+			babelHelpers.get(Object.getPrototypeOf(TooltipMenu.prototype), 'constructor', this).call(this, opt_config);
+		}
+
+		babelHelpers.inherits(TooltipMenu, _Tooltip);
+		babelHelpers.createClass(TooltipMenu, [{
+			key: 'syncContent',
+
+			/**
+    * @inheritDoc
+    */
+			value: function syncContent() {}
+		}]);
+		return TooltipMenu;
+	})(Tooltip);
+
+	/**
+  * Default tooltip elementClasses.
+  * @default tooltip
+  * @type {String}
+  * @static
+  */
+	TooltipMenu.ELEMENT_CLASSES_MERGED = 'tooltip-menu component';
+
+	/**
+  * TooltipMenu attrbutes definition.
+  * @type {Object}
+  * @static
+  */
+	TooltipMenu.ATTRS = {
+		/**
+   * Delay showing and hiding the menu (ms).
+   * @type {!Array.<number>}
+   * @default [ 0, 0 ]
+   */
+		delay: {
+			validator: Array.isArray,
+			value: [0, 0]
+		},
+
+		/**
+   * Trigger events used to bind handlers to show and hide tooltip.
+   * @type {!Array.<string>}
+   * @default ['click', 'mouseout']
+   */
+		events: {
+			validator: Array.isArray,
+			value: ['click', 'click']
+		},
+
+		/**
+   * Items to be placed inside tooltip menu. Each item must contain at least a
+   * label key.
+   * @type {!Array.<!object>}
+   */
+		content: {
+			validator: Array.isArray,
+			valueFn: function valueFn() {
+				return [];
+			}
+		}
+	};
+
+	ComponentRegistry.register('TooltipMenu', TooltipMenu);
+
+	this.ui.TooltipMenu = TooltipMenu;
+}).call(this);
+(function () {
+  /* jshint ignore:start */
+  'use strict';
+
+  var ComponentRegistry = this.ui.ComponentRegistry;
+
+  var Templates = ComponentRegistry.Templates;
+  // This file was automatically generated from TreeView.soy.
+  // Please don't edit this file by hand.
+
+  /**
+   * @fileoverview Templates in namespace Templates.TreeView.
+   * @hassoydeltemplate {TreeView}
+   * @hassoydeltemplate {TreeView.node}
+   * @hassoydeltemplate {TreeView.nodes}
+   * @hassoydelcall {TreeView}
+   * @hassoydelcall {TreeView.node}
+   * @hassoydelcall {TreeView.nodes}
+   */
+
+  if (typeof Templates.TreeView == 'undefined') {
+    Templates.TreeView = {};
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TreeView.content = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), '', true)(opt_data, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.TreeView.content.soyTemplateName = 'Templates.TreeView.content';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TreeView.nodes = function (opt_data, opt_ignored, opt_ijData) {
+    var output = '';
+    var nodeList182 = opt_data.nodes;
+    var nodeListLen182 = nodeList182.length;
+    for (var nodeIndex182 = 0; nodeIndex182 < nodeListLen182; nodeIndex182++) {
+      var nodeData182 = nodeList182[nodeIndex182];
+      var index__soy183 = nodeIndex182;
+      output += soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView.node'), '', true)({ id: opt_data.id, node: nodeData182, surfaceId: opt_data.parentSurfaceId != null ? opt_data.parentSurfaceId + '-' + index__soy183 : index__soy183 }, null, opt_ijData);
+    }
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
+  };
+  if (goog.DEBUG) {
+    Templates.TreeView.nodes.soyTemplateName = 'Templates.TreeView.nodes';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TreeView.node = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(opt_data.node ? '<div class="treeview-node-wrapper ' + soy.$$escapeHtmlAttribute(opt_data.node.expanded ? 'expanded' : '') + '"><div class="treeview-node-main u-cf ' + soy.$$escapeHtmlAttribute(opt_data.node.children ? 'hasChildren' : '') + '" data-onclick="handleNodeClicked_">' + (opt_data.node.children ? '<div class="treeview-node-toggler"></div>' : '') + '<span class="treeview-node-name">' + soy.$$escapeHtml(opt_data.node.name) + '</span></div>' + (opt_data.node.children ? soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), '', true)({ id: opt_data.id, nodes: opt_data.node.children, parentSurfaceId: opt_data.surfaceId }, null, opt_ijData) : '') + '</div>' : '');
+  };
+  if (goog.DEBUG) {
+    Templates.TreeView.node.soyTemplateName = 'Templates.TreeView.node';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TreeView.__deltemplate_s210_6f4f2112 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<ul id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-' + soy.$$escapeHtmlAttribute(opt_data.surfaceId) + '" class="treeview-nodes">' + soy.$$escapeHtml(opt_data.elementContent) + '</ul>');
+  };
+  if (goog.DEBUG) {
+    Templates.TreeView.__deltemplate_s210_6f4f2112.soyTemplateName = 'Templates.TreeView.__deltemplate_s210_6f4f2112';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), 'element', 0, Templates.TreeView.__deltemplate_s210_6f4f2112);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TreeView.__deltemplate_s218_68b4c502 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<li id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-' + soy.$$escapeHtmlAttribute(opt_data.surfaceId) + '" class="treeview-node">' + soy.$$escapeHtml(opt_data.elementContent) + '</li>');
+  };
+  if (goog.DEBUG) {
+    Templates.TreeView.__deltemplate_s218_68b4c502.soyTemplateName = 'Templates.TreeView.__deltemplate_s218_68b4c502';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.node'), 'element', 0, Templates.TreeView.__deltemplate_s218_68b4c502);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TreeView.__deltemplate_s226_13da0f6e = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView'), 'element', true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TreeView.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.TreeView.__deltemplate_s226_13da0f6e.soyTemplateName = 'Templates.TreeView.__deltemplate_s226_13da0f6e';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView'), '', 0, Templates.TreeView.__deltemplate_s226_13da0f6e);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TreeView.__deltemplate_s232_38810b2c = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="treeview component' + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? ' ' + opt_data.elementClasses : '') + '">' + soy.$$escapeHtml(opt_data.elementContent) + '</div>');
+  };
+  if (goog.DEBUG) {
+    Templates.TreeView.__deltemplate_s232_38810b2c.soyTemplateName = 'Templates.TreeView.__deltemplate_s232_38810b2c';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView'), 'element', 0, Templates.TreeView.__deltemplate_s232_38810b2c);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TreeView.__deltemplate_s240_c801199b = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TreeView.nodes(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.TreeView.__deltemplate_s240_c801199b.soyTemplateName = 'Templates.TreeView.__deltemplate_s240_c801199b';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), '', 0, Templates.TreeView.__deltemplate_s240_c801199b);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.TreeView.__deltemplate_s245_f6fc17d6 = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView.node'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TreeView.node(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.TreeView.__deltemplate_s245_f6fc17d6.soyTemplateName = 'Templates.TreeView.__deltemplate_s245_f6fc17d6';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.node'), '', 0, Templates.TreeView.__deltemplate_s245_f6fc17d6);
+
+  Templates.TreeView.nodes.params = ['id', 'nodes'];
+  Templates.TreeView.node.params = ['id', 'node', 'surfaceId'];
+  /* jshint ignore:end */
+}).call(this);
+(function () {
+	'use strict';
+
+	var Component = this.ui.Component;
+	var ComponentRegistry = this.ui.ComponentRegistry;
+	var dom = this.ui.dom;
+
+	/**
+  * TreeView component.
+  */
+
+	var TreeView = (function (_Component) {
+		function TreeView(opt_config) {
+			babelHelpers.classCallCheck(this, TreeView);
+
+			babelHelpers.get(Object.getPrototypeOf(TreeView.prototype), 'constructor', this).call(this, opt_config);
+		}
+
+		babelHelpers.inherits(TreeView, _Component);
+		babelHelpers.createClass(TreeView, [{
+			key: 'attached',
+
+			/**
+    * Called after this component has been attached to the dom.
+    */
+			value: function attached() {
+				this.on('nodesChanged', this.onNodesChanged_.bind(this));
+			}
+		}, {
+			key: 'getNodeObj',
+
+			/**
+    * Gets the node object from the nodes attribute that is located at the given
+    * index path.
+    * @param {!Array<number>} path An array of indexes indicating where the searched
+    *   node is located inside the nodes attribute.
+    * @return {!Object}
+    */
+			value: function getNodeObj(path) {
+				var obj = this.nodes[path[0]];
+				for (var i = 1; i < path.length; i++) {
+					obj = obj.children[path[i]];
+				}
+				return obj;
+			}
+		}, {
+			key: 'getNodeObjFromId_',
+
+			/**
+    * Gets the node object that the given element id represents from the nodes
+    * attribute
+    * @param {string} id
+    * @return {!Object}
+    */
+			value: function getNodeObjFromId_(id) {
+				var path = id.substr(this.id.length + 1).split('-');
+				return this.getNodeObj(path);
+			}
+		}, {
+			key: 'getSurfaceContent_',
+
+			/**
+    * Overrides SoyComponent's original method, skipping it when the flag for
+    * ignoring surface updates is set.
+    * @param {string} surfaceId The surface id.
+    * @return {Object|string} The content to be rendered.
+    * @protected
+    * @override
+    */
+			value: function getSurfaceContent_(surfaceId) {
+				if (!this.ignoreSurfaceUpdate_) {
+					return babelHelpers.get(Object.getPrototypeOf(TreeView.prototype), 'getSurfaceContent_', this).call(this, surfaceId);
+				}
+				this.ignoreSurfaceUpdate_ = false;
+			}
+		}, {
+			key: 'handleNodeClicked_',
+
+			/**
+    * This is called when one of this tree view's nodes is clicked.
+    * @param {Event} event
+    * @protected
+    */
+			value: function handleNodeClicked_(event) {
+				var node = event.delegateTarget.parentNode;
+				var nodeObj = this.getNodeObjFromId_(node.parentNode.id);
+				nodeObj.expanded = !nodeObj.expanded;
+				if (nodeObj.expanded) {
+					dom.addClasses(node, 'expanded');
+				} else {
+					dom.removeClasses(node, 'expanded');
+				}
+
+				this.nodes = this.nodes;
+				this.ignoreSurfaceUpdate_ = true;
+			}
+		}, {
+			key: 'onNodesChanged_',
+
+			/**
+    * Fired when the `nodes` attribute changes. Make sure that any other
+    * updates to the `nodes` attribute made after ignoreSurfaceUpdate_ is
+    * set to true, cause surfaces to update again.
+    * @return {[type]} [description]
+    */
+			value: function onNodesChanged_() {
+				this.ignoreSurfaceUpdate_ = false;
+			}
+		}]);
+		return TreeView;
+	})(Component);
+
+	/**
+  * Default tree view elementClasses.
+  * @default treeView
+  * @type {String}
+  * @static
+  */
+	TreeView.ELEMENT_CLASSES = 'treeview';
+
+	/**
+  * TreeView attributes definition.
+  * @type {Object}
+  * @static
+  */
+	TreeView.ATTRS = {
+		/**
+   * This tree view's nodes. Each node should have a name, and can optionally
+   * have nested children nodes. It should also indicate if its children are
+   * expanded or not.
+   * @type {Array<!{children: Array, expanded: boolean?, name: string}>}
+   * @default []
+   */
+		nodes: {
+			validator: Array.isArray,
+			valueFn: function valueFn() {
+				return [];
+			}
+		}
+	};
+
+	ComponentRegistry.register('TreeView', TreeView);
+
+	this.ui.TreeView = TreeView;
+}).call(this);
+//# sourceMappingURL=ui-kit.js.map

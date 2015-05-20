@@ -1,0 +1,793 @@
+@charset "UTF-8";
+/* UI Kit
+	 ========================================================================== */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+body {
+  background: #f4f8ff;
+}
+
+a {
+  color: #ff7175;
+}
+
+a:hover {
+  color: #ff7175;
+}
+
+/* ==========================================================================
+	 Utils
+	 ========================================================================== */
+.centered {
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+}
+
+.round, .btn,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"], .cell, .modal, input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select, .list .list-item, .sidebar {
+  border-radius: 0.2rem;
+}
+
+/* ==========================================================================
+	 Mixins
+	 ========================================================================== */
+/* ==========================================================================
+	 Components
+	 ========================================================================== */
+.autocomplete {
+  background-color: #fff;
+  overflow: hidden;
+  position: absolute;
+}
+.autocomplete.hidden {
+  display: none;
+}
+
+/* Avatar
+	 ========================================================================== */
+.avatar-round, .avatar, .avatar-initials, .avatar-icon, .avatar-icon-12,
+.avatar-icon-16, .avatar-photo img {
+  border-radius: 50%;
+}
+
+.avatar-photo:hover,
+.avatar-icon:hover,
+.avatar-icon-12:hover,
+.avatar-icon-16:hover {
+  opacity: .8;
+}
+
+.avatar, .avatar-initials, .avatar-icon, .avatar-icon-12,
+.avatar-icon-16 {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Avatar · Sizes
+	 ========================================================================== */
+.avatar-small, .avatar-photo.avatar-small img {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.avatar-medium, .avatar-photo.avatar-medium img {
+  width: 5.6rem;
+  height: 5.6rem;
+}
+
+.avatar-large, .avatar-photo.avatar-large img {
+  width: 9.2rem;
+  height: 9.2rem;
+}
+
+/* Avatar · Photo
+	 ========================================================================== */
+.avatar-photo {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Avatar · Initials
+	 ========================================================================== */
+.avatar-initials {
+  transition: opacity 0.3s ease-in-out;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.avatar-initials.avatar-small, .avatar-photo.avatar-small img.avatar-initials {
+  font-size: 0.9rem;
+  line-height: 3.6rem;
+}
+
+.avatar-initials.avatar-medium, .avatar-photo.avatar-medium img.avatar-initials {
+  font-size: 1.4rem;
+  line-height: 5.6rem;
+}
+
+.avatar-initials.avatar-large, .avatar-photo.avatar-large img.avatar-initials {
+  font-size: 2.3rem;
+  line-height: 9.2rem;
+}
+
+/* Avatar · Icon
+	 ========================================================================== */
+.avatar-icon {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Avatar · Icon (SVG)
+	 ========================================================================== */
+.avatar-icon.avatar-small img, .avatar-photo.avatar-small img.avatar-icon img {
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0.9rem 0;
+}
+
+.avatar-icon.avatar-medium img, .avatar-photo.avatar-medium img.avatar-icon img {
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 1.4rem 0;
+}
+
+.avatar-icon.avatar-large img, .avatar-photo.avatar-large img.avatar-icon img {
+  width: 4.6rem;
+  height: 4.6rem;
+  padding: 2.3rem 0;
+}
+
+/* Avatar · Icon (Font)
+	 ========================================================================== */
+.avatar-icon-12,
+.avatar-icon-16 {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.avatar-icon-12.avatar-medium, .avatar-photo.avatar-medium img.avatar-icon-12 {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.avatar-icon-12.avatar-medium span, .avatar-photo.avatar-medium img.avatar-icon-12 span,
+.avatar-icon-12.avatar-medium span,
+.avatar-photo.avatar-medium img.avatar-icon-12 span {
+  font-size: 1.2rem;
+  line-height: 3.6rem;
+}
+
+.avatar-icon-12.avatar-large, .avatar-photo.avatar-large img.avatar-icon-12 {
+  width: 7.2rem;
+  height: 7.2rem;
+}
+
+.avatar-icon-12.avatar-large span, .avatar-photo.avatar-large img.avatar-icon-12 span,
+.avatar-icon-12.avatar-large span,
+.avatar-photo.avatar-large img.avatar-icon-12 span {
+  font-size: 2.4rem;
+  line-height: 7.2rem;
+}
+
+.avatar-icon-16.avatar-medium, .avatar-photo.avatar-medium img.avatar-icon-16 {
+  width: 5.6rem;
+  height: 5.6rem;
+}
+
+.avatar-icon-16.avatar-medium span, .avatar-photo.avatar-medium img.avatar-icon-16 span,
+.avatar-icon-16.avatar-medium span,
+.avatar-photo.avatar-medium img.avatar-icon-16 span {
+  font-size: 1.6rem;
+  line-height: 5.6rem;
+}
+
+.avatar-icon-16.avatar-large, .avatar-photo.avatar-large img.avatar-icon-16 {
+  width: 9.2rem;
+  height: 9.2rem;
+}
+
+.avatar-icon-16.avatar-large span, .avatar-photo.avatar-large img.avatar-icon-16 span,
+.avatar-icon-16.avatar-large span,
+.avatar-photo.avatar-large img.avatar-icon-16 span {
+  font-size: 3.2rem;
+  line-height: 9.2rem;
+}
+
+/* Button
+	 ========================================================================== */
+.btn,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  transition: opacity 0.3s ease-in-out;
+  background: #ff7175;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  height: 3.2rem;
+  letter-spacing: normal;
+  line-height: 3.2rem;
+  margin: 0;
+  padding: 0 3.2rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover {
+  color: #fff;
+  opacity: .8;
+}
+
+.btn:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  color: #fff;
+}
+
+/* Button · Secondary
+	 ========================================================================== */
+.btn.btn-secondary {
+  color: #fff;
+  background: #bdc1c5;
+}
+
+/* Button · Disabled
+	 ========================================================================== */
+.btn.btn-disabled,
+button[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+  transition: none;
+}
+
+.btn.btn-disabled:hover {
+  opacity: .4;
+}
+
+/* Button · Link
+	 ========================================================================== */
+.btn.btn-link {
+  color: #ff7175;
+  background: transparent;
+  font-weight: 400;
+}
+
+.btn.btn-link:hover {
+  color: #ff7175;
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Cell
+	 ========================================================================== */
+.cell, .modal {
+  transition: box-shadow 0.3s ease-in-out;
+  background: #fff;
+  border: 1px solid rgba(35, 50, 64, 0.12);
+}
+
+/* Form
+	 ========================================================================== */
+form {
+  max-width: 40rem;
+}
+
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  transition: border 0.3s ease-in-out;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(35, 50, 64, 0.2);
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #ff7175;
+}
+
+label,
+.form-field-aux {
+  font-weight: 400;
+  display: block;
+}
+
+label {
+  color: rgba(35, 50, 64, 0.7);
+  font-size: 1.2rem;
+  margin-bottom: .3rem;
+}
+
+.form-field-aux {
+  color: rgba(35, 50, 64, 0.4);
+  font-size: 1.1rem;
+  margin-top: .2rem;
+}
+
+/* Overlay
+	 ========================================================================== */
+.backdrop, .overlay {
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.backdrop {
+  position: absolute;
+}
+
+.overlay {
+  position: fixed;
+}
+
+/* Modal
+	 ========================================================================== */
+.modal {
+  display: inline-block;
+  width: 46.4rem;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Modal · Header
+	 ========================================================================== */
+.modal header {
+  border-bottom: 1px solid rgba(35, 50, 64, 0.08);
+  padding: 2.1rem 2.4rem;
+}
+
+.modal header:empty {
+  border: none;
+  padding: 0;
+}
+
+.modal header h1,
+.modal header h2,
+.modal header h3,
+.modal header h4,
+.modal header h5,
+.modal header h6 {
+  color: #ff7175;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -0.02rem;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.modal .modal-close {
+  color: rgba(35, 50, 64, 0.4);
+  cursor: pointer;
+  float: right;
+  line-height: 1.6rem;
+}
+
+.modal .modal-close:hover {
+  color: rgba(35, 50, 64, 0.4);
+}
+
+/* Modal · Body
+	 ========================================================================== */
+.modal section {
+  padding: 2.1rem 4.4rem 6rem 2.2rem;
+}
+
+.modal.dialog section {
+  padding: 2.1rem 4.4rem 6rem 2.2rem;
+}
+
+.modal section:empty {
+  padding: 0;
+}
+
+.modal section p {
+  color: rgba(35, 50, 64, 0.8);
+  font-size: 1.2rem;
+}
+
+.modal.dialog section p {
+  font-size: 1.3rem;
+}
+
+.modal section p:last-child {
+  margin-bottom: 0;
+}
+
+/* Modal · Footer
+	 ========================================================================== */
+.modal footer {
+  padding: 1.2rem;
+  text-align: right;
+}
+
+.modal.dialog footer {
+  padding: 1.2rem 1.2rem 1.2rem 1.2rem;
+}
+
+.modal footer:empty {
+  padding: 0;
+}
+
+.modal footer .btn {
+  margin: 0 .6rem;
+}
+
+.modal footer .btn:last-child {
+  margin-right: 0;
+}
+
+/* List
+	 ========================================================================== */
+.list .list-item {
+  transition: background 0.3s ease-in-out;
+  margin: 0;
+  padding: .8rem;
+  width: 100%;
+}
+
+.list .list-item:hover {
+  background-color: rgba(255, 113, 117, 0.05);
+}
+
+.list .list-main-content {
+  margin-left: 1.2rem;
+}
+
+.list .list-text-primary {
+  color: rgba(35, 50, 64, 0.8);
+  font-size: 1.4rem;
+}
+
+.list .list-text-secondary {
+  color: rgba(35, 50, 64, 0.4);
+  font-size: 1.2rem;
+}
+
+.list .list-icons {
+  margin-top: .8rem;
+}
+
+.list .list-icon {
+  margin-left: .3rem;
+}
+
+/* Navigation · Topbar
+	 ========================================================================== */
+.topbar {
+  background: #fff;
+  height: 7.2rem;
+  overflow: hidden;
+}
+
+.topbar-list {
+  list-style: none;
+  font-size: 0;
+  margin: 0;
+}
+
+.topbar-item {
+  display: inline-block;
+  margin: 0 2rem;
+}
+
+.topbar-item:first-child {
+  margin: 0 2rem 0 0;
+  width: 7.2rem;
+}
+
+.topbar-item:last-child {
+  margin-right: 3.2rem;
+  padding: 0;
+}
+
+.topbar-logo-link {
+  background: #ff7175;
+  display: block;
+  font-size: 1.2rem;
+  padding: 2.6rem;
+}
+
+.topbar-logo {
+  vertical-align: sub;
+}
+
+.topbar-link {
+  transition: color 0.3s ease-in-out;
+  color: rgba(35, 50, 64, 0.7);
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0 .4rem;
+  text-decoration: none;
+}
+
+.topbar-link-selected,
+.topbar-link-selected:hover {
+  color: #ff7175;
+  border-bottom: 2px solid #ff7175;
+  padding-bottom: 2.4rem;
+}
+
+.topbar-item .avatar, .topbar-item .avatar-initials, .topbar-item .avatar-icon, .topbar-item .avatar-icon-12,
+.topbar-item .avatar-icon-16 {
+  display: block;
+  height: 36px;
+  width: 36px;
+}
+
+/* Navigation · Topbar Fill
+	 ========================================================================== */
+.topbar-fill.topbar {
+  background: #ff7175;
+}
+
+.topbar-fill .topbar-link:hover {
+  color: #fff;
+}
+
+.topbar-fill .topbar-link-selected,
+.topbar-fill .topbar-link-selected:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Navigation · Sidebar
+	 ========================================================================== */
+.sidebar {
+  background: #fff;
+  width: 20.8rem;
+}
+
+.sidebar-list {
+  list-style: none;
+  margin: 0;
+}
+
+.sidebar-item {
+  display: block;
+  margin: .2rem 0;
+}
+
+.sidebar-item:first-child {
+  margin-top: 0;
+  padding-top: 1.6rem;
+}
+
+.sidebar-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 1.6rem;
+}
+
+.sidebar-link {
+  transition: all 0.3s ease-in-out;
+  color: rgba(35, 50, 64, 0.9);
+  display: block;
+  font-size: 1.3rem;
+  padding: .8rem 2rem;
+  text-decoration: none;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 113, 117, 0.05);
+  color: rgba(35, 50, 64, 0.9);
+}
+
+.sidebar-link-selected,
+.sidebar-link-selected:hover {
+  background: rgba(255, 113, 117, 0.1);
+  color: #ff7175;
+}
+
+.sidebar-icon {
+  display: inline-block;
+  margin-right: 1.6rem;
+  vertical-align: middle;
+  color: #ff7175;
+  width: 1.6rem;
+}
+
+/* Shadow
+	 ========================================================================== */
+.shadow-z1, .cell, .modal, .topbar, .sidebar {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-z2, .cell:hover, .modal:hover, .modal, .tooltip-base, .tooltip, .tooltip-menu {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.tooltip-base, .tooltip, .tooltip-menu {
+  background: #fff;
+  border: 1px solid rgba(35, 50, 64, 0.12);
+  border-radius: 0.4rem;
+}
+
+/* Tooltip
+	 ========================================================================== */
+.tooltip {
+  color: rgba(35, 50, 64, 0.7);
+  display: inline-block;
+  font-size: 1.2rem;
+  padding: .8rem 1.2rem;
+  text-align: left;
+  position: absolute;
+}
+
+/* Tooltip · Menu
+	 ========================================================================== */
+.tooltip-menu {
+  display: inline-block;
+  text-align: center;
+  position: absolute;
+}
+
+.tooltip-menu-list {
+  list-style: none;
+  margin: 0;
+}
+
+.tooltip-menu-item {
+  margin: 0;
+}
+
+.tooltip-menu-item:first-child {
+  margin-top: .6rem;
+}
+
+.tooltip-menu-item:last-child {
+  margin-bottom: .6rem;
+}
+
+.tooltip-menu-link {
+  transition: background 0.3s ease-in-out;
+  color: rgba(35, 50, 64, 0.7);
+  display: block;
+  font-size: 1.25rem;
+  padding: .4rem 2.4rem;
+  text-decoration: none;
+}
+
+.tooltip-menu-link:hover {
+  background: rgba(255, 113, 117, 0.05);
+  color: rgba(35, 50, 64, 0.7);
+}
+
+/* TreeView
+	 ========================================================================== */
+.treeview ul {
+  list-style: none;
+}
+
+.treeview .treeview-nodes {
+  margin: 0.5rem 0 0 2.1rem;
+}
+
+.treeview .treeview-node {
+  margin-bottom: 0.5rem;
+}
+
+.treeview .treeview-node-main.hasChildren {
+  cursor: pointer;
+}
+
+.treeview .treeview-node-toggler {
+  border: 1px solid #233240;
+  float: left;
+  font-size: 1.2rem;
+  height: 1rem;
+  margin-top: .4rem;
+  line-height: 1rem;
+  text-align: center;
+  width: 1rem;
+}
+
+.treeview .treeview-node-toggler:before {
+  content: '+';
+}
+
+.treeview .treeview-node-wrapper.expanded > .treeview-node-main > .treeview-node-toggler:before {
+  content: '-';
+}
+
+.treeview .treeview-node-name {
+  float: left;
+  font-size: 1.4rem;
+  margin-left: .8rem;
+}
+
+.treeview .treeview-node-wrapper > .treeview-nodes {
+  display: none;
+}
+
+.treeview .treeview-node-wrapper.expanded > .treeview-nodes {
+  display: block;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  letter-spacing: -0.02rem;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.semi-bold {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+h4 {
+  font-size: 1.4rem;
+}
+
+h5 {
+  font-size: 1.3rem;
+}
+
+h6 {
+  font-size: 1.2rem;
+}

@@ -21,15 +21,15 @@
 					{/foreach}
 				</div>
 			{/if}
-			{if $item.img}
-				<span class="list-image u-pull-left {$item.img.class}">
-					<img src="{$item.img.src}">
+			{if $item.avatar}
+				<span class="list-image u-pull-left {$item.avatar.class}">
+					{$item.avatar.content}
 				</span>
 			{/if}
 			<div class="list-main-content u-pull-left">
-				<div class="list-text-primary">{$item.content}</div>
-				{if $item.help}
-					<div class="list-text-secondary">{$item.help}</div>
+				<div class="list-text-primary">{$item.textPrimary}</div>
+				{if $item.textSecondary}
+					<div class="list-text-secondary">{$item.textSecondary}</div>
 				{/if}
 			</div>
 		</li>

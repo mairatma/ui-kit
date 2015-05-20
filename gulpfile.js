@@ -88,6 +88,8 @@ gulp.task('styles:lib', function() {
 
 gulp.task('copy:site', function(done) {
 	var siteFiles = [
+		'src/public/*.css',
+		'src/public/*.html',
 		'src/public/images/**',
 		'src/public/scripts/**',
 		'src/public/vendor/**'

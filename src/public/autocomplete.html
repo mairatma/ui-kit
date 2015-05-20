@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UI Kit</title>
+
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="vendor/skeleton/css/normalize.css">
+    <link rel="stylesheet" href="vendor/skeleton/css/skeleton.css">
+
+    <link rel="stylesheet" href="fonts/icon-12.css">
+    <link rel="stylesheet" href="fonts/icon-16.css">
+
+    <link rel="stylesheet" href="styles/docs.css">
+</head>
+
+<body>
+
+    <div>
+	   <input id="autocomplete">
+    </div>
+
+    <script src="vendor/soyutils/soyutils.min.js"></script>
+    <script src="scripts/ui-kit.js"></script>
+    <script>
+        var states = [
+            'Alabama',
+            'Alaska',
+            'Arizona',
+            'Arkansas',
+            'California',
+            'Colorado',
+            'Connecticut',
+            'Delaware',
+            'Florida',
+            'Georgia',
+            'Hawaii',
+            'Idaho',
+            'Illinois',
+            'Indiana',
+            'Iowa',
+            'Kansas',
+            'Kentucky',
+            'Louisiana',
+            'Maine',
+            'Maryland',
+            'Massachusetts',
+            'Michigan',
+            'Minnesota',
+            'Mississippi',
+            'Missouri',
+            'Montana',
+            'Nebraska',
+            'Nevada',
+            'New Hampshire',
+            'New Jersey',
+            'New Mexico',
+            'New York',
+            'North Dakota',
+            'North Carolina',
+            'Ohio',
+            'Oklahoma',
+            'Oregon',
+            'Pennsylvania',
+            'Rhode Island',
+            'South Carolina',
+            'South Dakota',
+            'Tennessee',
+            'Texas',
+            'Utah',
+            'Vermont',
+            'Virginia',
+            'Washington',
+            'West Virginia',
+            'Wisconsin',
+            'Wyoming'
+        ];
+
+        var data = function(query) {
+            var res = [];
+
+            if (query) {
+                query = query.toLowerCase();
+
+                res = states.filter(function(item) {
+                    return (item.toLowerCase().indexOf(query) === 0);
+                }.bind(this));
+            }
+
+            return res;
+        };
+
+        var autocomplete = new this.ui.AutoComplete({
+        	inputElement: '#autocomplete',
+        	data: data,
+            format: function(item) {
+                return {
+                    textPrimary: item,
+                    text: item
+                };
+            },
+            select: function(curValue, newValue) {
+                return newValue + 'test123';
+            }
+        }).render();
+    </script>
+</body>
+</html>

@@ -6541,35 +6541,6 @@ this.uiNamed = {};
 				return data;
 			}
 		}, {
-			key: 'loadData_',
-
-			/**
-    * Loads the data for the passed `query` parameter.
-    *
-    * @protected
-    * @param {string} query The query for which results should be returned
-    */
-			value: function loadData_(query) {
-				return new Promise((function (resolve, reject) {
-
-					if (core.isFunction(this.data)) {
-						var result = this.data(query);
-
-						if (Array.isArray(result)) {
-							resolve(result);
-						} else if (result && core.isFunction(result.then)) {
-							result.then(function (data) {
-								resolve(data);
-							});
-						} else {
-							reject('The returned value from data loader should be an array or a Promise');
-						}
-					} else {
-						reject('There is no provided data loader');
-					}
-				}).bind(this));
-			}
-		}, {
 			key: 'onInput_',
 
 			/**
@@ -6583,7 +6554,7 @@ this.uiNamed = {};
 
 				this.emit('query', query);
 
-				this.loadData_(query).then((function (data) {
+				Promise.resolve(this.data(query)).then((function (data) {
 					this.emit('result', this.formatData_(data));
 				}).bind(this))['catch']((function (error) {
 					this.emit('error', error);
@@ -6609,6 +6580,25 @@ this.uiNamed = {};
 
 				this.inputElement.focus();
 			}
+		}, {
+			key: 'setData_',
+
+			/**
+    * Normalizes the provided data value. If the value is not a function,
+    * the value will be wrapped in a function which returns the provided value.
+    *
+    * @protected
+    * @param {*} val The provided value which have to be normalized.
+    */
+			value: function setData_(val) {
+				if (!core.isFunction(val)) {
+					return function () {
+						return val;
+					};
+				}
+
+				return val;
+			}
 		}]);
 		return AutoCompleteBase;
 	})(Component);
@@ -6620,14 +6610,15 @@ this.uiNamed = {};
   */
 	AutoCompleteBase.ATTRS = {
 		/**
-   * Function, which have to return the results from the query.
-   * The function should return an `array` or a `Promise`. In case of
+   * Function or array, which have to return the results from the query.
+   * If function, it should return an `array` or a `Promise`. In case of
    * Promise, it should be resolved with an array containing the results.
    *
-   * @type {function()}
+   * @type {Array.<object>|function}
    */
 		data: {
-			validator: core.isFunction
+			value: [],
+			setter: 'setData_'
 		},
 
 		/**
@@ -7266,12 +7257,199 @@ this.uiNamed = {};
 (function () {
 	'use strict';
 
+	var domPosition = this.ui.position;
+
+	/**
+  * Position utility. Computes region or best region to align an element with
+  * another. Regions are relative to viewport, make sure to use element with
+  * position fixed, or position absolute when the element first positioned
+  * parent is the body element.
+  */
+
+	var Position = (function () {
+		function Position() {
+			babelHelpers.classCallCheck(this, Position);
+		}
+
+		babelHelpers.createClass(Position, null, [{
+			key: 'align',
+
+			/**
+    * Aligns the element with the best region around alignElement. The best
+    * region is defined by clockwise rotation starting from the specified
+    * `position`. The element is always aligned in the middle of alignElement
+    * axis.
+    * @param {!Element} element Element to be aligned.
+    * @param {!Element} alignElement Element to align with.
+    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} pos
+    *     The initial position to try. Options `Position.Top`, `Position.Right`,
+    *     `Position.Bottom`, `Position.Left`.
+    * @static
+    */
+			value: function align(element, alignElement, position) {
+				var bestRegion = this.getAlignBestRegion(element, alignElement, position);
+
+				var computedStyle = window.getComputedStyle(element, null);
+				if (computedStyle.getPropertyValue('position') !== 'fixed') {
+					var docEl = window.document.documentElement;
+					bestRegion.top += docEl.clientTop + window.pageYOffset;
+					bestRegion.left += docEl.clientLeft + window.pageXOffset;
+				}
+
+				element.style.top = bestRegion.top + 'px';
+				element.style.left = bestRegion.left + 'px';
+			}
+		}, {
+			key: 'getAlignBestRegion',
+
+			/**
+    * Returns the best region to align element with alignElement. The best
+    * region is defined by clockwise rotation starting from the specified
+    * `position`. The element is always aligned in the middle of alignElement
+    * axis.
+    * @param {!Element} element Element to be aligned.
+    * @param {!Element} alignElement Element to align with.
+    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} pos
+    *     The initial position to try. Options `Position.Top`, `Position.Right`,
+    *     `Position.Bottom`, `Position.Left`.
+    * @return {DOMRect} Best region to align element.
+    * @static
+    */
+			value: function getAlignBestRegion(element, alignElement, position) {
+				var bestArea = 0;
+				var bestPosition = position;
+				var bestRegion = this.getAlignRegion(element, alignElement, bestPosition);
+				var tryPosition = bestPosition;
+				var tryRegion = bestRegion;
+				var viewportRegion = domPosition.getRegion(window);
+
+				for (var i = 0; i < 4;) {
+					if (domPosition.intersectRegion(viewportRegion, tryRegion)) {
+						var visibleRegion = domPosition.intersection(viewportRegion, tryRegion);
+						var area = visibleRegion.width * visibleRegion.height;
+						if (area > bestArea) {
+							bestArea = area;
+							bestRegion = tryRegion;
+							bestPosition = tryPosition;
+						}
+						if (domPosition.insideViewport(tryRegion)) {
+							break;
+						}
+					}
+					tryPosition = (position + ++i) % 4;
+					tryRegion = this.getAlignRegion(element, alignElement, tryPosition);
+				}
+
+				return bestRegion;
+			}
+		}, {
+			key: 'getAlignRegion',
+
+			/**
+    * Returns the region to align element with alignElement. The element is
+    * always aligned in the middle of alignElement axis.
+    * @param {!Element} element Element to be aligned.
+    * @param {!Element} alignElement Element to align with.
+    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} pos
+    *     The position to align. Options `Position.Top`, `Position.Right`,
+    *     `Position.Bottom`, `Position.Left`.
+    * @return {DOMRect} Region to align element.
+    * @static
+    */
+			value: function getAlignRegion(element, alignElement, position) {
+				var r1 = domPosition.getRegion(alignElement);
+				var r2 = domPosition.getRegion(element);
+				var top = 0;
+				var left = 0;
+
+				switch (position) {
+					case Position.Top:
+						top = r1.top - r2.height;
+						left = r1.left + r1.width / 2 - r2.width / 2;
+						break;
+					case Position.Right:
+						top = r1.top + r1.height / 2 - r2.height / 2;
+						left = r1.left + r1.width;
+						break;
+					case Position.Bottom:
+						top = r1.bottom;
+						left = r1.left + r1.width / 2 - r2.width / 2;
+						break;
+					case Position.Left:
+						top = r1.top + r1.height / 2 - r2.height / 2;
+						left = r1.left - r2.width;
+						break;
+				}
+
+				return {
+					bottom: top + r2.height,
+					height: r2.height,
+					left: left,
+					right: left + r2.width,
+					top: top,
+					width: r2.width
+				};
+			}
+		}, {
+			key: 'isValidPosition',
+
+			/**
+    * Checks if specified value is a valid position. Options `Position.Top`,
+    *     `Position.Right`, `Position.Bottom`, `Position.Left`.
+    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} val
+    * @return {Boolean} Returns true if value is a valid position.
+    * @static
+    */
+			value: function isValidPosition(val) {
+				return 0 <= val && val <= 3;
+			}
+		}]);
+		return Position;
+	})();
+
+	/**
+  * Represents the `Position.Top` constant.
+  * @type {Number}
+  * @default 0
+  * @static
+  */
+	Position.Top = 0;
+
+	/**
+  * Represents the `Position.Right` constant.
+  * @type {Number}
+  * @default 1
+  * @static
+  */
+	Position.Right = 1;
+
+	/**
+  * Represents the `Position.Bottom` constant.
+  * @type {Number}
+  * @default 2
+  * @static
+  */
+	Position.Bottom = 2;
+
+	/**
+  * Represents the `Position.Left` constant.
+  * @type {Number}
+  * @default 3
+  * @static
+  */
+	Position.Left = 3;
+
+	this.ui.Position = Position;
+}).call(this);
+(function () {
+	'use strict';
+
 	var AutoCompleteBase = this.ui.AutoCompleteBase;
 	var ComponentRegistry = this.ui.ComponentRegistry;
 	var core = this.ui.core;
 	var dom = this.ui.dom;
 	var List = this.ui.List;
-	var position = this.ui.position;
+	var Position = this.ui.Position;
 
 	/*
   * AutoComplete component.
@@ -7330,10 +7508,6 @@ this.uiNamed = {};
     * @inheritDoc
     */
 			value: function renderInternal() {
-				var inputElementRegion = position.getRegion(this.inputElement);
-				this.element.style.top = inputElementRegion.bottom + 'px';
-				this.element.style.width = inputElementRegion.width + 'px';
-
 				this.list_ = new List().render(this.element);
 			}
 		}, {
@@ -7368,6 +7542,20 @@ this.uiNamed = {};
 				}
 			}
 		}, {
+			key: 'align_',
+
+			/**
+    * Aligns main element to the input element.
+    *
+    * @protected
+    */
+			value: function align_() {
+				Position.align(this.element, this.inputElement, Position.Bottom);
+
+				var inputElementRegion = Position.getAlignRegion(this.inputElement, this.inputElement);
+				this.element.style.width = inputElementRegion.width + 'px';
+			}
+		}, {
 			key: 'onDataResult_',
 
 			/**
@@ -7382,6 +7570,8 @@ this.uiNamed = {};
 					this.list_.items = data;
 
 					this.visible = true;
+
+					this.align_();
 				} else {
 					this.visible = false;
 				}
@@ -7446,6 +7636,8 @@ this.uiNamed = {};
 					this.element.style.display = null;
 
 					this.attachDocumentClickEvents_();
+
+					this.align_();
 				} else {
 					this.element.style.display = 'none';
 
@@ -8026,193 +8218,6 @@ this.uiNamed = {};
 	ComponentRegistry.register('Modal', Modal);
 
 	this.ui.Modal = Modal;
-}).call(this);
-(function () {
-	'use strict';
-
-	var domPosition = this.ui.position;
-
-	/**
-  * Position utility. Computes region or best region to align an element with
-  * another. Regions are relative to viewport, make sure to use element with
-  * position fixed, or position absolute when the element first positioned
-  * parent is the body element.
-  */
-
-	var Position = (function () {
-		function Position() {
-			babelHelpers.classCallCheck(this, Position);
-		}
-
-		babelHelpers.createClass(Position, null, [{
-			key: 'align',
-
-			/**
-    * Aligns the element with the best region around alignElement. The best
-    * region is defined by clockwise rotation starting from the specified
-    * `position`. The element is always aligned in the middle of alignElement
-    * axis.
-    * @param {!Element} element Element to be aligned.
-    * @param {!Element} alignElement Element to align with.
-    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} pos
-    *     The initial position to try. Options `Position.Top`, `Position.Right`,
-    *     `Position.Bottom`, `Position.Left`.
-    * @static
-    */
-			value: function align(element, alignElement, position) {
-				var bestRegion = this.getAlignBestRegion(element, alignElement, position);
-
-				var computedStyle = window.getComputedStyle(element, null);
-				if (computedStyle.getPropertyValue('position') !== 'fixed') {
-					var docEl = window.document.documentElement;
-					bestRegion.top += docEl.clientTop + window.pageYOffset;
-					bestRegion.left += docEl.clientLeft + window.pageXOffset;
-				}
-
-				element.style.top = bestRegion.top + 'px';
-				element.style.left = bestRegion.left + 'px';
-			}
-		}, {
-			key: 'getAlignBestRegion',
-
-			/**
-    * Returns the best region to align element with alignElement. The best
-    * region is defined by clockwise rotation starting from the specified
-    * `position`. The element is always aligned in the middle of alignElement
-    * axis.
-    * @param {!Element} element Element to be aligned.
-    * @param {!Element} alignElement Element to align with.
-    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} pos
-    *     The initial position to try. Options `Position.Top`, `Position.Right`,
-    *     `Position.Bottom`, `Position.Left`.
-    * @return {DOMRect} Best region to align element.
-    * @static
-    */
-			value: function getAlignBestRegion(element, alignElement, position) {
-				var bestArea = 0;
-				var bestPosition = position;
-				var bestRegion = this.getAlignRegion(element, alignElement, bestPosition);
-				var tryPosition = bestPosition;
-				var tryRegion = bestRegion;
-				var viewportRegion = domPosition.getRegion(window);
-
-				for (var i = 0; i < 4;) {
-					if (domPosition.intersectRegion(viewportRegion, tryRegion)) {
-						var visibleRegion = domPosition.intersection(viewportRegion, tryRegion);
-						var area = visibleRegion.width * visibleRegion.height;
-						if (area > bestArea) {
-							bestArea = area;
-							bestRegion = tryRegion;
-							bestPosition = tryPosition;
-						}
-						if (domPosition.insideViewport(tryRegion)) {
-							break;
-						}
-					}
-					tryPosition = (position + ++i) % 4;
-					tryRegion = this.getAlignRegion(element, alignElement, tryPosition);
-				}
-
-				return bestRegion;
-			}
-		}, {
-			key: 'getAlignRegion',
-
-			/**
-    * Returns the region to align element with alignElement. The element is
-    * always aligned in the middle of alignElement axis.
-    * @param {!Element} element Element to be aligned.
-    * @param {!Element} alignElement Element to align with.
-    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} pos
-    *     The position to align. Options `Position.Top`, `Position.Right`,
-    *     `Position.Bottom`, `Position.Left`.
-    * @return {DOMRect} Region to align element.
-    * @static
-    */
-			value: function getAlignRegion(element, alignElement, position) {
-				var r1 = domPosition.getRegion(alignElement);
-				var r2 = domPosition.getRegion(element);
-				var top = 0;
-				var left = 0;
-
-				switch (position) {
-					case Position.Top:
-						top = r1.top - r2.height;
-						left = r1.left + r1.width / 2 - r2.width / 2;
-						break;
-					case Position.Right:
-						top = r1.top + r1.height / 2 - r2.height / 2;
-						left = r1.left + r1.width;
-						break;
-					case Position.Bottom:
-						top = r1.bottom;
-						left = r1.left + r1.width / 2 - r2.width / 2;
-						break;
-					case Position.Left:
-						top = r1.top + r1.height / 2 - r2.height / 2;
-						left = r1.left - r2.width;
-						break;
-				}
-
-				return {
-					bottom: top + r2.height,
-					height: r2.height,
-					left: left,
-					right: left + r2.width,
-					top: top,
-					width: r2.width
-				};
-			}
-		}, {
-			key: 'isValidPosition',
-
-			/**
-    * Checks if specified value is a valid position. Options `Position.Top`,
-    *     `Position.Right`, `Position.Bottom`, `Position.Left`.
-    * @param {Position.Top|Position.Right|Position.Bottom|Position.Left} val
-    * @return {Boolean} Returns true if value is a valid position.
-    * @static
-    */
-			value: function isValidPosition(val) {
-				return 0 <= val && val <= 3;
-			}
-		}]);
-		return Position;
-	})();
-
-	/**
-  * Represents the `Position.Top` constant.
-  * @type {Number}
-  * @default 0
-  * @static
-  */
-	Position.Top = 0;
-
-	/**
-  * Represents the `Position.Right` constant.
-  * @type {Number}
-  * @default 1
-  * @static
-  */
-	Position.Right = 1;
-
-	/**
-  * Represents the `Position.Bottom` constant.
-  * @type {Number}
-  * @default 2
-  * @static
-  */
-	Position.Bottom = 2;
-
-	/**
-  * Represents the `Position.Left` constant.
-  * @type {Number}
-  * @default 3
-  * @static
-  */
-	Position.Left = 3;
-
-	this.ui.Position = Position;
 }).call(this);
 (function () {
 	'use strict';

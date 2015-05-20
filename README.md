@@ -47,8 +47,12 @@ bower install liferay-apps/ui-kit
 Bulding the library:
 
 1. `gulp build:lib`
-2. `gulp test`
-3. `gulp test:watch`
+
+Testing the library:
+
+1. `gulp test` - this will run the tests inside Chrome
+2. `gulp test:watch` - this will continuously run the tests inside Chrome
+3. `gulp test:browsers` - this will run the tests inside all registered browsers
 
 Building the site:
 

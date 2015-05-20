@@ -39,6 +39,18 @@
 
 /**
  * @param? elementContent
+ * @param? elementClasses
+ * @param? visible
+ * @param? id
+ */
+{deltemplate Modal variant="'element'"}
+	<div id="{$id}" class="modal {$elementClasses ? $elementClasses : ''}  {$visible ? '' : 'hidden'}" data-component>
+		{$elementContent}
+	</div>
+{/deltemplate}
+
+/**
+ * @param? elementContent
  * @param id
  * @param? surfaceId
  */
@@ -80,17 +92,6 @@
 		{/param}
 		{param id: $id /}
 	{/delcall}
-{/deltemplate}
-
-/**
- * @param? elementContent
- * @param? elementClasses
- * @param? id
- */
-{deltemplate Modal variant="'element'"}
-	<div id="{$id}" class="modal component{$elementClasses ? ' ' + $elementClasses : ''}">
-		{$elementContent}
-	</div>
 {/deltemplate}
 
 /**

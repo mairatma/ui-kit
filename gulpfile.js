@@ -115,7 +115,7 @@ gulp.task('copy:site', function(done) {
 });
 
 gulp.task('soy:site', function() {
-  return gulp.src('src/**/*.soy')
+  return gulp.src(['src/**/*.soy', 'build/templates/*.soy'])
     .pipe(soynode({
     	renderSoyWeb: true
     }))

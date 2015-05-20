@@ -27,6 +27,18 @@ a:hover {
 	border-radius: 0.2rem;
 }
 
+.hidden {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
 /* ==========================================================================
 	 Mixins
 	 ========================================================================== */

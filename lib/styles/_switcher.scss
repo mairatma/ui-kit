@@ -2,7 +2,7 @@
 	 ========================================================================== */
 
 .switcher {
-	border-radius: 1.1rem;
+	border-radius: 1.3rem;
 	border: .1rem solid rgba($secondary, .2);
 	height: 2.4rem;
 	width: 4.2rem;
@@ -14,8 +14,6 @@
 	float: left;
 	height: 2.4rem;
 	width: 2.4rem;
-	margin-left: -.1rem;
-	margin-right: 0;
 }
 
 .switcher-control-icon {
@@ -35,8 +33,6 @@
 .switcher-on .switcher-control {
 	background: $primary;
 	float: right;
-	margin-right: -.1rem;
-	margin-left: 0;
 }
 
 .switcher-on .switcher-control-icon {

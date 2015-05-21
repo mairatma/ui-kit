@@ -1,0 +1,21 @@
+{namespace components}
+
+/**
+ * Switcher
+ */
+{template .switcher}
+	{let $id: 'switcher' /}
+	{let $title: 'Switcher' /}
+	{let $description: 'They can be used when is needed a two-sided choice. Ex: on/off. ' /}
+	{let $html kind="html"}
+{literal}<div class="switcher"></div>{/literal}
+	{/let}
+	{let $snippet kind="text"}{$html}{/let}
+	{call static.cell}
+		{param id: $id /}
+		{param title: $title /}
+		{param description: $description /}
+		{param snippet: $snippet /}
+		{param html: $html /}
+	{/call}
+{/template}

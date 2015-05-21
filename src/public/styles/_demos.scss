@@ -5,6 +5,7 @@
 #buttonTypes .docs-cell-demo,
 #buttonTags .docs-cell-demo,
 #cell .docs-cell-demo,
+#switcher .docs-cell-demo,
 #tooltip .docs-cell-demo,
 #tooltipMenu .docs-cell-demo,
 #icon12x12 .docs-cell-demo,
@@ -115,6 +116,13 @@
 #navSidebar .sidebar {
 	display: inline-block;
 	margin: 0 .7rem;
+}
+
+/* Switcher
+   ========================================================================== */
+
+#switcher .switcher {
+	margin: .9rem 0;
 }
 
 /* Typography

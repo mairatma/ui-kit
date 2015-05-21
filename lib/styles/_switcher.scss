@@ -1,0 +1,46 @@
+/* Switcher - Off
+	 ========================================================================== */
+
+.switcher {
+	border-radius: 1.1rem;
+	border: .1rem solid rgba($secondary, .2);
+	height: 2.4rem;
+	width: 4.2rem;
+}
+
+.switcher-control {
+	background: rgba($secondary, .2);
+	border-radius: 50%;
+	float: left;
+	height: 2.4rem;
+	width: 2.4rem;
+	margin-left: -.1rem;
+	margin-right: 0;
+}
+
+.switcher-control-icon {
+	background: #fff;
+	height: .2rem;
+	margin: 1.1rem auto;
+	width: .6rem;
+}
+
+/* Switcher - On
+	 ========================================================================== */
+
+.switcher-on {
+	background: rgba($primary, .1);
+}
+
+.switcher-on .switcher-control {
+	background: $primary;
+	float: right;
+	margin-right: -.1rem;
+	margin-left: 0;
+}
+
+.switcher-on .switcher-control-icon {
+	height: .6rem;
+	margin: .9rem auto;
+	width: .2rem;
+}

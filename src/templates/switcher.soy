@@ -8,7 +8,16 @@
 	{let $title: 'Switcher' /}
 	{let $description: 'They can be used when is needed a two-sided choice. Ex: on/off. ' /}
 	{let $html kind="html"}
-{literal}<div class="switcher"></div>{/literal}
+{literal}<div class="switcher">
+	<div class="switcher-control">
+		<div class="switcher-control-icon"></div>
+	</div>
+</div>
+<div class="switcher switcher-on">
+	<div class="switcher-control">
+		<div class="switcher-control-icon"></div>
+	</div>
+</div>{/literal}
 	{/let}
 	{let $snippet kind="text"}{$html}{/let}
 	{call static.cell}

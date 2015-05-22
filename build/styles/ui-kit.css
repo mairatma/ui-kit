@@ -24,6 +24,7 @@ a:hover {
   transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-backface-visibility: hidden;
 }
 
 .round, .btn,
@@ -651,6 +652,47 @@ label {
 
 .shadow-z2, .cell:hover, .modal:hover, .modal, .tooltip-base, .tooltip, .tooltip-menu {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* Switcher - Off
+	 ========================================================================== */
+.switcher {
+  border-radius: 1.3rem;
+  border: 0.1rem solid rgba(35, 50, 64, 0.2);
+  height: 2.4rem;
+  width: 4.2rem;
+}
+
+.switcher-control {
+  background: rgba(35, 50, 64, 0.2);
+  border-radius: 50%;
+  float: left;
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.switcher-control-icon {
+  background: #fff;
+  height: .2rem;
+  margin: 1.1rem auto;
+  width: .6rem;
+}
+
+/* Switcher - On
+	 ========================================================================== */
+.switcher-on {
+  background: rgba(255, 113, 117, 0.1);
+}
+
+.switcher-on .switcher-control {
+  background: #ff7175;
+  float: right;
+}
+
+.switcher-on .switcher-control-icon {
+  height: .6rem;
+  margin: .9rem auto;
+  width: .2rem;
 }
 
 .tooltip-base, .tooltip, .tooltip-menu {

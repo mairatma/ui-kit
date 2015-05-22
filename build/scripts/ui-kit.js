@@ -8485,6 +8485,131 @@ this.uiNamed = {};
   var ComponentRegistry = this.ui.ComponentRegistry;
 
   var Templates = ComponentRegistry.Templates;
+  // This file was automatically generated from Switcher.soy.
+  // Please don't edit this file by hand.
+
+  /**
+   * @fileoverview Templates in namespace Templates.Switcher.
+   * @hassoydeltemplate {Switcher}
+   * @hassoydelcall {Switcher}
+   */
+
+  if (typeof Templates.Switcher == 'undefined') {
+    Templates.Switcher = {};
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Switcher.content = function (opt_data, opt_ignored, opt_ijData) {
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div class="switcher-control"><div class="switcher-control-icon"></div></div>');
+  };
+  if (goog.DEBUG) {
+    Templates.Switcher.content.soyTemplateName = 'Templates.Switcher.content';
+  }
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Switcher.__deltemplate_s128_73a26937 = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('Switcher'), 'element', true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.Switcher.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
+  };
+  if (goog.DEBUG) {
+    Templates.Switcher.__deltemplate_s128_73a26937.soyTemplateName = 'Templates.Switcher.__deltemplate_s128_73a26937';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Switcher'), '', 0, Templates.Switcher.__deltemplate_s128_73a26937);
+
+  /**
+   * @param {Object.<string, *>=} opt_data
+   * @param {(null|undefined)=} opt_ignored
+   * @param {Object.<string, *>=} opt_ijData
+   * @return {!soydata.SanitizedHtml}
+   * @suppress {checkTypes}
+   */
+  Templates.Switcher.__deltemplate_s134_7e34f765 = function (opt_data, opt_ignored, opt_ijData) {
+    opt_data = opt_data || {};
+    return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="switcher component' + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? ' ' + opt_data.elementClasses : '') + '">' + soy.$$escapeHtml(opt_data.elementContent) + '</div>');
+  };
+  if (goog.DEBUG) {
+    Templates.Switcher.__deltemplate_s134_7e34f765.soyTemplateName = 'Templates.Switcher.__deltemplate_s134_7e34f765';
+  }
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Switcher'), 'element', 0, Templates.Switcher.__deltemplate_s134_7e34f765);
+
+  /* jshint ignore:end */
+}).call(this);
+(function () {
+	'use strict';
+
+	var core = this.ui.core;
+	var dom = this.ui.dom;
+	var Component = this.ui.Component;
+	var ComponentRegistry = this.ui.ComponentRegistry;
+
+	/**
+  * Switcher component.
+  */
+
+	var Switcher = (function (_Component) {
+		function Switcher(opt_config) {
+			babelHelpers.classCallCheck(this, Switcher);
+
+			babelHelpers.get(Object.getPrototypeOf(Switcher.prototype), 'constructor', this).call(this, opt_config);
+		}
+
+		babelHelpers.inherits(Switcher, _Component);
+		babelHelpers.createClass(Switcher, [{
+			key: 'syncChecked',
+
+			/**
+    * @inheritDoc
+    */
+			value: function syncChecked(checked) {
+				dom[checked ? 'addClasses' : 'removeClasses'](this.element, 'switcher-on');
+			}
+		}]);
+		return Switcher;
+	})(Component);
+
+	/**
+  * Default switcher elementClasses.
+  * @default list
+  * @type {String}
+  * @static
+  */
+	Switcher.ELEMENT_CLASSES = 'switcher';
+
+	/**
+  * Switcher attributes definition.
+  * @type {Object}
+  * @static
+  */
+	Switcher.ATTRS = {
+		checked: {
+			validator: core.isBoolean,
+			value: false
+		}
+	};
+
+	ComponentRegistry.register('Switcher', Switcher);
+
+	this.ui.Switcher = Switcher;
+}).call(this);
+(function () {
+  /* jshint ignore:start */
+  'use strict';
+
+  var ComponentRegistry = this.ui.ComponentRegistry;
+
+  var Templates = ComponentRegistry.Templates;
   // This file was automatically generated from Tooltip.soy.
   // Please don't edit this file by hand.
 
@@ -8519,14 +8644,14 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.Tooltip.__deltemplate_s128_8d49094e = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.Tooltip.__deltemplate_s145_8d49094e = function (opt_data, opt_ignored, opt_ijData) {
     opt_data = opt_data || {};
     return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('Tooltip'), 'element', true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.Tooltip.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
   };
   if (goog.DEBUG) {
-    Templates.Tooltip.__deltemplate_s128_8d49094e.soyTemplateName = 'Templates.Tooltip.__deltemplate_s128_8d49094e';
+    Templates.Tooltip.__deltemplate_s145_8d49094e.soyTemplateName = 'Templates.Tooltip.__deltemplate_s145_8d49094e';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Tooltip'), '', 0, Templates.Tooltip.__deltemplate_s128_8d49094e);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Tooltip'), '', 0, Templates.Tooltip.__deltemplate_s145_8d49094e);
 
   /**
    * @param {Object.<string, *>=} opt_data
@@ -8535,14 +8660,14 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.Tooltip.__deltemplate_s134_71828d2a = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.Tooltip.__deltemplate_s151_71828d2a = function (opt_data, opt_ignored, opt_ijData) {
     opt_data = opt_data || {};
     return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="tooltip component' + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? ' ' + opt_data.elementClasses : '') + '">' + soy.$$escapeHtml(opt_data.elementContent) + '</div>');
   };
   if (goog.DEBUG) {
-    Templates.Tooltip.__deltemplate_s134_71828d2a.soyTemplateName = 'Templates.Tooltip.__deltemplate_s134_71828d2a';
+    Templates.Tooltip.__deltemplate_s151_71828d2a.soyTemplateName = 'Templates.Tooltip.__deltemplate_s151_71828d2a';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Tooltip'), 'element', 0, Templates.Tooltip.__deltemplate_s134_71828d2a);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('Tooltip'), 'element', 0, Templates.Tooltip.__deltemplate_s151_71828d2a);
 
   Templates.Tooltip.content.params = ['content'];
   /* jshint ignore:end */
@@ -8883,11 +9008,11 @@ this.uiNamed = {};
    */
   Templates.TooltipMenu.items = function (opt_data, opt_ignored, opt_ijData) {
     var output = '';
-    var itemList146 = opt_data.content;
-    var itemListLen146 = itemList146.length;
-    for (var itemIndex146 = 0; itemIndex146 < itemListLen146; itemIndex146++) {
-      var itemData146 = itemList146[itemIndex146];
-      output += '<li class="tooltip-menu-item"><a class="tooltip-menu-link" href="' + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData146.href ? itemData146.href : '#')) + '">' + soy.$$escapeHtml(itemData146.content) + '</a></li>';
+    var itemList163 = opt_data.content;
+    var itemListLen163 = itemList163.length;
+    for (var itemIndex163 = 0; itemIndex163 < itemListLen163; itemIndex163++) {
+      var itemData163 = itemList163[itemIndex163];
+      output += '<li class="tooltip-menu-item"><a class="tooltip-menu-link" href="' + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData163.href ? itemData163.href : '#')) + '">' + soy.$$escapeHtml(itemData163.content) + '</a></li>';
     }
     return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
   };
@@ -8902,14 +9027,14 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TooltipMenu.__deltemplate_s153_cfc546d2 = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TooltipMenu.__deltemplate_s170_cfc546d2 = function (opt_data, opt_ignored, opt_ijData) {
     opt_data = opt_data || {};
     return soydata.VERY_UNSAFE.ordainSanitizedHtml('<nav id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="tooltip-menu ' + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? opt_data.elementClasses : '') + '" data-component>' + soy.$$escapeHtml(opt_data.elementContent) + '</nav>');
   };
   if (goog.DEBUG) {
-    Templates.TooltipMenu.__deltemplate_s153_cfc546d2.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s153_cfc546d2';
+    Templates.TooltipMenu.__deltemplate_s170_cfc546d2.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s170_cfc546d2';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu'), 'element', 0, Templates.TooltipMenu.__deltemplate_s153_cfc546d2);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu'), 'element', 0, Templates.TooltipMenu.__deltemplate_s170_cfc546d2);
 
   /**
    * @param {Object.<string, *>=} opt_data
@@ -8918,13 +9043,13 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TooltipMenu.__deltemplate_s161_c0ab3df3 = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TooltipMenu.__deltemplate_s178_c0ab3df3 = function (opt_data, opt_ignored, opt_ijData) {
     return soydata.VERY_UNSAFE.ordainSanitizedHtml('<ul id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-items" class="tooltip-menu-list">' + soy.$$escapeHtml(opt_data.elementContent) + '</ul>');
   };
   if (goog.DEBUG) {
-    Templates.TooltipMenu.__deltemplate_s161_c0ab3df3.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s161_c0ab3df3';
+    Templates.TooltipMenu.__deltemplate_s178_c0ab3df3.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s178_c0ab3df3';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu.items'), 'element', 0, Templates.TooltipMenu.__deltemplate_s161_c0ab3df3);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu.items'), 'element', 0, Templates.TooltipMenu.__deltemplate_s178_c0ab3df3);
 
   /**
    * @param {Object.<string, *>=} opt_data
@@ -8933,14 +9058,14 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TooltipMenu.__deltemplate_s167_8f8c631d = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TooltipMenu.__deltemplate_s184_8f8c631d = function (opt_data, opt_ignored, opt_ijData) {
     opt_data = opt_data || {};
     return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TooltipMenu'), 'element', true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TooltipMenu.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
   };
   if (goog.DEBUG) {
-    Templates.TooltipMenu.__deltemplate_s167_8f8c631d.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s167_8f8c631d';
+    Templates.TooltipMenu.__deltemplate_s184_8f8c631d.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s184_8f8c631d';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu'), '', 0, Templates.TooltipMenu.__deltemplate_s167_8f8c631d);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu'), '', 0, Templates.TooltipMenu.__deltemplate_s184_8f8c631d);
 
   /**
    * @param {Object.<string, *>=} opt_data
@@ -8949,13 +9074,13 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TooltipMenu.__deltemplate_s173_8278e063 = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TooltipMenu.__deltemplate_s190_8278e063 = function (opt_data, opt_ignored, opt_ijData) {
     return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TooltipMenu.items'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TooltipMenu.items(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
   };
   if (goog.DEBUG) {
-    Templates.TooltipMenu.__deltemplate_s173_8278e063.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s173_8278e063';
+    Templates.TooltipMenu.__deltemplate_s190_8278e063.soyTemplateName = 'Templates.TooltipMenu.__deltemplate_s190_8278e063';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu.items'), '', 0, Templates.TooltipMenu.__deltemplate_s173_8278e063);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TooltipMenu.items'), '', 0, Templates.TooltipMenu.__deltemplate_s190_8278e063);
 
   Templates.TooltipMenu.items.params = ['content'];
   /* jshint ignore:end */
@@ -9091,12 +9216,12 @@ this.uiNamed = {};
    */
   Templates.TreeView.nodes = function (opt_data, opt_ignored, opt_ijData) {
     var output = '';
-    var nodeList182 = opt_data.nodes;
-    var nodeListLen182 = nodeList182.length;
-    for (var nodeIndex182 = 0; nodeIndex182 < nodeListLen182; nodeIndex182++) {
-      var nodeData182 = nodeList182[nodeIndex182];
-      var index__soy183 = nodeIndex182;
-      output += soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView.node'), '', true)({ id: opt_data.id, node: nodeData182, surfaceId: opt_data.parentSurfaceId != null ? opt_data.parentSurfaceId + '-' + index__soy183 : index__soy183 }, null, opt_ijData);
+    var nodeList199 = opt_data.nodes;
+    var nodeListLen199 = nodeList199.length;
+    for (var nodeIndex199 = 0; nodeIndex199 < nodeListLen199; nodeIndex199++) {
+      var nodeData199 = nodeList199[nodeIndex199];
+      var index__soy200 = nodeIndex199;
+      output += soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView.node'), '', true)({ id: opt_data.id, node: nodeData199, surfaceId: opt_data.parentSurfaceId != null ? opt_data.parentSurfaceId + '-' + index__soy200 : index__soy200 }, null, opt_ijData);
     }
     return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
   };
@@ -9125,13 +9250,13 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TreeView.__deltemplate_s210_6f4f2112 = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TreeView.__deltemplate_s227_6f4f2112 = function (opt_data, opt_ignored, opt_ijData) {
     return soydata.VERY_UNSAFE.ordainSanitizedHtml('<ul id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-' + soy.$$escapeHtmlAttribute(opt_data.surfaceId) + '" class="treeview-nodes">' + soy.$$escapeHtml(opt_data.elementContent) + '</ul>');
   };
   if (goog.DEBUG) {
-    Templates.TreeView.__deltemplate_s210_6f4f2112.soyTemplateName = 'Templates.TreeView.__deltemplate_s210_6f4f2112';
+    Templates.TreeView.__deltemplate_s227_6f4f2112.soyTemplateName = 'Templates.TreeView.__deltemplate_s227_6f4f2112';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), 'element', 0, Templates.TreeView.__deltemplate_s210_6f4f2112);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), 'element', 0, Templates.TreeView.__deltemplate_s227_6f4f2112);
 
   /**
    * @param {Object.<string, *>=} opt_data
@@ -9140,13 +9265,13 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TreeView.__deltemplate_s218_68b4c502 = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TreeView.__deltemplate_s235_68b4c502 = function (opt_data, opt_ignored, opt_ijData) {
     return soydata.VERY_UNSAFE.ordainSanitizedHtml('<li id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '-' + soy.$$escapeHtmlAttribute(opt_data.surfaceId) + '" class="treeview-node">' + soy.$$escapeHtml(opt_data.elementContent) + '</li>');
   };
   if (goog.DEBUG) {
-    Templates.TreeView.__deltemplate_s218_68b4c502.soyTemplateName = 'Templates.TreeView.__deltemplate_s218_68b4c502';
+    Templates.TreeView.__deltemplate_s235_68b4c502.soyTemplateName = 'Templates.TreeView.__deltemplate_s235_68b4c502';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.node'), 'element', 0, Templates.TreeView.__deltemplate_s218_68b4c502);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.node'), 'element', 0, Templates.TreeView.__deltemplate_s235_68b4c502);
 
   /**
    * @param {Object.<string, *>=} opt_data
@@ -9155,14 +9280,14 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TreeView.__deltemplate_s226_13da0f6e = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TreeView.__deltemplate_s243_13da0f6e = function (opt_data, opt_ignored, opt_ijData) {
     opt_data = opt_data || {};
     return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView'), 'element', true)({ elementClasses: opt_data.elementClasses, elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TreeView.content(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
   };
   if (goog.DEBUG) {
-    Templates.TreeView.__deltemplate_s226_13da0f6e.soyTemplateName = 'Templates.TreeView.__deltemplate_s226_13da0f6e';
+    Templates.TreeView.__deltemplate_s243_13da0f6e.soyTemplateName = 'Templates.TreeView.__deltemplate_s243_13da0f6e';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView'), '', 0, Templates.TreeView.__deltemplate_s226_13da0f6e);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView'), '', 0, Templates.TreeView.__deltemplate_s243_13da0f6e);
 
   /**
    * @param {Object.<string, *>=} opt_data
@@ -9171,14 +9296,14 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TreeView.__deltemplate_s232_38810b2c = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TreeView.__deltemplate_s249_38810b2c = function (opt_data, opt_ignored, opt_ijData) {
     opt_data = opt_data || {};
     return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="treeview component' + soy.$$escapeHtmlAttribute(opt_data.elementClasses ? ' ' + opt_data.elementClasses : '') + '">' + soy.$$escapeHtml(opt_data.elementContent) + '</div>');
   };
   if (goog.DEBUG) {
-    Templates.TreeView.__deltemplate_s232_38810b2c.soyTemplateName = 'Templates.TreeView.__deltemplate_s232_38810b2c';
+    Templates.TreeView.__deltemplate_s249_38810b2c.soyTemplateName = 'Templates.TreeView.__deltemplate_s249_38810b2c';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView'), 'element', 0, Templates.TreeView.__deltemplate_s232_38810b2c);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView'), 'element', 0, Templates.TreeView.__deltemplate_s249_38810b2c);
 
   /**
    * @param {Object.<string, *>=} opt_data
@@ -9187,13 +9312,13 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TreeView.__deltemplate_s240_c801199b = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TreeView.__deltemplate_s257_c801199b = function (opt_data, opt_ignored, opt_ijData) {
     return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TreeView.nodes(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
   };
   if (goog.DEBUG) {
-    Templates.TreeView.__deltemplate_s240_c801199b.soyTemplateName = 'Templates.TreeView.__deltemplate_s240_c801199b';
+    Templates.TreeView.__deltemplate_s257_c801199b.soyTemplateName = 'Templates.TreeView.__deltemplate_s257_c801199b';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), '', 0, Templates.TreeView.__deltemplate_s240_c801199b);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.nodes'), '', 0, Templates.TreeView.__deltemplate_s257_c801199b);
 
   /**
    * @param {Object.<string, *>=} opt_data
@@ -9202,13 +9327,13 @@ this.uiNamed = {};
    * @return {!soydata.SanitizedHtml}
    * @suppress {checkTypes}
    */
-  Templates.TreeView.__deltemplate_s245_f6fc17d6 = function (opt_data, opt_ignored, opt_ijData) {
+  Templates.TreeView.__deltemplate_s262_f6fc17d6 = function (opt_data, opt_ignored, opt_ijData) {
     return soydata.VERY_UNSAFE.ordainSanitizedHtml(soy.$$getDelegateFn(soy.$$getDelTemplateId('TreeView.node'), 'element', true)({ elementContent: soydata.VERY_UNSAFE.$$ordainSanitizedHtmlForInternalBlocks('' + Templates.TreeView.node(opt_data, null, opt_ijData)), id: opt_data.id }, null, opt_ijData));
   };
   if (goog.DEBUG) {
-    Templates.TreeView.__deltemplate_s245_f6fc17d6.soyTemplateName = 'Templates.TreeView.__deltemplate_s245_f6fc17d6';
+    Templates.TreeView.__deltemplate_s262_f6fc17d6.soyTemplateName = 'Templates.TreeView.__deltemplate_s262_f6fc17d6';
   }
-  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.node'), '', 0, Templates.TreeView.__deltemplate_s245_f6fc17d6);
+  soy.$$registerDelegateFn(soy.$$getDelTemplateId('TreeView.node'), '', 0, Templates.TreeView.__deltemplate_s262_f6fc17d6);
 
   Templates.TreeView.nodes.params = ['id', 'nodes'];
   Templates.TreeView.node.params = ['id', 'node', 'surfaceId'];

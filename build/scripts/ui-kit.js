@@ -8567,6 +8567,24 @@ this.uiNamed = {};
 
 		babelHelpers.inherits(Switcher, _Component);
 		babelHelpers.createClass(Switcher, [{
+			key: 'attached',
+
+			/**
+    * @inheritDoc
+    */
+			value: function attached() {
+				this.on('click', this.handleClick);
+			}
+		}, {
+			key: 'handleClick',
+
+			/**
+    * Handles switcher click.
+    */
+			value: function handleClick() {
+				this.checked = !this.checked;
+			}
+		}, {
 			key: 'syncChecked',
 
 			/**

@@ -661,6 +661,9 @@ label {
   border: 0.1rem solid rgba(35, 50, 64, 0.2);
   height: 2.4rem;
   width: 4.2rem;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .switcher-control {

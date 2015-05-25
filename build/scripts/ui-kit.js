@@ -7592,7 +7592,7 @@ this.uiNamed = {};
   * @static
   * @default 'autocomplete autocomplete-list'
   */
-	AutoComplete.ELEMENT_CLASSES = 'autocomplete autocomplete-list';
+	AutoComplete.ELEMENT_CLASSES = 'cell autocomplete autocomplete-list';
 
 	ComponentRegistry.register('AutoComplete', AutoComplete);
 

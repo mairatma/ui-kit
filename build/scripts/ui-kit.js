@@ -6913,7 +6913,9 @@ this.uiNamed = {};
     * @inheritDoc
     */
 			value: function attached() {
-				this.eventHandler_.add(dom.on(this.inputElement, 'input', this.handleUserInput_.bind(this)));
+				if (this.inputElement) {
+					this.eventHandler_.add(dom.on(this.inputElement, 'input', this.handleUserInput_.bind(this)));
+				}
 			}
 		}, {
 			key: 'detached',
@@ -6922,7 +6924,9 @@ this.uiNamed = {};
     * @inheritDoc
     */
 			value: function detached() {
-				this.eventHandler_.removeAllListeners();
+				if (this.eventHandler_) {
+					this.eventHandler_.removeAllListeners();
+				}
 			}
 		}, {
 			key: 'handleUserInput_',
@@ -7497,8 +7501,7 @@ this.uiNamed = {};
     * Aligns main element to the input element.
     */
 			value: function align() {
-				var region = Position.getAlignRegion(this.inputElement, this.inputElement);
-				this.element.style.width = region.width + 'px';
+				this.element.style.width = this.inputElement.offsetWidth + 'px';
 				Position.align(this.element, this.inputElement, Position.Bottom);
 			}
 		}, {
@@ -7592,7 +7595,7 @@ this.uiNamed = {};
   * @static
   * @default 'autocomplete autocomplete-list'
   */
-	AutoComplete.ELEMENT_CLASSES = 'cell autocomplete autocomplete-list';
+	AutoComplete.ELEMENT_CLASSES = 'autocomplete autocomplete-list';
 
 	ComponentRegistry.register('AutoComplete', AutoComplete);
 

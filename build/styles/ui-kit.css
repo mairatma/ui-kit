@@ -18,13 +18,16 @@ a:hover {
 	 Utils
 	 ========================================================================== */
 .centered {
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
   left: 50%;
   position: fixed !important;
   top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -webkit-backface-visibility: hidden;
 }
 
 .round, .btn,
@@ -62,13 +65,29 @@ select, .list .list-item, .sidebar {
 	 Components
 	 ========================================================================== */
 .autocomplete {
+  -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
   background-color: #fff;
+  margin-top: 4px;
+  border: 1px transparent;
+  border-radius: 2px;
   overflow: hidden;
   position: absolute;
   z-index: 1;
 }
 .autocomplete.hidden {
   display: none;
+}
+.autocomplete .list {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+.autocomplete .list .list-item:hover {
+  background-color: #edf4fd;
+}
+.autocomplete .list ul {
+  margin-bottom: 0;
 }
 
 /* Avatar
@@ -658,13 +677,14 @@ label {
 /* Switcher - Off
 	 ========================================================================== */
 .switcher {
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
   border-radius: 1.2rem;
   border: 0.1rem solid rgba(35, 50, 64, 0.2);
   height: 2.2rem;
   width: 4rem;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
 }
 
 .switcher-control {

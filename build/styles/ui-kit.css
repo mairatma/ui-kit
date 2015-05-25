@@ -65,6 +65,7 @@ select, .list .list-item, .sidebar {
   background-color: #fff;
   overflow: hidden;
   position: absolute;
+  z-index: 1;
 }
 .autocomplete.hidden {
   display: none;
@@ -657,10 +658,10 @@ label {
 /* Switcher - Off
 	 ========================================================================== */
 .switcher {
-  border-radius: 1.3rem;
+  border-radius: 1.2rem;
   border: 0.1rem solid rgba(35, 50, 64, 0.2);
-  height: 2.4rem;
-  width: 4.2rem;
+  height: 2.2rem;
+  width: 4rem;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -671,6 +672,7 @@ label {
   border-radius: 50%;
   float: left;
   height: 2.4rem;
+  margin: -.1rem 0 0 -.1rem;
   width: 2.4rem;
 }
 
@@ -690,6 +692,7 @@ label {
 .switcher-on .switcher-control {
   background: #ff7175;
   float: right;
+  margin: -.1rem -.1rem 0 0;
 }
 
 .switcher-on .switcher-control-icon {

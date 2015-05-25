@@ -6892,20 +6892,28 @@ this.uiNamed = {};
 			babelHelpers.classCallCheck(this, AutoCompleteBase);
 
 			babelHelpers.get(Object.getPrototypeOf(AutoCompleteBase.prototype), 'constructor', this).call(this, opt_config);
+
+			this.eventHandler_ = new EventHandler();
 		}
 
 		babelHelpers.inherits(AutoCompleteBase, _Component);
 		babelHelpers.createClass(AutoCompleteBase, [{
+			key: 'created',
+
+			/**
+    * @inheritDoc
+    */
+			value: function created() {
+				this.on('select', this.select);
+			}
+		}, {
 			key: 'attached',
 
 			/**
     * @inheritDoc
     */
 			value: function attached() {
-				this.eventHandler_ = new EventHandler();
-				this.eventHandler_.add(dom.on(this.inputElement, 'input', this.onInput_.bind(this)));
-
-				this.on('select', this.selectValue_.bind(this));
+				this.eventHandler_.add(dom.on(this.inputElement, 'input', this.handleUserInput_.bind(this)));
 			}
 		}, {
 			key: 'detached',
@@ -6917,74 +6925,50 @@ this.uiNamed = {};
 				this.eventHandler_.removeAllListeners();
 			}
 		}, {
-			key: 'formatData_',
+			key: 'handleUserInput_',
 
 			/**
-    * Formats the data before to pass it to the UI for displaying.
-    * The `format` function will be called for each item from the data array.
-    *
+    * Handles the user input.
+    * @param {Event} event
     * @protected
-    * @param {!Array} data The data which have to be formatted
-    * @return {Array} The formatted data
     */
-			value: function formatData_(data) {
-				if (this.format) {
-					data = data.map((function (item) {
-						return this.format(item);
-					}).bind(this));
-				}
-
-				return data;
+			value: function handleUserInput_() {
+				this.request(this.inputElement.value);
 			}
 		}, {
-			key: 'onInput_',
+			key: 'request',
 
 			/**
-    * Handles the input event in the input element. The function will
-    * load the data and emit `query` and `result` events.
-    *
-    * @protected
+    * Cancels pending request and starts a request for the user input.
+    * @param {String} query
+    * @return {CancellablePromise} Deferred request.
     */
-			value: function onInput_() {
-				var query = this.inputElement.value;
+			value: function request(query) {
+				var self = this;
 
-				this.emit('query', query);
-
-				Promise.resolve(this.data(query)).then((function (data) {
-					this.emit('result', this.formatData_(data));
-				}).bind(this))['catch']((function (error) {
-					this.emit('error', error);
-				}).bind(this));
-			}
-		}, {
-			key: 'selectValue_',
-
-			/**
-    * Selects a value from the UI and populates the input element with
-    * the selected value.
-    *
-    * @protected
-    * @param {!Object} value The value provided by the UI, which have
-    * to be put in the input element
-    */
-			value: function selectValue_(value) {
-				if (this.select) {
-					value = this.select(this.inputElement.value, value);
+				if (this.pendingRequest) {
+					this.pendingRequest.cancel('Cancelled by another request');
 				}
 
-				this.inputElement.value = value;
+				this.pendingRequest = Promise.resolve().then(function () {
+					return self.data(query);
+				}).then(function (data) {
+					if (Array.isArray(data)) {
+						return data.map(self.format.bind(self));
+					}
+				});
 
-				this.inputElement.focus();
+				return this.pendingRequest;
 			}
 		}, {
 			key: 'setData_',
 
 			/**
-    * Normalizes the provided data value. If the value is not a function,
-    * the value will be wrapped in a function which returns the provided value.
-    *
+    * Normalizes the provided data value. If the value is not a function, the
+    * value will be wrapped in a function which returns the provided value.
+    * @param {Array.<object>|Promise|function} val The provided value which
+    *     have to be normalized.
     * @protected
-    * @param {*} val The provided value which have to be normalized.
     */
 			value: function setData_(val) {
 				if (!core.isFunction(val)) {
@@ -6992,7 +6976,6 @@ this.uiNamed = {};
 						return val;
 					};
 				}
-
 				return val;
 			}
 		}]);
@@ -7013,24 +6996,21 @@ this.uiNamed = {};
    * @type {Array.<object>|function}
    */
 		data: {
-			value: [],
 			setter: 'setData_'
 		},
 
 		/**
-   * Function, which will be invoked for each item from the array of the results
-   * which have to be formatted. The function should return an object
-   * with at least one property called `text`.
-   *
-   * @type {function()}
+   * Function that formats each item of the data.
+   * @type {function}
+   * @default Identity function.
    */
 		format: {
+			value: core.identityFunction,
 			validator: core.isFunction
 		},
 
 		/**
    * The element which will be used source for the data queries.
-   *
    * @type {DOMElement|string}
    */
 		inputElement: {
@@ -7038,13 +7018,20 @@ this.uiNamed = {};
 		},
 
 		/**
-   * Function, which have to format the chosen value from the user.
-   * It will receive two parameters - the selected value from the user
-   * and the current value from the input element.
-   *
-   * @type {function()}
+   * Handles item selection. It will receive two parameters - the selected
+   * value from the user and the current value from the input element.
+   * @type {function}
+   * @default
+   *   function(selectedValue) {
+   *	   this.inputElement.value = selectedValue;
+   *	   this.inputElement.focus();
+   *   }
    */
 		select: {
+			value: function value(selectedValue) {
+				this.inputElement.value = selectedValue.textPrimary;
+				this.inputElement.focus();
+			},
 			validator: core.isFunction
 		}
 	};
@@ -7449,6 +7436,7 @@ this.uiNamed = {};
 
 	var AutoCompleteBase = this.ui.AutoCompleteBase;
 	var ComponentRegistry = this.ui.ComponentRegistry;
+	var Promise = this.uiNamed.Promise.CancellablePromise;
 	var core = this.ui.core;
 	var dom = this.ui.dom;
 	var List = this.ui.List;
@@ -7478,18 +7466,9 @@ this.uiNamed = {};
     */
 			value: function attached() {
 				babelHelpers.get(Object.getPrototypeOf(AutoComplete.prototype), 'attached', this).call(this);
-
-				this.on('result', this.onDataResult_.bind(this));
-				this.list_.on('itemSelected', this.onItemSelected_.bind(this));
-			}
-		}, {
-			key: 'created',
-
-			/**
-    * @inheritDoc
-    */
-			value: function created() {
-				this.DEFAULT_ELEMENT_PARENT = this.inputElement.parentNode;
+				this.list.attach(this.element);
+				this.on('click', this.genericStopPropagation_);
+				this.eventHandler_.add(dom.on(document, 'click', this.hide.bind(this)));
 			}
 		}, {
 			key: 'detached',
@@ -7499,10 +7478,7 @@ this.uiNamed = {};
     */
 			value: function detached() {
 				babelHelpers.get(Object.getPrototypeOf(AutoComplete.prototype), 'detached', this).call(this);
-
-				this.list_.dispose();
-
-				this.disposeDocumentClickEvents_();
+				this.list.detach();
 			}
 		}, {
 			key: 'renderInternal',
@@ -7511,146 +7487,107 @@ this.uiNamed = {};
     * @inheritDoc
     */
 			value: function renderInternal() {
-				this.list_ = new List().render(this.element);
+				this.list = new List().render(this.element);
+				this.list.on('itemSelected', this.onListItemSelected_.bind(this));
 			}
 		}, {
-			key: 'attachDocumentClickEvents_',
-
-			/**
-    * Attaches click events to the list and to the document.
-    *
-    * @protected
-    */
-			value: function attachDocumentClickEvents_() {
-				this.documentClickHandler_ = dom.on(document, 'click', this.onDocumentClick_.bind(this));
-				this.listClickHandler_ = dom.on(this.list_.element, 'click', this.onListClick_.bind(this));
-			}
-		}, {
-			key: 'disposeDocumentClickEvents_',
-
-			/**
-    * Disposes the attached click events to the list and to the document.
-    *
-    * @protected
-    */
-			value: function disposeDocumentClickEvents_() {
-				if (this.documentClickHandler_) {
-					this.documentClickHandler_.dispose();
-					this.documentClickHandler_ = null;
-				}
-
-				if (this.listClickHandler_) {
-					this.listClickHandler_.dispose();
-					this.listClickHandler_ = null;
-				}
-			}
-		}, {
-			key: 'align_',
+			key: 'align',
 
 			/**
     * Aligns main element to the input element.
-    *
-    * @protected
     */
-			value: function align_() {
+			value: function align() {
+				var region = Position.getAlignRegion(this.inputElement, this.inputElement);
+				this.element.style.width = region.width + 'px';
 				Position.align(this.element, this.inputElement, Position.Bottom);
-
-				var inputElementRegion = Position.getAlignRegion(this.inputElement, this.inputElement);
-				this.element.style.width = inputElementRegion.width + 'px';
 			}
 		}, {
-			key: 'onDataResult_',
+			key: 'request',
 
 			/**
-    * Populates the UI with the data results and shows/hides the component.
-    *
+    * @inheritDoc
+    */
+			value: function request(query) {
+				var self = this;
+				return babelHelpers.get(Object.getPrototypeOf(AutoComplete.prototype), 'request', this).call(this, query).then(function (data) {
+					if (data) {
+						data.forEach(self.assertItemObjectStructure_);
+						self.list.items = data;
+					}
+					self.visible = !!(data && data.length > 0);
+				});
+			}
+		}, {
+			key: 'onListItemSelected_',
+
+			/**
+    * Emits a `select` event with the information about the selected item and
+    * hides the element.
+    * @param {Element} item The list selected item.
+    */
+			value: function onListItemSelected_(item) {
+				var selectedIndex = parseInt(item.getAttribute('data-index'), 10);
+				this.emit('select', this.list.items[selectedIndex]);
+				this.hide();
+			}
+		}, {
+			key: 'genericStopPropagation_',
+
+			/**
+    * Stops propagation of an event.
+    * @param {Event} event
     * @protected
-    * @param {!Array} data The loaded results from the user's query with
-    * which the UI should be populated
     */
-			value: function onDataResult_(data) {
-				if (data && data.length > 0) {
-					this.list_.items = data;
-
-					this.visible = true;
-
-					this.align_();
-				} else {
-					this.visible = false;
-				}
-			}
-		}, {
-			key: 'onDocumentClick_',
-
-			/**
-    * Handles clicking on document. If the dropdown is visible, hides it.
-    *
-    * @protected
-    */
-			value: function onDocumentClick_() {
-				this.visible = false;
-			}
-		}, {
-			key: 'onItemSelected_',
-
-			/**
-    * Emits a `select` event with the information about the selected item
-    * and hides the UI.
-    *
-    * @param {!DOMElement} item The selected item from the UI
-    */
-			value: function onItemSelected_(item) {
-				var itemIndex = parseInt(item.getAttribute('data-index'), 10);
-
-				this.emit('select', this.list_.items[itemIndex].text);
-
-				this.visible = false;
-			}
-		}, {
-			key: 'onListClick_',
-
-			/**
-    * Handles clicking on the list. The function stops the event propagation.
-    *
-    * @protected
-    * @param {!Event} event The native click event
-    */
-			value: function onListClick_(event) {
+			value: function genericStopPropagation_(event) {
 				event.stopPropagation();
 			}
 		}, {
 			key: 'syncVisible',
 
 			/**
-    * Synchronizes the visibility of the component.
-    *
-    * @protected
-    * @param {boolean} visible If true, shows the component, hides it otherwise
+    * @inheritDoc
     */
 			value: function syncVisible(visible) {
-				// Handles the change of visible property. The function
-				// attaches click listeners to document and the list and stops
-				// the event when user clicks on the list. In this case,
-				// if the event propagates to the document, this means user clicked
-				// outside of the list.
-				// TODO: Re-evaluate this approach
-
 				babelHelpers.get(Object.getPrototypeOf(AutoComplete.prototype), 'syncVisible', this).call(this, visible);
 
 				if (visible) {
-					this.attachDocumentClickEvents_();
-					this.align_();
-				} else {
-					this.disposeDocumentClickEvents_();
+					this.align();
+				}
+			}
+		}, {
+			key: 'assertItemObjectStructure_',
+
+			/**
+    * Asserts that formatted data is valid. Throws error if item is not in the
+    * valid syntax.
+    * @param {*} item
+    * @protected
+    */
+			value: function assertItemObjectStructure_(item) {
+				if (!core.isObject(item)) {
+					throw new Promise.CancellationError('AutoComplete item must be an object');
+				}
+				if (!item.hasOwnProperty('textPrimary')) {
+					throw new Promise.CancellationError('AutoComplete item must be an object with \'textPrimary\' key');
 				}
 			}
 		}]);
 		return AutoComplete;
 	})(AutoCompleteBase);
 
+	AutoComplete.ATTRS = {
+		/**
+   * @inheritDoc
+   */
+		format: {
+			value: function value(item) {
+				return core.isString(item) ? { textPrimary: item } : item;
+			}
+		}
+	};
+
 	/**
   * Provides a list of classes which have to be applied to the element's DOM element.
-  *
   * @type {string}
   * @static
   * @default 'autocomplete autocomplete-list'
@@ -8714,7 +8651,7 @@ this.uiNamed = {};
 
 			babelHelpers.get(Object.getPrototypeOf(Tooltip.prototype), 'constructor', this).call(this, opt_config);
 
-			this.eventsHandler_ = new EventHandler();
+			this.eventHandler_ = new EventHandler();
 		}
 
 		babelHelpers.inherits(Tooltip, _Component);
@@ -8735,7 +8672,7 @@ this.uiNamed = {};
     * @inheritDoc
     */
 			value: function detached() {
-				this.eventsHandler_.removeAllListeners();
+				this.eventHandler_.removeAllListeners();
 			}
 		}, {
 			key: 'align',
@@ -8871,18 +8808,18 @@ this.uiNamed = {};
 				if (!this.inDocument) {
 					return;
 				}
-				this.eventsHandler_.removeAllListeners();
+				this.eventHandler_.removeAllListeners();
 				var selector = this.selector;
 				if (!selector) {
 					return;
 				}
 
-				this.eventsHandler_.add(this.on('mouseenter', this.lock), this.on('mouseleave', this.unlock));
+				this.eventHandler_.add(this.on('mouseenter', this.lock), this.on('mouseleave', this.unlock));
 
 				if (events[0] === events[1]) {
-					this.eventsHandler_.add(dom.delegate(document, events[0], selector, this.handleToggle.bind(this)));
+					this.eventHandler_.add(dom.delegate(document, events[0], selector, this.handleToggle.bind(this)));
 				} else {
-					this.eventsHandler_.add(dom.delegate(document, events[0], selector, this.handleShow.bind(this)), dom.delegate(document, events[1], selector, this.handleHide.bind(this)));
+					this.eventHandler_.add(dom.delegate(document, events[0], selector, this.handleShow.bind(this)), dom.delegate(document, events[1], selector, this.handleHide.bind(this)));
 				}
 			}
 		}, {

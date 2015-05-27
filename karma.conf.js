@@ -1,8 +1,8 @@
 var isparta = require('isparta');
-var renameAlias = require('metaljs/tasks/lib/renameAlias');
+var metaljs = require('metaljs');
 
 var babelOptions = {
-	resolveModuleSource: renameAlias.renameAliasSync,
+	resolveModuleSource: metaljs.renameAlias,
 	sourceMap: 'both'
 };
 

@@ -551,7 +551,6 @@ label {
 
 .topbar-item:first-child {
   margin: 0 2rem 0 0;
-  width: 7.2rem;
 }
 
 .topbar-item:last-child {
@@ -568,6 +567,20 @@ label {
 
 .topbar-logo {
   vertical-align: sub;
+}
+
+.topbar-logo-dropdown {
+  background: #ff7175;
+  color: #fff;
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 2.8rem;
+  text-decoration: none;
+}
+
+.topbar-logo-dropdown:hover {
+  color: #fff;
 }
 
 .topbar-link {

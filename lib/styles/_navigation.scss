@@ -21,7 +21,6 @@
 
 .topbar-item:first-child {
 	margin: 0 2rem 0 0;
-	width: 7.2rem;
 }
 
 .topbar-item:last-child {
@@ -38,6 +37,20 @@
 
 .topbar-logo {
 	vertical-align: sub;
+}
+
+.topbar-logo-dropdown {
+	background: $primary;
+	color: $white;
+	display: block;
+	font-size: 1.2rem;
+	font-weight: $semiBold;
+	padding: 2.8rem;
+	text-decoration: none;
+}
+
+.topbar-logo-dropdown:hover {
+	color: $white;
 }
 
 .topbar-link {

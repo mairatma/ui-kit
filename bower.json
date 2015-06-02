@@ -5,7 +5,7 @@
   "dependencies": {
     "soyutils": "2014.04.22",
     "metaljs": "liferay/metal.js#master",
-    "metal-position": "eduardolundgren/metal-position",
+    "metal-position": "eduardolundgren/metal-position#master",
     "metal-promise": "eduardolundgren/metal-promise",
     "skeleton": "~2.0.4"
   }

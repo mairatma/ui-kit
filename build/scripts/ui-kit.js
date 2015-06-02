@@ -1652,6 +1652,10 @@ this.uiNamed = {};
 					listened = true;
 				}
 
+				if (event !== '*') {
+					this.emit.apply(this, ['*', event].concat(args));
+				}
+
 				return listened;
 			}
 		}, {
@@ -2742,11 +2746,10 @@ this.uiNamed = {};
 			this.targetEmitter_ = targetEmitter;
 
 			/**
-   * Map of events that should be proxied. If whitelist is set blacklist is
-   * ignored.
-   * @type {Object}
-   * @protected
-   */
+    * Map of events that should be proxied. If whitelist is set blacklist is ignored.
+    * @type {Object}
+    * @protected
+    */
 			this.whitelist_ = opt_whitelist;
 
 			this.startProxy_();
@@ -5020,9 +5023,6 @@ this.uiNamed = {};
   *     super(config);
   *   }
   *
-  *   created() {
-  *   }
-  *
   *   decorateInternal() {
   *   }
   *
@@ -5287,7 +5287,9 @@ this.uiNamed = {};
     * @protected
     */
 			value: function buildPlaceholderSurfaceData_(type, extra) {
-				return { componentName: type === Component.SurfaceType.COMPONENT ? extra : null };
+				return {
+					componentName: type === Component.SurfaceType.COMPONENT ? extra : null
+				};
 			}
 		}, {
 			key: 'cacheSurfaceContent',
@@ -5395,19 +5397,6 @@ this.uiNamed = {};
 				dom.append(element, htmlString);
 				return element.innerHTML;
 			}
-		}, {
-			key: 'created',
-
-			/**
-    * Lifecycle. Creation phase of the component happens once after the
-    * component is instantiated, therefore its the initial phase of the
-    * component Lifecycle. Be conscious about actions performed in this phase
-    * to not compromise instantiation time with operations that can be
-    * postponed to further phases. It's recommended to bind component custom
-    * events in this phase, in contrast to DOM events that must be bind on
-    * attach phase.
-    */
-			value: function created() {}
 		}, {
 			key: 'createPlaceholderSurface_',
 
@@ -5536,7 +5525,6 @@ this.uiNamed = {};
     */
 			value: function created_() {
 				this.on('attrsChanged', this.handleAttributesChanges_);
-				this.created();
 			}
 		}, {
 			key: 'decorate',
@@ -6202,7 +6190,11 @@ this.uiNamed = {};
 					var surfaceContent = instance.getSurfaceContent_(id);
 					var expandedContent = instance.replaceSurfacePlaceholders_(surfaceContent, id);
 					var surfaceHtml = instance.getSurfaceHtml(id, expandedContent);
-					instance.collectedSurfaces_.push({ cacheContent: surfaceContent, content: expandedContent, surfaceId: id });
+					instance.collectedSurfaces_.push({
+						cacheContent: surfaceContent,
+						content: expandedContent,
+						surfaceId: id
+					});
 
 					return surfaceHtml;
 				});
@@ -6485,7 +6477,11 @@ this.uiNamed = {};
   * properly instantiate and update child components defined through soy.
   * TODO: Switch to using proper AOP.
   */
-	var originalGetDelegateFn = soy.$$getDelegateFn;
+	var originalGetDelegateFn;
+
+	if (typeof soy === 'object') {
+		originalGetDelegateFn = soy.$$getDelegateFn;
+	}
 
 	/**
   * Special Component class that handles a better integration between soy templates
@@ -6565,7 +6561,9 @@ this.uiNamed = {};
     * @protected
     */
 			value: function buildComponentConfigData_(id, templateData) {
-				var config = { id: id };
+				var config = {
+					id: id
+				};
 				for (var key in templateData) {
 					config[key] = templateData[key];
 				}
@@ -6894,19 +6892,11 @@ this.uiNamed = {};
 			babelHelpers.get(Object.getPrototypeOf(AutoCompleteBase.prototype), 'constructor', this).call(this, opt_config);
 
 			this.eventHandler_ = new EventHandler();
+			this.on('select', this.select);
 		}
 
 		babelHelpers.inherits(AutoCompleteBase, _Component);
 		babelHelpers.createClass(AutoCompleteBase, [{
-			key: 'created',
-
-			/**
-    * @inheritDoc
-    */
-			value: function created() {
-				this.on('select', this.select);
-			}
-		}, {
 			key: 'attached',
 
 			/**
@@ -7472,7 +7462,8 @@ this.uiNamed = {};
 				babelHelpers.get(Object.getPrototypeOf(AutoComplete.prototype), 'attached', this).call(this);
 				this.list.attach(this.element);
 				this.on('click', this.genericStopPropagation_);
-				this.eventHandler_.add(dom.on(document, 'click', this.hide.bind(this)));
+				this.eventHandler_.add(dom.on(this.inputElement, 'focus', this.handleInputFocus_.bind(this)));
+				this.eventHandler_.add(dom.on(document, 'click', this.handleDocClick_.bind(this)));
 			}
 		}, {
 			key: 'detached',
@@ -7503,6 +7494,30 @@ this.uiNamed = {};
 			value: function align() {
 				this.element.style.width = this.inputElement.offsetWidth + 'px';
 				Position.align(this.element, this.inputElement, Position.Bottom);
+			}
+		}, {
+			key: 'handleDocClick_',
+
+			/**
+    * Handles document click in order to hide autocomplete. If input element is
+    * focused autocomplete will not hide.
+    * @param {Event} event
+    */
+			value: function handleDocClick_(event) {
+				if (document.activeElement == this.inputElement) {
+					return;
+				}
+				this.hide();
+			}
+		}, {
+			key: 'handleInputFocus_',
+
+			/**
+    * Handles input focus.
+    * @param {Event} event
+    */
+			value: function handleInputFocus_(event) {
+				this.request(this.inputElement.value);
 			}
 		}, {
 			key: 'request',
@@ -7639,6 +7654,8 @@ this.uiNamed = {};
 			babelHelpers.classCallCheck(this, DragDropUpload);
 
 			babelHelpers.get(Object.getPrototypeOf(DragDropUpload.prototype), 'constructor', this).call(this, opt_config);
+
+			this.isCompatible_ = Features.dragDrop() && Features.ajaxUpload();
 		}
 
 		babelHelpers.inherits(DragDropUpload, _Component);
@@ -7653,15 +7670,6 @@ this.uiNamed = {};
 					this.eventHandler_ = new EventHandler();
 					this.eventHandler_.add(this.on('dragenter', this.onDragEnter_, this), this.on('dragleave', this.onDragLeave_, this), this.on('dragover', this.preventEvent_, this), this.on('drop', this.onDrop_, this));
 				}
-			}
-		}, {
-			key: 'created',
-
-			/**
-    * @inheritDoc
-    */
-			value: function created() {
-				this.isCompatible_ = Features.dragDrop() && Features.ajaxUpload();
 			}
 		}, {
 			key: 'detached',
